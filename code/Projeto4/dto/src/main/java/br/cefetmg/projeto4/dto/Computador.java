@@ -1,6 +1,5 @@
 package br.cefetmg.projeto4.dto;
 
-import java.util.Iterator;
 import java.util.Queue;
 enum EstadoComputador{
     DISPONIVEL("Disponível"),
