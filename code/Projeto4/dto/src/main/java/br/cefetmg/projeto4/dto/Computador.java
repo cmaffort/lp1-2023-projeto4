@@ -1,5 +1,6 @@
 package br.cefetmg.projeto4.dto;
 
+import java.util.Iterator;
 import java.util.Queue;
 enum EstadoComputador{
     DISPONIVEL("Disponível"),
@@ -22,7 +23,7 @@ public class Computador {
     private int capacidadeDeArmazenamento;
     private String modeloProcessador;
     private String codigo;
-    private String doador;
+    private DoadorComputador doador;
     private EstadoComputador estado;
     private Queue<String> problemas;
     private Donatario donatario;
@@ -55,15 +56,8 @@ public class Computador {
     }
 
     public String getDoador() {
-        return doador;
-    }
-
-    public String getProblemas() {
-        if (problemas.isEmpty()) {
-            return "Sem problemas";
-        }
-        return problemas.peek();
-    }
+        return doador.getNome();
+    }  
 
     public void addProblemas(String problema) {
         problemas.add(problema);
