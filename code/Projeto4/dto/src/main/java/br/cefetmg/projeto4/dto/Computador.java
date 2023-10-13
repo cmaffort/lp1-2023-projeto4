@@ -1,8 +1,21 @@
 package br.cefetmg.projeto4.dto;
 
 import java.util.Queue;
-
+enum EstadoComputador{
+    DISPONIVEL("Disponível"),
+    DOADO("Doado"),
+    MANUTENCAO("Em manutenção"),
+    RETIRADADEPECAS("Retirada de Peças");
+    private String estado;
+    EstadoComputador(String estado){
+        this.estado = estado;
+    }
+    public String getEstado(){
+        return estado;
+    }
+}
 public class Computador {
+    
     private String dataDeChegada;
     private String modelo;
     private int quantidadeDeRAM;
@@ -10,10 +23,13 @@ public class Computador {
     private String modeloProcessador;
     private String codigo;
     private String doador;
-    private boolean estaParaDoacao;
-    private boolean estaParaRetiradaDePecas;
+    private EstadoComputador estado;
     private Queue<String> problemas;
-    private String donatario;
+    private Donatario donatario;
+    public Computador()
+    {
+        this.estado = EstadoComputador.MANUTENCAO;
+    }
     public String getDataDeChegada() {
         return dataDeChegada;
     }
@@ -42,22 +58,6 @@ public class Computador {
         return doador;
     }
 
-    public boolean getEstaParaDoacao() {
-        return estaParaDoacao;
-    }
-
-    public void setEstaParaDoacao(boolean estado) {
-        estaParaDoacao = estado;
-    }
-
-    public boolean getEstaParaRetiradaDePecas() {
-        return estaParaRetiradaDePecas;
-    }
-
-    public void setEstaParaRetiradaDePecas(boolean estado) {
-        estaParaRetiradaDePecas = estado;
-    }
-
     public String getProblemas() {
         if (problemas.isEmpty()) {
             return "Sem problemas";
@@ -70,10 +70,10 @@ public class Computador {
     }
 
     public String getDonatario() {
-        return donatario;
+        return donatario.getNome();
     }
 
-    public void setDonatario(String donatario) {
+    public void setDonatario(Donatario donatario) {
         this.donatario = donatario;
     }
 }
