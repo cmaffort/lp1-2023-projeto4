@@ -9,6 +9,10 @@ public class Donatario {
     private int serie;
     private String avaliacao;
     private String problemas;
+    public int getCodigo()
+    {
+        return codigo;
+    }
     
     public String getNome() {
         return nome;
