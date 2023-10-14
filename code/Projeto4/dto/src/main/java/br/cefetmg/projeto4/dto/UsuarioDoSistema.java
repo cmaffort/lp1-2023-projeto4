@@ -9,8 +9,16 @@ public class UsuarioDoSistema {
     private final String CPF;
     private LocalDate dataNascimento;
     private final LocalDateTime dataDeCadastro;
+    private String email;
+    public String getEmail () {
+        return email;
+    }    
+    
+    public void setEmail (String email) {
+        this.email = email;
+    }    
 
-    public UsuarioDoSistema(String nome, String CPF) {
+    public UsuarioDoSistema(String nome, String CPF, String email) {
         this.nome = nome;
         this.CPF = CPF;
         this.dataDeCadastro = LocalDateTime.now();

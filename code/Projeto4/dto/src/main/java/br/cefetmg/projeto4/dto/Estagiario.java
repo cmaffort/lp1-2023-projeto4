@@ -14,8 +14,8 @@ public class Estagiario extends UsuarioDoSistema {
     private LocalDate dataSaida;
 
 
-    public Estagiario(String nome, String CPF, int diaEntrada, int mesEntrada, int anoEntrada, int diaSaida, int mesSaida, int anoSaida) {
-        super(nome, CPF);
+    public Estagiario(String nome, String CPF, String email, int diaEntrada, int mesEntrada, int anoEntrada, int diaSaida, int mesSaida, int anoSaida) {
+        super(nome, CPF, email);
          dataEntrada = LocalDate.of(anoEntrada, mesEntrada, diaEntrada);         
          dataSaida = LocalDate.of(anoSaida, mesSaida, diaSaida);
     }
