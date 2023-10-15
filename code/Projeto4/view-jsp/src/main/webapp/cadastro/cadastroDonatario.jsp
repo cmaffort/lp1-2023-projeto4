@@ -7,7 +7,7 @@
     </head>
     <body>
     <h1>Donatario</h1>
-    <form action="#" method="post">
+        <form action="ProcessarDados" method="post">
         
         <label for="nome">Nome completo:</label>
         <input type="text" id="nome" name="nome" required>
