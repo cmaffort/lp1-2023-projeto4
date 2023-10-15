@@ -12,15 +12,13 @@
             <button id="fisica">Pessoa Física</button>
             <button id="juridica">Pessoa Jurídica</button>
      <div id="dynamicContent">Selecione o modo de cadastro</div>
-
-
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function() {
-            $("#juridica").click(function() {
+            $("#fisica").click(function() {
                 $.ajax({
                     type: "GET",
-                    url: "doador/cadastroPessoaJuridica.jsp", // The URL to the JSP page that will return new content
+                    url: "doador/cadastroPessoaFisica.jsp", // The URL to the JSP page that will return new content
                     success: function(response) {
                         $("#dynamicContent").html(response); // Update the content with the response from the server
                     },
@@ -30,10 +28,34 @@
                 });
             });
             
-             $("#fisica").click(function() {
+             $("#juridica").click(function() {
                 $.ajax({
                     type: "GET",
-                    url: "cadastro/cadastroPessoaFisica.jsp", // The URL to the JSP page that will return new content
+                    url: "cadastroPessoaJuridica.jsp", // The URL to the JSP page that will return new content
+                    success: function(response) {
+                        $("#dynamicContent").html(response); // Update the content with the response from the server
+                    },
+                    error: function() {
+                        alert("Failed to update content.");
+                    }
+                });
+            });
+             $("#estagiario").click(function() {
+                $.ajax({
+                    type: "GET",
+                    url: "cadastro/cadastroEstagiario.jsp", // The URL to the JSP page that will return new content
+                    success: function(response) {
+                        $("#dynamicContent").html(response); // Update the content with the response from the server
+                    },
+                    error: function() {
+                        alert("Failed to update content.");
+                    }
+                });
+            });
+            $("#doador").click(function() {
+                $.ajax({
+                    type: "GET",
+                    url: "cadastro/cadastroDoador.jsp", // The URL to the JSP page that will return new content
                     success: function(response) {
                         $("#dynamicContent").html(response); // Update the content with the response from the server
                     },
@@ -47,6 +69,8 @@
 
         });
     </script>
+
+
 
     </body>
 </html>

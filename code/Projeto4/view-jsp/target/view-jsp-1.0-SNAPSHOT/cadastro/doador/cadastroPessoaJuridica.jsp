@@ -6,12 +6,13 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Cadastro Pessoa Juridica</h1>
+        <h1>Cadastro Doador Pessoa Juridica</h1>
             <form action="#" method="post">
         
-        <label for="nome">Nome da Empresa</label>
+        <label for="nome">Nome completo:</label>
         <input type="text" id="nome" name="nome" required>
         <br><br>
+        
         <label for="login">Endereço:</label>
         <input type="text" id="endereco" name="endereco" required>
         <br><br>
@@ -26,6 +27,7 @@
         <label for="login">CNPJ:</label>
         <input type="text" id="cidade" name="cidade" required>
         <br><br>
+
         <label for="email">Email:</label>
         <input type="email" id="email" name="email" required>
         <br><br>
@@ -38,7 +40,5 @@
 
         <input type="submit" value="Cadastrar">
     </form>
-    
 
-    </body>
 </html>

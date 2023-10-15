@@ -8,7 +8,8 @@
     <button id="donatario">Donatario</button>
     <button id="professor">Professor</button>
     <button id="estagiario">Estagiario</button>
-    <button id="doador">Doador</button>
+    <button id="doadorF">Doador Pessoa Fisica</button>
+    <button id="doadorJ">Doador Pessoa Juridica</button>
 
      <div id="dynamicContent">Selecione o modo de cadastro</div>
 
@@ -53,10 +54,10 @@
                     }
                 });
             });
-            $("#doador").click(function() {
+            $("#doadorJ").click(function() {
                 $.ajax({
                     type: "GET",
-                    url: "cadastro/cadastroDoador.jsp", // The URL to the JSP page that will return new content
+                    url: "cadastro/doador/cadastroPessoaJuridica.jsp", // The URL to the JSP page that will return new content
                     success: function(response) {
                         $("#dynamicContent").html(response); // Update the content with the response from the server
                     },
@@ -66,6 +67,18 @@
                 });
             });
 
+            $("#doadorF").click(function() {
+                $.ajax({
+                    type: "GET",
+                    url: "cadastro/doador/cadastroPessoaFisica.jsp", // The URL to the JSP page that will return new content
+                    success: function(response) {
+                        $("#dynamicContent").html(response); // Update the content with the response from the server
+                    },
+                    error: function() {
+                        alert("Failed to update content.");
+                    }
+                });
+            });
 
 
         });

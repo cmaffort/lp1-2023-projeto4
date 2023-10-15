@@ -12,6 +12,25 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <h1>Cadastro Doador Pessoa Fisica</h1>
+    <form action="#" method="post">
+        
+        <label for="nome">Nome completo:</label>
+        <input type="text" id="nome" name="nome" required>
+        <br><br>
+        
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        <br><br>
+        <label for="senha">Senha:</label>
+        <input type="password" id="senha" name="senha" required>
+        <br><br>
+        <label for="confirmarSenha">Confirmar Senha:</label>
+        <input type="password" id="confirmarSenha" name="confirmarSenha" required>
+        <br><br>
+
+        <input type="submit" value="Cadastrar">
+    </form>
+
     </body>
 </html>
