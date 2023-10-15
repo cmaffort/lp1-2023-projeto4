@@ -12,10 +12,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- *
- * @author laura
- */
 @WebServlet(name = "ProcessarDados", urlPatterns = {"/ProcessarDados"})
 public class ProcessarDados extends HttpServlet {
 
