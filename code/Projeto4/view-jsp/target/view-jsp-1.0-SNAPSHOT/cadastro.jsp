@@ -8,7 +8,8 @@
     <button id="donatario">Donatario</button>
     <button id="professor">Professor</button>
     <button id="estagiario">Estagiario</button>
-    
+    <button id="doador">Doador</button>
+
      <div id="dynamicContent">Selecione o modo de cadastro</div>
 
 
@@ -18,7 +19,7 @@
             $("#donatario").click(function() {
                 $.ajax({
                     type: "GET",
-                    url: "cadastroDonatario.jsp", // The URL to the JSP page that will return new content
+                    url: "cadastro/cadastroDonatario.jsp", // The URL to the JSP page that will return new content
                     success: function(response) {
                         $("#dynamicContent").html(response); // Update the content with the response from the server
                     },
@@ -27,10 +28,11 @@
                     }
                 });
             });
+            
              $("#professor").click(function() {
                 $.ajax({
                     type: "GET",
-                    url: "cadastroProfessor.jsp", // The URL to the JSP page that will return new content
+                    url: "cadastro/cadastroProfessor.jsp", // The URL to the JSP page that will return new content
                     success: function(response) {
                         $("#dynamicContent").html(response); // Update the content with the response from the server
                     },
@@ -42,7 +44,7 @@
              $("#estagiario").click(function() {
                 $.ajax({
                     type: "GET",
-                    url: "cadastroEstagiario.jsp", // The URL to the JSP page that will return new content
+                    url: "cadastro/cadastroEstagiario.jsp", // The URL to the JSP page that will return new content
                     success: function(response) {
                         $("#dynamicContent").html(response); // Update the content with the response from the server
                     },
@@ -51,6 +53,19 @@
                     }
                 });
             });
+            $("#doador").click(function() {
+                $.ajax({
+                    type: "GET",
+                    url: "cadastro/cadastroDoador.jsp", // The URL to the JSP page that will return new content
+                    success: function(response) {
+                        $("#dynamicContent").html(response); // Update the content with the response from the server
+                    },
+                    error: function() {
+                        alert("Failed to update content.");
+                    }
+                });
+            });
+
 
 
         });
