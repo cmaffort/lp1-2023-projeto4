@@ -9,7 +9,7 @@
         <h1>Cadastro Doador Pessoa Juridica</h1>
         <form action=” ${pageContext.request.contextPath}/processarServlet.java” method=”post”>
         
-        <label for="nome">Nome completo:</label>
+        <label for="nome">Nome empresa:</label>
         <input type="text" id="nome" name="nome" required>
         <br><br>
         

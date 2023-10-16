@@ -3,13 +3,15 @@ import java.time.LocalDateTime;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class DoadorComputadorPessoaJuridica {
     private String nome;
     private final String CNPJ;
     private final LocalDateTime dataDeCadastro;
     private String email;
-    private Queue<Computador> computadoresDoados;
+    private LinkedList<Computador> computadoresDoados;
 
     public String getEmail () {
         return email;
@@ -24,7 +26,7 @@ public class DoadorComputadorPessoaJuridica {
         this.email = email;
     }    
 
-    public UsuarioDoSistema(String nome, String CNPJ, String email) {
+    public DoadorComputadorPessoaJuridica(String nome, String CNPJ, String email) {
         this.nome = nome;
         this.CNPJ = CNPJ;
         this.dataDeCadastro = LocalDateTime.now();
@@ -34,17 +36,12 @@ public class DoadorComputadorPessoaJuridica {
     public String getNome() {
         return nome;
     }
-    public int getIdade() {
-        LocalDate dataAtual = LocalDate.now();
-        Period periodo = Period.between(dataNascimento, dataAtual);
-        return periodo.getYears();
-    }
     public void setNome(String nome) {
         this.nome = nome;
     }
 
-    public String getCPF() {
-        return CPF;
+    public String getCNPJ() {
+        return CNPJ;
     }
 
     public long getDiasDesdeCadastro() {
