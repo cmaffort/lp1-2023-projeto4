@@ -12,7 +12,9 @@ public class DoadorComputadorPessoaJuridica {
     private final LocalDateTime dataDeCadastro;
     private String email;
     private LinkedList<Computador> computadoresDoados;
-
+    String endereco;
+    String bairro;
+    String cidade;
     public String getEmail () {
         return email;
     }    
@@ -26,11 +28,14 @@ public class DoadorComputadorPessoaJuridica {
         this.email = email;
     }    
 
-    public DoadorComputadorPessoaJuridica(String nome, String CNPJ, String email) {
+    public DoadorComputadorPessoaJuridica(String nome, String CNPJ, String email, String endereco, String bairro, String cidade) {
         this.nome = nome;
         this.CNPJ = CNPJ;
         this.dataDeCadastro = LocalDateTime.now();
-        
+        this.email = email;
+        this.endereco = endereco;
+        this.bairro = bairro;
+        this.cidade = cidade;
     }
 
     public String getNome() {
@@ -42,6 +47,25 @@ public class DoadorComputadorPessoaJuridica {
 
     public String getCNPJ() {
         return CNPJ;
+    }
+    public String getEndereco() {
+        return endereco;
+    }
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
+    }
+    
+    public String getBairro() {
+        return bairro;
+    }
+    public void setBairro(String bairro) {
+        this.endereco = bairro;
+    }
+    public String getCidade() {
+        return cidade;
+    }
+    public void setCidade(String endereco) {
+        this.endereco = endereco;
     }
 
     public long getDiasDesdeCadastro() {
