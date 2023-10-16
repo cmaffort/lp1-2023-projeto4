@@ -1,0 +1,44 @@
+body, * {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+header {
+    box-sizing: border-box;
+    width: 100vw;
+    height: 8.4vh;
+    background-color: #10446c;
+    position: absolute;
+    padding: 0 0.694vw;
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+}
+
+header img {
+    width: 3.472vw;
+}
+
+nav {
+    box-sizing: border-box;
+    height: 100%;
+    display: flex;
+    align-content: center;
+    justify-content: space-evenly;
+    cursor: pointer;
+}
+
+nav figure {
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: white;
+    font-size: 0.972vw;
+    padding: 0 0.694vw;
+}
+
+nav figure img:not(:only-child) {
+    width: 2.083vw;
+    align-self: center;
+}
