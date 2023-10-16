@@ -1,41 +1,34 @@
 package br.cefetmg.projeto4.dto;
 
 import java.util.Queue;
-enum EstadoComputador{
-    DISPONIVEL("Disponível"),
-    DOADO("Doado"),
-    MANUTENCAO("Em manutenção"),
-    RETIRADADEPECAS("Retirada de Peças");
-    private String estado;
-    EstadoComputador(String estado){
-        this.estado = estado;
-    }
-    public String getEstado(){
-        return estado;
-    }
-}
 public class Computador {
     
     private String dataDeChegada;
-    private String modelo;
+    private final String marca;
     private int quantidadeDeRAM;
     private int capacidadeDeArmazenamento;
     private String modeloProcessador;
     private String codigo;
-    private DoadorComputador doador;
-    private EstadoComputador estado;
+    private final DoadorComputadorPessoaFisica doador;
+ //   private EstadoComputador estado;
     private Queue<String> problemas;
     private Donatario donatario;
-    public Computador()
+    public Computador(String marca, int quantidadeDeRAM,  int capacidadeDeArmazenamento, Queue<String> problemas, DoadorComputadorPessoaFisica doador)
     {
-        this.estado = EstadoComputador.MANUTENCAO;
+   //     this.estado = EstadoComputador.NAO_RECEBIDO;
+        this.marca = marca;
+        this.quantidadeDeRAM = quantidadeDeRAM;
+        this.capacidadeDeArmazenamento = capacidadeDeArmazenamento;
+        this.problemas = problemas;
+        this.doador = doador;
+        
     }
     public String getDataDeChegada() {
         return dataDeChegada;
     }
 
-    public String getModelo() {
-        return modelo;
+    public String getMarca() {
+        return marca;
     }
 
     public int getQuantidadeDeRAM() {
@@ -69,4 +62,13 @@ public class Computador {
     public void setDonatario(Donatario donatario) {
         this.donatario = donatario;
     }
+    public void setRam(int ram)
+    {
+        this.quantidadeDeRAM = ram;
+    }
+    public void setCapacidadeDeArmazenamento(int armazenamento)
+    {
+        this.capacidadeDeArmazenamento = armazenamento;
+    }
+
 }
