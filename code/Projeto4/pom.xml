@@ -9,7 +9,6 @@
     <module>dto</module>
     <module>idao</module>
     <module>dao-postgres</module>
-    <module>model</module>
     <module>view-jsp</module>
   </modules>
   <properties>
