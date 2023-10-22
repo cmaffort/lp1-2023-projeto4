@@ -8,8 +8,9 @@
   <modules>
     <module>dto</module>
     <module>idao</module>
-    <module>dao-postgres</module>
     <module>view-jsp</module>
+    <module>JavaWeb</module>
+    <module>dao-mysql</module>
   </modules>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

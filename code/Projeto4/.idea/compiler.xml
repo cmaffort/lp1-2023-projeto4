@@ -8,10 +8,15 @@
         <outputRelativeToContentRoot value="true" />
         <module name="idao" />
         <module name="view-jsp" />
+        <module name="JavaWeb" />
         <module name="dto" />
-        <module name="dao-postgres" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="dao-mysql" target="21" />
+      <module name="dao-postgres" target="17" />
+      <module name="dao-postgress" target="17" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
