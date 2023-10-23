@@ -8,7 +8,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "DoadorServlet", urlPatterns = {"/DoadorServlet"})
+@WebServlet(name = "DoadorFisicoServlet", urlPatterns = {"/DoadorFisicoServlet"})
 public class DoadorFisicoServlet extends HttpServlet {
 
     
@@ -16,7 +16,7 @@ public class DoadorFisicoServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            
+            out.println(request.getParameter("login"));
             
         }
     }
