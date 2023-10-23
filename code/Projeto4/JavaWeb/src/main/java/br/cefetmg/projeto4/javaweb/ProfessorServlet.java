@@ -8,7 +8,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "DoadorServlet", urlPatterns = {"/DoadorServlet"})
+@WebServlet(name = "ProfessorServlet", urlPatterns = {"/ProfessorServlet"})
 public class ProfessorServlet extends HttpServlet {
 
     
@@ -16,7 +16,7 @@ public class ProfessorServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            
+            out.println("<p>" + request.getParameter("nome") + "</p><p>" + request.getParameter("escola")  + "</p><p>" + request.getParameter("email") + "</p>");
             
         }
     }

@@ -7,24 +7,24 @@
     </head>
     <body>
     <h1>Donatario</h1>
-        <form action="ProcessarDados" method="post">
+        <form action="DonatarioCadastro" method="post">
         
         <label for="nome">Nome completo:</label>
         <input type="text" id="nome" name="nome" required>
         <br><br>
         
-        <label for="login">Escola:</label>
+        <label for="escola">Escola:</label>
         <input type="text" id="escola" name="escola" required>
         <br><br>
-        <label for="login">Endereço:</label>
+        <label for="endereco">Endereço:</label>
         <input type="text" id="endereco" name="endereco" required>
         <br><br>
         
-        <label for="login">Bairro:</label>
+        <label for="bairro">Bairro:</label>
         <input type="text" id="bairro" name="bairro" required>
         <br><br>
         
-        <label for="login">Cidade:</label>
+        <label for="cidade">Cidade:</label>
         <input type="text" id="cidade" name="cidade" required>
         <br><br>
         <label for="email">Email:</label>

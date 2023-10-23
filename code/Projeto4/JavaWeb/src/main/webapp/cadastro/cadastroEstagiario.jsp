@@ -8,7 +8,7 @@
     </head>
     <body>
     <h1>Estagiario</h1>
-    <form action="EstagiarioServlet.java" method="post">
+    <form action="EstagiarioServlet" method="post">
         <label for="nome">Nome completo:</label>
         <input type="text" id="nome" name="nome" required>
         <br>

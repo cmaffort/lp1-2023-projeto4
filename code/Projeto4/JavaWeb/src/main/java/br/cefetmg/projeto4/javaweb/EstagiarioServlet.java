@@ -8,7 +8,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "DoadorServlet", urlPatterns = {"/DoadorServlet"})
+@WebServlet(name = "EstagiarioServlet", urlPatterns = {"/EstagiarioServlet"})
 public class EstagiarioServlet extends HttpServlet {
 
     
@@ -20,7 +20,10 @@ public class EstagiarioServlet extends HttpServlet {
             String nome = request.getParameter("nome");
             String curso = request.getParameter("curso");
             String serie = request.getParameter("serie");
-            
+            out.println("<p>" + nome + "</p>");
+            out.println("<p>" + curso + "</p>");
+            out.println("<p>" + serie + "</p>");
+
             
         }
     }

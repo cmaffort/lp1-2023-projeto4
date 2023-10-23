@@ -16,8 +16,11 @@ public class DonatarioCadastro extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            
-            
+            out.println("<p>" + "Donatario" + "</p>");
+
+            out.println("<p>" + request.getParameter("nome") + "</p>");
+            out.println("<p>" + request.getParameter("escola") + "</p>");
+            out.println("<p>" + request.getParameter("email") + "</p>");
         }
     }
 

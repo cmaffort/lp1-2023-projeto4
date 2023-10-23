@@ -9,7 +9,7 @@
     </head>
     <body>
         <h1>Professor</h1>
-    <form action="#" method="post">
+    <form action="ProfessorServlet" method="post">
         
         <label for="nome">Nome completo:</label>
         <input type="text" id="nome" name="nome" required>
