@@ -17,6 +17,10 @@ public class EstagiarioServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             
+            String nome = request.getParameter("nome");
+            String curso = request.getParameter("curso");
+            String serie = request.getParameter("serie");
+            
             
         }
     }
