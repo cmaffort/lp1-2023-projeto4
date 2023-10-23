@@ -16,7 +16,13 @@ public class ProfessorServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            out.println("<p>" + request.getParameter("nome") + "</p><p>" + request.getParameter("escola")  + "</p><p>" + request.getParameter("email") + "</p>");
+            
+            String nome = request.getParameter("nome");
+            String departamento = request.getParameter("escola");
+            String email = request.getParameter("email");
+            out.println("<p>" + nome + "</p>");
+            out.println("<p>" + departamento + "</p>");
+            out.println("<p>" + email + "</p>");
             
         }
     }

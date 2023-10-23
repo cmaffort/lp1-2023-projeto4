@@ -15,8 +15,17 @@ public class DoadorFisicoServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            out.println(request.getParameter("login"));
+        try (PrintWriter out = response.getWriter()) {            
+            
+            String nome = request.getParameter("nome");
+            String cpf = request.getParameter("cpf");
+            String email = request.getParameter("email");
+            String senha = request.getParameter("senha");
+            String confimarSenha = request.getParameter("confirmarSenha");
+            out.println("<p>" + nome + "</p>");
+            out.println("<p>" + cpf + "</p>");
+            out.println("<p>" + email + "</p>");
+            
             
         }
     }
