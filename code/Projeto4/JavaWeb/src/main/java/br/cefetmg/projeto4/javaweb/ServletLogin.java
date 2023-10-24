@@ -8,8 +8,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "DonatarioCadastro", urlPatterns = {"/DonatarioCadastro"})
-public class DonatarioCadastro extends HttpServlet {
+@WebServlet(name = "ServletLogin", urlPatterns = {"/ServletLogin"})
+public class ServletLogin extends HttpServlet {
 
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -17,18 +17,13 @@ public class DonatarioCadastro extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             
-            String nome = request.getParameter("nome");
-            String escola = request.getParameter("escola");
-            String endereco = request.getParameter("endereco");
-            String bairro = request.getParameter("bairro");
-            String cidade = request.getParameter("cidade");
-            String email = request.getParameter("email");
+            String nome = request.getParameter("login");
             String senha = request.getParameter("senha");
-            String confirmarSenha = request.getParameter("confirmarSenha");
-            
+            String serie = request.getParameter("serie");
             out.println("<p>" + nome + "</p>");
-            out.println("<p>" + escola + "</p>");
-            out.println("<p>" + email + "</p>");
+            out.println("<p>" + senha + "</p>");
+            out.println("<p>" + "login" + "</p>");            
+            
         }
     }
 

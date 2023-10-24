@@ -8,14 +8,23 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "DoadorServlet", urlPatterns = {"/DoadorServlet"})
+@WebServlet(name = "DoadorFisicoServlet", urlPatterns = {"/DoadorFisicoServlet"})
 public class DoadorFisicoServlet extends HttpServlet {
 
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
+        try (PrintWriter out = response.getWriter()) {            
+            
+            String nome = request.getParameter("nome");
+            String cpf = request.getParameter("cpf");
+            String email = request.getParameter("email");
+            String senha = request.getParameter("senha");
+            String confimarSenha = request.getParameter("confirmarSenha");
+            out.println("<p>" + nome + "</p>");
+            out.println("<p>" + cpf + "</p>");
+            out.println("<p>" + email + "</p>");
             
             
         }

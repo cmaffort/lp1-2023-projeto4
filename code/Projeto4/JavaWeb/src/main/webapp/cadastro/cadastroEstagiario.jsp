@@ -8,7 +8,7 @@
     </head>
     <body>
     <h1>Estagiario</h1>
-    <form action="EstagiarioServlet.java" method="post">
+    <form action="EstagiarioServlet" method="post">
         <label for="nome">Nome completo:</label>
         <input type="text" id="nome" name="nome" required>
         <br>
@@ -19,6 +19,10 @@
         <br>        
         <label for="curso">Serie/Periodo: </label>
         <input type="number" id="serie" name="serie" required> 
+        <br>
+        <br>
+        <label for="login">CPF: </label>
+        <input type="text" id="cpf" name="cpf" required> 
         <br>
         <br>        
         <label for="email">Email:</label>

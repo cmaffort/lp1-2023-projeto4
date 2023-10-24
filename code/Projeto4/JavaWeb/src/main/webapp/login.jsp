@@ -12,7 +12,7 @@
         <header></header>
     
         <h1>Entrar</h1>
-        <form action="http://localhost:8080/JavaWeb_war_exploded/hello-servlet" method="get">
+        <form action="ServletLogin" method="get">
             <label for="login">Email:</label>
             <input type="email" id="login" name="login" required>
             <br><br>
