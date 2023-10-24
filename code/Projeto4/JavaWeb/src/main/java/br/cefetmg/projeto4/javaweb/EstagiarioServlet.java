@@ -20,6 +20,11 @@ public class EstagiarioServlet extends HttpServlet {
             String nome = request.getParameter("nome");
             String curso = request.getParameter("curso");
             String serie = request.getParameter("serie");
+            String email = request.getParameter("email");
+            String cpf = request.getParameter("cpf");
+            String senha = request.getParameter("senha");
+            String confirmarSenha = request.getParameter("confirmarSenha");
+            
             out.println("<p>" + nome + "</p>");
             out.println("<p>" + curso + "</p>");
             out.println("<p>" + serie + "</p>");

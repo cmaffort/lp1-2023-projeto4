@@ -20,6 +20,10 @@
         <input type="text" id="endereco" name="endereco" required>
         <br><br>
         
+        <label for="login">CPF:</label>
+        <input type="text" id="cpf" name="cpf" required>
+        <br><br>
+        
         <label for="bairro">Bairro:</label>
         <input type="text" id="bairro" name="bairro" required>
         <br><br>
@@ -27,12 +31,15 @@
         <label for="cidade">Cidade:</label>
         <input type="text" id="cidade" name="cidade" required>
         <br><br>
+        
         <label for="email">Email:</label>
         <input type="email" id="email" name="email" required>
         <br><br>
+        
         <label for="senha">Senha:</label>
         <input type="password" id="senha" name="senha" required>
         <br><br>
+        
         <label for="confirmarSenha">Confirmar Senha:</label>
         <input type="password" id="confirmarSenha" name="confirmarSenha" required>
         <br><br>

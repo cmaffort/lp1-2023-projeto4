@@ -20,6 +20,10 @@
         <label for="curso">Serie/Periodo: </label>
         <input type="number" id="serie" name="serie" required> 
         <br>
+        <br>
+        <label for="login">CPF: </label>
+        <input type="text" id="cpf" name="cpf" required> 
+        <br>
         <br>        
         <label for="email">Email:</label>
         <input type="email" id="email" name="email" required>

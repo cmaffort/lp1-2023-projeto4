@@ -20,9 +20,15 @@ public class DonatarioCadastro extends HttpServlet {
             String nome = request.getParameter("nome");
             String escola = request.getParameter("escola");
             String endereco = request.getParameter("endereco");
-            out.println("<p>" + request.getParameter("nome") + "</p>");
-            out.println("<p>" + request.getParameter("escola") + "</p>");
-            out.println("<p>" + request.getParameter("email") + "</p>");
+            String bairro = request.getParameter("bairro");
+            String cidade = request.getParameter("cidade");
+            String email = request.getParameter("email");
+            String senha = request.getParameter("senha");
+            String confirmarSenha = request.getParameter("confirmarSenha");
+            
+            out.println("<p>" + nome + "</p>");
+            out.println("<p>" + escola + "</p>");
+            out.println("<p>" + email + "</p>");
         }
     }
 
