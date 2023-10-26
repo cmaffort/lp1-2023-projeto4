@@ -1,21 +1,10 @@
 package br.cefetmg.projeto4.idao;
-
+import br.cefetmg.projeto4.dto.Computador;
+import java.sql.SQLException;
+import java.util.List;
 public interface IComputadorDAO {
-    public String getDataDeChegada();
-    public String getModelo();
-    public int getQuantidadeDeRAM();
-    public int getCapacidadeDeArmazenamento();
-    public String getModeloProcessador();
-    public String getCodigo();
-    public String getDoador();
-    public boolean getEstaParaDoacao();
-    public void setEstaParaDoacao(boolean estado);
-    public boolean getEstaParaRetiradaDePecas();
-    public void setEstaParaRetiradaDePecas(boolean estado);
-    // os problemas estão armazenados em uma fila de acordo com a ordem de importancia
-    public String getProblemas();
-    public void addProblemas(String problemas);
-    public String getDonatario();
-    public void setDonatario(IDonatarioDAO donatario);
-    
+    boolean inserir(Computador computador) throws SQLException, ClassNotFoundException;
+    boolean alterar(Computador Computador) throws SQLException, ClassNotFoundException;
+    boolean remover(Computador Computador) throws SQLException, ClassNotFoundException;
+    List<Computador> listar() throws SQLException, ClassNotFoundException;    
 }
