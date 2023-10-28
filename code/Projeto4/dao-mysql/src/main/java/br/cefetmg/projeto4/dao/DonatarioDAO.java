@@ -25,14 +25,16 @@ public class DonatarioDAO implements IDonatarioDAO {
     @Override
     public boolean inserir(Donatario donatario) throws SQLException, ClassNotFoundException {
         try {
-            PreparedStatement statement = conexao.prepareStatement("INSERT INTO donatarios (nome, CPF, email, escola, posicao, codigo, serie) VALUES (?, ?, ?, ?, ?, ?)");
+            PreparedStatement statement = conexao.prepareStatement("INSERT INTO donatarios (nome, CPF, email, escola, posicao, codigo, serie) VALUES (?, ?, ?, ?, ?, ?, ?)");
 
             statement.setString(1, donatario.getNome());
             statement.setString(2, donatario.getCPF());
             statement.setString(3, donatario.getEmail());
             statement.setString(4, donatario.getEscola());
             statement.setInt(5, donatario.getPosicao());
-            statement.setString(6, donatario.getSerie());
+            statement.setString(6, "1");
+
+            statement.setString(7, donatario.getSerie());
 
             int rowsAffected = statement.executeUpdate();
 

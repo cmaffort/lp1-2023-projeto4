@@ -22,7 +22,7 @@ public class DonatarioCadastro extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             
             String nome = request.getParameter("nome");
-            String CPF = request.getParameter("CPF");
+            String CPF = request.getParameter("cpf");
 
             String escola = request.getParameter("escola");
             String endereco = request.getParameter("endereco");
@@ -36,10 +36,15 @@ public class DonatarioCadastro extends HttpServlet {
             String confirmarSenha = request.getParameter("confirmarSenha");
             try {
             Donatario donatario = new Donatario(nome, CPF,email, escola, -1, serie, enderecoCompleto);
+            out.println("<p>" + donatario.getCPF() + "</p>");
+            out.println("<p>" + donatario.getNome()+ "</p>");
 
             DonatarioDAO donatarioDAO = new DonatarioDAO();
                 try {
-                    donatarioDAO.inserir(donatario);
+                    if(donatarioDAO.inserir(donatario))
+                        out.println("<p>inserido</p>");
+                    else
+                        out.println("<p>erro</p>");
                 } catch (ClassNotFoundException ex) {
                     Logger.getLogger(DonatarioCadastro.class.getName()).log(Level.SEVERE, null, ex);
                 }
