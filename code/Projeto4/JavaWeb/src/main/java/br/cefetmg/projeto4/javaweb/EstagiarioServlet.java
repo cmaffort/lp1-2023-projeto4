@@ -1,5 +1,7 @@
 package br.cefetmg.projeto4.javaweb;
 import br.cefetmg.projeto4.dto.Estagiario;
+import br.cefetmg.projeto4.dao.EstagiarioDAO;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -7,26 +9,35 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.time.LocalDate;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 @WebServlet(name = "EstagiarioServlet", urlPatterns = {"/EstagiarioServlet"})
 public class EstagiarioServlet extends HttpServlet {
 
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, SQLException, ClassNotFoundException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             
             String nome = request.getParameter("nome");
-            String curso = request.getParameter("curso");
-            String serie = request.getParameter("serie");
+           /* String curso = request.getParameter("curso");
+            String serie = request.getParameter("serie"); */
             String email = request.getParameter("email");
             String cpf = request.getParameter("cpf");
             String senha = request.getParameter("senha");
             String confirmarSenha = request.getParameter("confirmarSenha");
             Estagiario estagiario = new Estagiario(nome, cpf, email,  "21", "1", "1", "10", "1", "1", senha);
+            try {
+            EstagiarioDAO estagiarioDAO = new EstagiarioDAO();
+            estagiarioDAO.inserir(estagiario);
+            }catch (SQLException e) {
+                out.println("<p>SQLException</p>");
+            }
+// processo de confirmar a senha
             
-           // processo de confirmar a senha        
+// processo de confirmar a senha        
             
 
             
@@ -45,7 +56,13 @@ public class EstagiarioServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(EstagiarioServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(EstagiarioServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -59,7 +76,13 @@ public class EstagiarioServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(EstagiarioServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(EstagiarioServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -70,6 +93,5 @@ public class EstagiarioServlet extends HttpServlet {
     @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
-
+    }
 }
