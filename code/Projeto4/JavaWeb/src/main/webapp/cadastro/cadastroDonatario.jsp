@@ -12,6 +12,10 @@
         <label for="nome">Nome completo:</label>
         <input type="text" id="nome" name="nome" required>
         <br><br>
+        <label for="serie">Serie:</label>
+        <input type="number" id="serie" name="serie" required>
+        <br><br>
+
         
         <label for="escola">Escola:</label>
         <input type="text" id="escola" name="escola" required>
