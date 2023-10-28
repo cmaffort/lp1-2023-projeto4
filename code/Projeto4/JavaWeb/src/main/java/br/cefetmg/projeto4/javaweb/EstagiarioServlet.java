@@ -1,5 +1,5 @@
 package br.cefetmg.projeto4.javaweb;
-
+import br.cefetmg.projeto4.dto.Estagiario;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -7,7 +7,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
+import java.time.LocalDate;
 @WebServlet(name = "EstagiarioServlet", urlPatterns = {"/EstagiarioServlet"})
 public class EstagiarioServlet extends HttpServlet {
 
@@ -24,10 +24,10 @@ public class EstagiarioServlet extends HttpServlet {
             String cpf = request.getParameter("cpf");
             String senha = request.getParameter("senha");
             String confirmarSenha = request.getParameter("confirmarSenha");
+            Estagiario estagiario = new Estagiario(nome, cpf, email,  "21", "1", "1", "10", "1", "1", senha);
             
-            out.println("<p>" + nome + "</p>");
-            out.println("<p>" + curso + "</p>");
-            out.println("<p>" + serie + "</p>");
+           // processo de confirmar a senha        
+            
 
             
         }

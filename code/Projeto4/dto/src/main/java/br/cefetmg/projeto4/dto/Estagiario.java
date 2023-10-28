@@ -1,48 +1,79 @@
 package br.cefetmg.projeto4.dto;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.Duration;
-import java.time.LocalDate;
-import java.time.Period;
 
 public class Estagiario extends UsuarioDoSistema {
     private int computadoresFeitosEssaSemana;
     private String curso;
     private int serie;
-    private LocalDate dataEntrada;
-    private LocalDate dataSaida;
-
-
-    public Estagiario(String nome, String CPF, String email, int diaEntrada, int mesEntrada, int anoEntrada, int diaSaida, int mesSaida, int anoSaida) {
-        super(nome, CPF, email);
-         dataEntrada = LocalDate.of(anoEntrada, mesEntrada, diaEntrada);         
-         dataSaida = LocalDate.of(anoSaida, mesSaida, diaSaida);
+    private String senha;    
+   private String anoEntrada; 
+    private String mesEntrada;    
+    private String diaEntrada;
+    private String anoSaida;    
+    private String mesSaida;    
+    private String diaSaida;
+    
+public Estagiario(String nome, String CPF, String email, String diaEntrada, String mesEntrada, String anoEntrada, String diaSaida, String mesSaida, String anoSaida, String senha) {
+    super(nome, CPF, email);
+    this.diaEntrada = diaEntrada;
+    this.mesEntrada = mesEntrada;
+    this.anoEntrada = anoEntrada;
+    this.diaSaida = diaSaida;
+    this.mesSaida = mesSaida;
+    this.anoSaida = anoSaida;
+    this.senha = senha;
+    }
+    
+    public String getDataEntrada() {
+        String data = diaEntrada + "/" + mesEntrada + "/" + anoEntrada;
+        return data;
     }
 
-
+    public String getDataSaida() {
+        String data = diaSaida + "/" + mesSaida + "/" + anoSaida;
+        return data;
+    }
     public int getComputadoresFeitosEssaSemana() {
         return computadoresFeitosEssaSemana;
+    }
+
+    public void setComputadoresFeitosEssaSemana(int computadoresFeitosEssaSemana) {
+        this.computadoresFeitosEssaSemana = computadoresFeitosEssaSemana;
     }
 
     public String getCurso() {
         return curso;
     }
 
+    public void setCurso(String curso) {
+        this.curso = curso;
+    }
+
     public int getSerie() {
         return serie;
     }
 
-    public String getFimDoEstagio() {
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        String dataFormatada = dateFormat.format(dataSaida);
-        return dataFormatada;
-    }
-    public String getInicioDoEstagio() {
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        String dataFormatada = dateFormat.format(dataEntrada);
-        return dataFormatada;
+    public void setSerie(int serie) {
+        this.serie = serie;
     }
 
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+    public String getNome()
+    {
+        return super.getNome();
+    }
+    public String getCPF()
+    {
+        return super.getCPF();
+    }
+    public int getIdade()
+    {
+        return super.getIdade();
+    }
 
 }
