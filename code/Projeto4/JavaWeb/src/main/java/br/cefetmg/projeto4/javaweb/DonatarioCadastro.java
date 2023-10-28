@@ -1,5 +1,6 @@
 package br.cefetmg.projeto4.javaweb;
-
+import br.cefetmg.projeto4.dao.DonatarioDAO;
+import br.cefetmg.projeto4.dto.Donatario;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -7,6 +8,9 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @WebServlet(name = "DonatarioCadastro", urlPatterns = {"/DonatarioCadastro"})
 public class DonatarioCadastro extends HttpServlet {
@@ -18,17 +22,31 @@ public class DonatarioCadastro extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             
             String nome = request.getParameter("nome");
+            String CPF = request.getParameter("CPF");
+
             String escola = request.getParameter("escola");
             String endereco = request.getParameter("endereco");
             String bairro = request.getParameter("bairro");
             String cidade = request.getParameter("cidade");
             String email = request.getParameter("email");
             String senha = request.getParameter("senha");
+            String serie = request.getParameter("serie");
+
+            String enderecoCompleto = "Rua/Av: " + endereco + " Bairro: " + bairro + " Cidade: " + cidade;
             String confirmarSenha = request.getParameter("confirmarSenha");
-            
-            out.println("<p>" + nome + "</p>");
-            out.println("<p>" + escola + "</p>");
-            out.println("<p>" + email + "</p>");
+            try {
+            Donatario donatario = new Donatario(nome, CPF,email, escola, -1, serie, enderecoCompleto);
+
+            DonatarioDAO donatarioDAO = new DonatarioDAO();
+                try {
+                    donatarioDAO.inserir(donatario);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(DonatarioCadastro.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }catch (SQLException e) {
+                out.println("<p>SQLException</p>");
+            }
+
         }
     }
 
