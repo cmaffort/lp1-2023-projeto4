@@ -5,8 +5,9 @@ import java.time.format.DateTimeFormatter;
 import static java.time.temporal.TemporalQueries.localDate;
 
 public class Pecas {
-    
+   
     private int quantidade;
+    private String codigo;
     private String modelo;
     private String descricao;
     private LocalDate dataChegada;
@@ -22,6 +23,14 @@ public class Pecas {
     
     public void setQuantidade (int quantidade) {
         this.quantidade = quantidade;
+    }
+    
+    public String getCodigo () {
+        return codigo;
+    }
+    
+    public void setCodigo (String codigo) {
+        this.codigo = codigo;
     }
     
     public String getModelo () {
