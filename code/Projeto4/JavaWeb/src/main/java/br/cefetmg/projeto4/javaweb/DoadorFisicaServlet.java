@@ -1,6 +1,10 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
+ */
 package br.cefetmg.projeto4.javaweb;
-import br.cefetmg.projeto4.dao.DonatarioDAO;
-import br.cefetmg.projeto4.dto.Donatario;
+import br.cefetmg.projeto4.dao.DoadorFisicaDAO;
+import br.cefetmg.projeto4.dto.DoadorFisica;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -12,35 +16,21 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-@WebServlet(name = "DonatarioCadastro", urlPatterns = {"/DonatarioCadastro"})
-public class DonatarioCadastro extends HttpServlet {
-
-    
+@WebServlet(name = "DoadorFisicaServlet", urlPatterns = {"/DoadorFisicaServlet"})
+public class DoadorFisicaServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            
             String nome = request.getParameter("nome");
             String CPF = request.getParameter("cpf");
-
-            String escola = request.getParameter("escola");
-            String endereco = request.getParameter("endereco");
-            String bairro = request.getParameter("bairro");
-            String cidade = request.getParameter("cidade");
             String email = request.getParameter("email");
             String senha = request.getParameter("senha");
-            String serie = request.getParameter("serie");
-            String enderecoCompleto = "Rua/Av: " + endereco + " Bairro: " + bairro + " Cidade: " + cidade;
-            String confirmarSenha = request.getParameter("confirmarSenha");
+            DoadorFisica doadorFisica = new DoadorFisica(nome, CPF, email, senha);
             try {
-            Donatario donatario = new Donatario(nome, CPF,email, escola, -1, serie, enderecoCompleto);
-            out.println("<p>" + donatario.getCPF() + "</p>");
-            out.println("<p>" + donatario.getNome()+ "</p>");
-
-            DonatarioDAO donatarioDAO = new DonatarioDAO();
+                DoadorFisicaDAO doadorFisicaDAO = new DoadorFisicaDAO();
                 try {
-                    if(donatarioDAO.inserir(donatario))
+                    if(doadorFisicaDAO.inserir(doadorFisica))
                         out.println("<p>inserido</p>");
                     else
                         out.println("<p>erro</p>");
@@ -50,7 +40,18 @@ public class DonatarioCadastro extends HttpServlet {
             }catch (SQLException e) {
                 out.println("<p>SQLException</p>");
             }
-
+        
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet DoadorFisicaServlet</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet DoadorFisicaServlet at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+            
         }
     }
 

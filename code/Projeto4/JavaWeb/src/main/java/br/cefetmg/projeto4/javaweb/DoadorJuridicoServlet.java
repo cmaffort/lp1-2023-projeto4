@@ -1,5 +1,6 @@
 package br.cefetmg.projeto4.javaweb;
 
+import br.cefetmg.projeto4.dao.EstagiarioDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -7,6 +8,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.sql.SQLException;
 
 @WebServlet(name = "DoadorJuridicoServlet", urlPatterns = {"/DoadorJuridicoServlet"})
 public class DoadorJuridicoServlet extends HttpServlet {
@@ -25,7 +27,7 @@ public class DoadorJuridicoServlet extends HttpServlet {
             String email = request.getParameter("email");
             String senha = request.getParameter("senha");
             String confirmarSenha = request.getParameter("confimarSenha");
-            
+
             out.println("<p>" + nome + "</p>");
             out.println("<p>" + endereco + "</p>");
             out.println("<p>" + bairro + "</p>");

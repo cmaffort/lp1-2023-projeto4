@@ -1,6 +1,11 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
+ */
 package br.cefetmg.projeto4.javaweb;
-import br.cefetmg.projeto4.dao.DonatarioDAO;
-import br.cefetmg.projeto4.dto.Donatario;
+
+import br.cefetmg.projeto4.dao.ProfessorDAO;
+import br.cefetmg.projeto4.dto.Professor;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -12,41 +17,42 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-@WebServlet(name = "DonatarioCadastro", urlPatterns = {"/DonatarioCadastro"})
-public class DonatarioCadastro extends HttpServlet {
+/**
+ *
+ * @author lucas
+ */
+@WebServlet(name = "ProfessorServlet", urlPatterns = {"/ProfessorServlet"})
+public class ProfessorServlet extends HttpServlet {
 
-    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, ClassNotFoundException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            
             String nome = request.getParameter("nome");
             String CPF = request.getParameter("cpf");
-
-            String escola = request.getParameter("escola");
-            String endereco = request.getParameter("endereco");
-            String bairro = request.getParameter("bairro");
-            String cidade = request.getParameter("cidade");
             String email = request.getParameter("email");
+            String departamento = request.getParameter("departamento");
             String senha = request.getParameter("senha");
-            String serie = request.getParameter("serie");
-            String enderecoCompleto = "Rua/Av: " + endereco + " Bairro: " + bairro + " Cidade: " + cidade;
-            String confirmarSenha = request.getParameter("confirmarSenha");
+            System.out.println(email);
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet ProfessorServlet</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet ProfessorServlet at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+            Professor professor = new Professor(nome, CPF, email, departamento, senha);
+            System.out.println(professor.getNome() + ": " + professor.getEmail());
             try {
-            Donatario donatario = new Donatario(nome, CPF,email, escola, -1, serie, enderecoCompleto);
-            out.println("<p>" + donatario.getCPF() + "</p>");
-            out.println("<p>" + donatario.getNome()+ "</p>");
+                ProfessorDAO professorDAO = new ProfessorDAO();
+                if(professorDAO.inserir(professor))
+                    out.println("<p>inserido</p>");
+                else
+                    out.println("<p>erro</p>");
 
-            DonatarioDAO donatarioDAO = new DonatarioDAO();
-                try {
-                    if(donatarioDAO.inserir(donatario))
-                        out.println("<p>inserido</p>");
-                    else
-                        out.println("<p>erro</p>");
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(DonatarioCadastro.class.getName()).log(Level.SEVERE, null, ex);
-                }
             }catch (SQLException e) {
                 out.println("<p>SQLException</p>");
             }
@@ -66,7 +72,11 @@ public class DonatarioCadastro extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ProfessorServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -80,7 +90,11 @@ public class DonatarioCadastro extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ProfessorServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

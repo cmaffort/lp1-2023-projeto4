@@ -20,7 +20,7 @@
         <br><br>
         
         <label for="login">Departamento: </label>
-        <input type="text" id="escola" name="escola" required>
+        <input type="text" id="departamento" name="departamento" required>
         <br><br>
         
         <label for="email">Email:</label>
