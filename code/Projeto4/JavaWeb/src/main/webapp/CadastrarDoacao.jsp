@@ -18,8 +18,8 @@
         <input type="text" id="quantidade" name="quantidade" required>
         <br><br>
 
-         <label for="ddlCores">Estado do Produto:</label>
-        <select id="ddlCores" name="cores" form="frmCores">
+        <label for="status">Estado do Produto:</label>
+        <select id="opcoes" name="opcoes" form="opcoes">
         <option value="status">Status</option>    
         <option value="funcionando">Funcionando</option>
         <option value="quebrados">Quebrado</option>
@@ -33,8 +33,8 @@
          <br><br>
         <label for="formaEntrega">Como deseja fornecer o produto:</label>
         
-        <input type="radio" name="opcao" value="op1"> Entrega
-        <input type="radio" name="opcao" value="op2"> Busca
+        <input type="radio" name="entrega" value="op1"> Entrega
+        <input type="radio" name="busca" value="op2"> Busca
         <input type="date" name="data">
         <br><br>
          
