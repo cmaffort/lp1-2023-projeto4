@@ -20,7 +20,7 @@ const links = [
     'suporte.html',
     'login.jsp',
     'https://www.dde.cefetmg.br/2023/08/29/oficina-de-recuperacao-de-computadores-beneficia-estudantes-sem-acesso-a-computadores/',
-    'doacao.html'
+    'CadastrarDoacao.jsp'
     ];
 
 function newEl(tag, ...classNames) {

@@ -1,0 +1,26 @@
+h1 {
+    color: black;
+    text-align: center;
+}
+
+#quantidade {
+    width: 40px;
+}
+
+label {
+    margin-left: 40px;
+}
+
+#especificacoes {
+    margin-left: 50px;
+    width: 1000px;
+    height: 150px;
+    border-radius: 15px;
+    color:brown;
+}
+
+button {
+    height: 15px;
+    border-radius: 50%;
+}
+
