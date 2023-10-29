@@ -33,10 +33,12 @@
          <br><br>
         <label for="formaEntrega">Como deseja fornecer o produto:</label>
         
-        <button>
-
-    
-   
+        <input type="radio" name="opcao" value="op1"> Entrega
+        <input type="radio" name="opcao" value="op2"> Busca
+        <input type="date" name="data">
+        <br><br>
+         
+        <input type="submit" value="Cadastrar"> 
         
     <script src="code/header.js"></script>
 </body>
