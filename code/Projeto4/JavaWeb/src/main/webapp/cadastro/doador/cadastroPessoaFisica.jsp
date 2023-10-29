@@ -13,7 +13,7 @@
     </head>
     <body>
         <h1>Cadastro Doador Pessoa Fisica</h1>
-    <form action="DoadorFisicoServlet" method="post">
+    <form action="DoadorFisicaServlet" method="post">
         
         <label for="nome">Nome completo:</label>
         <input type="text" id="nome" name="nome" required>
