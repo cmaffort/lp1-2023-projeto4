@@ -21,7 +21,7 @@ public class EstagiarioDAO implements IEstagiarioDAO {
     @Override
     public boolean inserir(Estagiario estagiario) throws SQLException, ClassNotFoundException {
         try {
-            PreparedStatement statement = conexao.prepareStatement("INSERT INTO estagiarios (nome, CPF, email, dataEntrada, dataSaida, senha) VALUES (?, ?, ?, ?, ?, ?)");
+            PreparedStatement statement = conexao.prepareStatement("INSERT INTO estagiarios (nome, CPF, email, dataDeEntrada, dataDeSaida, senha) VALUES (?, ?, ?, ?, ?, ?)");
             statement.setString(1, estagiario.getNome());
             statement.setString(2, estagiario.getCPF());
             statement.setString(3, estagiario.getEmail() );
