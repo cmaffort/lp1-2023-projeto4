@@ -22,9 +22,6 @@
                                  new Doacao(5,computador)
         
         };
-
-
-
         %>    
         
         
@@ -34,8 +31,7 @@
             
             <div>
             
-                <p class="quadradoDoacao"> <% System.out.println("algo"); %>  
-            
+                <p class="quadradoDoacao"> <% System.out.println(arr[0]); System.out.println(arr[1]); System.out.println(arr[0]); System.out.println(arr[0]);%>     
             
         </div>
             
