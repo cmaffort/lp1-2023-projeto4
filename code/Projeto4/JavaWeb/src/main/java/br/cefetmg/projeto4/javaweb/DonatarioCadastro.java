@@ -34,7 +34,7 @@ public class DonatarioCadastro extends HttpServlet {
             String enderecoCompleto = "Rua/Av: " + endereco + " Bairro: " + bairro + " Cidade: " + cidade;
             String confirmarSenha = request.getParameter("confirmarSenha");
             try {
-            Donatario donatario = new Donatario(nome, CPF,email, escola, -1, serie, enderecoCompleto);
+            Donatario donatario = new Donatario(nome, CPF,email, senha, escola, -1, serie, enderecoCompleto);
             out.println("<p>" + donatario.getCPF() + "</p>");
             out.println("<p>" + donatario.getNome()+ "</p>");
 

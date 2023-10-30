@@ -1,5 +1,6 @@
 package br.cefetmg.projeto4.javaweb;
 
+import br.cefetmg.projeto4.dao.DoacaoDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -9,6 +10,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import br.cefetmg.projeto4.dto.Computador;
 import br.cefetmg.projeto4.dto.Doacao;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @WebServlet(name = "CadastrarDoacaoServlet", urlPatterns = {"/CadastrarDoacaoServlet"})
 public class CadastrarDoacaoServlet extends HttpServlet {
@@ -43,6 +47,21 @@ public class CadastrarDoacaoServlet extends HttpServlet {
 
             Computador computador = new Computador(null, data, null, marca, modelo, quantidadeRAM);
             Doacao doacao = new Doacao(quantidade, computador);
+                        try {
+                DoacaoDAO doacaoDAO = new DoacaoDAO();
+                try {
+                    if(doacaoDAO.inserir(doacao))
+                        out.println("<p>inserido</p>");
+                    else
+                        out.println("<p>erro</p>");
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(DonatarioCadastro.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }catch (SQLException e) {
+                out.println("<p>SQLException</p>");
+            }
+
+            
         }
     }
 
