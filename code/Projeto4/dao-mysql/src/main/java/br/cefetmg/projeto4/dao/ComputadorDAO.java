@@ -21,8 +21,7 @@ public class ComputadorDAO implements IComputadorDAO {
     @Override
     public boolean inserir(Computador computador) throws SQLException, ClassNotFoundException {
         try {
-            PreparedStatement statement = conexao.prepareStatement("INSERT INTO computadores (codigo, doador, dataDeChegada, donatario, marca, modeloProcessador, quantidadeDeRAM) VALUES (?, ?, ?, ?, ?, ?, ?)");
-            String codigo = computador.getCodigo();
+            PreparedStatement statement = conexao.prepareStatement("INSERT INTO computadores (codigo, doador, dataDeChegada, donatario, marca, modeloProcessador, quantidadeDeRAM) VALUES (?, ?, ?, ?, ?, ?, ?)");       
             String doador = computador.getDoador();
             String dataDeChegada = computador.getDataDeChegada();
             String donatario = computador.getDonatario();
@@ -30,13 +29,12 @@ public class ComputadorDAO implements IComputadorDAO {
             String modeloProcessador = computador.getModeloProcessador();
             int quantidadeDeRAM = computador.getQuantidadeDeRAM();
 
-            statement.setString(1, codigo);
-            statement.setString(2, doador);
-            statement.setString(3, dataDeChegada);
-            statement.setString(4, donatario);
-            statement.setString(5, marca);
-            statement.setString(6, modeloProcessador);
-            statement.setString(7, String.valueOf(quantidadeDeRAM));
+            statement.setString(1, doador);
+            statement.setString(2, dataDeChegada);
+            statement.setString(3, donatario);
+            statement.setString(4, marca);
+            statement.setString(5, modeloProcessador);
+            statement.setString(6, String.valueOf(quantidadeDeRAM));
 
             int rowsAffected = statement.executeUpdate();
 
@@ -62,8 +60,6 @@ public class ComputadorDAO implements IComputadorDAO {
     public boolean remover(Computador computador) throws SQLException, ClassNotFoundException {
     try {
             PreparedStatement statement = conexao.prepareStatement("DELETE FROM computadores WHERE codigo = ?");
-            String codigo = computador.getCodigo();
-            statement.setString(1, codigo);
 
             int rowsAffected = statement.executeUpdate();
 
