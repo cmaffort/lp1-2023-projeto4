@@ -25,7 +25,7 @@ public class DonatarioDAO implements IDonatarioDAO {
     @Override
     public boolean inserir(Donatario donatario) throws SQLException, ClassNotFoundException {
         try {
-            PreparedStatement statement = conexao.prepareStatement("INSERT INTO donatarios (nome, CPF, email, senha, escola, posicao, codigo, serie) VALUES (?, ?, ?, ?, ?, ?, ?)");
+            PreparedStatement statement = conexao.prepareStatement("INSERT INTO donatarios (nome, CPF, email, senha, escola, posicao, codigo, serie) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
 
             statement.setString(1, donatario.getNome());
             statement.setString(2, donatario.getCPF());
