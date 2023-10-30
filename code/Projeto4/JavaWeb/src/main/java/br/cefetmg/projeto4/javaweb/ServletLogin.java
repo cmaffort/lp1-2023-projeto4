@@ -56,6 +56,7 @@ public class ServletLogin extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             MySqlConnection bancoDeDados = new MySqlConnection();
             Connection conexao = bancoDeDados.getConexao();
+            String salvando = "nao salvo";
             String email = request.getParameter("login");
             String senha = request.getParameter("senha");
             String[] tabelas = {"doadorFisica", "professores", "donatarios", "estagiarios"};
@@ -63,8 +64,11 @@ public class ServletLogin extends HttpServlet {
                 if(verificarTabela(conexao, tabelas[i], email, senha))
                 {
                     out.println("<p> logado com sussesso como:" + tabelas[i]);
+                    salvando = tabelas[i];
                     break;
                 }
+            if(salvando.equals("doadorFisica"))
+                response.sendRedirect("CadastrarDoacao.jsp");
             
         }
              catch (SQLException e) {

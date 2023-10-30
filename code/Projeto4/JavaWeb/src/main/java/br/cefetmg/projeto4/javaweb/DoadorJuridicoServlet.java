@@ -1,5 +1,6 @@
 package br.cefetmg.projeto4.javaweb;
 
+import br.cefetmg.projeto4.dao.DoadorFisicaDAO;
 import br.cefetmg.projeto4.dao.EstagiarioDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -9,7 +10,11 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
-
+import br.cefetmg.projeto4.dao.DoadorJuridicoDAO;
+import br.cefetmg.projeto4.dto.DoadorFisica;
+import br.cefetmg.projeto4.dto.DoadorJuridica;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 @WebServlet(name = "DoadorJuridicoServlet", urlPatterns = {"/DoadorJuridicoServlet"})
 public class DoadorJuridicoServlet extends HttpServlet {
 
@@ -27,11 +32,22 @@ public class DoadorJuridicoServlet extends HttpServlet {
             String email = request.getParameter("email");
             String senha = request.getParameter("senha");
             String confirmarSenha = request.getParameter("confimarSenha");
+            DoadorJuridica doadorJuridico = new DoadorJuridica(nome, endereco + " " + bairro + " " + cidade, cnpj, email, senha);
+            try {
+                DoadorJuridicoDAO doadorJuricoDAO = new DoadorJuridicoDAO();
+                try {
+                    if(doadorJuricoDAO.inserir(doadorJuridico))
+                        out.println("<p>inserido</p>");
+                    else
+                        out.println("<p>erro</p>");
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(DonatarioCadastro.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }catch (SQLException e) {
+                out.println("<p>SQLException</p>");
+            }
+        
 
-            out.println("<p>" + nome + "</p>");
-            out.println("<p>" + endereco + "</p>");
-            out.println("<p>" + bairro + "</p>");
-            
             
         }
     }
