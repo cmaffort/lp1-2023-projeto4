@@ -9,8 +9,7 @@ public class Computador {
     private String marca;
     private String modeloProcessador;
     private int quantidadeDeRAM;
-    public Computador(String codigo, String doador, String dataDeChegada, String donatario, String marca, String modeloProcessador, int quantidadeDeRAM) {
-        this.codigo = codigo; 
+    public Computador(String doador, String dataDeChegada, String donatario, String marca, String modeloProcessador, int quantidadeDeRAM) {
         this.doador = doador;
         this.dataDeChegada = dataDeChegada;
         this.donatario = donatario;
@@ -24,13 +23,7 @@ public class Computador {
         this.doador = null;
     }
     // Métodos "get" para obter os valores dos campos
-    public String getCodigo() {
-        return codigo;
-    }
-
-    public String getDoador() {
-        return doador;
-    }
+    
 
     public String getDataDeChegada() {
         return dataDeChegada;

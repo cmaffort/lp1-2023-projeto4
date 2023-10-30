@@ -1,6 +1,5 @@
 package br.cefetmg.projeto4.javaweb;
 
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -8,22 +7,16 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import br.cefetmg.projeto4.dto.Computador;
 
-@WebServlet(name = "CadastrarDoacaoServlet", urlPatterns = {"/CadastrarDoacaoServlet"})
-public class CadastrarDoacaoServlet extends HttpServlet {
+@WebServlet(name = "gestaoDoacaoServlet", urlPatterns = {"/gestaoDoacaoServlet"})
+public class gestaoDoacaoServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             
-            String quantidade = request.getParameter("quantidade");
-            String especificacoes = request.getParameter("especificacoes");
-            String data = request.getParameter("data");
-            String estado = request.getParameter("status");
             
-            Computador computador; 
         }
     }
 
