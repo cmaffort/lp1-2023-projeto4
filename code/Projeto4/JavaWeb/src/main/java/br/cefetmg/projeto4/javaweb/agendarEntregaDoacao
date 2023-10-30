@@ -1,57 +1,50 @@
 package br.cefetmg.projeto4.javaweb;
 
-import br.cefetmg.projeto4.dao.DoadorFisicaDAO;
-import br.cefetmg.projeto4.dao.EstagiarioDAO;
+import br.cefetmg.projeto4.dao.AgendamentoDAO;
+import br.cefetmg.projeto4.dto.Agendamento;
+import br.cefetmg.projeto4.javaweb.ProfessorServlet;
+
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.sql.SQLException;
-import br.cefetmg.projeto4.dao.DoadorJuridicoDAO;
-import br.cefetmg.projeto4.dto.DoadorFisica;
-import br.cefetmg.projeto4.dto.DoadorJuridica;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-@WebServlet(name = "DoadorJuridicoServlet", urlPatterns = {"/DoadorJuridicoServlet"})
-public class DoadorJuridicoServlet extends HttpServlet {
 
+/**
+ *
+ * @author Aluno
+ */
+@WebServlet(name = "EntregaDoacao", urlPatterns = {"/EntregaDoacao"})
+public class agendarEntregaDoacao extends HttpServlet {
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, ClassNotFoundException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            
-            String nome = request.getParameter("nome");
-            String endereco = request.getParameter("endereco");
-            String bairro = request.getParameter("bairro");
-            String cidade = request.getParameter("cidade");
-            String cnpj = request.getParameter("cnpj");
-            String email = request.getParameter("email");
-            String senha = request.getParameter("senha");
-            String confirmarSenha = request.getParameter("confimarSenha");
-            DoadorJuridica doadorJuridico = new DoadorJuridica(nome, endereco + " " + bairro + " " + cidade, cnpj, email, senha);
+            String data = request.getParameter("dataRetirada");
+            String hora = request.getParameter("horaRetirada");
+            int idDonatario = 1;
+
+            Agendamento agendamento = new Agendamento(data, hora, idDonatario);
+
             try {
-                DoadorJuridicoDAO doadorJuricoDAO = new DoadorJuridicoDAO();
-                try {
-                    if(doadorJuricoDAO.inserir(doadorJuridico))
-                        out.println("<p>inserido</p>");
-                    else
-                        out.println("<p>erro</p>");
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(DonatarioCadastro.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }catch (SQLException e) {
+                AgendamentoDAO agendamentoDAO = new AgendamentoDAO();
+
+                if(agendamentoDAO.inserir(agendamento))
+                    out.println("<p>inserido</p>");
+                else
+                    out.println("<p>erro</p>");
+            } catch (SQLException e) {
                 out.println("<p>SQLException</p>");
             }
-        
-
-            
         }
     }
-
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -64,7 +57,11 @@ public class DoadorJuridicoServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (ClassNotFoundException e) {
+            Logger.getLogger(agendarEntregaDoacao.class.getName()).log(Level.SEVERE, null, e);
+        }
     }
 
     /**
@@ -78,7 +75,11 @@ public class DoadorJuridicoServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (ClassNotFoundException e) {
+            Logger.getLogger(agendarEntregaDoacao.class.getName()).log(Level.SEVERE, null, e);
+        }
     }
 
     /**
@@ -90,5 +91,4 @@ public class DoadorJuridicoServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
 }

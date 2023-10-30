@@ -22,6 +22,7 @@ public class UsuarioDoSistema {
         this.nome = nome;
         this.CPF = CPF;
         this.dataDeCadastro = LocalDateTime.now();
+        this.email = email;
         
     }
 

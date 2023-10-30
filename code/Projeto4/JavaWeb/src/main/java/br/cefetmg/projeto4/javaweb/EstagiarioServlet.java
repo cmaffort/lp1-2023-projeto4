@@ -31,7 +31,7 @@ public class EstagiarioServlet extends HttpServlet {
             Estagiario estagiario = new Estagiario(nome, cpf, email,  "21", "1", "1", "10", "1", "1", senha);
             try {
             EstagiarioDAO estagiarioDAO = new EstagiarioDAO();
-            estagiarioDAO.inserir(estagiario);
+            if(estagiarioDAO.inserir(estagiario));
             }catch (SQLException e) {
                 out.println("<p>SQLException</p>");
             }
