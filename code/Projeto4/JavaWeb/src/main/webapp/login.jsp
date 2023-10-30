@@ -3,8 +3,8 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" href="style.css">
         <link rel="stylesheet" href="style/header.css">
+        <link rel="stylesheet" href="style/login.css">
         <title>JSP Page</title>
     </head>
 
