@@ -2,7 +2,6 @@ package br.cefetmg.projeto4.dto;
 
 
 public class Computador {
-    private String codigo;
     private String doador;
     private String dataDeChegada;
     private String donatario;
@@ -36,6 +35,10 @@ public class Computador {
     public String getMarca() {
         return marca;
     }
+    
+    public String getDoador() {
+        return doador;
+    }
 
     public String getModeloProcessador() {
         return modeloProcessador;
@@ -43,11 +46,6 @@ public class Computador {
 
     public int getQuantidadeDeRAM() {
         return quantidadeDeRAM;
-    }
-
-    // Métodos "set" para definir os valores dos campos
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
     }
 
     public void setDoador(String doador) {
