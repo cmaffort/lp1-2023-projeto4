@@ -1,6 +1,5 @@
 package br.cefetmg.projeto4.javaweb;
 
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -9,6 +8,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import br.cefetmg.projeto4.dto.Computador;
+import br.cefetmg.projeto4.dto.Doacao;
 
 @WebServlet(name = "CadastrarDoacaoServlet", urlPatterns = {"/CadastrarDoacaoServlet"})
 public class CadastrarDoacaoServlet extends HttpServlet {
@@ -17,13 +17,32 @@ public class CadastrarDoacaoServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            
-            String quantidade = request.getParameter("quantidade");
-            String especificacoes = request.getParameter("especificacoes");
+
+            String quantidade1 = request.getParameter("quantidade");
+            String modelo = request.getParameter("modelo");
+            String marca = request.getParameter("marca");
+            String quantidadeRam = request.getParameter("quantidadeRAM");
             String data = request.getParameter("data");
             String estado = request.getParameter("status");
+            int quantidadeRAM = 0;
+            int quantidade = 0;
             
-            Computador computador; 
+            try {
+                quantidade = Integer.parseInt(quantidade1);
+                System.out.println(quantidade1);
+            } catch (NumberFormatException ex) {
+                ex.printStackTrace();
+            }
+            
+            try {
+                quantidadeRAM = Integer.parseInt(quantidadeRam);
+                System.out.println(quantidadeRAM);
+            } catch (NumberFormatException ex) {
+                ex.printStackTrace();
+            }
+
+            Computador computador = new Computador(null, data, null, marca, modelo, quantidadeRAM);
+            Doacao doacao = new Doacao(quantidade, computador);
         }
     }
 
