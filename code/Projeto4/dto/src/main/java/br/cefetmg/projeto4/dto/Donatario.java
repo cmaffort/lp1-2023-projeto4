@@ -7,11 +7,13 @@ public class Donatario {
     private String escola;
     private int posicao;
     private String serie;
+    private String senha;
     private String enderecoCompleto;
-    public Donatario(String nome, String CPF, String email, String escola, int posicao, String serie, String enderecoCompleto) {
+    public Donatario(String nome, String CPF, String email, String senha, String escola, int posicao, String serie, String enderecoCompleto) {
         this.nome = nome;
         this.CPF = CPF;
         this.email = email;
+        this.senha = senha;
         this.escola = escola;
         this.posicao = posicao;
         this.serie = serie;
@@ -24,6 +26,14 @@ public class Donatario {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 
     public String getCPF() {

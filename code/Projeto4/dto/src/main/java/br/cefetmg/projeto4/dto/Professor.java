@@ -11,7 +11,7 @@ public class Professor  {
     public Professor(String nome, String CPF, String email, String departamento, String senha) {
         this.nome = nome;
         this.CPF = CPF;
-        this.email = "silvia@gmail.com";
+        this.email = email;
         this.departamento = departamento;
         this.senha = senha;
     }
