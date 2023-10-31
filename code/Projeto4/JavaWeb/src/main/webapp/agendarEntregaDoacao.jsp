@@ -21,5 +21,5 @@
         <p> Documentos necessários para a retirada: identidade ou outro documento com foto</p>
         
         <script src="code/header.js"></script>
-    </body>
+    </body>
 </html>
