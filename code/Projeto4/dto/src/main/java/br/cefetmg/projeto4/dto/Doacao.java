@@ -9,16 +9,22 @@ public class Doacao {
     private String marca;
     private String modeloProcessador;
     private int quantidadeDeRAM;
+    private String doador;
 
-    public Doacao(int quantidade, Computador computador, String dataDeChegada, String donatario, String marca, String modeloProcessador, int quantidadeRAM) {
+    public Doacao(int quantidade, Computador computador) {
         this.quantidade = quantidade;
         this.computador = computador;
-        this.dataDeChegada = dataDeChegada;
-        this.donatario = donatario;
-        this.marca = marca;
-        this.modeloProcessador = modeloProcessador;
-        this.quantidadeDeRAM = quantidadeRAM;
     }
+    
+    public Doacao(String doador, String dataDeChegada, String donatario, String marca, String modeloProcessador, int quantidadeDeRAM) {
+    
+    this.dataDeChegada = dataDeChegada;
+    this.donatario = donatario; 
+    this.marca = marca;
+    this.modeloProcessador = modeloProcessador;
+    this.quantidadeDeRAM = quantidadeDeRAM;
+    this.doador = doador;
+    }        
 
     public int getQuantidade() {
         return quantidade;

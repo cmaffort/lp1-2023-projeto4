@@ -46,7 +46,7 @@ public class CadastrarDoacaoServlet extends HttpServlet {
             }
 
             Computador computador = new Computador(null, data, null, marca, modelo, quantidadeRAM);
-            Doacao doacao = new Doacao(quantidade, computador, computador.getDataDeChegada(), computador.getDonatario(), computador.getMarca(), computador.getModeloProcessador(), computador.getQuantidadeDeRAM());
+            Doacao doacao = new Doacao(quantidade, computador);
                         try {
                 DoacaoDAO doacaoDAO = new DoacaoDAO();
                 try {
