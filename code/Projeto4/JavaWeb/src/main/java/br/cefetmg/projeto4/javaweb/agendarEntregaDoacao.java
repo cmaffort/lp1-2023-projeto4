@@ -2,7 +2,6 @@ package br.cefetmg.projeto4.javaweb;
 
 import br.cefetmg.projeto4.dao.AgendamentoDAO;
 import br.cefetmg.projeto4.dto.Agendamento;
-import br.cefetmg.projeto4.javaweb.ProfessorServlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
