@@ -3,8 +3,8 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" href="style/agendarEntregaDoacao.css">
         <link rel="stylesheet" href="style/header.css">
+        <link rel="stylesheet" href="style/agendarEntregaDoacao.css">
         <title>Agendar Entrega da Doação</title>
     </head>
     <body>
@@ -21,5 +21,5 @@
         <p> Documentos necessários para a retirada: identidade ou outro documento com foto</p>
         
         <script src="code/header.js"></script>
-    </body>
+    </body>
 </html>

@@ -1,0 +1,38 @@
+#type {
+    padding-top: 8vh;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#type button {
+    width: 20%;
+    height: 8vh;
+}
+
+#type .selected {
+    background-color: #9fa3a7;
+}
+
+form {
+    width: fit-content;
+    margin: auto;
+}
+
+input {
+    border-radius: 30px;
+    border: 1px, black;
+    background-color: #bec1c4;
+}
+
+input[type="submit"] {
+    width: 100%;
+    text-align: center;
+    background-color: #10446c;
+    font-family: Andale Mono, monospace;
+    margin: 10px 0 40px 0;
+    color: white;
+}
+
+p {
+    text-align: center;
+}
