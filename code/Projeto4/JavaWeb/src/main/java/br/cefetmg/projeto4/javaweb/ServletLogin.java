@@ -59,7 +59,7 @@ public class ServletLogin extends HttpServlet {
             String salvando = "nao salvo";
             String email = request.getParameter("login");
             String senha = request.getParameter("senha");
-            String[] tabelas = {"doadorFisica", "professores", "donatarios", "estagiarios"};
+            String[] tabelas = {"doadorJuridica", "doadorFisica", "professores", "donatarios", "estagiarios"};
             for(int i = 0; i < tabelas.length; ++i)
                 if(verificarTabela(conexao, tabelas[i], email, senha))
                 {
@@ -67,9 +67,12 @@ public class ServletLogin extends HttpServlet {
                     salvando = tabelas[i];
                     break;
                 }
-            if(salvando.equals("doadorFisica"))
+            if(salvando.equals("doadorFisica") || salvando.equals("doadorJuridica"))
                 response.sendRedirect("CadastrarDoacao.jsp");
+            if(salvando.equals("estagiarios") || salvando.equals("professores"))
+                response.sendRedirect("MostrarDoacoes");
             
+
         }
              catch (SQLException e) {
                 // Handle any SQL exceptions, e.g., log or display an error message
