@@ -43,7 +43,8 @@
             <br><br>
 
             <input type="submit" value="Cadastrar"> 
-
+            
+            <a href="GestaoDoacoes.jsp">Texto a ser exibido</a>    
             <script src="code/header.js"></script>
     </body>
 </html>
