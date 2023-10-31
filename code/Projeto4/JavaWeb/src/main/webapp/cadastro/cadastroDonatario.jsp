@@ -48,7 +48,7 @@
         <input type="password" id="confirmarSenha" name="confirmarSenha" required>
         <br><br>
 
-        <input type="submit" value="Cadastrar">
+        <div id="submit"><input type="submit" value="Cadastrar"></div>
     </form>
     
     </body>

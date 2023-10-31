@@ -24,9 +24,12 @@ input {
     background-color: #bec1c4;
 }
 
-input[type="submit"] {
+#submit {
     width: 100%;
     text-align: center;
+}
+
+#submit input {
     background-color: #10446c;
     font-family: Andale Mono, monospace;
     margin: 10px 0 40px 0;
