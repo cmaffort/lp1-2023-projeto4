@@ -25,7 +25,7 @@ public class GestaoDoacao extends HttpServlet {
                 // Criar uma declaração SQL
                 String sql = "SELECT id, quantidade, computador FROM doacao";
                 Statement statement = connection.createStatement();
-
+                String newSql = "SELECT id, nome_aluno FROM fila_espera";
                 // Executar a consulta SQL
                 ResultSet resultSet = statement.executeQuery(sql);
 
@@ -60,6 +60,17 @@ public class GestaoDoacao extends HttpServlet {
                 }
 
                 out.println("</table>");
+                resultSet = statement.executeQuery(newSql);
+                out.println("<h2>Fila de Espera</h2>");
+                out.println("<table>");
+                out.println("<tr><th>Posição</th><th>Nome</th></tr>");
+                while (resultSet.next()) {
+                    int id = resultSet.getInt("id");
+                    String nome = resultSet.getString("nome_aluno");
+
+                    out.println("<tr><td>" + id + "</td><td>" + nome + "</td></tr>");
+                }
+
                 out.println("</body></html>");
 
                 // Fechar recursos
