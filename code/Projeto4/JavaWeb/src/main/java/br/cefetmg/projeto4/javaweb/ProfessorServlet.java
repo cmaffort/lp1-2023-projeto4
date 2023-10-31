@@ -48,8 +48,10 @@ public class ProfessorServlet extends HttpServlet {
             System.out.println(professor.getNome() + ": " + professor.getEmail());
             try {
                 ProfessorDAO professorDAO = new ProfessorDAO();
-                if(professorDAO.inserir(professor))
+                if(professorDAO.inserir(professor)) {
                     out.println("<p>inserido</p>");
+                    response.sendRedirect("login.jsp");
+                }
                 else
                     out.println("<p>erro</p>");
 

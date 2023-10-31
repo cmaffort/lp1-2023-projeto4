@@ -41,7 +41,11 @@ public class DonatarioCadastro extends HttpServlet {
             DonatarioDAO donatarioDAO = new DonatarioDAO();
                 try {
                     if(donatarioDAO.inserir(donatario))
+                    {
                         out.println("<p>inserido</p>");
+                        response.sendRedirect("login.jsp");
+
+                    }
                     else
                         out.println("<p>erro</p>");
                 } catch (ClassNotFoundException ex) {
