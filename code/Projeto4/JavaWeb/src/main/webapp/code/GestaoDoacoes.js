@@ -1,9 +1,9 @@
-function adicionaDoacao(quantidade, computador) {
+function adicionaDoacao(quantidade, computador, str, str1, str2, str3, qntdRAM) {
     let novaDoacao = document.createElement("div");
-    novaDoacao.classList.add("despesa");
+    novaDoacao.classList.add("Doacao");
    
     let novoDoador = document.createElement("div");
-    novoTitulo.textContent = "Doador: " + novoDoador;
+    novoDoador.textContent = "Doador: " + computador;
    
     //let novoConteudo = document.createElement("div");
    
@@ -50,7 +50,12 @@ for (let i = 0; i < quadradoDoacao.length; i++) {
    
     let quantidade = conteudoDivido[0];
     let computador = conteudoDivido[1];
+    let str = conteudoDivido[2];
+    let str1 = conteudoDivido[3];
+    let str2 = conteudoDivido[4];
+    let str3 = conteudoDivido[5];
+    let qntdRAM = conteudoDivido[6];
    
-    adicionaDoacao(quantidade, computador);
+    adicionaDoacao(quantidade, computador, str, str1, str2, str3, str3, qntdRAM);
 }
 
