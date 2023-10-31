@@ -42,7 +42,7 @@
             <input type="date" name="data">
             <br><br>
 
-            <input type="submit" value="Cadastrar"> 
+            <div id="submit"><input type="submit" value="Cadastrar"></div>
             
             <a href="GestaoDoacoes.jsp">Texto a ser exibido</a>    
             <script src="code/header.js"></script>

@@ -19,16 +19,12 @@ input {
     background-color: #bec1c4;
 }
 
-#senha {
-    width: 70.5%;
-}
-
-#acessar {
+#submit {
     width: 100%;
     text-align: center;
 }
 
-#acessar input {
+#submit input {
     background-color: #10446c;
     font-family: Andale Mono, monospace;
     margin: 10px 0 40px 0;

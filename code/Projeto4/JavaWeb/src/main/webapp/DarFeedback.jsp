@@ -16,7 +16,7 @@
         
         <textarea name="comments" rows="4" cols="50"></textarea><br>
 
-        <input type="submit" value="Submit">
+        <div id="submit"><input type="submit" value="Submit"></div>
     </form>
 
     <script src="code/header.js"></script>
