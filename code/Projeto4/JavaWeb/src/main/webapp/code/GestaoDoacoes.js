@@ -1,45 +1,57 @@
-function adicionaDoacao(quantidade, computador, str, str1, str2, str3, qntdRAM) {
-    let novaDoacao = document.createElement("div");
-    novaDoacao.classList.add("Doacao");
+    let posicaoDoacao = 1;
+    let contDoacao = document.querySelector("#article-despesas");
+
+function adicionaDoacao(str, str1, str2, str3,str4,  qntdRAM) {
+    let doacao = document.createElement("div");
+    doacao.classList.add("Doacao");
    
-    let novoDoador = document.createElement("div");
-    novoDoador.textContent = "Doador: " + computador;
+    let novoQuadrado = document.createElement("div");
    
-    //let novoConteudo = document.createElement("div");
+    let doador = document.createElement("div");
+    doador.textContent = "Doador: " + str;
    
-    //let novoValor = document.createElement("div");
-    //novoValor.textContent = "Valor: R$" + valor;
+    let data = document.createElement("div");
+    data.textContent = "Data de Chegada: " + str1;
    
-    //let novaData = document.createElement("div");
-    //novaData.textContent = "Data ocorrência: " + data;
+    let donatario = document.createElement("div");
+    donatario.textContent = "Donatario: " + str2;
    
-    //let novaDescricao = document.createElement("div");
-    //novaDescricao.textContent = "Descrição: " + descricao;
+    let marca = document.createElement("div");
+    marca.textContent = "Marca: " + str3;
+    
+    let modeloProcessador = document.createElement("div");
+    modeloProcessador.textContent = "Modelo: " + str4;
+    
+    let quantidadeDeRAM = document.createElement("div");
+    quantidadeDeRAM.textContent = "Quantidade de RAM: " + qntdRAM;
    
-    //novoConteudo.appendChild(novoValor);
-    //novoConteudo.appendChild(novaData);
-    //novoConteudo.appendChild(novaDescricao);
+    novoQuadrado.appendChild(data);
+    novoQuadrado.appendChild(donatario);
+    novoQuadrado.appendChild(marca);
+    novoQuadrado.appendChild(modeloProcessador);
+    novoQuadrado.appendChild(quantidadeDeRAM);
+    
+    
+    doacao.appendChild(doador);
+    doacao.appendChild(novoQuadrado);
    
-    //novaDespesa.appendChild(novoTitulo);
-    //novaDespesa.appendChild(novoConteudo);
-   
-    //novoConteudo.classList.add("flex-conteudo-despesas");
-    novoDoador.classList.add("flex-titulo");
-    novaDoacao.classList.add("flex-despesas");
+    novoQuadrado.classList.add("flex-conteudo-despesas");
+    doador.classList.add("flex-doador");
+    doacao.classList.add("flex-doacao");
    
     if (ultimo == "D") {
-        novaDespesa.classList.add("esquerda");
+        doacao.classList.add("esquerda");
         ultimo = "E";
     }
     else {
-        novaDespesa.classList.add("direita");
+        doacao.classList.add("direita");
         ultimo = "D";
     }
    
-    novaDespesa.style.top = posicaoDespesas + "%";
-    posicaoDespesas+= 30;
+    doacao.style.top = posicaoDoacao + "%";
+    posicaoDoacao+= 30;
    
-    contDespesas.appendChild(novaDespesa);
+    contDoacao.appendChild(doacao);
 }
 
 let quadradoDoacao = document.querySelectorAll(".quadradoDoacao");
@@ -48,14 +60,13 @@ for (let i = 0; i < quadradoDoacao.length; i++) {
     let conteudoAtual = quadradoDoacao[i].innerHTML;
     let conteudoDivido = conteudoAtual.split('*');
    
-    let quantidade = conteudoDivido[0];
-    let computador = conteudoDivido[1];
-    let str = conteudoDivido[2];
-    let str1 = conteudoDivido[3];
-    let str2 = conteudoDivido[4];
-    let str3 = conteudoDivido[5];
-    let qntdRAM = conteudoDivido[6];
+    let str = conteudoDivido[0];
+    let str1 = conteudoDivido[1];
+    let str2 = conteudoDivido[2];
+    let str3 = conteudoDivido[3];
+    let str4 = conteudoDivido[4];
+    let qntdRAM = conteudoDivido[5];
    
-    adicionaDoacao(quantidade, computador, str, str1, str2, str3, str3, qntdRAM);
+    adicionaDoacao(str, str1, str2, str3, str4, qntdRAM);
 }
 

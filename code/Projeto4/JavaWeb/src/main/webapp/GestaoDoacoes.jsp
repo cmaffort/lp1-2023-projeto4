@@ -14,16 +14,19 @@
 
 
         <%
-            Computador computador = null;
-            String str = "algo";
-            
+            Computador computador = new Computador();
+            String doador = computador.getDoador();
+            String dataDeChegada = computador.getDataDeChegada();
+            String donatario = computador.getDonatario();
+            String marca = computador.getMarca();
+            String modeloProcessador = computador.getModeloProcessador();
+            int quantidadeDeRAM = computador.getQuantidadeDeRAM();
 
-            Doacao arr[] = {new Doacao(5, computador, str, str, str, str, 8),
-                new Doacao(5, computador, str, str, str, str, 8),
-                new Doacao(5, computador, str, str, str, str, 8),
-                new Doacao(5, computador, str, str, str, str, 8)
-
-            };
+            Doacao arr[] = {new Doacao(doador, dataDeChegada, donatario, marca, modeloProcessador, quantidadeDeRAM),
+            //    new Doacao(5, computador, str, str, str, str, 8),
+            //    new Doacao(5, computador, str, str, str, str, 8),
+            //    new Doacao(5, computador, str, str, str, str, 8)
+             };
         %>    
 
 
