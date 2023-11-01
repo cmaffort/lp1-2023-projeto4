@@ -1,3 +1,7 @@
+body {
+    background-color: #9fa3a7;
+}
+
 #type {
     padding-top: 8vh;
     width: 100%;
@@ -11,11 +15,7 @@
 
 #type .selected {
     background-color: #9fa3a7;
-}
-
-form {
-    width: fit-content;
-    margin: auto;
+    border: none;
 }
 
 input {
@@ -26,16 +26,35 @@ input {
 
 #submit {
     width: 100%;
+    height: fit-content;
     text-align: center;
 }
 
 #submit input {
     background-color: #10446c;
     font-family: Andale Mono, monospace;
-    margin: 10px 0 40px 0;
     color: white;
 }
 
 p {
     text-align: center;
+}
+
+main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 84vh;
+    width: 100vw;
+}
+
+.campo {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 10px;
+    padding-bottom: 10px;
+}
+
+.campo input {
+    width: 100%;
 }

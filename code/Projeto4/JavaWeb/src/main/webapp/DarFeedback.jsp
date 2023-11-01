@@ -5,21 +5,19 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="style/header.css">
         <link rel="stylesheet" href="style/feedback.css">
-    <title>Feedback Form</title>
+    <title>Dê seu feedback!</title>
     </head>
+    <body>
+        <header></header>
+        <h1>Feedback</h1>
+        <form>
+            <p>Descreva a sua experiência:</p>
+            
+            <textarea name="comments" rows="4" cols="50"></textarea><br>
 
-<body>
-    <header></header>
-    <h1>Feedback</h1>
-    <form>
-        <p>Descreva a sua experiência:</p>
-        
-        <textarea name="comments" rows="4" cols="50"></textarea><br>
+            <div id="submit"><input type="submit" value="Submit"></div>
+        </form>
 
-        <div id="submit"><input type="submit" value="Submit"></div>
-    </form>
-
-    <script src="code/header.js"></script>
-</body>
-
+        <script src="code/header.js"></script>
+    </body>
 </html>

@@ -4,7 +4,7 @@
 <head>
     <link rel="stylesheet" href="style/header.css">
     <link rel="stylesheet" href="style/signup.css">
-    <title>AJAX JSP Example</title>
+    <title>Cadastre-se</title>
 </head>
 <body>
     <header></header>
@@ -17,10 +17,10 @@
         <button id="doadorJ">Doador Pessoa Juridica</button>
     </nav>
 
-    <div id="dynamicContent">Selecione o modo de cadastro</div>
+    <main id="conteudo">Selecione o modo de cadastro</main>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="code/header.js"></script>
     <script src="code/cadastro.js"></script>
+    <script src="code/jquery-3.7.1.min.js"></script>
 </body>
 </html>

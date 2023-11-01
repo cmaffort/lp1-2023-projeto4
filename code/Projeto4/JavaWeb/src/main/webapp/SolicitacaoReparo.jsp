@@ -1,15 +1,9 @@
-<%-- 
-    Document   : SolicitacaoReparo
-    Created on : 16 de out de 2023, 14:46:24
-    Author     : laura
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Solicitação de reparo</title>
     </head>
     <body>
         <h1>Solicitação de Reparo</h1>
