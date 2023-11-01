@@ -23,10 +23,10 @@ function selectCadastro(evt, type) {
 
     setConteudo(type);
 
-    const selected = document.getElementsByClassName('selected');
+    const selected = document.querySelector('.selected');
 
-    if (selected.length > 0)
-        selected[0].classList.remove('selected');
+    if (selected)
+        selected.classList.remove('selected');
 
     target.classList.add('selected');
 }

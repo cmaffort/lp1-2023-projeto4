@@ -3,6 +3,9 @@
 <html>
     <body>
         <form action="DonatarioCadastro" method="post">
+            <figure>
+                <img src="img/logo-cefet.png">
+            </figure>
             <div class="campo">
                 <label for="nome">Nome completo:</label>
                 <input type="text" id="nome" name="nome" required>
