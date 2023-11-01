@@ -3,7 +3,7 @@
 <html>
     <body>
         <form action="ProfessorServlet" method="post">
-            <figure>
+            <figure id="logo">
                 <img src="img/logo-cefet.png">
             </figure>
             <div class="campo"> 

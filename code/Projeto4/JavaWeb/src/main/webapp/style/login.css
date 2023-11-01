@@ -41,15 +41,15 @@ input {
 form {
     padding: 2vw;
     border-radius: 1vw;
-    background-color: #10446cc7;
+    background-color: #10446c93;
     color: white;
 }
 
-figure {
+#logo {
     text-align: center;
 }
 
-figure img[src*="logo"] {
+#logo img {
     height: 14vh;
 }
 

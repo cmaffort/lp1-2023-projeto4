@@ -1,6 +1,4 @@
-body {
-    background-color: #9fa3a7;
-}
+
 
 #type {
     padding-top: 8vh;
@@ -18,7 +16,7 @@ body {
 }
 
 #type .selected {
-    background-color: #9fa3a7;
+    background-color: #EDF2F7;
     border: none;
 }
 
@@ -72,10 +70,10 @@ form {
     color: white;
 }
 
-figure {
+#logo {
     text-align: center;
 }
 
-figure img[src*="logo"] {
+#logo img {
     height: 14vh;
 }

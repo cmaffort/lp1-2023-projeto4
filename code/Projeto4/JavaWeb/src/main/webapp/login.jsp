@@ -13,7 +13,7 @@
     
         <main>
             <form action="ServletLogin" method="get">
-                <figure>
+                <figure id="logo">
                     <img src="img/logo-cefet.png">
                 </figure>
                 <div class="campo">    

@@ -1,27 +1,30 @@
 const headerEl = document.querySelector('header');
-const imgs = [
-    'img/logo-cefet.png',
-    'img/pedido.png',
-    'img/suporte.png',
-    'img/login.png',
-    'img/sobre-nos.png',
-    'img/doacao.png'
-    ];
-const alts = [
-    'Logo CEFET',
-    'Fazer pedido',
-    'Suporte',
-    'Login',
-    'Sobre nós',
-    'Fazer doação'
-    ];
-const links = [
-    'pedido.html', 
-    'suporte.html',
-    'login.jsp',
-    'https://www.dde.cefetmg.br/2023/08/29/oficina-de-recuperacao-de-computadores-beneficia-estudantes-sem-acesso-a-computadores/',
-    'CadastrarDoacao.jsp'
-    ];
+const icons = {
+    'srcs' : [
+        'img/logo-cefet.png',
+        'img/pedido.png',
+        'img/suporte.png',
+        'img/login.png',
+        'img/sobre-nos.png',
+        'img/doacao.png'
+    ],
+    'alts' : [
+        'Logo CEFET',
+        'Fazer pedido',
+        'Suporte',
+        'Login',
+        'Sobre nós',
+        'Fazer doação'
+    ],
+    'hrefs' : [
+        'index.html',
+        'pedido.html', 
+        'suporte.html',
+        'login.jsp',
+        'https://www.dde.cefetmg.br/2023/08/29/oficina-de-recuperacao-de-computadores-beneficia-estudantes-sem-acesso-a-computadores/',
+        'CadastrarDoacao.jsp'
+    ]
+};
 
 function newEl(tag, ...classNames) {
     const el = document.createElement(tag);
@@ -43,7 +46,7 @@ function newImg(src, alt = null, ...classNames) {
     return img;
 }
 
-function newFigure(img, text = null, evt = null, response = null, ...classNames) {
+function newFigure(img, href, text = null, ...classNames) {
     const figure = newEl('figure', ...classNames);
     
     figure.appendChild(img);
@@ -55,23 +58,52 @@ function newFigure(img, text = null, evt = null, response = null, ...classNames)
 
         figure.append(textEl);
     }
-    if (evt != null)
-        figure.addEventListener(evt, response);
+    
+    figure.addEventListener('click', () => redirect(href));
 
     return figure;
 }
 
-function newNav(...classNames) {
+function newNav(id = null, ...classNames) {
     const nav = newEl('nav', ...classNames);
 
-    for (let i = 0; i < links.length; ++i) {
-        const img = newImg(imgs[i + 1]);
-        const figure = newFigure(img, alts[i + 1], 'click', () => redirect(links[i]));
+    if (id != null)
+        nav.setAttribute('id', id);
 
-        nav.appendChild(figure);
+    return nav;
+}
+
+function newPopulatedNav(id, startIndex, endIndex, altType = 'alt', ...classNames) {
+    const nav = newNav(id, ...classNames);
+
+    switch(altType) {
+        case 'text':
+            populateNavText(nav, startIndex, endIndex);
+            break;
+        case 'alt':
+        default:
+            populateNavAlt(nav, startIndex, endIndex);
     }
 
     return nav;
+}
+
+function populateNavAlt(nav, startIndex, endIndex) {
+    for (let i = startIndex; i < endIndex; ++i) {
+        const img = newImg(icons['srcs'][i], icons['alts'][i])
+        const figure = newFigure(img, icons['hrefs'][i]);
+
+        nav.appendChild(figure);
+    }
+}
+
+function populateNavText(nav, startIndex, endIndex) {
+    for (let i = startIndex; i < endIndex; ++i) {
+        const img = newImg(icons['srcs'][i])
+        const figure = newFigure(img, icons['hrefs'][i], icons['alts'][i]);
+
+        nav.appendChild(figure);
+    }
 }
 
 function redirect(href) {
@@ -79,11 +111,11 @@ function redirect(href) {
 }
 
 function loadHeader() {
-    const logo = newImg(imgs[0], alts[0]);
-    const nav = newNav();
+    const navHome = newPopulatedNav('home', 0, 1);
+    const navPages = newPopulatedNav('pages', 1, icons['srcs'].length, 'text');
 
-    headerEl.appendChild(logo);
-    headerEl.appendChild(nav);
+    headerEl.appendChild(navHome);
+    headerEl.appendChild(navPages);
 }
 
 document.addEventListener('DOMContentLoaded', loadHeader);

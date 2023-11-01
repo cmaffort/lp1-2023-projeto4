@@ -3,7 +3,7 @@
 <html>
     <body>
         <form action="DoadorFisicaServlet" method="post">
-            <figure>
+            <figure id="logo">
                 <img src="img/logo-cefet.png">
             </figure>
             <div class="campo"> 
