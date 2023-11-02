@@ -4,8 +4,9 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="style/header.css">
+        <link rel="stylesheet" href="style/main.css">
         <link rel="stylesheet" href="style/feedback.css">
-    <title>Dê seu feedback!</title>
+        <title>Dê seu feedback!</title>
     </head>
     <body>
         <header></header>

@@ -68,7 +68,7 @@ public class ServletLogin extends HttpServlet {
                     break;
                 }
             if(salvando.equals("doadorFisica") || salvando.equals("doadorJuridica"))
-                response.sendRedirect("CadastrarDoacao.jsp");
+                response.sendRedirect("cadastroDoacao.jsp");
             if(salvando.equals("estagiarios") || salvando.equals("professores"))
                 response.sendRedirect("MostrarDoacoes");
             

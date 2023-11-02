@@ -14,64 +14,6 @@
 }
 
 #type .selected {
-    background-color: inherit;
     border: none;
-}
-
-input {
-    border-radius: 30px;
-    border: 1px, black;
-    background-color: #bec1c4;
-}
-
-#submit {
-    width: 100%;
-    height: fit-content;
-    text-align: center;
-}
-
-#submit input {
-    background-color: #10446c;
-    font-family: Andale Mono, monospace;
-    color: white;
-    cursor: pointer;
-}
-
-p {
-    text-align: center;
-}
-
-main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 84vh;
-    width: 100vw;
-}
-
-.campo {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 10px;
-    padding-bottom: 10px;
-}
-
-.campo input {
-    width: 100%;
-}
-
-form {
-    padding: 2vw;
-    border-radius: 1vw;
-    background-color: #10446c93;
-    color: white;
-}
-
-#logo {
-    text-align: center;
-}
-
-#logo img {
-    height: 14vh;
+    background-color: inherit;
 }

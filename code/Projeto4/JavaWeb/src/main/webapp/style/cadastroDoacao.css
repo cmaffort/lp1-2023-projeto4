@@ -1,0 +1,20 @@
+h1 {
+    color: black;
+    margin-left: 4.1vh;
+    margin-bottom: 2vh;
+    padding-top: 10vh;
+    text-align: center;
+}
+
+label {
+    margin-left: 4.1vh;
+}
+
+#quantidade {
+    margin-top: 10vh;
+}
+
+button {
+    height: 15px;
+    border-radius: 50%;
+}
