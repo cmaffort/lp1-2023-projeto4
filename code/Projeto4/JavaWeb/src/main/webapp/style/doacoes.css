@@ -3,16 +3,16 @@
     width: 100vh;
 }
 
-.Doacao {
+.doacao {
     height: 25vh;
     width: 25vh;
     background-color: green;
 }
 
-.Esquerda {
+.esquerda {
     margin: 30px;
 }
 
-.Direita {
+.direita {
     margin: 1200px;
 }

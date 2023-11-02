@@ -1,0 +1,10 @@
+form {
+    padding: 2vw;
+    border-radius: 1vw;
+    background-color: #10446c93;
+    color: white;
+}
+
+form p {
+    padding-top: 10px;
+}

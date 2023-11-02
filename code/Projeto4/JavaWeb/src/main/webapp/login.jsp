@@ -4,6 +4,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="style/header.css">
+        <link rel="stylesheet" href="style/main.css">
+        <link rel="stylesheet" href="style/form.css">
         <link rel="stylesheet" href="style/login.css">
         <title>Login</title>
     </head>
@@ -22,7 +24,7 @@
                 </div><div class="campo">    
                     <label for="senha">Senha:</label>
                     <input type="password" id="senha" name="senha" required>
-                </div><div id="acessar">
+                </div><div id="submit">
                     <input type="submit" value="Acessar">
                 </div>
 

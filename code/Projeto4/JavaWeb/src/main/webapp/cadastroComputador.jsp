@@ -33,9 +33,7 @@
         <input type="password" id="confirmarSenha" name="confirmarSenha" required>
         <br>
         <br>
-        
 
-        
         <input type="submit" value="Cadastrar">
     </form>
 

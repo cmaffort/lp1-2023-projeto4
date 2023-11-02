@@ -3,8 +3,9 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" href="style/CadastrarDoacao.css">
         <link rel="stylesheet" href="style/header.css">
+        <link rel="stylesheet" href="style/main.css">
+        <link rel="stylesheet" href="style/cadastroDoacao.css">
         <title>Cadastrar Doação</title>
     </head>
 
@@ -44,7 +45,7 @@
 
             <div id="submit"><input type="submit" value="Cadastrar"></div>
             
-            <a href="GestaoDoacoes.jsp">Texto a ser exibido</a>    
+            <a href="gestaoDoacoes.jsp">Texto a ser exibido</a>    
             <script src="code/header.js"></script>
     </body>
 </html>

@@ -3,12 +3,14 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" href="style/GestaoDoacoes.css">
         <link rel="stylesheet" href="style/header.css">
+        <link rel="stylesheet" href="style/main.css">
+        <link rel="stylesheet" href="style/doacoes.css">
         <title>Gestão de Doação</title>
     </head>
     <body>
         <header></header>
+        
             <%@ page import="br.cefetmg.projeto4.dto.Doacao"%>
             <%@ page import="br.cefetmg.projeto4.dto.Computador"%>
 
@@ -52,7 +54,7 @@
         </div>
 
 
-        <script src="code/GestaoDoacoes.js"></script>
+        <script src="code/gestaoDoacoes.js"></script>
         <script src="code/header.js"></script>
     </body>
 </html>

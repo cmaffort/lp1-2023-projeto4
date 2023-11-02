@@ -4,6 +4,64 @@ body, * {
 }
 
 body {
-    background-image: url('../img/background.jpg');
-    background-size: cover;
+    background-color: #EDF2F7;
+}
+
+input, select {
+    background-color: #bec1c4; 
+}
+
+input {
+    border-radius: 30px;
+    border: 1px, black;
+}
+
+#submit {
+    width: 100%;
+    height: fit-content;
+    text-align: center;
+}
+
+#submit input {
+    background-color: #10446c;
+    font-family: Andale Mono, monospace;
+    color: white;
+    cursor: pointer;
+}
+
+.campo {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 10px;
+    padding-bottom: 10px;
+}
+
+.campo input {
+    width: 100%;
+}
+
+p {
+    text-align: center;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 84vh;
+    width: 100vw;
+}
+
+form {
+    width: fit-content;
+    margin: auto;
+}
+
+#logo {
+    text-align: center;
+}
+
+#logo img {
+    height: 14vh;
 }
