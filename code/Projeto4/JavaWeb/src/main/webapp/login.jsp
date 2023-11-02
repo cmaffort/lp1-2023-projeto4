@@ -11,18 +11,24 @@
     <body>
         <header></header>
     
-        <h1>Entrar</h1>
-        <form action="ServletLogin" method="get">
-            <label for="login">Email:</label>
-            <input type="email" id="login" name="login" required>
-            <br><br>
-            <label for="senha">Senha:</label>
-            <input type="password" id="senha" name="senha" required>
-            <br><br>
-            <div id="acessar"><input type="submit" value="Acessar"></div>
-        </form>
+        <main>
+            <form action="ServletLogin" method="get">
+                <figure id="logo">
+                    <img src="img/logo-cefet.png">
+                </figure>
+                <div class="campo">    
+                    <label for="login">Email:</label>
+                    <input type="email" id="login" name="login" required>
+                </div><div class="campo">    
+                    <label for="senha">Senha:</label>
+                    <input type="password" id="senha" name="senha" required>
+                </div><div id="acessar">
+                    <input type="submit" value="Acessar">
+                </div>
 
-        <p>Não possui conta? <a href="cadastro.jsp">Cadastre-se</a></p>
+                <p>Não possui conta? <a href="cadastro.jsp">Cadastre-se</a></p>
+            </form>
+        </main>
 
         <script src="code/header.js"></script>
     </body>

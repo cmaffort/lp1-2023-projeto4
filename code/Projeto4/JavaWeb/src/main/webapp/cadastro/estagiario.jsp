@@ -3,6 +3,9 @@
 <html>
     <body>
         <form action="EstagiarioServlet" method="post">
+            <figure id="logo">
+                <img src="img/logo-cefet.png">
+            </figure>
             <div class="campo"> 
                 <label for="nome">Nome completo:</label>
                 <input type="text" id="nome" name="nome" required>

@@ -3,6 +3,9 @@
 <html>
     <body>
         <form action=”DoadorJuridicoServlet” method=”post”>
+            <figure id="logo">
+                <img src="img/logo-cefet.png">
+            </figure>
             <div class="campo"> 
                 <label for="nome">Nome empresa:</label>
                 <input type="text" id="nome" name="nome" required>

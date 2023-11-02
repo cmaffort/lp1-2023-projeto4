@@ -1,7 +1,3 @@
-body {
-    background-color: #9fa3a7;
-}
-
 #type {
     padding-top: 8vh;
     width: 100%;
@@ -13,8 +9,12 @@ body {
     height: 8vh;
 }
 
+#type button:not(.selected) {
+    cursor: pointer;
+}
+
 #type .selected {
-    background-color: #9fa3a7;
+    background-color: inherit;
     border: none;
 }
 
@@ -34,6 +34,7 @@ input {
     background-color: #10446c;
     font-family: Andale Mono, monospace;
     color: white;
+    cursor: pointer;
 }
 
 p {
@@ -42,6 +43,7 @@ p {
 
 main {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 84vh;
@@ -57,4 +59,19 @@ main {
 
 .campo input {
     width: 100%;
+}
+
+form {
+    padding: 2vw;
+    border-radius: 1vw;
+    background-color: #10446c93;
+    color: white;
+}
+
+#logo {
+    text-align: center;
+}
+
+#logo img {
+    height: 14vh;
 }
