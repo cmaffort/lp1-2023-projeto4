@@ -37,7 +37,10 @@ public class DoadorJuridicoServlet extends HttpServlet {
                 DoadorJuridicoDAO doadorJuricoDAO = new DoadorJuridicoDAO();
                 try {
                     if(doadorJuricoDAO.inserir(doadorJuridico))
+                    {
                         out.println("<p>inserido</p>");
+                        response.sendRedirect("login.jsp");
+                    }
                     else
                         out.println("<p>erro</p>");
                 } catch (ClassNotFoundException ex) {

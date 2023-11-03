@@ -31,7 +31,10 @@ public class DoadorFisicaServlet extends HttpServlet {
                 DoadorFisicaDAO doadorFisicaDAO = new DoadorFisicaDAO();
                 try {
                     if(doadorFisicaDAO.inserir(doadorFisica))
+                    {
                         out.println("<p>inserido</p>");
+                        response.sendRedirect("login.jsp");
+                    }
                     else
                         out.println("<p>erro</p>");
                 } catch (ClassNotFoundException ex) {

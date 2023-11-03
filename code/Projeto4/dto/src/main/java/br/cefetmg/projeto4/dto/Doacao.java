@@ -15,7 +15,11 @@ public class Doacao {
         this.quantidade = quantidade;
         this.computador = computador;
     }
-    
+    public Doacao(String marca, int quantidadeDeRAM) {
+        this.marca = marca;
+        this.quantidadeDeRAM = quantidadeDeRAM;
+    }
+
     public Doacao(String doador, String dataDeChegada, String donatario, String marca, String modeloProcessador, int quantidadeDeRAM) {
     
     this.dataDeChegada = dataDeChegada;
