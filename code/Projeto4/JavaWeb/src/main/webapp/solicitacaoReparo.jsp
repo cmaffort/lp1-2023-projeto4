@@ -22,7 +22,7 @@
         <p>Especifique o problema:</p>
         <textarea name="details" rows="4" cols="50"></textarea><br>
 
-        <input type="submit" value="Submit">
+        <input type="submit" value="Solicitar Reparo">
     </form>
 
     </body>
