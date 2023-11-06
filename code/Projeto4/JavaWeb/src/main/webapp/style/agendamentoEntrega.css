@@ -1,8 +1,3 @@
-h2 {
-    position: absolute;
-    top: 25vh;
-}
-
 main {
     padding-top: 8vh;
     display: flex;
@@ -11,4 +6,9 @@ main {
     justify-content: center;
     height: 92vh;
     width: 100vw;
+}
+
+h2 {
+    position: absolute;
+    top: 20vh;
 }

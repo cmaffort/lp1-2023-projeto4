@@ -7,13 +7,16 @@ body {
     background-color: #EDF2F7;
 }
 
-input, select {
-    background-color: #bec1c4; 
+input, select, textarea {
+    background-color: #bec1c4e3; 
+    border-radius: 30px;
+    border: 1px solid black;
 }
 
-input {
-    border-radius: 30px;
-    border: 1px, black;
+textarea {
+    border-radius: 10px;
+    text-align: center;
+    margin-bottom: 1vh;
 }
 
 #submit {
@@ -36,8 +39,8 @@ input {
     padding-bottom: 10px;
 }
 
-.campo input {
-    width: 100%;
+.campo > input {
+    width: calc(100% - 5px);
 }
 
 p {
