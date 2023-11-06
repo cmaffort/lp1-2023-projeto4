@@ -5,7 +5,6 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="style/header.css">
         <link rel="stylesheet" href="style/main.css">
-        <link rel="stylesheet" href="style/form.css">
         <link rel="stylesheet" href="style/solicitacaoReparo.css">
         <title>Solicitação de reparo</title>
     </head>
