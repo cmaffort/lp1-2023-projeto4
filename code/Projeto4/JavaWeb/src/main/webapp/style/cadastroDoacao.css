@@ -1,20 +1,22 @@
-h1 {
-    color: black;
-    margin-left: 4.1vh;
-    margin-bottom: 2vh;
-    padding-top: 10vh;
-    text-align: center;
+h2 {
+    top: 15vh;
 }
 
-label {
-    margin-left: 4.1vh;
+ul, li {
+    display: grid;
 }
 
-#quantidade {
-    margin-top: 10vh;
+ul {
+    grid-template-columns: 1fr 1fr;
+    gap: 2vh;
+    padding: 0;
 }
 
-button {
-    height: 15px;
-    border-radius: 50%;
+li {
+    list-style: none;
+}
+
+li label {
+    grid-template-columns: auto 1fr;
+    gap: 1vh;
 }

@@ -11,41 +11,58 @@
 
     <body>
         <header></header>
-        <h1>Cadastrar Doação</h1>
 
-        <form action="CadastrarDoacaoServlet" method="post">
+        <main>
+            <h2>Cadastrar Doação</h2>
 
-            <label for="nome">Quantidade:</label>
-            <input type="text" id="quantidade" name="quantidade" required>
-            <br><br>
-
-            <label for="status">Estado do Produto:</label>
-            <select id="opcoes" name="opcoes" form="opcoes">
-                <option value="status">Status</option>    
-                <option value="funcionando">Funcionando</option>
-                <option value="quebrados">Quebrado</option>
-                <option value="faltandoPeca">Faltando Peça</option>
-                <option value="algunsDefeitos">Alguns defeitos</option>
-            </select>
-            <br><br>
-            <label for="nome">Modelo:</label>
-            <input type="text" id="modelo" name="modelo" required>
-            <br><br>
-            <label for="marca">Marca:</label>
-            <input type="text" id="marca" name="marca" required>
-            <br><br>
-            <label for="quantidadeRAM">Quantidade de RAM:</label>
-            <input type="text" id="quantidadeRAM" name="quantidadeRAM" required>
-            <label for="formaEntrega">Como deseja fornecer o produto:</label>
-
-            <input type="radio" name="entrega" value="op1"> Entrega
-            <input type="radio" name="busca" value="op2"> Busca
-            <input type="date" name="data">
-            <br><br>
-
-            <div id="submit"><input type="submit" value="Cadastrar"></div>
+            <form action="CadastrarDoacaoServlet" method="post">
+                <figure id="logo">
+                    <img src="img/logo-cefet.png">
+                </figure>
+                <div class="campo">
+                    <label for="nome">Quantidade:</label>
+                    <input type="text" id="quantidade" name="quantidade" required>
+                </div><div class="campo">
+                    <label for="status">Estado do Produto:</label>
+                    <select id="opcoes" name="opcoes" form="opcoes">
+                        <option value="" disabled selected>Selecione</option>    
+                        <option value="funcionando">Funcionando</option>
+                        <option value="quebrados">Quebrado</option>
+                        <option value="faltandoPeca">Faltando Peça</option>
+                        <option value="algunsDefeitos">Alguns defeitos</option>
+                    </select>
+                </div><div class="campo">
+                    <label for="nome">Modelo:</label>
+                    <input type="text" id="modelo" name="modelo" required>
+                </div><div class="campo">
+                    <label for="marca">Marca:</label>
+                    <input type="text" id="marca" name="marca" required>
+                </div><div class="campo">
+                    <label for="quantidadeRAM">Quantidade de RAM:</label>
+                    <input type="text" id="quantidadeRAM" name="quantidadeRAM" required>
+                </div><div class="campo">
+                    <label for="formaEntrega">Como deseja fornecer o produto:</label>
+                    <ul>
+                        <li>
+                            <label>
+                                <input type="radio" name="formaEntrega" value="op1" id="entrega"> Entrega
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="radio" name="formaEntrega" value="op2" id="busca"> Busca
+                            </label>
+                        </li>
+                    </ul>
+                </div><div class="campo">
+                    <label for="data">Data:</label>
+                    <input type="date" name="data">
+                </div><div id="submit">
+                    <input type="submit" value="Cadastrar">
+                </div>
+            </form>
+        </main>
             
-            <a href="gestaoDoacoes.jsp">Texto a ser exibido</a>    
-            <script src="code/header.js"></script>
+        <script src="code/header.js"></script>
     </body>
 </html>

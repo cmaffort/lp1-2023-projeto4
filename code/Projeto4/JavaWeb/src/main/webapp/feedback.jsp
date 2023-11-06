@@ -10,14 +10,21 @@
     </head>
     <body>
         <header></header>
-        <h1>Feedback</h1>
-        <form>
-            <p>Descreva a sua experiência:</p>
-            
-            <textarea name="comments" rows="4" cols="50"></textarea><br>
 
-            <div id="submit"><input type="submit" value="Submit"></div>
-        </form>
+        <main>
+            <h2>Feedback</h2>
+
+            <form>
+                <figure id="logo">
+                    <img src="img/logo-cefet.png">
+                </figure>
+                <textarea name="comments" rows="4" cols="50" placeholder="Descreva a sua experiência"></textarea>
+
+                <div id="submit">
+                    <input type="submit" value="Enviar">
+                </div>
+            </form>
+        </main>
 
         <script src="code/header.js"></script>
     </body>
