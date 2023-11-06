@@ -18,7 +18,6 @@
                 <figure id="logo">
                     <img src="img/logo-cefet.png">
                 </figure>
-
                 <p id="problema">Qual é o problema?</p>
                 <label>
                     <input type="radio" name="issue" value="pecas_faltando"> Peças Faltando
