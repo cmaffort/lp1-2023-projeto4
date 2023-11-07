@@ -16,8 +16,8 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-@WebServlet(name = "DoadorFisicaServlet", urlPatterns = {"/DoadorFisicaServlet"})
-public class DoadorFisicaServlet extends HttpServlet {
+@WebServlet(name = "DoadorFisicoServlet", urlPatterns = {"/DoadorFisicoServlet"})
+public class DoadorFisicoServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
