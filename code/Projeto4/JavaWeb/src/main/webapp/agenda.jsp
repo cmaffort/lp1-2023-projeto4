@@ -58,7 +58,10 @@
 <%
     } catch (Exception e) {
 %>
-        <p><%=e.getMessage()%></p>
+        <div id="exception">
+            <h2>Erro ao carregar agenda</h2>
+            <p>Descrição: <%=e.getMessage()%></p>
+        </div>
 <%        
     }
 %>

@@ -55,6 +55,7 @@ main {
     justify-content: center;
     height: 91.6vh;
     width: 100vw;
+    text-align: center;
 }
 
 form {
