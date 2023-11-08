@@ -29,10 +29,10 @@
             <caption>Doações Agendadas</caption>
             <thead>
                 <tr>
-                    <th>Id</th>
+                    <th>ID</th>
                     <th>Data</th>
                     <th>Horario</th>
-                    <th>Id Donatario</th>
+                    <th>ID Donatario</th>
                 </tr>
             </thead>
             <tbody>

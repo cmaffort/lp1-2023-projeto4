@@ -111,6 +111,9 @@ function redirect(href) {
 }
 
 function loadHeader() {
+    if(!headerEl)
+        return;
+
     const navHome = newPopulatedNav('home', 0, 1);
     const navPages = newPopulatedNav('pages', 1, icons['srcs'].length, 'text');
 

@@ -111,10 +111,6 @@ th {
     color: #fff; 
 }
 
-tr:nth-child(2n) td:nth-child(2n), tr:nth-child(2n + 1) td:nth-child(2n + 1) {
-    background-color: #bfd2f0;
-}
-
 caption {
     font-weight: bold;
     font-size: 1.5em;
