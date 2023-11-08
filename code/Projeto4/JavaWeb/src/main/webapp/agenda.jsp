@@ -21,7 +21,7 @@
         MySqlConnection mySqlConnection = new MySqlConnection();
 
         try (Connection connection = mySqlConnection.getConexao()) {
-            String sql = "SELECT * FROM agendamentos";
+            String sql = "SELECT * FROM `agendamentos`";
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
 %>
@@ -32,7 +32,8 @@
                     <th>ID</th>
                     <th>Data</th>
                     <th>Horario</th>
-                    <th>ID Donatario</th>
+                    <th>Nome donatario</th>
+                    <th>Email donatario</th>
                 </tr>
             </thead>
             <tbody>
@@ -42,15 +43,29 @@
                 String data = resultSet.getString("data");
                 String horario = resultSet.getString("horario");
                 int idDonatario = resultSet.getInt("id_donatario");
+
+                sql = "SELECT * FROM `donatarios` WHERE `id` = ?";
+                PreparedStatement stmt = connection.prepareStatement(sql);
+
+                stmt.setInt(1, idDonatario);
+                ResultSet resultSet2 = stmt.executeQuery();
+
+                if (resultSet2.next()) {
+                    String nome = resultSet2.getString("nome");
+                    String email = resultSet2.getString("email");
 %>
                 <tr>
                     <td><%=id%></td>
                     <td><%=data%></td>
                     <td><%=horario%></td>
-                    <td><%=idDonatario%></td>
+                    <td><%=nome%></td>
+                    <td><%=email%></td>
                 </tr>
 <% 
+                }
+                resultSet2.close();
             }
+            resultSet.close();
         }
 %>
             </tbody>
