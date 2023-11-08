@@ -3,6 +3,10 @@ main {
     height: calc(93.6vh + 1em);
 }
 
+th {
+    width: 20%;
+}
+
 #exception {
     padding-top: calc(2vh);
 }

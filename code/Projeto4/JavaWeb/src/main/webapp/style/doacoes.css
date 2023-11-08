@@ -11,3 +11,11 @@ section {
 table {
     margin: auto;
 }
+
+section th {
+    width: 50%;
+}
+
+section:first-child th {
+    width: calc(100% / 3)
+}
