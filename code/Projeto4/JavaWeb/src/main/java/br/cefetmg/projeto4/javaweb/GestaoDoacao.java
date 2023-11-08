@@ -37,20 +37,17 @@ public class GestaoDoacao extends HttpServlet {
 
                 // Escrever a página HTML
                 out.println("<html><head>");
-                out.println("<style>");
-                out.println("body { font-family: Arial, sans-serif; background-color: #e0e0ff; margin: 0; padding: 0; }");
-                out.println("h2 { color: #336699; }");
-                out.println("table { width: 80%; margin: 20px auto; border-collapse: collapse; background-color: #cce0ff; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); }");
-                out.println("table, th, td { border: 1px solid #99b3e6; }");
-                out.println("th, td { padding: 10px; text-align: left; }");
-                out.println("th { background-color: #336699; color: #fff; }");
-                out.println("tr:nth-child(even) { background-color: #ccd9ff; }");
-                out.println("tr:nth-child(odd) { background-color: #cce0ff; }");
-                out.println("</style>");
+                out.println("<link rel=\"stylesheet\" href=\"style/header.css\">");
+                out.println("<link rel=\"stylesheet\" href=\"style/main.css\">");
+                out.println("<link rel=\"stylesheet\" href=\"style/doacoes.css\">");
                 out.println("</head><body>");
-                out.println("<h2>Lista de Doações</h2>");
+                out.println("<header></header>");
+                out.println("<main><section>");
                 out.println("<table>");
+                out.println("<caption>Lista de Doações</caption>");
+                out.println("<thead>");
                 out.println("<tr><th>ID</th><th>Quantidade</th><th>Computador</th></tr>");
+                out.println("</thead><tbody>");
 
                 // Iterar sobre os resultados e exibi-los na tabela HTML
                 while (resultSet.next()) {
@@ -61,11 +58,13 @@ public class GestaoDoacao extends HttpServlet {
                     out.println("<tr><td>" + id + "</td><td>" + quantidade + "</td><td>" + computador + "</td></tr>");
                 }
 
-                out.println("</table>");
+                out.println("</tbody></table></section>");
                 resultSet = statement.executeQuery(newSql);
-                out.println("<h2>Fila de Espera</h2>");
-                out.println("<table>");
+                out.println("<section><table>");
+                out.println("<caption>Fila de Espera</caption>");
+                out.println("<thead>");
                 out.println("<tr><th>Posição</th><th>Nome</th></tr>");
+                out.println("</thead><tbody>");
                 while (resultSet.next()) {
                     int id = resultSet.getInt("id");
                     String nome = resultSet.getString("nome_aluno");
@@ -73,6 +72,9 @@ public class GestaoDoacao extends HttpServlet {
                     out.println("<tr><td>" + id + "</td><td>" + nome + "</td></tr>");
                 }
 
+                out.println("</tbody></table>");
+                out.println("</section></main>");
+                out.println("<script src=\"code/header.js\"></script>");
                 out.println("</body></html>");
 
                 // Fechar recursos

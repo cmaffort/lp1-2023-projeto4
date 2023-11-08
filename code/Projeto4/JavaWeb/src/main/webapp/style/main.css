@@ -55,6 +55,7 @@ main {
     justify-content: center;
     height: 91.6vh;
     width: 100vw;
+    text-align: center;
 }
 
 form {
@@ -90,7 +91,6 @@ h2 {
 }
 
 table { 
-    width: 35%;
     border-collapse: collapse; 
     background-color: #cce0ff; 
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
@@ -106,13 +106,8 @@ th, td {
 }
 
 th {
-    width: 25%;
     background-color: #10446c; 
     color: #fff; 
-}
-
-tr:nth-child(2n) td:nth-child(2n), tr:nth-child(2n + 1) td:nth-child(2n + 1) {
-    background-color: #bfd2f0;
 }
 
 caption {

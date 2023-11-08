@@ -2,3 +2,15 @@ main {
     padding-top: calc(6.4vh - 1em);
     height: calc(93.6vh + 1em);
 }
+
+th {
+    width: 20%;
+}
+
+#exception {
+    padding-top: calc(2vh);
+}
+
+#exception h2 {
+    position: static;
+}

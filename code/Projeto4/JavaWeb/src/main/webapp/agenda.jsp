@@ -2,16 +2,6 @@
 <%@page import="java.sql.*"%>
 <%@page import="br.cefetmg.projeto4.dao.mysql.MySqlConnection"%>
 
-<%
-    try {
-        MySqlConnection mySqlConnection = new MySqlConnection();
-
-        try (Connection connection = mySqlConnection.getConexao()) {
-            String sql = "SELECT * FROM agendamentos";
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(sql);
-%>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,14 +16,24 @@
     <header></header>
 
     <main>
+<%
+    try {
+        MySqlConnection mySqlConnection = new MySqlConnection();
+
+        try (Connection connection = mySqlConnection.getConexao()) {
+            String sql = "SELECT * FROM `agendamentos`";
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
+%>
         <table>
             <caption>Doações Agendadas</caption>
             <thead>
                 <tr>
-                    <th>Id</th>
+                    <th>ID</th>
                     <th>Data</th>
                     <th>Horario</th>
-                    <th>Id Donatario</th>
+                    <th>Nome donatario</th>
+                    <th>Email donatario</th>
                 </tr>
             </thead>
             <tbody>
@@ -43,15 +43,29 @@
                 String data = resultSet.getString("data");
                 String horario = resultSet.getString("horario");
                 int idDonatario = resultSet.getInt("id_donatario");
+
+                sql = "SELECT * FROM `donatarios` WHERE `id` = ?";
+                PreparedStatement stmt = connection.prepareStatement(sql);
+
+                stmt.setInt(1, idDonatario);
+                ResultSet resultSet2 = stmt.executeQuery();
+
+                if (resultSet2.next()) {
+                    String nome = resultSet2.getString("nome");
+                    String email = resultSet2.getString("email");
 %>
                 <tr>
                     <td><%=id%></td>
                     <td><%=data%></td>
                     <td><%=horario%></td>
-                    <td><%=idDonatario%></td>
+                    <td><%=nome%></td>
+                    <td><%=email%></td>
                 </tr>
 <% 
+                }
+                resultSet2.close();
             }
+            resultSet.close();
         }
 %>
             </tbody>
@@ -59,7 +73,10 @@
 <%
     } catch (Exception e) {
 %>
-        <p><%=e.getMessage()%></p>
+        <div id="exception">
+            <h2>Erro ao carregar agenda</h2>
+            <p>Descrição: <%=e.getMessage()%></p>
+        </div>
 <%        
     }
 %>
