@@ -2,16 +2,6 @@
 <%@page import="java.sql.*"%>
 <%@page import="br.cefetmg.projeto4.dao.mysql.MySqlConnection"%>
 
-<%
-    try {
-        MySqlConnection mySqlConnection = new MySqlConnection();
-
-        try (Connection connection = mySqlConnection.getConexao()) {
-            String sql = "SELECT * FROM agendamentos";
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(sql);
-%>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,6 +16,15 @@
     <header></header>
 
     <main>
+<%
+    try {
+        MySqlConnection mySqlConnection = new MySqlConnection();
+
+        try (Connection connection = mySqlConnection.getConexao()) {
+            String sql = "SELECT * FROM agendamentos";
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
+%>
         <table>
             <caption>Doações Agendadas</caption>
             <thead>
