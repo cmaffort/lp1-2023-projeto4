@@ -6,6 +6,7 @@ public class DoadorJuridica {
         private String CNPJ;
         private String email;
         private String senha;
+        private int computadoresDoados;
 
     public String getNome() {
         return nome;
@@ -54,4 +55,13 @@ public class DoadorJuridica {
         this.email = email;
         this.senha = senha;
     }
+        public DoadorJuridica(String nome, String endereco, String CNPJ, String email, String senha, int computadoresDoados) {
+        this.nome = nome;
+        this.endereco = endereco;
+        this.CNPJ = CNPJ;
+        this.email = email;
+        this.senha = senha;
+        this.computadoresDoados = computadoresDoados;
+    }
+
 }

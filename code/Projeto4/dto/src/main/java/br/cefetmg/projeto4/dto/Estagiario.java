@@ -4,6 +4,9 @@ public class Estagiario extends UsuarioDoSistema {
     private int computadoresFeitosEssaSemana;
     private String curso;
     private int serie;
+    private String dataEntrada;
+    
+    private String dataSaida;
     private String senha;    
    private String anoEntrada; 
     private String mesEntrada;    
@@ -20,6 +23,12 @@ public Estagiario(String nome, String CPF, String email, String diaEntrada, Stri
     this.diaSaida = diaSaida;
     this.mesSaida = mesSaida;
     this.anoSaida = anoSaida;
+    this.senha = senha;
+    }
+public Estagiario(String nome, String CPF, String email, String dataEntrada, String dataSaida, String senha) {
+    super(nome, CPF, email);
+    this.dataEntrada = dataEntrada;
+    this.dataSaida = dataSaida;
     this.senha = senha;
     }
     
