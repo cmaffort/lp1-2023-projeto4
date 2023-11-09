@@ -4,11 +4,14 @@
  */
 package br.cefetmg.projeto4.dao;
 import br.cefetmg.projeto4.dao.mysql.MySqlConnection;
+import br.cefetmg.projeto4.dto. DoadorJuridica;
 import br.cefetmg.projeto4.idao.IDoadorJuridicaDAO;
 import br.cefetmg.projeto4.dto.DoadorJuridica;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class DoadorJuridicoDAO implements IDoadorJuridicaDAO {
@@ -76,7 +79,31 @@ public class DoadorJuridicoDAO implements IDoadorJuridicaDAO {
 
     @Override
     public List<DoadorJuridica> listar() throws SQLException, ClassNotFoundException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+   List<DoadorJuridica> doadoresJuridicas = new ArrayList<>();
+
+    try {
+        PreparedStatement statement = conexao.prepareStatement("SELECT * FROM computadores");
+        ResultSet resultSet = statement.executeQuery();
+
+        while (resultSet.next()) {
+            String nome = resultSet.getString("nome");
+            String CNPJ = resultSet.getString("CNPJ");
+            String email = resultSet.getString("email");
+            String senha = resultSet.getString("senha");
+            String endereco = resultSet.getString("endereco");
+
+            int computadoresDoados = resultSet.getInt("computadores_doados");
+            DoadorJuridica doadorJuridica = new DoadorJuridica(nome, endereco, CNPJ, email, senha);
+            doadoresJuridicas.add(doadorJuridica);
+        }
+
+        resultSet.close();
+        statement.close();
+    } catch (SQLException e) {
+        System.out.println("Erro: " + e.getMessage());
+    }
+
+    return doadoresJuridicas;
     }
     
 }

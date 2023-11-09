@@ -1,5 +1,6 @@
 package br.cefetmg.projeto4.dao;
 import br.cefetmg.projeto4.dao.mysql.MySqlConnection;
+import br.cefetmg.projeto4.dto.Computador;
 import br.cefetmg.projeto4.idao.IDonatarioDAO;
 import java.sql.SQLException;
 import br.cefetmg.projeto4.dto.Donatario;
@@ -80,7 +81,33 @@ public class DonatarioDAO implements IDonatarioDAO {
 
     @Override
     public List<Donatario> listar() throws SQLException, ClassNotFoundException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    List<Donatario> donatarios = new ArrayList<>();
+
+    try {
+        PreparedStatement statement = conexao.prepareStatement("SELECT * FROM computadores");
+        ResultSet resultSet = statement.executeQuery();
+
+        while (resultSet.next()) {
+            String nome = resultSet.getString("nome");
+            String CPF = resultSet.getString("CPF");
+            String email = resultSet.getString("email");
+            String senha = resultSet.getString("senha");
+            String escola = resultSet.getString("escola");
+            int posicao = resultSet.getInt("posicao");
+            String serie = resultSet.getString("serie");
+
+            Donatario donatario = new Donatario(nome, CPF, email, senha, escola, posicao, serie, "rua");
+            donatarios.add(donatario);
+        }
+
+        resultSet.close();
+        statement.close();
+    } catch (SQLException e) {
+        System.out.println("Erro: " + e.getMessage());
+    }
+
+    return donatarios;
+
     }
      
 }

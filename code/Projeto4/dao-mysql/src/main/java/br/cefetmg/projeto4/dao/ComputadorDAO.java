@@ -79,30 +79,32 @@ public class ComputadorDAO implements IComputadorDAO {
 
     @Override
     public List<Computador> listar() throws SQLException, ClassNotFoundException {
-        List<Computador> computadores = new ArrayList<>();
+    List<Computador> computadores = new ArrayList<>();
 
-      /*  try {
-            PreparedStatement statement = conexao.prepareStatement("SELECT * FROM computadores");
-            ResultSet resultSet = statement.executeQuery();
+    try {
+        PreparedStatement statement = conexao.prepareStatement("SELECT * FROM computadores");
+        ResultSet resultSet = statement.executeQuery();
 
-            while (resultSet.next()) {
-                String codigo = resultSet.getString("codigo");
-                String doador = resultSet.getString("doador");
-                String dataDeChegada = resultSet.getString("dataDeChegada");
-                String donatario = resultSet.getString("donatario");
-                String marca = resultSet.getString("marca");
-                String modeloProcessador = resultSet.getString("modeloProcessador");
-                int quantidadeDeRAM = resultSet.getInt("quantidadeDeRAM");
+        while (resultSet.next()) {
+            String codigo = resultSet.getString("codigo");
+            String doador = resultSet.getString("doador");
+            String dataDeChegada = resultSet.getString("dataDeChegada");
+            String donatario = resultSet.getString("donatario");
+            String marca = resultSet.getString("marca");
+            String modeloProcessador = resultSet.getString("modeloProcessador");
+            int quantidadeDeRAM = resultSet.getInt("quantidadeDeRAM");
 
-                Computador computador = new Computador(codigo, doador, dataDeChegada, donatario, marca, modeloProcessador, quantidadeDeRAM);
-                computadores.add(computador);
-            }
+            Computador computador = new Computador(doador, dataDeChegada, donatario, marca, modeloProcessador, quantidadeDeRAM);
+            computadores.add(computador);
+        }
 
-            resultSet.close();
-            statement.close();
-        } catch (SQLException e) {
-            System.out.println("Erro: " + e.getMessage());
-        }*/
+        resultSet.close();
+        statement.close();
+    } catch (SQLException e) {
+        System.out.println("Erro: " + e.getMessage());
+    }
 
-        return computadores;    }
+    return computadores;
+
+    }
 }
