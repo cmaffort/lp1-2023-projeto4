@@ -56,7 +56,22 @@ public class DoadorJuridicoDAO implements IDoadorJuridicaDAO {
 
     @Override
     public boolean remover(DoadorJuridica doadorJuridica) throws SQLException, ClassNotFoundException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try {
+            PreparedStatement statement = conexao.prepareStatement("DELETE FROM donatarios WHERE CNPJ = ?");
+            statement.setString(1, doadorJuridica.getCNPJ());
+            int rowsAffected = statement.executeUpdate();
+
+            if (rowsAffected > 0) {
+                System.out.println("Remoção realizada com sucesso");
+                return true;
+            } else {
+                System.out.println("Erro na remoção");
+                return false;
+            }
+        } catch (SQLException e) {
+            System.out.println("Erro: " + e.getMessage());
+            return false;
+        }
     }
 
     @Override

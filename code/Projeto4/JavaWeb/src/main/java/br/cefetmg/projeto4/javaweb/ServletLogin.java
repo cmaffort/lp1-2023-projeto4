@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -67,14 +68,18 @@ public class ServletLogin extends HttpServlet {
                     salvando = tabelas[i];
                     break;
                 }
-            if(salvando.equals("doadorFisica") || salvando.equals("doadorJuridica"))
-                response.sendRedirect("cadastroDoacao.jsp");
-            if(salvando.equals("estagiarios") || salvando.equals("professores"))
-                response.sendRedirect("MostrarDoacoes");
-            
-
+            if(salvando != null)
+            {
+                Cookie cookie = new Cookie("tipoDeLogin", salvando);
+                cookie.setMaxAge(24 * 60 * 60);
+                response.addCookie(cookie);
+                if(salvando.equals("doadorFisica") || salvando.equals("doadorJuridica"))
+                   response.sendRedirect("cadastroDoacao.jsp");
+                if(salvando.equals("estagiarios") || salvando.equals("professores"))
+                    response.sendRedirect("MostrarDoacoes");
+            }
         }
-             catch (SQLException e) {
+        catch (SQLException e) {
                 // Handle any SQL exceptions, e.g., log or display an error message
                 out.println("<p>Error: " + e.getMessage() + "</p>");
             }

@@ -47,9 +47,9 @@ public class EstagiarioDAO implements IEstagiarioDAO {
     public boolean remover(Estagiario estagiario) throws SQLException, ClassNotFoundException{
         try {
 
-        PreparedStatement statement = conexao.prepareStatement("DELETE FROM estagiarios WHERE nome = ?");
-        statement.setString(1, estagiario.getNome());
-                   int rowsAffected = statement.executeUpdate();
+        PreparedStatement statement = conexao.prepareStatement("DELETE FROM estagiarios WHERE CPF = ?");
+        statement.setString(1, estagiario.getCPF());
+        int rowsAffected = statement.executeUpdate();
 
             if (rowsAffected > 0) {
                 System.out.println("Inserção realizada com sucesso");
