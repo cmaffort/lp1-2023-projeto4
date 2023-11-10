@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="style/header.css">
     <link rel="stylesheet" href="style/main.css">
     <link rel="stylesheet" href="style/agenda.css">
+    <link rel="stylesheet" href="style/table.css">
     <title>Agenda de doações</title>
 </head>
 <body>
@@ -51,7 +52,7 @@
                 ResultSet resultSet2 = stmt.executeQuery();
 
                 if (resultSet2.next()) {
-                    String nome = resultSet2.getString("nome");
+                    String nome = resultSet2.getString("nom");
                     String email = resultSet2.getString("email");
 %>
                 <tr>
@@ -83,5 +84,6 @@
     </main>
 
     <script src="code/header.js"></script>
+    <script src="code/th.js"></script>
 </body>
 </html>
