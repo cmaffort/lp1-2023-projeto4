@@ -52,7 +52,7 @@
                 ResultSet resultSet2 = stmt.executeQuery();
 
                 if (resultSet2.next()) {
-                    String nome = resultSet2.getString("nom");
+                    String nome = resultSet2.getString("nome");
                     String email = resultSet2.getString("email");
 %>
                 <tr>
@@ -85,5 +85,6 @@
 
     <script src="code/header.js"></script>
     <script src="code/th.js"></script>
+    <script src="code/exception.js"></script>
 </body>
 </html>
