@@ -7,6 +7,9 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import br.cefetmg.projeto4.dto.SolicitacaoReparo;
+import br.cefetmg.projeto4.dto.Computador;
+import br.cefetmg.projeto4.dto.EstadoManutencao;
 
 @WebServlet(name = "SolicitacaoReparoServlet", urlPatterns = {"/SolicitacaoReparoServlet"})
 public class SolicitacaoReparoServlet extends HttpServlet {
@@ -16,8 +19,10 @@ public class SolicitacaoReparoServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
            
-            
-            
+           Object estado = request.getAttribute("problema");
+           String especificacoes = request.getParameter("especificacoes");
+           EstadoManutencao manuetencao;
+           Computador computador;
         }
     }
 

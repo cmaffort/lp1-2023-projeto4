@@ -14,7 +14,7 @@
         <main>
             <h2>Solicitação de Reparo</h2>
 
-            <form>
+            <form action="SolicitacaoReparo" method="post">
                 <figure id="logo">
                     <img src="img/logo-cefet.png">
                 </figure>
