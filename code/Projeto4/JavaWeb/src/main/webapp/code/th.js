@@ -7,7 +7,9 @@ function setThWidth(table) {
         th.style.width = (100 / thArr.length) + '%';
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+function fixTables() {
     for (const table of tables)
         setThWidth(table);
-});
+}
+
+document.addEventListener('DOMContentLoaded', fixTables);
