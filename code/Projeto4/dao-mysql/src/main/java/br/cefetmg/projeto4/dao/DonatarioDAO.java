@@ -84,17 +84,17 @@ public class DonatarioDAO implements IDonatarioDAO {
     List<Donatario> donatarios = new ArrayList<>();
 
     try {
-        PreparedStatement statement = conexao.prepareStatement("SELECT * FROM computadores");
+        PreparedStatement statement = conexao.prepareStatement("SELECT * FROM fila_espera");
         ResultSet resultSet = statement.executeQuery();
 
         while (resultSet.next()) {
-            String nome = resultSet.getString("nome");
-            String CPF = resultSet.getString("CPF");
-            String email = resultSet.getString("email");
-            String senha = resultSet.getString("senha");
-            String escola = resultSet.getString("escola");
-            int posicao = resultSet.getInt("posicao");
-            String serie = resultSet.getString("serie");
+            String nome = resultSet.getString("nome_aluno");
+             String CPF = "";
+            String email = "";
+            String senha = "";
+            String escola = ""; 
+            int posicao = resultSet.getInt("id");
+             String serie = "";
 
             Donatario donatario = new Donatario(nome, CPF, email, senha, escola, posicao, serie, "rua");
             donatarios.add(donatario);

@@ -72,7 +72,7 @@ public class DoadorFisicaDAO implements IDoadorFisicaDAO {
     List<DoadorFisica> doadoresFisicas = new ArrayList<>();
 
     try {
-        PreparedStatement statement = conexao.prepareStatement("SELECT * FROM computadores");
+        PreparedStatement statement = conexao.prepareStatement("SELECT * FROM doadorFisico");
         ResultSet resultSet = statement.executeQuery();
 
         while (resultSet.next()) {
