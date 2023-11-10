@@ -1,11 +1,15 @@
 package br.cefetmg.projeto4.dao;
 
 import br.cefetmg.projeto4.dao.mysql.MySqlConnection;
+import br.cefetmg.projeto4.dto.Computador;
 import br.cefetmg.projeto4.dto.Doacao;
+import br.cefetmg.projeto4.dto.DoadorFisica;
 import java.sql.Connection;
 import java.sql.SQLException;
 import br.cefetmg.projeto4.idao.IDoacaoDAO;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 public class DoacaoDAO implements IDoacaoDAO {
     MySqlConnection bancoDeDados;
@@ -22,7 +26,7 @@ public class DoacaoDAO implements IDoacaoDAO {
 
         PreparedStatement statement = conexao.prepareStatement("INSERT INTO doacao (quantidade, computador) VALUES (?, ?)");
         statement.setInt(1, doacao.getQuantidade());
-        statement.setString(2, doacao.getComputador().getMarca());
+        statement.setString(2, doacao.getMarcaComputador());
                     int rowsAffected = statement.executeUpdate();
 
             if (rowsAffected > 0) {
@@ -52,7 +56,30 @@ public class DoacaoDAO implements IDoacaoDAO {
 
     @Override
     public List<Doacao> listar() throws SQLException, ClassNotFoundException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    List<Doacao> doacoes = new ArrayList<>();
+
+    try {
+        PreparedStatement statement = conexao.prepareStatement("SELECT * FROM doacao");
+        ResultSet resultSet = statement.executeQuery();
+
+        while (resultSet.next()) {
+            String nome = resultSet.getString("computador");
+            int quantidade = resultSet.getInt("quantidade");
+            String doador = resultSet.getString("doador");
+            String data = resultSet.getString("data");
+            int ram = resultSet.getInt("quantidade_ram");
+            Computador computador = new Computador(doador,data,"", nome,"", ram);
+            Doacao doacao = new Doacao(quantidade, computador);
+            doacoes.add(doacao);
+        }
+
+        resultSet.close();
+        statement.close();
+    } catch (SQLException e) {
+        System.out.println("Erro: " + e.getMessage());
+    }
+
+    return doacoes;
     }
     
 

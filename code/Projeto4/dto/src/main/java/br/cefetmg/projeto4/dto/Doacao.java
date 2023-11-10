@@ -30,6 +30,34 @@ public class Doacao {
     this.doador = doador;
     }        
 
+    public Computador getComputador() {
+        return computador;
+    }
+
+    public String getDataDeChegada() {
+        return computador.getDataDeChegada();
+    }
+
+    public String getDonatario() {
+        return donatario;
+    }
+
+    public String getMarca() {
+        return marca;
+    }
+
+    public String getModeloProcessador() {
+        return modeloProcessador;
+    }
+
+    public int getQuantidadeDeRAM() {
+        return computador.getQuantidadeDeRAM();
+    }
+
+    public String getDoador() {
+        return computador.getDoador();
+    }
+
     public int getQuantidade() {
         return quantidade;
     }
@@ -38,8 +66,8 @@ public class Doacao {
         this.quantidade = quantidade;
     }
 
-    public Computador getComputador() {
-        return computador;
+    public String getMarcaComputador() {
+        return computador.getMarca();
     }
 
     public void setComputador(Computador computador) {

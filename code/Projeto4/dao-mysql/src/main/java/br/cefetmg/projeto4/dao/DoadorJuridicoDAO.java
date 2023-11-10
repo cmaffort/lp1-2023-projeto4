@@ -60,7 +60,7 @@ public class DoadorJuridicoDAO implements IDoadorJuridicaDAO {
     @Override
     public boolean remover(DoadorJuridica doadorJuridica) throws SQLException, ClassNotFoundException {
         try {
-            PreparedStatement statement = conexao.prepareStatement("DELETE FROM donatarios WHERE CNPJ = ?");
+            PreparedStatement statement = conexao.prepareStatement("DELETE FROM doadorJuridico WHERE CNPJ = ?");
             statement.setString(1, doadorJuridica.getCNPJ());
             int rowsAffected = statement.executeUpdate();
 
