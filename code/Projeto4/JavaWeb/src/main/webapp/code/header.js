@@ -150,6 +150,7 @@ function loadMenu() {
         newLi('Relatar peças faltantes', 'cadastroPecaFaltante.jsp'),
         newLi('Dar feedback', 'feedback.jsp'),
         newLi('Gerir doações', 'MostrarDoacoes'),
+        newLi('Gerir doadores', 'gestaoDoadores.jsp'),
         newLi('Solicitar reparo', 'solicitacaoReparo.jsp'),
         newLi('Verificar posição na fila', 'verificarPosicao.jsp'),
         newLi('Deletar conta', 'deletarConta.jsp', 'danger')
