@@ -6,7 +6,7 @@ public class SolicitacaoReparo {
     private String dataDeDoacao;
     private String especificacoes;
     
-    SolicitacaoReparo (Computador computador, String dataDeDoacao, String especificacoes) {
+    public SolicitacaoReparo (Computador computador, String dataDeDoacao, String especificacoes) {
         this.computador = computador ;
         this.dataDeDoacao = dataDeDoacao ;
         this.especificacoes = especificacoes;
