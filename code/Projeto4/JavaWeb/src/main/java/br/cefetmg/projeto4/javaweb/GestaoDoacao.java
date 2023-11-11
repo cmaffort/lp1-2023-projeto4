@@ -37,6 +37,7 @@ public class GestaoDoacao extends HttpServlet {
             out.println("<link rel=\"stylesheet\" href=\"style/header.css\">");
             out.println("<link rel=\"stylesheet\" href=\"style/main.css\">");
             out.println("<link rel=\"stylesheet\" href=\"style/doacoes.css\">");
+            out.println("<link rel=\"stylesheet\" href=\"style/table.css\">");
             out.println("</head><body>");
             out.println("<header></header>");
             out.println("<main><section>");
@@ -66,6 +67,7 @@ public class GestaoDoacao extends HttpServlet {
             out.println("</tbody></table>");
             out.println("</section></main>");
             out.println("<script src=\"code/header.js\"></script>");
+            out.println("<script src=\"code/th.js\"></script>");
             out.println("</body></html>");
         } catch (SQLException ex) {
             Logger.getLogger(GestaoDoacao.class.getName()).log(Level.SEVERE, null, ex);

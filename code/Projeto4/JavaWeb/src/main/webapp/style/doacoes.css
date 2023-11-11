@@ -1,21 +1,13 @@
 main {
-    padding-top: 14vh;
-    height: fit-content;
+    flex-direction: row;
+    align-items: normal;
 }
 
 section {
-    width: 100%;
     padding-bottom: 5.6vh;
+    width: 50%;
 }
 
 table {
     margin: auto;
-}
-
-section th {
-    width: 50%;
-}
-
-section:first-child th {
-    width: calc(100% / 3)
 }
