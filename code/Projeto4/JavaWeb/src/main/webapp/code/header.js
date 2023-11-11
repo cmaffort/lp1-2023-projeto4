@@ -114,7 +114,7 @@ function redirect(href) {
 }
 
 function loadHeader() {
-    if(!headerEl)
+    if (!headerEl)
         return;
 
     const navHome = newPopulatedNav('home', 0, 1);
