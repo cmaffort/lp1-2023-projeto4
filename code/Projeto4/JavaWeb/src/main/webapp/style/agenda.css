@@ -6,3 +6,8 @@ main {
 #exception h2 {
     position: static;
 }
+
+table {
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+}

@@ -9,7 +9,13 @@ function fixContent() {
             main.removeChild(child);
 }
 
+function showTable() {
+    tables[0].style.opacity = 1;
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     if (exception)
         fixContent();
+    if (tables[0])
+        showTable();
 })
