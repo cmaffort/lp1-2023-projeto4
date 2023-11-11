@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="style/header.css">
     <link rel="stylesheet" href="style/main.css">
     <link rel="stylesheet" href="style/agenda.css">
+    <link rel="stylesheet" href="style/table.css">
     <title>Agenda de doações</title>
 </head>
 <body>
@@ -83,5 +84,7 @@
     </main>
 
     <script src="code/header.js"></script>
+    <script src="code/th.js"></script>
+    <script src="code/exception.js"></script>
 </body>
 </html>

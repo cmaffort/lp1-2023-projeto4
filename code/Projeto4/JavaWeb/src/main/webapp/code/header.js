@@ -18,12 +18,16 @@ const icons = {
     ],
     'hrefs' : [
         'index.html',
-        'pedido.html', 
-        'suporte.html',
+        '', 
+        '',
         'login.jsp',
         'https://www.dde.cefetmg.br/2023/08/29/oficina-de-recuperacao-de-computadores-beneficia-estudantes-sem-acesso-a-computadores/',
         'cadastroDoacao.jsp'
     ]
+};
+const AltType = {
+    ALT: 0,
+    TEXT: 1
 };
 
 function newEl(tag, ...classNames) {
@@ -40,7 +44,7 @@ function newImg(src, alt = null, ...classNames) {
 
     img.src = src;
 
-    if (alt != null)
+    if (alt)
         img.alt = alt;
 
     return img;
@@ -51,8 +55,8 @@ function newFigure(img, href, text = null, ...classNames) {
     
     figure.appendChild(img);
 
-    if (text != null) {
-        const textEl = newEl('p');
+    if (text) {
+        const textEl = newEl('span');
 
         textEl.innerHTML = text;
 
@@ -67,20 +71,19 @@ function newFigure(img, href, text = null, ...classNames) {
 function newNav(id = null, ...classNames) {
     const nav = newEl('nav', ...classNames);
 
-    if (id != null)
+    if (id)
         nav.setAttribute('id', id);
 
     return nav;
 }
 
-function newPopulatedNav(id, startIndex, endIndex, altType = 'alt', ...classNames) {
+function newPopulatedNav(id, startIndex, endIndex, altType = AltType.ALT, ...classNames) {
     const nav = newNav(id, ...classNames);
 
     switch(altType) {
-        case 'text':
+        case AltType.TEXT:
             populateNavText(nav, startIndex, endIndex);
             break;
-        case 'alt':
         default:
             populateNavAlt(nav, startIndex, endIndex);
     }
@@ -111,11 +114,11 @@ function redirect(href) {
 }
 
 function loadHeader() {
-    if(!headerEl)
+    if (!headerEl)
         return;
 
     const navHome = newPopulatedNav('home', 0, 1);
-    const navPages = newPopulatedNav('pages', 1, icons['srcs'].length, 'text');
+    const navPages = newPopulatedNav('pages', 1, icons['srcs'].length, AltType.TEXT);
 
     headerEl.appendChild(navHome);
     headerEl.appendChild(navPages);

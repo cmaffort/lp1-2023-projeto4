@@ -1,97 +1,67 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package br.cefetmg.projeto4.javaweb;
 
-import java.io.IOException;
-import java.io.PrintWriter;
+import br.cefetmg.projeto4.dao.mysql.MySqlConnection;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
-/**
- *
- * @author lucas
- */
 @WebServlet(name = "ServletDeletarConta", urlPatterns = {"/ServletDeletarConta"})
 public class ServletDeletarConta extends HttpServlet {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            Cookie[] cookieTipoLogin = request.getCookies();
-            boolean cookieExiste = false;
-            for (Cookie cookie : cookieTipoLogin) {
-                if (cookie.getName().equals("tipoDeLogin")) {
-                    out.println("<p>cookie existe</p>");
-                    cookieExiste = true;
-                }
-            }
+            String email = request.getParameter("login");
+            String senha = request.getParameter("senha");
+            String[] tabelas = {"doadorJuridica", "doadorFisica", "professores", "donatarios", "estagiarios"};
 
-            out.println("<head>");
-            out.println("<title>Servlet ServletDeletarConta</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet ServletDeletarConta at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            MySqlConnection bancoDeDados = new MySqlConnection();
+            try (Connection conexao = bancoDeDados.getConexao()) {
+                String salvando = null;
+
+                for (String tabela : tabelas) {
+                    if (verificarTabela(conexao, tabela, email, senha)) {
+                        try {
+                            PreparedStatement statement = conexao.prepareStatement("DELETE FROM " + tabela + " WHERE email = ? AND senha = ?");
+                            statement.setString(1, email);
+                            statement.setString(2, senha);
+                            int rowsDeleted = statement.executeUpdate(); // Usar executeUpdate() para DELETE
+                            response.sendRedirect("http://localhost:8080/view-jsp/index.html");
+
+                        } catch (SQLException e) {
+                            System.out.println("Erro ao excluir registros da tabela " + tabela + ": " + e.getMessage());
+                        }
+                    }
+                }
+
+                if (salvando != null) {
+                    Cookie cookie = new Cookie("tipoDeLogin", salvando);
+                    cookie.setMaxAge(24 * 60 * 60);
+                    response.addCookie(cookie);
+                } else {
+                    response.sendRedirect("paginaDeErro.jsp");
+                }
+            } catch (SQLException e) {
+                out.println("<p>Error: " + e.getMessage() + "</p>");
+            }
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
+    private boolean verificarTabela(Connection conexao, String tabela, String email, String senha) throws SQLException {
+        try (PreparedStatement statement = conexao.prepareStatement("SELECT * FROM " + tabela + " WHERE email = ? AND senha = ?")) {
+            statement.setString(1, email);
+            statement.setString(2, senha);
+            return statement.executeQuery().next();
+        } catch (SQLException e) {
+            System.out.println("Erro ao verificar a tabela " + tabela + ": " + e.getMessage());
+            return false;
+        }
     }
-
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
 }

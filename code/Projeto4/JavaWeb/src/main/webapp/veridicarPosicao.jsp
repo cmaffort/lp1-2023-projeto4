@@ -1,6 +1,6 @@
 <%-- 
-    Document   : deletarConta
-    Created on : 9 de nov. de 2023, 15:34:54
+    Document   : veridicarPosicao
+    Created on : 11 de nov. de 2023, 11:58:38
     Author     : lucas
 --%>
 
@@ -13,7 +13,7 @@
     </head>
     <body>
                 <main>
-            <form action="ServletDeletarConta" method="post">
+            <form action="ServletLogin" method="get">
                 <figure id="logo">
                     <img src="img/logo-cefet.png">
                 </figure>
@@ -24,11 +24,8 @@
                     <label for="senha">Senha:</label>
                     <input type="password" id="senha" name="senha" required>
                 </div><div id="submit">
-                    <input type="submit" value="Deletar">
+                    <input type="submit" value="Acessar">
                 </div>
-
-            </form>
-        </main>
 
     </body>
 </html>

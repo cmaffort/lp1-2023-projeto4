@@ -1,51 +1,59 @@
 package br.cefetmg.projeto4.dto;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import static java.time.temporal.TemporalQueries.localDate;
 
 public class Pecas {
    
     private int quantidade;
     private String codigo;
-    private String modelo;
+    private String nome;
     private String descricao;
-    private LocalDate dataChegada;
-    
-    public String getDataChegada()
-    {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");
-        return dataChegada.format(formatter);
-    }
-    public int getQuantidade () {
-        return quantidade;
-    }
-    
-    public void setQuantidade (int quantidade) {
+    private String marca;
+
+    public Pecas(int quantidade, String codigo, String nome, String marca) {
         this.quantidade = quantidade;
-    }
-    
-    public String getCodigo () {
-        return codigo;
-    }
-    
-    public void setCodigo (String codigo) {
         this.codigo = codigo;
-    }
-    
-    public String getModelo () {
-        return modelo;
+        this.nome = nome;
+        this.marca = marca;
     }
 
-    public void setModelo (String modelo) {
-        this.modelo = modelo;
+    public int getQuantidade() {
+        return quantidade;
     }
-    
-    public String getDescricao () {
+
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
+    }
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getDescricao() {
         return descricao;
     }
-    
-    public void setDescricao (String descricao) {
+
+    public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
+
+    public String getMarca() {
+        return marca;
+    }
+
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
+    
 }
