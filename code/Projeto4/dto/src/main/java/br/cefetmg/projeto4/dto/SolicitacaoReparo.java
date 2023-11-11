@@ -2,9 +2,15 @@ package br.cefetmg.projeto4.dto;
 
 public class SolicitacaoReparo {
     
-    Computador computador;
-    String dataDeDoacao;
-    String especificacoes;
+    private Computador computador;
+    private String dataDeDoacao;
+    private String especificacoes;
+    
+    SolicitacaoReparo (Computador computador, String dataDeDoacao, String especificacoes) {
+        this.computador = computador ;
+        this.dataDeDoacao = dataDeDoacao ;
+        this.especificacoes = especificacoes;
+    }
     
     public Computador getComputador () {
         return computador;

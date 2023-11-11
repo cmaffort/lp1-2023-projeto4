@@ -1,28 +1,57 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
+ */
 package br.cefetmg.projeto4.javaweb;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import br.cefetmg.projeto4.dto.SolicitacaoReparo;
-import br.cefetmg.projeto4.dto.Computador;
-import br.cefetmg.projeto4.dto.EstadoManutencao;
 
-@WebServlet(name = "SolicitacaoReparoServlet", urlPatterns = {"/SolicitacaoReparoServlet"})
-public class SolicitacaoReparoServlet extends HttpServlet {
+/**
+ *
+ * @author lucas
+ */
+@WebServlet(name = "ServletDeletarConta", urlPatterns = {"/ServletDeletarConta"})
+public class ServletDeletarConta extends HttpServlet {
 
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-           
-           Object estado = request.getAttribute("problema");
-           String especificacoes = request.getParameter("especificacoes");
-           EstadoManutencao manuetencao;
-           Computador computador;
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            Cookie[] cookieTipoLogin = request.getCookies();
+            boolean cookieExiste = false;
+            for (Cookie cookie : cookieTipoLogin) {
+                if (cookie.getName().equals("tipoDeLogin")) {
+                    out.println("<p>cookie existe</p>");
+                    cookieExiste = true;
+                }
+            }
+
+            out.println("<head>");
+            out.println("<title>Servlet ServletDeletarConta</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet ServletDeletarConta at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
     }
 

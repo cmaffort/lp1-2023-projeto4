@@ -47,9 +47,9 @@ public class EstagiarioDAO implements IEstagiarioDAO {
     public boolean remover(Estagiario estagiario) throws SQLException, ClassNotFoundException{
         try {
 
-        PreparedStatement statement = conexao.prepareStatement("DELETE FROM estagiarios WHERE nome = ?");
-        statement.setString(1, estagiario.getNome());
-                   int rowsAffected = statement.executeUpdate();
+        PreparedStatement statement = conexao.prepareStatement("DELETE FROM estagiarios WHERE CPF = ?");
+        statement.setString(1, estagiario.getCPF());
+        int rowsAffected = statement.executeUpdate();
 
             if (rowsAffected > 0) {
                 System.out.println("Inserção realizada com sucesso");
@@ -70,31 +70,33 @@ public class EstagiarioDAO implements IEstagiarioDAO {
 
     @Override
     public List<Estagiario> listar() throws SQLException, ClassNotFoundException {
-        List<Estagiario> computadores = new ArrayList<>();
+           List<Estagiario> estagiarios = new ArrayList<>();
 
-      /*  try {
-            PreparedStatement statement = conexao.prepareStatement("SELECT * FROM computadores");
-            ResultSet resultSet = statement.executeQuery();
+    try {
+        PreparedStatement statement = conexao.prepareStatement("SELECT * FROM estagiarios");
+        ResultSet resultSet = statement.executeQuery();
 
-            while (resultSet.next()) {
-                String codigo = resultSet.getString("codigo");
-                String doador = resultSet.getString("doador");
-                String dataDeChegada = resultSet.getString("dataDeChegada");
-                String donatario = resultSet.getString("donatario");
-                String marca = resultSet.getString("marca");
-                String modeloProcessador = resultSet.getString("modeloProcessador");
-                int quantidadeDeRAM = resultSet.getInt("quantidadeDeRAM");
+        while (resultSet.next()) {
+            String nome = resultSet.getString("nome");
+            String CPF = resultSet.getString("CPF");
+            String email = resultSet.getString("email");
+            String senha = resultSet.getString("senha");
+            String dataEntrada = resultSet.getString("dataEntrada");
+            String dataSaida = resultSet.getString("dataSaida");
 
-                Computador computador = new Computador(codigo, doador, dataDeChegada, donatario, marca, modeloProcessador, quantidadeDeRAM);
-                computadores.add(computador);
-            }
+            String endereco = resultSet.getString("endereco");
+        Estagiario estagiario = new Estagiario(nome, CPF, email, dataEntrada, dataSaida, senha);
+            estagiarios.add(estagiario);
+        }
 
-            resultSet.close();
-            statement.close();
-        } catch (SQLException e) {
-            System.out.println("Erro: " + e.getMessage());
-        }*/
+        resultSet.close();
+        statement.close();
+    } catch (SQLException e) {
+        System.out.println("Erro: " + e.getMessage());
+    }
 
-        return computadores;    }
+    return estagiarios;
+
+    }
 
 }

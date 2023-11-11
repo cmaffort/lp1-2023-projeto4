@@ -1,5 +1,6 @@
 package br.cefetmg.projeto4.dao;
 import br.cefetmg.projeto4.dao.mysql.MySqlConnection;
+import br.cefetmg.projeto4.dto.Computador;
 import br.cefetmg.projeto4.idao.IDonatarioDAO;
 import java.sql.SQLException;
 import br.cefetmg.projeto4.dto.Donatario;
@@ -60,12 +61,53 @@ public class DonatarioDAO implements IDonatarioDAO {
 
     @Override
     public boolean remover(Donatario donatario) throws SQLException, ClassNotFoundException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try {
+            PreparedStatement statement = conexao.prepareStatement("DELETE FROM donatarios WHERE CPF = ?");
+            statement.setString(1, donatario.getCPF());
+            int rowsAffected = statement.executeUpdate();
+
+            if (rowsAffected > 0) {
+                System.out.println("Remoção realizada com sucesso");
+                return true;
+            } else {
+                System.out.println("Erro na remoção");
+                return false;
+            }
+        } catch (SQLException e) {
+            System.out.println("Erro: " + e.getMessage());
+            return false;
+        }
     }
 
     @Override
     public List<Donatario> listar() throws SQLException, ClassNotFoundException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    List<Donatario> donatarios = new ArrayList<>();
+
+    try {
+        PreparedStatement statement = conexao.prepareStatement("SELECT * FROM fila_espera");
+        ResultSet resultSet = statement.executeQuery();
+
+        while (resultSet.next()) {
+            String nome = resultSet.getString("nome_aluno");
+             String CPF = "";
+            String email = "";
+            String senha = "";
+            String escola = ""; 
+            int posicao = resultSet.getInt("id");
+             String serie = "";
+
+            Donatario donatario = new Donatario(nome, CPF, email, senha, escola, posicao, serie, "rua");
+            donatarios.add(donatario);
+        }
+
+        resultSet.close();
+        statement.close();
+    } catch (SQLException e) {
+        System.out.println("Erro: " + e.getMessage());
+    }
+
+    return donatarios;
+
     }
      
 }

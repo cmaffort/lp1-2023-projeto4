@@ -13,7 +13,14 @@ public class DoadorFisica {
         this.senha = senha;
         this.computadoresDoados = 0;
     }
-    
+        public DoadorFisica(String nome, String CPF,  String email, String senha, int computadoresDoados) {
+        this.nome = nome;
+        this.email = email;
+        this.CPF = CPF;
+        this.senha = senha;
+        this.computadoresDoados = 0;
+    }
+
 
     public int getComputadoresDoados() {
         return computadoresDoados;
