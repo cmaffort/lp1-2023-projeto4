@@ -25,6 +25,10 @@ const icons = {
         'cadastroDoacao.jsp'
     ]
 };
+const AltType = {
+    ALT: 0,
+    TEXT: 1
+};
 
 function newEl(tag, ...classNames) {
     const el = document.createElement(tag);
@@ -52,7 +56,7 @@ function newFigure(img, href, text = null, ...classNames) {
     figure.appendChild(img);
 
     if (text != null) {
-        const textEl = newEl('p');
+        const textEl = newEl('span');
 
         textEl.innerHTML = text;
 
@@ -73,14 +77,13 @@ function newNav(id = null, ...classNames) {
     return nav;
 }
 
-function newPopulatedNav(id, startIndex, endIndex, altType = 'alt', ...classNames) {
+function newPopulatedNav(id, startIndex, endIndex, altType = AltType.ALT, ...classNames) {
     const nav = newNav(id, ...classNames);
 
     switch(altType) {
-        case 'text':
+        case AltType.TEXT:
             populateNavText(nav, startIndex, endIndex);
             break;
-        case 'alt':
         default:
             populateNavAlt(nav, startIndex, endIndex);
     }
@@ -115,7 +118,7 @@ function loadHeader() {
         return;
 
     const navHome = newPopulatedNav('home', 0, 1);
-    const navPages = newPopulatedNav('pages', 1, icons['srcs'].length, 'text');
+    const navPages = newPopulatedNav('pages', 1, icons['srcs'].length, AltType.TEXT);
 
     headerEl.appendChild(navHome);
     headerEl.appendChild(navPages);
