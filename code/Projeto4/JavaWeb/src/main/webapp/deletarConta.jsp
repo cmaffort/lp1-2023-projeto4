@@ -13,7 +13,7 @@
     </head>
     <body>
                 <main>
-            <form action="ServletDeletar" method="get">
+            <form action="ServletDeletarConta" method="post">
                 <figure id="logo">
                     <img src="img/logo-cefet.png">
                 </figure>
