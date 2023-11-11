@@ -90,7 +90,7 @@ public class DonatarioDAO implements IDonatarioDAO {
         while (resultSet.next()) {
             String nome = resultSet.getString("nome_aluno");
              String CPF = "";
-            String email = "";
+            String email = resultSet.getString("email");
             String senha = "";
             String escola = ""; 
             int posicao = resultSet.getInt("id");
