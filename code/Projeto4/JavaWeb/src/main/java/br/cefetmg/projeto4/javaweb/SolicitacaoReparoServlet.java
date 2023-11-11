@@ -1,5 +1,10 @@
 package br.cefetmg.projeto4.javaweb;
 
+import br.cefetmg.projeto4.dto.SolicitacaoReparo;
+import br.cefetmg.projeto4.dto.Computador;
+import br.cefetmg.projeto4.dto.EstadoManutencao;
+import br.cefetmg.projeto4.dao.SolicitacaoReparoDAO;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -7,22 +12,38 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import br.cefetmg.projeto4.dto.SolicitacaoReparo;
-import br.cefetmg.projeto4.dto.Computador;
-import br.cefetmg.projeto4.dto.EstadoManutencao;
+
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @WebServlet(name = "SolicitacaoReparoServlet", urlPatterns = {"/SolicitacaoReparoServlet"})
 public class SolicitacaoReparoServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-           
-           Object estado = request.getAttribute("problema");
-           String especificacoes = request.getParameter("especificacoes");
-           EstadoManutencao manuetencao;
-           Computador computador;
+
+            Object estado = request.getAttribute("problema");
+            String especificacoes = request.getParameter("especificacoes");
+            EstadoManutencao manutencao;
+            Computador computador = new Computador();
+            String dataDeDoacao = "algo";
+
+            SolicitacaoReparo reparo = new SolicitacaoReparo(computador, dataDeDoacao, especificacoes);
+
+            try {
+                SolicitacaoReparoDAO reparoDAO = new SolicitacaoReparoDAO();
+
+                if (reparoDAO.inserir(reparo)) {
+                    out.println("<p>inserido</p>");
+                }
+
+            } catch (SQLException e) {
+                out.println("<p>SQLException</p>");
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(GestaoDoacao.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 
