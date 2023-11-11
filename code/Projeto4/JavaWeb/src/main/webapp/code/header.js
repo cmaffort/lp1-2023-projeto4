@@ -44,7 +44,7 @@ function newImg(src, alt = null, ...classNames) {
 
     img.src = src;
 
-    if (alt != null)
+    if (alt)
         img.alt = alt;
 
     return img;
@@ -55,7 +55,7 @@ function newFigure(img, href, text = null, ...classNames) {
     
     figure.appendChild(img);
 
-    if (text != null) {
+    if (text) {
         const textEl = newEl('span');
 
         textEl.innerHTML = text;
@@ -71,7 +71,7 @@ function newFigure(img, href, text = null, ...classNames) {
 function newNav(id = null, ...classNames) {
     const nav = newEl('nav', ...classNames);
 
-    if (id != null)
+    if (id)
         nav.setAttribute('id', id);
 
     return nav;
