@@ -2,9 +2,12 @@ h2 {
     top: 15vh;
 }
 
+main, main p {
+    text-align: left;
+}
+
 main p {
     margin-bottom: 2vh;
-    text-align: left;
 }
 
 #texto {

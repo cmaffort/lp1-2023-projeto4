@@ -2,21 +2,21 @@ h2 {
     top: 15vh;
 }
 
-ul, li {
+main ul, main li {
     display: grid;
 }
 
-ul {
+main ul {
     grid-template-columns: 1fr 1fr;
     gap: 2vh;
     padding: 0;
 }
 
-li {
+main li {
     list-style: none;
 }
 
-li label {
+main li label {
     grid-template-columns: auto 1fr;
     gap: 1vh;
 }
