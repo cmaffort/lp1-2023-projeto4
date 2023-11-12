@@ -2,7 +2,7 @@ package br.cefetmg.projeto4.javaweb;
 
 import br.cefetmg.projeto4.dto.SolicitacaoReparo;
 import br.cefetmg.projeto4.dto.Computador;
-import br.cefetmg.projeto4.dto.EstadoManutencao;
+import br.cefetmg.projeto4.dto.SolicitacaoReparo.EstadoManutencao;
 import br.cefetmg.projeto4.dao.SolicitacaoReparoDAO;
 
 import java.io.IOException;
@@ -24,11 +24,19 @@ public class SolicitacaoReparoServlet extends HttpServlet {
             throws ServletException, IOException {
         try (PrintWriter out = response.getWriter()) {
 
-            Object estado = request.getAttribute("problema");
+            String estado = request.getParameter("problema");
             String especificacoes = request.getParameter("especificacoes");
-            EstadoManutencao manutencao;
             Computador computador = new Computador();
             String dataDeDoacao = "algo";
+            SolicitacaoReparo manutencao = new SolicitacaoReparo();
+
+            if (estado.equals("Mal funcionamento")) {
+                manutencao.setManutencao(EstadoManutencao.MAL_FUNCIONAMENTO);
+            } else if (estado.equals("Peças faltando")) {
+                manutencao.setManutencao(EstadoManutencao.FALTANDO_PECAS);
+            } else if (estado.equals("Outro")) {
+                manutencao.setManutencao(EstadoManutencao.OUTRO);
+            }
 
             SolicitacaoReparo reparo = new SolicitacaoReparo(computador, dataDeDoacao, especificacoes);
 
