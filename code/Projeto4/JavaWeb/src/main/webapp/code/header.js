@@ -22,7 +22,8 @@ const icons = {
 const menu = {
     SRC: 'img/hamburger.png',
     ALT: 'Menu',
-    EL: newNav('menu', 'hidden')
+    EL: newNav('menu'),
+    HIDDEN: true
 };
 const AltType = {
     ALT: 0,
@@ -138,7 +139,24 @@ function redirect(href) {
 }
 
 function toggleMenu() {
-    menu.EL.classList.toggle('hidden');
+    if (menu.HIDDEN)
+        showMenu();
+    else
+        hideMenu();
+}
+
+function hideMenu() {
+    console.log('hide');
+    menu.EL.classList.add('hidden');
+    setTimeout(() => menu.EL.style.display = 'none', 300);
+    menu.HIDDEN = true;
+}
+
+function showMenu() {
+    console.log('show');
+    menu.EL.style.display = 'block';
+    setTimeout(() => menu.EL.classList.remove('hidden'), 1);
+    menu.HIDDEN = false;
 }
 
 function loadMenu() {
@@ -174,6 +192,8 @@ function loadHeader() {
     headerEl.appendChild(section);
     section.appendChild(navPages);
     section.appendChild(newMenu());
+
+    hideMenu();
 }
 
 document.addEventListener('DOMContentLoaded', loadHeader);
