@@ -10,7 +10,7 @@ header {
     align-content: center;
 }
 
-nav, section {
+nav, header section {
     box-sizing: border-box;
     height: 100%;
     display: flex;
