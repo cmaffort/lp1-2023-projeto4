@@ -146,14 +146,12 @@ function toggleMenu() {
 }
 
 function hideMenu() {
-    console.log('hide');
     menu.EL.classList.add('hidden');
     setTimeout(() => menu.EL.style.display = 'none', 300);
     menu.HIDDEN = true;
 }
 
 function showMenu() {
-    console.log('show');
     menu.EL.style.display = 'block';
     setTimeout(() => menu.EL.classList.remove('hidden'), 1);
     menu.HIDDEN = false;
