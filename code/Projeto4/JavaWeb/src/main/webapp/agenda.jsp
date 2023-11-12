@@ -22,7 +22,7 @@
         MySqlConnection mySqlConnection = new MySqlConnection();
 
         try (Connection connection = mySqlConnection.getConexao()) {
-            String sql = "SELECT * FROM `agendamentos`";
+            String sql = "SELECT agendamentos.data, agendamentos.horario, usuarios.nome, usuarios.email FROM `agendamentos` JOIN `usuarios` ON agendamentos.id_donatario = usuarios.id;";
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
 %>
@@ -30,7 +30,6 @@
             <caption>Doações Agendadas</caption>
             <thead>
                 <tr>
-                    <th>ID</th>
                     <th>Data</th>
                     <th>Horario</th>
                     <th>Nome donatario</th>
@@ -40,31 +39,18 @@
             <tbody>
 <%
             while(resultSet.next()) {
-                int id = resultSet.getInt("id");
                 String data = resultSet.getString("data");
                 String horario = resultSet.getString("horario");
-                int idDonatario = resultSet.getInt("id_donatario");
-
-                sql = "SELECT * FROM `donatarios` WHERE `id` = ?";
-                PreparedStatement stmt = connection.prepareStatement(sql);
-
-                stmt.setInt(1, idDonatario);
-                ResultSet resultSet2 = stmt.executeQuery();
-
-                if (resultSet2.next()) {
-                    String nome = resultSet2.getString("nome");
-                    String email = resultSet2.getString("email");
+                String nome = resultSet.getString("nome");
+                String email = resultSet.getString("email");                
 %>
                 <tr>
-                    <td><%=id%></td>
                     <td><%=data%></td>
                     <td><%=horario%></td>
                     <td><%=nome%></td>
                     <td><%=email%></td>
                 </tr>
 <% 
-                }
-                resultSet2.close();
             }
             resultSet.close();
         }
