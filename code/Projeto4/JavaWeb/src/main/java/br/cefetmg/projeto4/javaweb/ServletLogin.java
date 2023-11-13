@@ -1,6 +1,7 @@
 package br.cefetmg.projeto4.javaweb;
 
 
+import br.cefetmg.projeto4.dao.VerificarTipoUsuarioDAO;
 import br.cefetmg.projeto4.dao.mysql.MySqlConnection;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -56,44 +57,15 @@ public class ServletLogin extends HttpServlet {
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            MySqlConnection bancoDeDados = new MySqlConnection();
-            Connection conexao = bancoDeDados.getConexao();
             String salvando = "nao salvo";
             String email = request.getParameter("login");
             String senha = request.getParameter("senha");
-            Cookie[] cookieTipoLogin = request.getCookies();
-            for (Cookie cookie : cookieTipoLogin) {
-                if (cookie.getName().equals("tipoDeLogin")) {
-                    if(cookie.getValue().equals("doadorFisica") || cookie.getValue().equals("doadorJuridica") )
-                        response.sendRedirect("cadastroDoacao.jsp");
-                    if(cookie.equals("estagiarios") || cookie.equals("professores"))
-                        response.sendRedirect("MostrarDoacoes");
-
-                }
-            }
-
-            String[] tabelas = {"doadorJuridica", "doadorFisica", "professores", "donatarios", "estagiarios"};
-            for(int i = 0; i < tabelas.length; ++i)
-                if(verificarTabela(conexao, tabelas[i], email, senha))
-                {
-                    out.println("<p> logado com sussesso como:" + tabelas[i]);
-                    salvando = tabelas[i];
-                    break;
-                }
-            if(salvando != null)
-            {
-                Cookie cookie = new Cookie("tipoDeLogin", salvando);
-                cookie.setMaxAge(24 * 60 * 60);
-                response.addCookie(cookie);
-                if(salvando.equals("doadorFisica") || salvando.equals("doadorJuridica"))
-                   response.sendRedirect("cadastroDoacao.jsp");
-                if(salvando.equals("estagiarios") || salvando.equals("professores"))
-                    response.sendRedirect("MostrarDoacoes");
-            }
+            VerificarTipoUsuarioDAO verificar = new VerificarTipoUsuarioDAO();
+            salvando = verificar.getTipoUsuario(email, senha);
+            if(salvando.equals("doadorFisica") || salvando.equals("doadorJuridica"))
+                response.sendRedirect("cadastroDoacao.jsp");
+            if(salvando.equals("estagiarios") || salvando.equals("professores"))
+                response.sendRedirect("MostrarDoacoes");
         }
-        catch (SQLException e) {
-                // Handle any SQL exceptions, e.g., log or display an error message
-                out.println("<p>Error: " + e.getMessage() + "</p>");
-            }
     }
 }
