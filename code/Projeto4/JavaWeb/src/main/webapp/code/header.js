@@ -22,7 +22,10 @@ const icons = {
 const menu = {
     SRC: 'img/hamburger.png',
     ALT: 'Menu',
-    EL: newNav('menu'),
+    DROPDOWN: {
+        PARENT: newNav(null, 'menu'),
+        EL: newNav('menu')
+    },
     HIDDEN: true
 };
 const AltType = {
@@ -89,17 +92,16 @@ function newLi(text, href, ...classNames) {
 function newMenu() {
     const img = newImg(menu.SRC, menu.ALT, 'menu');
     const figure = newEl('figure');
-    const nav = newNav(null, 'menu');
 
     figure.appendChild(img);
-    nav.appendChild(figure);
-    nav.appendChild(menu.EL);
+    menu.DROPDOWN.PARENT.appendChild(figure);
+    menu.DROPDOWN.PARENT.appendChild(menu.DROPDOWN.EL);
 
     loadMenu();
 
     figure.addEventListener('click', toggleMenu);
 
-    return nav;
+    return menu.DROPDOWN.PARENT;
 }
 
 function newPopulatedNav(id, startIndex, endIndex, altType = AltType.ALT, ...classNames) {
@@ -146,14 +148,14 @@ function toggleMenu() {
 }
 
 function hideMenu() {
-    menu.EL.classList.add('hidden');
-    setTimeout(() => menu.EL.style.display = 'none', 300);
+    menu.DROPDOWN.EL.classList.add('hidden');
+    setTimeout(() => menu.DROPDOWN.EL.style.display = 'none', 300);
     menu.HIDDEN = true;
 }
 
 function showMenu() {
-    menu.EL.style.display = 'block';
-    setTimeout(() => menu.EL.classList.remove('hidden'), 1);
+    menu.DROPDOWN.EL.style.display = 'block';
+    setTimeout(() => menu.DROPDOWN.EL.classList.remove('hidden'), 1);
     menu.HIDDEN = false;
 }
 
@@ -175,7 +177,7 @@ function loadMenu() {
     for (const li of lis)
         ul.appendChild(li);
 
-    menu.EL.appendChild(ul);
+    menu.DROPDOWN.EL.appendChild(ul);
 }
 
 function loadHeader() {
@@ -195,3 +197,10 @@ function loadHeader() {
 }
 
 document.addEventListener('DOMContentLoaded', loadHeader);
+document.addEventListener('click', e => {
+    if (menu.HIDDEN)
+        return;
+
+    if (!menu.DROPDOWN.PARENT.contains(e.target))
+        hideMenu();
+});
