@@ -22,7 +22,14 @@ public class ComputadorDTO {
         this.marca = "Desconhecida";
         this.doador = null;
     }
+    
     // Métodos "get" para obter os valores dos campos
+
+    public ComputadorDTO(String dataDeChegada, String marca, int quantidadeDeRAM) {
+        this.dataDeChegada = dataDeChegada;
+        this.marca = marca;
+        this.quantidadeDeRAM = quantidadeDeRAM;
+    }
     
 
     public String getDataDeChegada() {

@@ -23,28 +23,42 @@ public class SolicitacaoReparoServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try (PrintWriter out = response.getWriter()) {
+            out.println("<p>inserido</p>");
 
             String estado = request.getParameter("problema");
             String especificacoes = request.getParameter("especificacoes");
             ComputadorDTO computador = new ComputadorDTO();
-            String dataDeDoacao = "algo";
+            String dataDeDoacao = "2023-11-14";
             SolicitacaoReparoDTO manutencao = new SolicitacaoReparoDTO();
+            out.println("<p>"+ estado + "</p>");
+            out.println("<p>"+ especificacoes + "</p>");
 
-            if (estado.equals("Mal funcionamento")) {
-                manutencao.setManutencao(EstadoManutencao.MAL_FUNCIONAMENTO);
-            } else if (estado.equals("Peças faltando")) {
-                manutencao.setManutencao(EstadoManutencao.FALTANDO_PECAS);
-            } else if (estado.equals("Outro")) {
-                manutencao.setManutencao(EstadoManutencao.OUTRO);
+
+            switch (estado) {
+                case "mal_funcionamento":
+                    manutencao.setManutencao(EstadoManutencao.MAL_FUNCIONAMENTO);
+                    break;
+                case "pecas_faltando":
+                    manutencao.setManutencao(EstadoManutencao.FALTANDO_PECAS);
+                    break;
+                case "outro":
+                    manutencao.setManutencao(EstadoManutencao.OUTRO);
+                    break;
+                default:
+                    break;
             }
 
             SolicitacaoReparoDTO reparo = new SolicitacaoReparoDTO(computador, dataDeDoacao, especificacoes);
 
             try {
                 SolicitacaoReparoDAO reparoDAO = new SolicitacaoReparoDAO();
-
+                out.print(reparo.getDataDeDoacao());
                 if (reparoDAO.inserir(reparo)) {
                     out.println("<p>inserido</p>");
+                }
+                else {
+                    out.println("<p>erro</p>");
+
                 }
 
             } catch (SQLException e) {
