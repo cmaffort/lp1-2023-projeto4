@@ -47,20 +47,21 @@ public class DoadorJuridicoDAO implements IDoadorJuridicoDAO {
                     throw new SQLException("Failed to get the last inserted ID from usuarios.");
             }
     
-            PreparedStatement stmt2 = conexao.prepareStatement("INSERT INTO doadoresJuridicos (id_cadastro, computadores_doados) VALUES (?, ?)", Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement stmt2 = conexao.prepareStatement("INSERT INTO doadores (id_cadastro, computadores_doados, tipo) VALUES (?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
             
             stmt2.setInt(1, lastId);
             stmt2.setInt(2, doadorJuridico.getComputadoresDoados());
+            stmt2.setString(3, doadorJuridico.getTipoDoador());
             rowsAffected = stmt2.executeUpdate();
 
             if (rowsAffected <= 0) 
-                throw new SQLException("Insertion into doadoresJuridicos failed");
+                throw new SQLException("Insertion into doadores failed");
 
             try (ResultSet resultSet = stmt2.getGeneratedKeys()) {
                 if (resultSet.next()) 
                     lastId = resultSet.getInt(1);
                 else 
-                    throw new SQLException("Failed to get the last inserted ID from usuarios.");
+                    throw new SQLException("Failed to get the last inserted ID from doadores.");
             }
 
             PreparedStatement stmt3 = conexao.prepareStatement("INSERT INTO doadoresJuridicos (id_doador, endereco) VALUES (?, ?)");
