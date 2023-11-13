@@ -5,7 +5,7 @@
 package br.cefetmg.projeto4.javaweb;
 
 import br.cefetmg.projeto4.dao.PecasDAO;
-import br.cefetmg.projeto4.dto.Pecas;
+import br.cefetmg.projeto4.dto.PecasDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -48,7 +48,7 @@ public class PecaFaltanteServlet extends HttpServlet {
             String nome = request.getParameter("nome");
             String marca = request.getParameter("marca");
             String codigo = request.getParameter("codigo");
-            Pecas peca = new Pecas(quantidade, codigo, nome, marca);
+            PecasDTO peca = new PecasDTO(quantidade, codigo, nome, marca);
             PecasDAO pecasDAO = new PecasDAO();
             pecasDAO.inserirPecaFaltante(peca);
             out.println("<body>");

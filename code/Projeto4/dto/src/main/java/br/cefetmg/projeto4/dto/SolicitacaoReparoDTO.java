@@ -1,19 +1,19 @@
 package br.cefetmg.projeto4.dto;
 
-public class SolicitacaoReparo {
+public class SolicitacaoReparoDTO {
     
-    private Computador computador;
+    private ComputadorDTO computador;
     private String dataDeDoacao;
     private String especificacoes;
     private EstadoManutencao manutencao;
     
-    public SolicitacaoReparo (Computador computador, String dataDeDoacao, String especificacoes) {
+    public SolicitacaoReparoDTO (ComputadorDTO computador, String dataDeDoacao, String especificacoes) {
         this.computador = computador ;
         this.dataDeDoacao = dataDeDoacao ;
         this.especificacoes = especificacoes;
     }
     
-    public SolicitacaoReparo () {}
+    public SolicitacaoReparoDTO () {}
     
     public enum EstadoManutencao {
  
@@ -34,11 +34,11 @@ public class SolicitacaoReparo {
    } 
     
     
-    public Computador getComputador () {
+    public ComputadorDTO getComputador () {
         return computador;
     } 
     
-    public void setComputador (Computador computador) {
+    public void setComputador (ComputadorDTO computador) {
         this.computador = computador;
     }
     

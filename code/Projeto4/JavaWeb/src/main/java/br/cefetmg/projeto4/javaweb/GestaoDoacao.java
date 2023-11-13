@@ -2,8 +2,8 @@ package br.cefetmg.projeto4.javaweb;
 
 import br.cefetmg.projeto4.dao.DoacaoDAO;
 import br.cefetmg.projeto4.dao.DonatarioDAO;
-import br.cefetmg.projeto4.dto.Doacao;
-import br.cefetmg.projeto4.dto.Donatario;
+import br.cefetmg.projeto4.dto.DoacaoDTO;
+import br.cefetmg.projeto4.dto.DonatarioDTO;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -26,7 +26,7 @@ public class GestaoDoacao extends HttpServlet {
         // Configuração da conexão com o banco de dados (substitua pelos seus próprios dados)
         try {
             DoacaoDAO doacaoDAO = new DoacaoDAO();
-            List<Doacao> doacoes = doacaoDAO.listar();
+            List<DoacaoDTO> doacoes = doacaoDAO.listar();
 
             // Configurar a resposta HTTP com um tipo de conteúdo HTML
             response.setContentType("text/html");
@@ -48,19 +48,19 @@ public class GestaoDoacao extends HttpServlet {
             out.println("</thead><tbody>");
 
             // Iterar sobre os resultados e exibi-los na tabela HTML
-            for (Doacao doacao : doacoes) {
+            for (DoacaoDTO doacao : doacoes) {
                 out.println("<tr><td>" + doacao.getQuantidade()+ "</td><td>" + doacao.getMarcaComputador() + "</td><td>" + doacao.getQuantidadeDeRAM() + "</td><td>" + doacao.getDoador() + "</td><td>" + doacao.getDataDeChegada());
             }
 
             out.println("</tbody></table></section>");
             DonatarioDAO donatarioDAO = new DonatarioDAO();
-            List<Donatario> donatarios = donatarioDAO.listar();
+            List<DonatarioDTO> donatarios = donatarioDAO.listar();
             out.println("<section><table>");
             out.println("<caption>Fila de Espera</caption>");
             out.println("<thead>");
             out.println("<tr><th>Posição</th><th>Nome</th><th>Email</th></tr>");
             out.println("</thead><tbody>");
-            for (Donatario donatario : donatarios) {
+            for (DonatarioDTO donatario : donatarios) {
                 out.println("<tr><td>" + donatario.getPosicao() + "</td><td>" + donatario.getNome() + "</td><td>"+ donatario.getEmail()+ "</td></tr>");
             }
 

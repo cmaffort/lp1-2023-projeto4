@@ -1,13 +1,13 @@
 package br.cefetmg.projeto4.idao;
 
-import br.cefetmg.projeto4.dto.Doacao;
+import br.cefetmg.projeto4.dto.DoacaoDTO;
 import java.sql.SQLException;
 import java.util.List;
 
 public interface IDoacaoDAO {
-    boolean inserir(Doacao doacao) throws SQLException, ClassNotFoundException;
-    boolean alterar(Doacao doacao) throws SQLException, ClassNotFoundException;
-    boolean remover(Doacao doacao) throws SQLException, ClassNotFoundException;
-    List<Doacao> listar() throws SQLException, ClassNotFoundException;    
+    boolean inserir(DoacaoDTO doacao) throws SQLException, ClassNotFoundException;
+    boolean alterar(DoacaoDTO doacao) throws SQLException, ClassNotFoundException;
+    boolean remover(DoacaoDTO doacao) throws SQLException, ClassNotFoundException;
+    List<DoacaoDTO> listar() throws SQLException, ClassNotFoundException;    
 
 }

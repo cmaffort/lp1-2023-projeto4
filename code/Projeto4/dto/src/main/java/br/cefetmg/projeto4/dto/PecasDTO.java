@@ -1,7 +1,7 @@
 package br.cefetmg.projeto4.dto;
 
 
-public class Pecas {
+public class PecasDTO {
    
     private int quantidade;
     private String codigo;
@@ -9,7 +9,7 @@ public class Pecas {
     private String descricao;
     private String marca;
 
-    public Pecas(int quantidade, String codigo, String nome, String marca) {
+    public PecasDTO(int quantidade, String codigo, String nome, String marca) {
         this.quantidade = quantidade;
         this.codigo = codigo;
         this.nome = nome;

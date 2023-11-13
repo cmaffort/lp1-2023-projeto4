@@ -8,8 +8,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import br.cefetmg.projeto4.dto.Computador;
-import br.cefetmg.projeto4.dto.Doacao;
+import br.cefetmg.projeto4.dto.ComputadorDTO;
+import br.cefetmg.projeto4.dto.DoacaoDTO;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,7 +27,6 @@ public class CadastrarDoacaoServlet extends HttpServlet {
             String marca = request.getParameter("marca");
             String quantidadeRam = request.getParameter("quantidadeRAM");
             String data = request.getParameter("data");
-            String estado = request.getParameter("status");
             int quantidadeRAM = 0;
             int quantidade = 0;
             
@@ -45,8 +44,8 @@ public class CadastrarDoacaoServlet extends HttpServlet {
                 ex.printStackTrace();
             }
 
-            Computador computador = new Computador(null, data, null, marca, modelo, quantidadeRAM);
-            Doacao doacao = new Doacao(quantidade, computador);
+            ComputadorDTO computador = new ComputadorDTO(null, data, null, marca, modelo, quantidadeRAM);
+            DoacaoDTO doacao = new DoacaoDTO(quantidade, computador);
                         try {
                 DoacaoDAO doacaoDAO = new DoacaoDAO();
                 try {

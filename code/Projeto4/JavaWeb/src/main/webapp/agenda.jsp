@@ -1,6 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="java.sql.*"%>
-<%@page import="br.cefetmg.projeto4.dao.mysql.MySqlConnection"%>
+<%@page import="java.util.List"%>
+<%@page import="br.cefetmg.projeto4.dao.AgendamentoDAO"%>
+<%@page import="br.cefetmg.projeto4.dto.AgendamentoComUsuarioDTO"%>
 
 <!DOCTYPE html>
 <html>
@@ -19,18 +20,13 @@
     <main>
 <%
     try {
-        MySqlConnection mySqlConnection = new MySqlConnection();
-
-        try (Connection connection = mySqlConnection.getConexao()) {
-            String sql = "SELECT * FROM `agendamentos`";
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(sql);
+        AgendamentoDAO agendamentoDAO = new AgendamentoDAO();
+        List<AgendamentoComUsuarioDTO> agendamentos = agendamentoDAO.listar();
 %>
         <table>
             <caption>Doações Agendadas</caption>
             <thead>
                 <tr>
-                    <th>ID</th>
                     <th>Data</th>
                     <th>Horario</th>
                     <th>Nome donatario</th>
@@ -39,34 +35,15 @@
             </thead>
             <tbody>
 <%
-            while(resultSet.next()) {
-                int id = resultSet.getInt("id");
-                String data = resultSet.getString("data");
-                String horario = resultSet.getString("horario");
-                int idDonatario = resultSet.getInt("id_donatario");
-
-                sql = "SELECT * FROM `donatarios` WHERE `id` = ?";
-                PreparedStatement stmt = connection.prepareStatement(sql);
-
-                stmt.setInt(1, idDonatario);
-                ResultSet resultSet2 = stmt.executeQuery();
-
-                if (resultSet2.next()) {
-                    String nome = resultSet2.getString("nome");
-                    String email = resultSet2.getString("email");
+        for (AgendamentoComUsuarioDTO agendamento : agendamentos) {                 
 %>
                 <tr>
-                    <td><%=id%></td>
-                    <td><%=data%></td>
-                    <td><%=horario%></td>
-                    <td><%=nome%></td>
-                    <td><%=email%></td>
+                    <td><%=agendamento.getData()%></td>
+                    <td><%=agendamento.getHorario()%></td>
+                    <td><%=agendamento.getNome()%></td>
+                    <td><%=agendamento.getEmail()%></td>
                 </tr>
 <% 
-                }
-                resultSet2.close();
-            }
-            resultSet.close();
         }
 %>
             </tbody>

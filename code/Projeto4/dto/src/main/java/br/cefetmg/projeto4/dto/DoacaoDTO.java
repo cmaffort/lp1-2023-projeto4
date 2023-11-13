@@ -1,9 +1,9 @@
 package br.cefetmg.projeto4.dto;
 
-public class Doacao {
+public class DoacaoDTO {
    
     private int quantidade;
-    private Computador computador;
+    private ComputadorDTO computador;
     private String dataDeChegada;
     private String donatario;
     private String marca;
@@ -11,16 +11,16 @@ public class Doacao {
     private int quantidadeDeRAM;
     private String doador;
 
-    public Doacao(int quantidade, Computador computador) {
+    public DoacaoDTO(int quantidade, ComputadorDTO computador) {
         this.quantidade = quantidade;
         this.computador = computador;
     }
-    public Doacao(String marca, int quantidadeDeRAM) {
+    public DoacaoDTO(String marca, int quantidadeDeRAM) {
         this.marca = marca;
         this.quantidadeDeRAM = quantidadeDeRAM;
     }
 
-    public Doacao(String doador, String dataDeChegada, String donatario, String marca, String modeloProcessador, int quantidadeDeRAM) {
+    public DoacaoDTO(String doador, String dataDeChegada, String donatario, String marca, String modeloProcessador, int quantidadeDeRAM) {
     
     this.dataDeChegada = dataDeChegada;
     this.donatario = donatario; 
@@ -30,7 +30,7 @@ public class Doacao {
     this.doador = doador;
     }        
 
-    public Computador getComputador() {
+    public ComputadorDTO getComputador() {
         return computador;
     }
 
@@ -70,7 +70,7 @@ public class Doacao {
         return computador.getMarca();
     }
 
-    public void setComputador(Computador computador) {
+    public void setComputador(ComputadorDTO computador) {
         this.computador = computador;
     }
     

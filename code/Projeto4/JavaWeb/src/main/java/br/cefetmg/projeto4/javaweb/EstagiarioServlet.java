@@ -1,5 +1,5 @@
 package br.cefetmg.projeto4.javaweb;
-import br.cefetmg.projeto4.dto.Estagiario;
+import br.cefetmg.projeto4.dto.EstagiarioDTO;
 import br.cefetmg.projeto4.dao.EstagiarioDAO;
 
 import java.io.IOException;
@@ -28,7 +28,7 @@ public class EstagiarioServlet extends HttpServlet {
             String cpf = request.getParameter("cpf");
             String senha = request.getParameter("senha");
             String confirmarSenha = request.getParameter("confirmarSenha");
-            Estagiario estagiario = new Estagiario(nome, cpf, email,  "21", "1", "1", "10", "1", "1", senha);
+            EstagiarioDTO estagiario = new EstagiarioDTO(nome, cpf, email, senha, "21/1/1", "10/1/1");
             try {
             EstagiarioDAO estagiarioDAO = new EstagiarioDAO();
             if(estagiarioDAO.inserir(estagiario))

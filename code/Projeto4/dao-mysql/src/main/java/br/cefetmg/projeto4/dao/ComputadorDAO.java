@@ -2,7 +2,7 @@ package br.cefetmg.projeto4.dao;
 import br.cefetmg.projeto4.dao.mysql.MySqlConnection;
 import br.cefetmg.projeto4.idao.IComputadorDAO;
 import java.sql.SQLException;
-import br.cefetmg.projeto4.dto.Computador;
+import br.cefetmg.projeto4.dto.ComputadorDTO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,7 +19,7 @@ public class ComputadorDAO implements IComputadorDAO {
     }
 
     @Override
-    public boolean inserir(Computador computador) throws SQLException, ClassNotFoundException {
+    public boolean inserir(ComputadorDTO computador) throws SQLException, ClassNotFoundException {
         try {
             PreparedStatement statement = conexao.prepareStatement("INSERT INTO computadores (codigo, doador, dataDeChegada, donatario, marca, modeloProcessador, quantidadeDeRAM) VALUES (?, ?, ?, ?, ?, ?, ?)");       
             String doador = computador.getDoador();
@@ -52,12 +52,12 @@ public class ComputadorDAO implements IComputadorDAO {
     }
 
     @Override
-    public boolean alterar(Computador computador) throws SQLException, ClassNotFoundException {
+    public boolean alterar(ComputadorDTO computador) throws SQLException, ClassNotFoundException {
         return false;
     }
 
     @Override
-    public boolean remover(Computador computador) throws SQLException, ClassNotFoundException {
+    public boolean remover(ComputadorDTO computador) throws SQLException, ClassNotFoundException {
     try {
             PreparedStatement statement = conexao.prepareStatement("DELETE FROM computadores WHERE codigo = ?");
 
@@ -78,15 +78,14 @@ public class ComputadorDAO implements IComputadorDAO {
     }
 
     @Override
-    public List<Computador> listar() throws SQLException, ClassNotFoundException {
-    List<Computador> computadores = new ArrayList<>();
+    public List<ComputadorDTO> listar() throws SQLException, ClassNotFoundException {
+    List<ComputadorDTO> computadores = new ArrayList<>();
 
     try {
         PreparedStatement statement = conexao.prepareStatement("SELECT * FROM computadores");
         ResultSet resultSet = statement.executeQuery();
 
         while (resultSet.next()) {
-            String codigo = resultSet.getString("codigo");
             String doador = resultSet.getString("doador");
             String dataDeChegada = resultSet.getString("dataDeChegada");
             String donatario = resultSet.getString("donatario");
@@ -94,7 +93,7 @@ public class ComputadorDAO implements IComputadorDAO {
             String modeloProcessador = resultSet.getString("modeloProcessador");
             int quantidadeDeRAM = resultSet.getInt("quantidadeDeRAM");
 
-            Computador computador = new Computador(doador, dataDeChegada, donatario, marca, modeloProcessador, quantidadeDeRAM);
+            ComputadorDTO computador = new ComputadorDTO(doador, dataDeChegada, donatario, marca, modeloProcessador, quantidadeDeRAM);
             computadores.add(computador);
         }
 

@@ -10,7 +10,7 @@ header {
     align-content: center;
 }
 
-nav {
+nav, header section {
     box-sizing: border-box;
     height: 100%;
     display: flex;
@@ -26,7 +26,7 @@ nav figure {
     justify-content: center;
 }
 
-#home img {
+#home img, .menu img {
     height: 100%;
 }
 
@@ -36,7 +36,49 @@ nav figure {
     padding: 0 0.694vw;
 }
 
-#pages figure img:not(:only-child) {
+#pages img {
     width: 2.083vw;
     align-self: center;
+}
+
+.hidden {
+    opacity: 0;
+}
+
+#menu {
+    color: #d9dcdde3;
+    border-radius: 5px;
+    border: 1px #d9dcdde3 solid;
+    background-color: #10446c;
+    position: absolute;
+    right: 0;
+    top: 8vh;
+    height: fit-content;
+    transition: opacity .19s ease-in-out;
+}
+
+#menu ul {
+    padding: 2px;
+}
+
+#menu li {
+    list-style: none;
+    padding: 2.5px 8px 2.5px;
+    border-radius: 5px;
+}
+
+#menu li:first-child {
+    padding-top: 3px;
+}
+
+#menu li:last-child {
+    padding-bottom: 3px;
+}
+
+#menu li:hover {
+    background-color: rgba(255, 255, 255, 0.089);
+}
+
+.danger {
+    color: rgb(221, 4, 4);
 }
