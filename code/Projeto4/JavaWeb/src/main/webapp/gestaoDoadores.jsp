@@ -3,6 +3,8 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="style/header.css">
+        <link rel="stylesheet" href="style/main.css">
         <title>JSP Page</title>
     </head>
     <body>
