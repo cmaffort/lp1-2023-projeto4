@@ -19,7 +19,30 @@ public class DonatarioDAO implements IDonatarioDAO {
         bancoDeDados = new MySqlConnection();
         conexao = bancoDeDados.getConexao(); // Abre a conexão com o banco de dados
     }
+    public int getPosicaoFila(String login, String senha) throws SQLException
+    {
+        
+        try {
+            String query = "SELECT posicao FROM usuarios WHERE email = ? AND senha = ?";
+            conexao.setAutoCommit(false);
+            PreparedStatement stmt1 = conexao.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            stmt1.setString(1, login);
+            stmt1.setString(2, senha);
+            ResultSet rs = stmt1.executeQuery();
+            if (rs.next()) {
+                int posicao = rs.getInt("posicao");
+                return posicao;
+            } else {
+                return -1; // Valor de retorno para credenciais inválidas
+            }
 
+        }catch (SQLException e) {
+            conexao.rollback();
+    
+            System.out.println("Erro: " + e.getMessage());
+            return -1;
+        } 
+    }
     @Override
     public boolean inserir(DonatarioDTO donatario) throws SQLException, ClassNotFoundException {
         try {

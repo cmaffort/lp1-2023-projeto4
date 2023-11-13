@@ -46,9 +46,14 @@ public class SolicitacaoReparoDTO {
         return dataDeDoacao;
     }
 
-    public void setDataDeDoacao () {
+    public void setDataDeDoacao(String dataDeDoacao) {
         this.dataDeDoacao = dataDeDoacao;
     }
+
+    public void setEspecificacoes(String especificacoes) {
+        this.especificacoes = especificacoes;
+    }
+
     
     public String getEspecificacoes () {
         return especificacoes;
