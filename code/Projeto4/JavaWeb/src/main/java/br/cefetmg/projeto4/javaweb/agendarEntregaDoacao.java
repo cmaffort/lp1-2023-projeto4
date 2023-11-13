@@ -1,7 +1,7 @@
 package br.cefetmg.projeto4.javaweb;
 
 import br.cefetmg.projeto4.dao.AgendamentoDAO;
-import br.cefetmg.projeto4.dto.Agendamento;
+import br.cefetmg.projeto4.dto.AgendamentoDTO;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -30,7 +30,7 @@ public class agendarEntregaDoacao extends HttpServlet {
             String hora = request.getParameter("horaRetirada");
             int idDonatario = 1;
 
-            Agendamento agendamento = new Agendamento(data, hora, idDonatario);
+            AgendamentoDTO agendamento = new AgendamentoDTO(data, hora, idDonatario);
 
             try {
                 AgendamentoDAO agendamentoDAO = new AgendamentoDAO();

@@ -1,9 +1,8 @@
 package br.cefetmg.projeto4.dao;
 
 import br.cefetmg.projeto4.dao.mysql.MySqlConnection;
-import br.cefetmg.projeto4.dto.Computador;
-import br.cefetmg.projeto4.dto.Doacao;
-import br.cefetmg.projeto4.dto.DoadorFisica;
+import br.cefetmg.projeto4.dto.ComputadorDTO;
+import br.cefetmg.projeto4.dto.DoacaoDTO;
 import java.sql.Connection;
 import java.sql.SQLException;
 import br.cefetmg.projeto4.idao.IDoacaoDAO;
@@ -21,7 +20,7 @@ public class DoacaoDAO implements IDoacaoDAO {
     }
 
     @Override
-    public boolean inserir(Doacao doacao) throws SQLException, ClassNotFoundException {
+    public boolean inserir(DoacaoDTO doacao) throws SQLException, ClassNotFoundException {
         try {
 
         PreparedStatement statement = conexao.prepareStatement("INSERT INTO doacao (quantidade, computador) VALUES (?, ?)");
@@ -45,18 +44,18 @@ public class DoacaoDAO implements IDoacaoDAO {
     }
 
     @Override
-    public boolean alterar(Doacao doacao) throws SQLException, ClassNotFoundException {
+    public boolean alterar(DoacaoDTO doacao) throws SQLException, ClassNotFoundException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public boolean remover(Doacao doacao) throws SQLException, ClassNotFoundException {
+    public boolean remover(DoacaoDTO doacao) throws SQLException, ClassNotFoundException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public List<Doacao> listar() throws SQLException, ClassNotFoundException {
-    List<Doacao> doacoes = new ArrayList<>();
+    public List<DoacaoDTO> listar() throws SQLException, ClassNotFoundException {
+    List<DoacaoDTO> doacoes = new ArrayList<>();
 
     try {
         PreparedStatement statement = conexao.prepareStatement("SELECT * FROM doacao");
@@ -68,8 +67,8 @@ public class DoacaoDAO implements IDoacaoDAO {
             String doador = resultSet.getString("doador");
             String data = resultSet.getString("data");
             int ram = resultSet.getInt("quantidade_ram");
-            Computador computador = new Computador(doador,data,"", nome,"", ram);
-            Doacao doacao = new Doacao(quantidade, computador);
+            ComputadorDTO computador = new ComputadorDTO(doador,data,"", nome,"", ram);
+            DoacaoDTO doacao = new DoacaoDTO(quantidade, computador);
             doacoes.add(doacao);
         }
 
