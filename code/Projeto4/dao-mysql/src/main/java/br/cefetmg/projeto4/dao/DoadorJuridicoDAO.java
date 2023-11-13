@@ -167,7 +167,7 @@ public class DoadorJuridicoDAO implements IDoadorJuridicoDAO {
    List<DoadorJuridicoDTO> doadoresJuridicos = new ArrayList<>();
 
     try {
-        PreparedStatement statement = conexao.prepareStatement("SELECT doadoresJuridicos.*, doadores.*, usuarios.* FROM doadoresJuridicos JOIN doadores ON doadoresJuridicos.id_doadores = doadores.id JOIN usuarios ON doadores.id_cadastro = usuarios.id;");
+        PreparedStatement statement = conexao.prepareStatement("SELECT doadoresJuridicos.*, doadores.*, usuarios.* FROM doadoresJuridicos JOIN doadores ON doadoresJuridicos.id_doador = doadores.id JOIN usuarios ON doadores.id_cadastro = usuarios.id;");
         ResultSet resultSet = statement.executeQuery();
 
         while (resultSet.next()) {

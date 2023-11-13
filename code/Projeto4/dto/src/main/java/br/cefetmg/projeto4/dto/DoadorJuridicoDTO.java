@@ -2,7 +2,8 @@ package br.cefetmg.projeto4.dto;
 
 public class DoadorJuridicoDTO extends DoadorDTO {
     private String endereco;
-
+    private String CNPJ;
+    
     public DoadorJuridicoDTO(String nome, String CNPJ,  String email, String senha, String endereco) {
         this(nome, CNPJ, email, senha, 0, endereco);
     } 
@@ -18,5 +19,13 @@ public class DoadorJuridicoDTO extends DoadorDTO {
 
     public void setEndereco(String endereco) {
         this.endereco = endereco;
+    }
+    
+    public String getCNPJ () {
+        return CNPJ;
+    }
+
+    public void setCNPJ () {
+        this.CNPJ = CNPJ;
     }
 }

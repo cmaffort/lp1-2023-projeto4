@@ -1,0 +1,14 @@
+main {
+    flex-direction: row;
+    align-items: normal;
+}
+
+main section {
+    padding-bottom: 5.6vh;
+    width: 50%;
+}
+
+table {
+    margin: auto;
+}
+
