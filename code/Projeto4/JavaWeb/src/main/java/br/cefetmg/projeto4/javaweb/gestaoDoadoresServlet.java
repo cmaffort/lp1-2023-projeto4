@@ -1,8 +1,8 @@
 package br.cefetmg.projeto4.javaweb;
 
-import br.cefetmg.projeto4.dto.DoadorFisica;
-import br.cefetmg.projeto4.dto.DoadorJuridica;
-import br.cefetmg.projeto4.dao.DoadorFisicaDAO;
+import br.cefetmg.projeto4.dto.DoadorDTO;
+import br.cefetmg.projeto4.dto.DoadorJuridicoDTO;
+import br.cefetmg.projeto4.dao.DoadorDAO;
 import br.cefetmg.projeto4.dao.DoadorJuridicoDAO;
 
 import java.io.IOException;
@@ -27,10 +27,10 @@ public class gestaoDoadoresServlet extends HttpServlet {
             throws ServletException, IOException {
  
         try {
-            DoadorFisicaDAO doadorFisicaDAO = new DoadorFisicaDAO();
-            List<DoadorFisica> doadoresFisicos = doadorFisicaDAO.listar();
+            DoadorDAO doadorFisicaDAO = new DoadorDAO();
+            List<DoadorDTO> doadoresFisicos = doadorFisicaDAO.listar();
             DoadorJuridicoDAO doadorJuridicoDAO = new DoadorJuridicoDAO();
-            List<DoadorJuridica> doadoresjuridicos = doadorJuridicoDAO.listar();
+            List<DoadorJuridicoDTO> doadoresjuridicos = doadorJuridicoDAO.listar();
             
         }
         catch (SQLException ex) {

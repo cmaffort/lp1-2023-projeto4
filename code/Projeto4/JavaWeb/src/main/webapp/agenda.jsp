@@ -1,6 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="java.sql.*"%>
-<%@page import="br.cefetmg.projeto4.dao.mysql.MySqlConnection"%>
+<%@page import="java.util.List"%>
+<%@page import="br.cefetmg.projeto4.dao.AgendamentoDAO"%>
+<%@page import="br.cefetmg.projeto4.dto.AgendamentoComUsuarioDTO"%>
 
 <!DOCTYPE html>
 <html>
@@ -19,12 +20,8 @@
     <main>
 <%
     try {
-        MySqlConnection mySqlConnection = new MySqlConnection();
-
-        try (Connection connection = mySqlConnection.getConexao()) {
-            String sql = "SELECT agendamentos.data, agendamentos.horario, usuarios.nome, usuarios.email FROM `agendamentos` JOIN `usuarios` ON agendamentos.id_donatario = usuarios.id;";
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(sql);
+        AgendamentoDAO agendamentoDAO = new AgendamentoDAO();
+        List<AgendamentoComUsuarioDTO> agendamentos = agendamentoDAO.listar();
 %>
         <table>
             <caption>Doações Agendadas</caption>
@@ -38,21 +35,15 @@
             </thead>
             <tbody>
 <%
-            while(resultSet.next()) {
-                String data = resultSet.getString("data");
-                String horario = resultSet.getString("horario");
-                String nome = resultSet.getString("nome");
-                String email = resultSet.getString("email");                
+        for (AgendamentoComUsuarioDTO agendamento : agendamentos) {                 
 %>
                 <tr>
-                    <td><%=data%></td>
-                    <td><%=horario%></td>
-                    <td><%=nome%></td>
-                    <td><%=email%></td>
+                    <td><%=agendamento.getData()%></td>
+                    <td><%=agendamento.getHorario()%></td>
+                    <td><%=agendamento.getNome()%></td>
+                    <td><%=agendamento.getEmail()%></td>
                 </tr>
 <% 
-            }
-            resultSet.close();
         }
 %>
             </tbody>

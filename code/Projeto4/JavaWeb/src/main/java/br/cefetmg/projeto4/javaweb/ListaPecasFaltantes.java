@@ -11,7 +11,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import br.cefetmg.projeto4.dto.Pecas;
+import br.cefetmg.projeto4.dto.PecasDTO;
 import br.cefetmg.projeto4.dao.PecasDAO;
 import java.sql.SQLException;
 import java.util.List;
@@ -33,8 +33,8 @@ public class ListaPecasFaltantes extends HttpServlet {
             out.println("<body>");
             out.println("<h1>Servlet ListaPecasFaltantes at " + request.getContextPath() + "</h1>");
 
-            List<Pecas> pecas = pecasDAO.listar();
-            for(Pecas peca : pecas)
+            List<PecasDTO> pecas = pecasDAO.listar();
+            for(PecasDTO peca : pecas)
             {
                 out.println("<p>" + peca.getCodigo() + " " + peca.getMarca() + peca.getNome() + " " + peca.getQuantidade()+ "</p>");
             }

@@ -1,6 +1,6 @@
 package br.cefetmg.projeto4.dao;
 import br.cefetmg.projeto4.dao.mysql.MySqlConnection;
-import br.cefetmg.projeto4.dto.SolicitacaoReparo;
+import br.cefetmg.projeto4.dto.SolicitacaoReparoDTO;
 import java.sql.Connection;
 import java.sql.SQLException;
 import br.cefetmg.projeto4.idao.ISolicitacaoReparoDAO;
@@ -18,7 +18,7 @@ public class SolicitacaoReparoDAO implements ISolicitacaoReparoDAO {
     }
     
     @Override
-    public boolean inserir(SolicitacaoReparo reparo) throws SQLException, ClassNotFoundException {
+    public boolean inserir(SolicitacaoReparoDTO reparo) throws SQLException, ClassNotFoundException {
         try {
 
         PreparedStatement statement = conexao.prepareStatement("INSERT INTO reparo (dataDeDoacao, especificacoes, donatario, marca, modeloProcessador, quantidadeDeRAM) VALUES (?, ?, ?, ?, ?, ?)");
@@ -45,17 +45,17 @@ public class SolicitacaoReparoDAO implements ISolicitacaoReparoDAO {
     }
 
     @Override
-    public boolean alterar(SolicitacaoReparo reparo) throws SQLException, ClassNotFoundException {
+    public boolean alterar(SolicitacaoReparoDTO reparo) throws SQLException, ClassNotFoundException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public boolean remover(SolicitacaoReparo reparo) throws SQLException, ClassNotFoundException {
+    public boolean remover(SolicitacaoReparoDTO reparo) throws SQLException, ClassNotFoundException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public List<SolicitacaoReparo> listar() throws SQLException, ClassNotFoundException {
+    public List<SolicitacaoReparoDTO> listar() throws SQLException, ClassNotFoundException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     

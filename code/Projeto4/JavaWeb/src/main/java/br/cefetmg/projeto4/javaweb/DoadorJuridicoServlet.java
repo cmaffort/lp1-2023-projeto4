@@ -1,7 +1,5 @@
 package br.cefetmg.projeto4.javaweb;
 
-import br.cefetmg.projeto4.dao.DoadorFisicaDAO;
-import br.cefetmg.projeto4.dao.EstagiarioDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -11,8 +9,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
 import br.cefetmg.projeto4.dao.DoadorJuridicoDAO;
-import br.cefetmg.projeto4.dto.DoadorFisica;
-import br.cefetmg.projeto4.dto.DoadorJuridica;
+import br.cefetmg.projeto4.dto.DoadorJuridicoDTO;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 @WebServlet(name = "DoadorJuridicoServlet", urlPatterns = {"/DoadorJuridicoServlet"})
@@ -32,7 +29,7 @@ public class DoadorJuridicoServlet extends HttpServlet {
             String email = request.getParameter("email");
             String senha = request.getParameter("senha");
             String confirmarSenha = request.getParameter("confimarSenha");
-            DoadorJuridica doadorJuridico = new DoadorJuridica(nome, endereco + " " + bairro + " " + cidade, cnpj, email, senha);
+            DoadorJuridicoDTO doadorJuridico = new DoadorJuridicoDTO(nome, endereco + " " + bairro + " " + cidade, cnpj, email, senha);
             try {
                 DoadorJuridicoDAO doadorJuricoDAO = new DoadorJuridicoDAO();
                 try {

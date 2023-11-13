@@ -4,14 +4,12 @@
  */
 package br.cefetmg.projeto4.dao;
 import br.cefetmg.projeto4.dao.mysql.MySqlConnection;
-import br.cefetmg.projeto4.dto.Agendamento;
-import br.cefetmg.projeto4.dto.Doacao;
+import br.cefetmg.projeto4.dto.DoacaoDTO;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.List;
 /**
  *
  * @author lucas
@@ -27,7 +25,7 @@ public class GestaoDoacaoDAO {
     }
 
 
-        public ArrayList<Doacao> listar() throws SQLException, ClassNotFoundException {
+        public ArrayList<DoacaoDTO> listar() throws SQLException, ClassNotFoundException {
                         try {
             // Create a connection to the database
 
@@ -36,12 +34,12 @@ public class GestaoDoacaoDAO {
 
             // Execute the SQL query and store the result set
             ResultSet resultSet = statement.executeQuery("SELECT * FROM doacao ORDER BY quantidade");
-            ArrayList<Doacao> lista = new ArrayList<Doacao>();            // Iterate through the result set and display the data
+            ArrayList<DoacaoDTO> lista = new ArrayList<DoacaoDTO>();            // Iterate through the result set and display the data
             while (resultSet.next()) {
                 // Replace "column_name" with the actual column names you want to retrieve
                 String column1 = resultSet.getString("quantidade");
                 int column2 = resultSet.getInt("computador");
-                Doacao doacao = new Doacao(column1, column2);
+                DoacaoDTO doacao = new DoacaoDTO(column1, column2);
                 lista.add(doacao);
                 
             }

@@ -1,37 +1,33 @@
 package br.cefetmg.projeto4.dao;
 import br.cefetmg.projeto4.dao.mysql.MySqlConnection;
-import br.cefetmg.projeto4.idao.IDonatarioDAO;
+import br.cefetmg.projeto4.dto.DoadorDTO;
+import br.cefetmg.projeto4.idao.IDoadorDAO;
 import java.sql.*;
-
-import br.cefetmg.projeto4.dto.DonatarioDTO;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author lucas
- */
-public class DonatarioDAO implements IDonatarioDAO {
+public class DoadorDAO implements IDoadorDAO {
     MySqlConnection bancoDeDados;
     Connection conexao;
 
-    public DonatarioDAO() throws SQLException {
+    public DoadorDAO() throws SQLException {
         bancoDeDados = new MySqlConnection();
         conexao = bancoDeDados.getConexao(); // Abre a conexão com o banco de dados
     }
 
     @Override
-    public boolean inserir(DonatarioDTO donatario) throws SQLException, ClassNotFoundException {
+    public boolean inserir(DoadorDTO doador) throws SQLException, ClassNotFoundException {
         try {
             conexao.setAutoCommit(false);
     
-            String cadastroSQL = "INSERT INTO usuarios (nome, codigo, email, senha) VALUES (?, ?, ?, ?)";
+            String cadastroSQL = "INSERT INTO usuarios (nome, codigo, email, senha, tipo) VALUES (?, ?, ?, ?, ?)";
             PreparedStatement stmt1 = conexao.prepareStatement(cadastroSQL, Statement.RETURN_GENERATED_KEYS);
     
-            stmt1.setString(1, donatario.getNome());
-            stmt1.setString(2, donatario.getCodigo());
-            stmt1.setString(3, donatario.getEmail());
-            stmt1.setString(4, donatario.getSenha());
+            stmt1.setString(1, doador.getNome());
+            stmt1.setString(2, doador.getCodigo());
+            stmt1.setString(3, doador.getEmail());
+            stmt1.setString(4, doador.getSenha());
+            stmt1.setString(5, doador.getTipo());
     
             int rowsAffected = stmt1.executeUpdate();
     
@@ -46,16 +42,14 @@ public class DonatarioDAO implements IDonatarioDAO {
                     throw new SQLException("Failed to get the last inserted ID from usuarios.");
             }
     
-            PreparedStatement stmt2 = conexao.prepareStatement("INSERT INTO donatarios (id_cadastro, escola, posicao, serie) VALUES (?, ?, ?, ?)");
+            PreparedStatement stmt2 = conexao.prepareStatement("INSERT INTO doadores (id_cadastro, computadores_doados) VALUES (?, ?)");
             
             stmt2.setInt(1, lastId);
-            stmt2.setString(2, donatario.getEscola());
-            stmt2.setInt(3, donatario.getPosicao());
-            stmt2.setInt(4, donatario.getSerie());
+            stmt2.setInt(2, doador.getComputadoresDoados());
             rowsAffected = stmt2.executeUpdate();
     
             if (rowsAffected <= 0) 
-                throw new SQLException("Insertion into donatarios failed");
+                throw new SQLException("Insertion into doadores failed");
     
             conexao.commit();
 
@@ -70,20 +64,20 @@ public class DonatarioDAO implements IDonatarioDAO {
             System.out.println("Erro: " + e.getMessage());
             return false;
         } 
-    } 
+    }    
 
     @Override
-    public boolean alterar(DonatarioDTO donatario) throws SQLException, ClassNotFoundException {
+    public boolean alterar(DoadorDTO doador) throws SQLException, ClassNotFoundException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public boolean remover(DonatarioDTO donatario) throws SQLException, ClassNotFoundException {
+    public boolean remover(DoadorDTO doador) throws SQLException, ClassNotFoundException {
         try {
             conexao.setAutoCommit(false);
     
             PreparedStatement stmt1 = conexao.prepareStatement("SELECT id FROM usuarios WHERE codigo = ?");
-            stmt1.setString(1, donatario.getCodigo());
+            stmt1.setString(1, doador.getCodigo());
             ResultSet resultSet = stmt1.executeQuery();
     
             int id;
@@ -93,13 +87,13 @@ public class DonatarioDAO implements IDonatarioDAO {
             else 
                 throw new SQLException("Id selection failed");
 
-            PreparedStatement stmt2 = conexao.prepareStatement("DELETE FROM donatarios WHERE id_cadastro = ?");
+            PreparedStatement stmt2 = conexao.prepareStatement("DELETE FROM doadores WHERE id_cadastro = ?");
             stmt2.setInt(1, id);
     
             int rowsAffectedDoador = stmt2.executeUpdate();
     
             if (rowsAffectedDoador <= 0) 
-                throw new SQLException("Deletion from donatarios failed");
+                throw new SQLException("Deletion from doadores failed");
     
             PreparedStatement stmt3 = conexao.prepareStatement("DELETE FROM usuarios WHERE id = ?");
             stmt3.setInt(1, id);
@@ -122,27 +116,24 @@ public class DonatarioDAO implements IDonatarioDAO {
             System.out.println("Erro: " + e.getMessage());
             return false;
         }
-    }
+    }    
 
     @Override
-    public List<DonatarioDTO> listar() throws SQLException, ClassNotFoundException {
-    List<DonatarioDTO> donatarios = new ArrayList<>();
+    public List<DoadorDTO> listar() throws SQLException, ClassNotFoundException {
+    List<DoadorDTO> doadores = new ArrayList<>();
 
     try {
-        PreparedStatement statement = conexao.prepareStatement("SELECT * FROM fila_espera");
+        PreparedStatement statement = conexao.prepareStatement("SELECT doadores.*, usuarios.* FROM doadores JOIN usuarios ON doadores.id_cadastro = usuarios.id;");
         ResultSet resultSet = statement.executeQuery();
 
         while (resultSet.next()) {
-            String nome = resultSet.getString("nome_aluno");
-            String CPF = "";
+            String nome = resultSet.getString("nome");
+            String CPF = resultSet.getString("codigo");
             String email = resultSet.getString("email");
-            String senha = "";
-            String escola = ""; 
-            int posicao = resultSet.getInt("id");
-            int serie = 0;
-
-            DonatarioDTO donatario = new DonatarioDTO(nome, CPF, email, senha, escola, posicao, serie);
-            donatarios.add(donatario);
+            String senha = resultSet.getString("senha");
+            int computadoresDoados = resultSet.getInt("computadores_doados");
+            DoadorDTO doador = new DoadorDTO(nome, CPF, email, senha, computadoresDoados);
+            doadores.add(doador);
         }
 
         resultSet.close();
@@ -151,8 +142,8 @@ public class DonatarioDAO implements IDonatarioDAO {
         System.out.println("Erro: " + e.getMessage());
     }
 
-    return donatarios;
+    return doadores;
 
     }
-     
+   
 }

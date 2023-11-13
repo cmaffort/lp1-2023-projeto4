@@ -3,8 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 package br.cefetmg.projeto4.javaweb;
-import br.cefetmg.projeto4.dao.DoadorFisicaDAO;
-import br.cefetmg.projeto4.dto.DoadorFisica;
+import br.cefetmg.projeto4.dao.DoadorDAO;
+import br.cefetmg.projeto4.dto.DoadorDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -26,9 +26,9 @@ public class DoadorFisicoServlet extends HttpServlet {
             String CPF = request.getParameter("cpf");
             String email = request.getParameter("email");
             String senha = request.getParameter("senha");
-            DoadorFisica doadorFisica = new DoadorFisica(nome, CPF, email, senha);
+            DoadorDTO doadorFisica = new DoadorDTO(nome, CPF, email, senha);
             try {
-                DoadorFisicaDAO doadorFisicaDAO = new DoadorFisicaDAO();
+                DoadorDAO doadorFisicaDAO = new DoadorDAO();
                 try {
                     if(doadorFisicaDAO.inserir(doadorFisica))
                     {

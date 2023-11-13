@@ -1,6 +1,6 @@
 package br.cefetmg.projeto4.javaweb;
 import br.cefetmg.projeto4.dao.DonatarioDAO;
-import br.cefetmg.projeto4.dto.Donatario;
+import br.cefetmg.projeto4.dto.DonatarioDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -34,8 +34,8 @@ public class DonatarioCadastro extends HttpServlet {
             String enderecoCompleto = "Rua/Av: " + endereco + " Bairro: " + bairro + " Cidade: " + cidade;
             String confirmarSenha = request.getParameter("confirmarSenha");
             try {
-            Donatario donatario = new Donatario(nome, CPF,email, senha, escola, -1, serie, enderecoCompleto);
-            out.println("<p>" + donatario.getCPF() + "</p>");
+            DonatarioDTO donatario = new DonatarioDTO(nome, CPF, email, senha, escola, -1, Integer.parseInt(serie));
+            out.println("<p>" + donatario.getCodigo() + "</p>");
             out.println("<p>" + donatario.getNome()+ "</p>");
 
             DonatarioDAO donatarioDAO = new DonatarioDAO();

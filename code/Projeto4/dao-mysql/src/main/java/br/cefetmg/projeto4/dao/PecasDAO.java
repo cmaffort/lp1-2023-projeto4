@@ -2,7 +2,7 @@ package br.cefetmg.projeto4.dao;
 import br.cefetmg.projeto4.dao.mysql.MySqlConnection;
 import br.cefetmg.projeto4.idao.IPecasDAO;
 import java.sql.SQLException;
-import br.cefetmg.projeto4.dto.Pecas;
+import br.cefetmg.projeto4.dto.PecasDTO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,7 +17,7 @@ public class PecasDAO implements IPecasDAO {
         bancoDeDados = new MySqlConnection();
         conexao = bancoDeDados.getConexao(); // Abre a conexão com o banco de dados
     }
-    public boolean inserirPecaFaltante(Pecas pecas) throws SQLException, ClassNotFoundException {
+    public boolean inserirPecaFaltante(PecasDTO pecas) throws SQLException, ClassNotFoundException {
         try {
             PreparedStatement statement = conexao.prepareStatement("INSERT INTO pecas_faltantes (nome, marca, quantidade_em_falta) VALUES (?, ?, ?);");
             statement.setString(1, pecas.getNome());
@@ -40,7 +40,7 @@ public class PecasDAO implements IPecasDAO {
     }
     
     @Override
-    public boolean inserir(Pecas pecas) throws SQLException, ClassNotFoundException {
+    public boolean inserir(PecasDTO pecas) throws SQLException, ClassNotFoundException {
         try {
             PreparedStatement statement = conexao.prepareStatement("INSERT INTO pecas (nome, marca, quantidade_em_falta) VALUES (?, ?, ?);");
             statement.setString(1, pecas.getNome());
@@ -63,7 +63,7 @@ public class PecasDAO implements IPecasDAO {
     }
     
     @Override
-    public boolean remover(Pecas pecas) throws SQLException, ClassNotFoundException{
+    public boolean remover(PecasDTO pecas) throws SQLException, ClassNotFoundException{
         try {
 
         PreparedStatement statement = conexao.prepareStatement("DELETE FROM pecas WHERE nome = ?");
@@ -83,13 +83,13 @@ public class PecasDAO implements IPecasDAO {
         }
     }
     @Override
-    public boolean alterar(Pecas pecas) throws SQLException, ClassNotFoundException {
+    public boolean alterar(PecasDTO pecas) throws SQLException, ClassNotFoundException {
         return false;
     }
 
     @Override
-    public List<Pecas> listar() throws SQLException, ClassNotFoundException {
-        List<Pecas> pecas = new ArrayList<>();
+    public List<PecasDTO> listar() throws SQLException, ClassNotFoundException {
+        List<PecasDTO> pecas = new ArrayList<>();
 
        try {
             PreparedStatement statement = conexao.prepareStatement("SELECT * FROM pecas_faltantes");
@@ -100,7 +100,7 @@ public class PecasDAO implements IPecasDAO {
                 String nome = resultSet.getString("nome");
                 String marca = resultSet.getString("marca");
                 int quantidade = resultSet.getInt("quantidade_em_falta");
-                Pecas peca = new Pecas(quantidade, codigo, nome, marca);
+                PecasDTO peca = new PecasDTO(quantidade, codigo, nome, marca);
                 pecas.add(peca);
             }
 
@@ -112,8 +112,8 @@ public class PecasDAO implements IPecasDAO {
 
         return pecas;    }
 
-    public List<Pecas> listarEstoque() throws SQLException, ClassNotFoundException {
-        List<Pecas> pecas = new ArrayList<>();
+    public List<PecasDTO> listarEstoque() throws SQLException, ClassNotFoundException {
+        List<PecasDTO> pecas = new ArrayList<>();
 
        try {
             PreparedStatement statement = conexao.prepareStatement("SELECT * FROM pecas_estoque");
@@ -124,7 +124,7 @@ public class PecasDAO implements IPecasDAO {
                 String nome = resultSet.getString("nome");
                 String marca = resultSet.getString("marca");
                 int quantidade = resultSet.getInt("quantidade_em_falta");
-                Pecas peca = new Pecas(quantidade, codigo, nome, marca);
+                PecasDTO peca = new PecasDTO(quantidade, codigo, nome, marca);
                 pecas.add(peca);
             }
 

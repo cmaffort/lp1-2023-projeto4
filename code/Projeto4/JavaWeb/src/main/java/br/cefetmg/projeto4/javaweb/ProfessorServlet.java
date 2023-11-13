@@ -5,7 +5,7 @@
 package br.cefetmg.projeto4.javaweb;
 
 import br.cefetmg.projeto4.dao.ProfessorDAO;
-import br.cefetmg.projeto4.dto.Professor;
+import br.cefetmg.projeto4.dto.ProfessorDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -44,7 +44,7 @@ public class ProfessorServlet extends HttpServlet {
             out.println("<h1>Servlet ProfessorServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
-            Professor professor = new Professor(nome, CPF, email, departamento, senha);
+            ProfessorDTO professor = new ProfessorDTO(nome, CPF, email, departamento, senha);
             System.out.println(professor.getNome() + ": " + professor.getEmail());
             try {
                 ProfessorDAO professorDAO = new ProfessorDAO();
