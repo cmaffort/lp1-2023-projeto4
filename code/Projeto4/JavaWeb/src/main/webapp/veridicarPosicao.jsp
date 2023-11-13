@@ -13,7 +13,7 @@
     </head>
     <body>
                 <main>
-            <form action="ServletLogin" method="get">
+            <form action="VerificarPosicao" method="get">
                 <figure id="logo">
                     <img src="img/logo-cefet.png">
                 </figure>
@@ -21,9 +21,6 @@
                     <label for="login">Email:</label>
                     <input type="email" id="login" name="login" required>
                 </div><div class="campo">    
-                    <label for="senha">Senha:</label>
-                    <input type="password" id="senha" name="senha" required>
-                </div><div id="submit">
                     <input type="submit" value="Acessar">
                 </div>
 
