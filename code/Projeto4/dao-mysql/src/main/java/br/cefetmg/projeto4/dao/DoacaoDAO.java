@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 public class DoacaoDAO implements IDoacaoDAO {
     MySqlConnection bancoDeDados;
     Connection conexao;
@@ -22,10 +23,13 @@ public class DoacaoDAO implements IDoacaoDAO {
     @Override
     public boolean inserir(DoacaoDTO doacao) throws SQLException, ClassNotFoundException {
         try {
+        Random rand = new Random();
+        int numero = rand.nextInt(1000) + 1;
 
-        PreparedStatement statement = conexao.prepareStatement("INSERT INTO doacao (quantidade, computador) VALUES (?, ?)");
-        statement.setInt(1, doacao.getQuantidade());
-        statement.setString(2, doacao.getMarcaComputador());
+        PreparedStatement statement = conexao.prepareStatement("INSERT INTO doacoes (id_doador, quantidade, computador) VALUES (?, ?, ?)");
+        statement.setInt(1, numero);
+        statement.setInt(2, doacao.getQuantidade());
+        statement.setString(3, doacao.getMarcaComputador());
                     int rowsAffected = statement.executeUpdate();
 
             if (rowsAffected > 0) {
@@ -58,16 +62,16 @@ public class DoacaoDAO implements IDoacaoDAO {
     List<DoacaoDTO> doacoes = new ArrayList<>();
 
     try {
-        PreparedStatement statement = conexao.prepareStatement("SELECT * FROM doacao");
+        PreparedStatement statement = conexao.prepareStatement("SELECT * FROM doacoes");
         ResultSet resultSet = statement.executeQuery();
 
         while (resultSet.next()) {
             String nome = resultSet.getString("computador");
             int quantidade = resultSet.getInt("quantidade");
-            String doador = resultSet.getString("doador");
+            //String doador = resultSet.getString("doador");
             String data = resultSet.getString("data");
-            int ram = resultSet.getInt("quantidade_ram");
-            ComputadorDTO computador = new ComputadorDTO(doador,data,"", nome,"", ram);
+           // int ram = resultSet.getInt("quantidade_ram");
+            ComputadorDTO computador = new ComputadorDTO("Doador",data,"", nome,"", 4);
             DoacaoDTO doacao = new DoacaoDTO(quantidade, computador);
             doacoes.add(doacao);
         }
