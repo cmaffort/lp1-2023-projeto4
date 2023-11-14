@@ -148,8 +148,8 @@ function toggleMenu() {
 }
 
 function hideMenu() {
+    menu.DROPDOWN.EL.style.display = 'none'
     menu.DROPDOWN.EL.classList.add('hidden');
-    setTimeout(() => menu.DROPDOWN.EL.style.display = 'none', 300);
     menu.HIDDEN = true;
 }
 
