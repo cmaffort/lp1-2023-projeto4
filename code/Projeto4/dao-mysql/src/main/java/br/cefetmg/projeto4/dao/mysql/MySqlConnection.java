@@ -10,7 +10,7 @@ public class MySqlConnection {
     public  Connection getConexao() throws SQLException {
                 try {
             Class.forName("com.mysql.jdbc.Driver");
-             conexao = DriverManager.getConnection("jdbc:mysql://sql10.freesqldatabase.com:3306/sql10660068", "sql10660068", "cEfByLBAlU");
+             conexao = DriverManager.getConnection("jdbc:mysql://localhost/db_projeto4", "root", "");
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(MySqlConnection.class.getName()).log(Level.SEVERE, null, ex);
         }

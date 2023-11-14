@@ -28,7 +28,7 @@ public class agendarEntregaDoacao extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             String data = request.getParameter("dataRetirada");
             String hora = request.getParameter("horaRetirada");
-            int idDonatario = 1;
+            int idDonatario = 0;
 
             AgendamentoDTO agendamento = new AgendamentoDTO(data, hora, idDonatario);
 
