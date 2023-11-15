@@ -202,6 +202,6 @@ document.addEventListener('click', e => {
     if (menu.HIDDEN)
         return;
 
-    if (!menu.DROPDOWN.PARENT.contains(e.target))
+    if (!menu.DROPDOWN.PARENT.contains(e.target) || menu.DROPDOWN.EL.contains(e.target))
         hideMenu();
 });
