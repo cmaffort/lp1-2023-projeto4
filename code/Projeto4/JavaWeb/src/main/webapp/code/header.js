@@ -83,7 +83,11 @@ function newNav(id = null, ...classNames) {
 function newLi(text, href, ...classNames) {
     const li = newEl('li', ...classNames);
 
-    li.addEventListener('click', () => redirect(href));
+    li.addEventListener('click', () => {
+        hideMenu();
+        redirect(href)
+    });
+    
     li.innerHTML = text;
 
     return li;
@@ -202,6 +206,6 @@ document.addEventListener('click', e => {
     if (menu.HIDDEN)
         return;
 
-    if (!menu.DROPDOWN.PARENT.contains(e.target) || menu.DROPDOWN.EL.contains(e.target))
+    if (!menu.DROPDOWN.PARENT.contains(e.target))
         hideMenu();
 });
