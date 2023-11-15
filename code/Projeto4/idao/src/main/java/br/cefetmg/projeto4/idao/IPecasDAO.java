@@ -9,5 +9,4 @@ public interface IPecasDAO {
     boolean alterar(PecasDTO pecas) throws SQLException, ClassNotFoundException;
     boolean remover(PecasDTO pecas) throws SQLException, ClassNotFoundException;
     List<PecasDTO> listar() throws SQLException, ClassNotFoundException;    
-
 }

@@ -165,6 +165,7 @@ function loadMenu() {
         newLi('Agenda', 'agenda.jsp'),
         newLi('Agendar entrega', 'agendamentoEntrega.jsp'),
         newLi('Fazer doação', 'cadastroDoacao.jsp'),
+        newLi('Gerir estoque', 'estoque.jsp'),
         newLi('Relatar peças faltantes', 'cadastroPecaFaltante.jsp'),
         newLi('Dar feedback', 'feedback.jsp'),
         newLi('Gerir doações', 'MostrarDoacoes'),
