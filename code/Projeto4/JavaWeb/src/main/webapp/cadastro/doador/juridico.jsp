@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
     <body>
-        <form action=”DoadorJuridicoServlet” method=”post”>
+        <form action="DoadorJuridicoServlet" method="post">
             <figure id="logo">
                 <img src="img/logo-cefet.png">
             </figure>
