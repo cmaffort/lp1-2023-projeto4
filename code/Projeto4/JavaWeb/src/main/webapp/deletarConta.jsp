@@ -9,10 +9,14 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="style/header.css">
+        <link rel="stylesheet" href="style/main.css">
         <title>JSP Page</title>
     </head>
     <body>
-                <main>
+        <header></header>
+
+        <main>
             <form action="ServletDeletarConta" method="post">
                 <figure id="logo">
                     <img src="img/logo-cefet.png">
@@ -30,5 +34,6 @@
             </form>
         </main>
 
+        <script src="code/header.js"></script>
     </body>
 </html>

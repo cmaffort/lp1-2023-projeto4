@@ -7,7 +7,7 @@ body {
     background-color: #e0e0ff;
 }
 
-input, select, textarea {
+input, select, textarea, #estoque button {
     background-color: #bec1c4e3; 
     border-radius: 30px;
     border: 1px solid black;
@@ -19,17 +19,24 @@ textarea {
     margin-bottom: 1vh;
 }
 
-#submit {
+#submit, #estoque button {
     width: 100%;
-    height: fit-content;
-    text-align: center;
 }
 
-#submit input {
+#submit input, #estoque button {
     background-color: #10446c;
     font-family: Andale Mono, monospace;
     color: white;
     cursor: pointer;
+}
+
+#submit input:hover, #estoque button:hover {
+    background-color: #165c92;
+}
+
+#submit {
+    height: fit-content;
+    text-align: center;
 }
 
 .campo {

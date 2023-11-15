@@ -34,6 +34,4 @@ public class DeletarUsuarioDAO {
         }
         return true;
     }
-
-
 }

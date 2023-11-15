@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-@WebServlet(name = "gestaoDoadoresServlet", urlPatterns = {"/gestaoDoadoresServlet"})
+@WebServlet(name = "gestaoDoadores", urlPatterns = {"/gestaoDoadores"})
 public class gestaoDoadoresServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -47,18 +47,27 @@ public class gestaoDoadoresServlet extends HttpServlet {
             out.println("<table>");
             out.println("<caption>Lista de Doadores Fisicos</caption>");
             out.println("<thead>");
-            out.println("<tr><th>Nome</th><th>Email</th><th>Computadores doados</th><th>CPF</th><th>Codigo</th></tr>");
+            out.println("<tr><th>Nome</th><th>Email</th><th>Computadores doados</th><th>CPF</th></tr>");
             out.println("</thead><tbody>");
 
             // Iterar sobre os resultados e exibi-los na tabela HTML
             for (DoadorDTO doadores : doadoresFisicos) {
-                out.println("<tr><td>" + doadores.getNome()+ "</td><td>" + doadores.getEmail() + "</td><td>" + doadores.getComputadoresDoados()+ "</td><td>" + doadores.getCPF() + "</td><td>" + doadores.getCodigo());
+                out.println("<tr><td>" + doadores.getNome()+ "</td><td>" + doadores.getEmail() + "</td><td>" + doadores.getComputadoresDoados()+ "</td><td>" + doadores.getCodigo() + "</td></tr>");
             }
+            out.println("</tbody></table>");
+            out.println("<table>");
+            out.println("<caption>Lista de Doadores Juridicos</caption>");
+            out.println("<thead>");
+            out.println("<tr><th>Nome</th><th>Email</th><th>Computadores doados</th><th>CNPJ</th></tr>");
+            out.println("</thead><tbody>");
             for (DoadorJuridicoDTO doadores : doadoresJuridicos) {
-                out.println("<tr><td>" + doadores.getNome()+ "</td><td>" + doadores.getEmail()+ "</td><td>" + doadores.getComputadoresDoados() + "</td><td>" + doadores.getCNPJ() + "</td><td>" + doadores.getCodigo());
+                out.println("<tr><td>" + doadores.getNome()+ "</td><td>" + doadores.getEmail()+ "</td><td>" + doadores.getComputadoresDoados() + "</td><td>" + doadores.getCodigo() + "</td></tr>");
             }
 
-            out.println("</table></body></html>");
+            out.println("</table>");
+            out.println("<script src=\"code/header.js\"></script>");
+            out.println("<script src=\"code/th.js\"></script>");
+            out.println("</body></html>");
 
 
             // Iterar sobre os resultados e exibi-los na tabela HTML

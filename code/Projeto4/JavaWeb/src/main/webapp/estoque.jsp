@@ -1,7 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.util.List"%>
-<%@page import="br.cefetmg.projeto4.dao.AgendamentoDAO"%>
-<%@page import="br.cefetmg.projeto4.dto.AgendamentoComUsuarioDTO"%>
+<%@page import="br.cefetmg.projeto4.dao.EstoqueDAO"%>
+<%@page import="br.cefetmg.projeto4.dto.ItemEstoqueDTO"%>
 
 <!DOCTYPE html>
 <html>
@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="style/main.css">
     <link rel="stylesheet" href="style/exception.css">
     <link rel="stylesheet" href="style/table.css">
-    <title>Agenda de doações</title>
+    <title>Estoque</title>
 </head>
 <body>
     <header></header>
@@ -20,39 +20,44 @@
     <main>
 <%
     try {
-        AgendamentoDAO agendamentoDAO = new AgendamentoDAO();
-        List<AgendamentoComUsuarioDTO> agendamentos = agendamentoDAO.listar();
+        EstoqueDAO estoqueDAO = new EstoqueDAO();
+        List<ItemEstoqueDTO> itens = estoqueDAO.listar();
 %>
-        <table>
-            <caption>Doações Agendadas</caption>
+        <table id="estoque">
+            <caption>Estoque</caption>
             <thead>
                 <tr>
-                    <th>Data</th>
-                    <th>Horario</th>
-                    <th>Nome donatario</th>
-                    <th>Email donatario</th>
+                    <th>Tipo</th>
+                    <th>Quantidade</th>
+                    <th>Status</th>
                 </tr>
             </thead>
             <tbody>
 <%
-        for (AgendamentoComUsuarioDTO agendamento : agendamentos) {                 
+        for (ItemEstoqueDTO item : itens) {
 %>
                 <tr>
-                    <td><%=agendamento.getData()%></td>
-                    <td><%=agendamento.getHorario()%></td>
-                    <td><%=agendamento.getNome()%></td>
-                    <td><%=agendamento.getEmail()%></td>
+                    <td><%=item.getTipo()%></td>
+                    <td><%=item.getQuantidade()%></td>
+                    <td><%=item.getStatus()%></td>
                 </tr>
-<% 
+<%
         }
 %>
             </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3">
+                        <button onclick="redirect('cadastroPecaFaltante.jsp')">Relatar peças faltantes</button>
+                    </td>
+                </tr>
+            </tfoot>
         </table>
 <%
     } catch (Exception e) {
 %>
         <div id="exception">
-            <h2>Erro ao carregar agenda</h2>
+            <h2>Erro ao carregar estoque</h2>
             <p>Descrição: <%=e.getMessage()%></p>
         </div>
 <%        

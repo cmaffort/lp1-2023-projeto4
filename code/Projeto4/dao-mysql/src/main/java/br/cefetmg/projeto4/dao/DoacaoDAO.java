@@ -26,10 +26,11 @@ public class DoacaoDAO implements IDoacaoDAO {
         Random rand = new Random();
         int numero = rand.nextInt(1000) + 1;
 
-        PreparedStatement statement = conexao.prepareStatement("INSERT INTO doacoes (id_doador, quantidade, computador) VALUES (?, ?, ?)");
+        PreparedStatement statement = conexao.prepareStatement("INSERT INTO doacoes (id_doador, quantidade, computador, data) VALUES (?, ?, ?, ?)");
         statement.setInt(1, numero);
         statement.setInt(2, doacao.getQuantidade());
         statement.setString(3, doacao.getMarcaComputador());
+        statement.setString(4, doacao.getDataDeChegada());
                     int rowsAffected = statement.executeUpdate();
 
             if (rowsAffected > 0) {
