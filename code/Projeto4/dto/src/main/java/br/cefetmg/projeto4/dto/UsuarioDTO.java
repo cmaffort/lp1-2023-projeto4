@@ -6,21 +6,7 @@ public class UsuarioDTO {
     }
 
     protected enum Tipo {
-        DONATARIO("Donatario"), 
-        PROFESSOR("Professor"), 
-        ESTAGIARIO("Estagiario"), 
-        DOADOR("Doador");
-
-        private String str;
-
-        Tipo(String str) {
-            this.str = str;
-        }
-
-        @Override
-        public String toString() {
-            return str;
-        }
+        DONATARIO, PROFESSOR, ESTAGIARIO, DOADOR;
     }
 
     private String nome;
@@ -68,7 +54,7 @@ public class UsuarioDTO {
     }
 
     public String getTipoCodigo() {
-        return tipoCodigo.toString();
+        return tipoCodigo.name();
     }
 
     public void setTipoCodigo(TipoCodigo tipoCodigo) {
@@ -92,7 +78,7 @@ public class UsuarioDTO {
     }
 
     public String getTipo() {
-        return tipo.toString();
+        return tipo.name();
     }
 
     public void setTipo(Tipo tipo) {

@@ -2,19 +2,7 @@ package br.cefetmg.projeto4.dto;
 
 public class DoadorDTO extends UsuarioDTO {
     protected enum TipoDoador {
-        FISICO("Fisico"), 
-        JURIDICO("Juridico");
-
-        private String str;
-
-        TipoDoador(String str) {
-            this.str = str;
-        }
-
-        @Override
-        public String toString() {
-            return str;
-        }
+        FISICO, JURIDICO;
     }
 
     private int computadoresDoados;
@@ -47,7 +35,7 @@ public class DoadorDTO extends UsuarioDTO {
     }
 
     public String getTipoDoador() {
-        return tipo.toString();
+        return tipo.name();
     }
 
     public void setTipoDoador(TipoDoador tipo) {
