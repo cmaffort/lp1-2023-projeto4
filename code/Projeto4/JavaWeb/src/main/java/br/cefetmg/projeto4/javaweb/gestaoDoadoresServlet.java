@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-@WebServlet(name = "gestaoDoadoresServlet", urlPatterns = {"/gestaoDoadoresServlet"})
+@WebServlet(name = "gestaoDoadores", urlPatterns = {"/gestaoDoadores"})
 public class gestaoDoadoresServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -58,7 +58,10 @@ public class gestaoDoadoresServlet extends HttpServlet {
                 out.println("<tr><td>" + doadores.getNome()+ "</td><td>" + doadores.getEmail()+ "</td><td>" + doadores.getComputadoresDoados() + "</td><td>" + doadores.getCNPJ() + "</td><td>" + doadores.getCodigo());
             }
 
-            out.println("</table></body></html>");
+            out.println("</table>");
+            out.println("<script src=\"code/header.js\"></script>");
+            out.println("<script src=\"code/th.js\"></script>");
+            out.println("</body></html>");
 
 
             // Iterar sobre os resultados e exibi-los na tabela HTML
