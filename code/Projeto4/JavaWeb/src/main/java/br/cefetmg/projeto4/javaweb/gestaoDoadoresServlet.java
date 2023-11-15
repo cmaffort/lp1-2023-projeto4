@@ -47,15 +47,21 @@ public class gestaoDoadoresServlet extends HttpServlet {
             out.println("<table>");
             out.println("<caption>Lista de Doadores Fisicos</caption>");
             out.println("<thead>");
-            out.println("<tr><th>Nome</th><th>Email</th><th>Computadores doados</th><th>CPF</th><th>Codigo</th></tr>");
+            out.println("<tr><th>Nome</th><th>Email</th><th>Computadores doados</th><th>CPF</th></tr>");
             out.println("</thead><tbody>");
 
             // Iterar sobre os resultados e exibi-los na tabela HTML
             for (DoadorDTO doadores : doadoresFisicos) {
-                out.println("<tr><td>" + doadores.getNome()+ "</td><td>" + doadores.getEmail() + "</td><td>" + doadores.getComputadoresDoados()+ "</td><td>" + doadores.getCPF() + "</td><td>" + doadores.getCodigo());
+                out.println("<tr><td>" + doadores.getNome()+ "</td><td>" + doadores.getEmail() + "</td><td>" + doadores.getComputadoresDoados()+ "</td><td>" + doadores.getCodigo() + "</td></tr>");
             }
+            out.println("</tbody></table>");
+            out.println("<table>");
+            out.println("<caption>Lista de Doadores Juridicos</caption>");
+            out.println("<thead>");
+            out.println("<tr><th>Nome</th><th>Email</th><th>Computadores doados</th><th>CNPJ</th></tr>");
+            out.println("</thead><tbody>");
             for (DoadorJuridicoDTO doadores : doadoresJuridicos) {
-                out.println("<tr><td>" + doadores.getNome()+ "</td><td>" + doadores.getEmail()+ "</td><td>" + doadores.getComputadoresDoados() + "</td><td>" + doadores.getCNPJ() + "</td><td>" + doadores.getCodigo());
+                out.println("<tr><td>" + doadores.getNome()+ "</td><td>" + doadores.getEmail()+ "</td><td>" + doadores.getComputadoresDoados() + "</td><td>" + doadores.getCodigo() + "</td></tr>");
             }
 
             out.println("</table>");

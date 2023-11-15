@@ -7,7 +7,6 @@ public class DoadorDTO extends UsuarioDTO {
 
     private int computadoresDoados;
     private TipoDoador tipo;
-    private String cpf;
 
     public DoadorDTO(String nome, String CPF,  String email, String senha) {
         this(nome, CPF, email, senha, 0);
@@ -40,13 +39,5 @@ public class DoadorDTO extends UsuarioDTO {
 
     public void setTipoDoador(TipoDoador tipo) {
         this.tipo = tipo;
-    }
-    
-    public String getCPF () {
-        return cpf;
-    }
-    
-    public void setCPF(String cpf) {
-        this.cpf = cpf;
     }
 }
