@@ -176,6 +176,7 @@ function loadMenu() {
         newLi('Gerir doadores', 'gestaoDoadores'),
         newLi('Solicitar reparo', 'solicitacaoReparo.jsp'),
         newLi('Verificar posição na fila', 'verificarPosicao.jsp'),
+        newLi('Manter computador', 'manterComputador.jsp'),
         newLi('Deletar conta', 'deletarConta.jsp', 'danger')
     ];
 
