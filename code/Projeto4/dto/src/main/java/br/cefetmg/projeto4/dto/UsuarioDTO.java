@@ -9,26 +9,22 @@ public class UsuarioDTO {
         DONATARIO, PROFESSOR, ESTAGIARIO, DOADOR;
     }
 
-    private String nome;
-    private String codigo;
+    protected String nome;
+    protected String codigo;
     private TipoCodigo tipoCodigo;
-    private String email;
-    private String senha;
+    protected String email;
+    protected String senha;
     private Tipo tipo;
 
-    protected UsuarioDTO(String nome, String email) {
-        this(nome, null, email, null);
-    }
-
-    protected UsuarioDTO(String nome, String CPF, String email, String senha) {
+    public UsuarioDTO(String nome, String CPF, String email, String senha) {
         this(nome, CPF, email, senha, Tipo.DONATARIO);
     }
 
-    protected UsuarioDTO(String nome, String CPF, String email, String senha, Tipo tipo) {
+    public UsuarioDTO(String nome, String CPF, String email, String senha, Tipo tipo) {
         this(nome, CPF, TipoCodigo.CPF, email, senha, tipo);
     }
 
-    protected UsuarioDTO(String nome, String codigo, TipoCodigo tipoCodigo, String email, String senha, Tipo tipo) {
+    public UsuarioDTO(String nome, String codigo, TipoCodigo tipoCodigo, String email, String senha, Tipo tipo) {
         this.nome = nome;
         this.codigo = codigo;
         this.tipoCodigo = tipoCodigo;
@@ -70,10 +66,16 @@ public class UsuarioDTO {
     }
 
     public String getSenha() {
+        if (senha == null)
+            throw new UnsupportedOperationException("Este objeto não pode manter senha");
+
         return senha;
     }
 
     public void setSenha(String senha) {
+        if (this.senha == null)
+            throw new UnsupportedOperationException("Este objeto não pode manter senha");
+
         this.senha = senha;
     }
 
@@ -83,5 +85,9 @@ public class UsuarioDTO {
 
     public void setTipo(Tipo tipo) {
         this.tipo = tipo;
+    }
+
+    public UsuarioDTO safe() {
+        return new UsuarioDTO(nome, codigo, tipoCodigo, email, null, tipo);
     }
 }

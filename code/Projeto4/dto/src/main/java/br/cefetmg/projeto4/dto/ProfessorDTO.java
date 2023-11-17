@@ -16,4 +16,9 @@ public class ProfessorDTO extends UsuarioDTO  {
     public void setDepartamento(String departamento) {
         this.departamento = departamento;
     }
+
+    @Override
+    public ProfessorDTO safe() {
+        return new ProfessorDTO(nome, codigo, email, null, departamento);
+    }
 }

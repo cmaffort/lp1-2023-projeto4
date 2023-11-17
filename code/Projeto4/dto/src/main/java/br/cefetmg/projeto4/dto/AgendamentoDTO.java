@@ -3,16 +3,12 @@ package br.cefetmg.projeto4.dto;
 public class AgendamentoDTO {
     private String data;
     private String horario;
-    private int idDonatario;
+    private DonatarioDTO donatario;
 
-    protected AgendamentoDTO (String data, String horario) {
-        this(data, horario, 0);
-    }
-
-    public AgendamentoDTO(String data, String horario, int idDonatario) {
+public AgendamentoDTO(String data, String horario, DonatarioDTO donatario) {
         this.data = data;
         this.horario = horario;
-        this.idDonatario = idDonatario;
+        this.donatario = donatario;
     }
 
     public String getData() {
@@ -23,8 +19,8 @@ public class AgendamentoDTO {
         return horario;
     }
 
-    public int getIdDonatario() {
-        return idDonatario;
+    public DonatarioDTO getDonatario() {
+        return donatario;
     }
 
     public void setData(String data) {
@@ -35,7 +31,7 @@ public class AgendamentoDTO {
         this.horario = horario;
     }
 
-    public void setIdDonatario(int idDonatario) {
-        this.idDonatario = idDonatario;
+    public void setIdDonatario(DonatarioDTO donatario) {
+        this.donatario = donatario;
     }
 }

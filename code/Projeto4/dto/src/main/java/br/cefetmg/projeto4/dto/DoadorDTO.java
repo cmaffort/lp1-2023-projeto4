@@ -5,7 +5,7 @@ public class DoadorDTO extends UsuarioDTO {
         FISICO, JURIDICO;
     }
 
-    private int computadoresDoados;
+    protected int computadoresDoados;
     private TipoDoador tipo;
 
     public DoadorDTO(String nome, String CPF,  String email, String senha) {
@@ -39,5 +39,10 @@ public class DoadorDTO extends UsuarioDTO {
 
     public void setTipoDoador(TipoDoador tipo) {
         this.tipo = tipo;
+    }
+
+    @Override
+    public DoadorDTO safe() {
+        return new DoadorDTO(nome, codigo, email, null, computadoresDoados, tipo);
     }
 }

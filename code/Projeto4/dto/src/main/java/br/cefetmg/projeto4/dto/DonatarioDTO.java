@@ -5,6 +5,10 @@ public class DonatarioDTO extends UsuarioDTO {
     private int posicao;
     private int serie;
 
+    public DonatarioDTO(String nome, String CPF, String email, String senha, String escola, int serie) {
+        this(nome, CPF, email, senha, escola, 0, serie);
+    }
+
     public DonatarioDTO(String nome, String CPF, String email, String senha, String escola, int posicao, int serie) {
         super(nome, CPF, email, senha);
         this.escola = escola;
@@ -34,5 +38,10 @@ public class DonatarioDTO extends UsuarioDTO {
 
     public void setSerie(int serie) {
         this.serie = serie;
+    }
+
+    @Override
+    public DonatarioDTO safe() {
+        return new DonatarioDTO(nome, codigo, email, null, escola, posicao, serie);
     }
 }

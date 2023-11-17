@@ -13,8 +13,6 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
@@ -30,7 +28,7 @@ public class gestaoDoadoresServlet extends HttpServlet {
             DoadorDAO doadorFisicaDAO = new DoadorDAO();
             List<DoadorDTO> doadoresFisicos = doadorFisicaDAO.listar();
             DoadorJuridicoDAO doadorJuridicoDAO = new DoadorJuridicoDAO();
-            List<DoadorJuridicoDTO> doadoresJuridicos = doadorJuridicoDAO.listar();
+            List<DoadorDTO> doadoresJuridicos = doadorJuridicoDAO.listar();
             
             response.setContentType("text/html");
             PrintWriter out = response.getWriter();
@@ -51,17 +49,19 @@ public class gestaoDoadoresServlet extends HttpServlet {
             out.println("</thead><tbody>");
 
             // Iterar sobre os resultados e exibi-los na tabela HTML
-            for (DoadorDTO doadores : doadoresFisicos) {
-                out.println("<tr><td>" + doadores.getNome()+ "</td><td>" + doadores.getEmail() + "</td><td>" + doadores.getComputadoresDoados()+ "</td><td>" + doadores.getCodigo() + "</td></tr>");
+            for (DoadorDTO doador : doadoresFisicos) {
+                out.println("<tr><td>" + doador.getNome()+ "</td><td>" + doador.getEmail() + "</td><td>" + doador.getComputadoresDoados()+ "</td><td>" + doador.getCodigo() + "</td></tr>");
             }
             out.println("</tbody></table>");
             out.println("<table>");
             out.println("<caption>Lista de Doadores Juridicos</caption>");
             out.println("<thead>");
-            out.println("<tr><th>Nome</th><th>Email</th><th>Computadores doados</th><th>CNPJ</th></tr>");
+            out.println("<tr><th>Nome</th><th>Email</th><th>Computadores doados</th><th>CNPJ</th><th>Endereço</th></tr>");
             out.println("</thead><tbody>");
-            for (DoadorJuridicoDTO doadores : doadoresJuridicos) {
-                out.println("<tr><td>" + doadores.getNome()+ "</td><td>" + doadores.getEmail()+ "</td><td>" + doadores.getComputadoresDoados() + "</td><td>" + doadores.getCodigo() + "</td></tr>");
+            for (DoadorDTO doador : doadoresJuridicos) {
+                DoadorJuridicoDTO doadorJuridico = (DoadorJuridicoDTO) doador;
+
+                out.println("<tr><td>" + doador.getNome()+ "</td><td>" + doador.getEmail()+ "</td><td>" + doador.getComputadoresDoados() + "</td><td>" + doador.getCodigo() + "</td><td>" + doadorJuridico.getEndereco() + "</td></tr>");
             }
 
             out.println("</table>");

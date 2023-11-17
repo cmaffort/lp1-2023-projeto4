@@ -8,10 +8,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import br.cefetmg.projeto4.dao.mysql.MySqlConnection;
-import br.cefetmg.projeto4.dto.AgendamentoComUsuarioDTO;
 import br.cefetmg.projeto4.dto.AgendamentoDTO;
+import br.cefetmg.projeto4.dto.DonatarioDTO;
 import br.cefetmg.projeto4.idao.IAgendamentoDAO;
 
 public class AgendamentoDAO implements IAgendamentoDAO {
@@ -26,11 +27,11 @@ public class AgendamentoDAO implements IAgendamentoDAO {
     @Override
     public boolean inserir(AgendamentoDTO agendamento) throws SQLException, ClassNotFoundException {
         try {
-            PreparedStatement stmt = conexao.prepareStatement("INSERT INTO agendamentos (data, horario, id_donatario) VALUES (?, ?, ?)");
+            PreparedStatement stmt = conexao.prepareStatement("INSERT INTO agendamentos (data, horario, id_donatario) VALUES (?, ?, (SELECT id FROM usuarios WHERE email = ?))");
 
             stmt.setString(1, agendamento.getData());
             stmt.setString(2, agendamento.getHorario());
-            stmt.setInt(3, agendamento.getIdDonatario());
+            stmt.setString(3, agendamento.getDonatario().getEmail());
 
             int rowsAffected = stmt.executeUpdate();
 
@@ -58,21 +59,23 @@ public class AgendamentoDAO implements IAgendamentoDAO {
     }
 
     @Override
-    public List<AgendamentoComUsuarioDTO> listar() throws SQLException, ClassNotFoundException {
+    public List<AgendamentoDTO> listar() throws SQLException, ClassNotFoundException {
         try {
-            List<AgendamentoComUsuarioDTO> agendamentos = new ArrayList<>();
+            List<AgendamentoDTO> agendamentos = new ArrayList<>();
+            DonatarioDAO donatarioDAO = new DonatarioDAO();
 
-            String sql = "SELECT agendamentos.*, usuarios.* FROM agendamentos JOIN usuarios ON agendamentos.id_donatario = usuarios.id;";
+            String sql = "SELECT agendamentos.*, usuarios.email FROM agendamentos JOIN usuarios ON agendamentos.id_donatario = usuarios.id;";
             Statement stmt = conexao.createStatement();
             ResultSet resultSet = stmt.executeQuery(sql);
 
             while (resultSet.next()) {
                 String data = resultSet.getString("data");
                 String horario = resultSet.getString("horario");
-                String nome = resultSet.getString("nome");
                 String email = resultSet.getString("email");
 
-                AgendamentoComUsuarioDTO agendamento = new AgendamentoComUsuarioDTO(data, horario, nome, email);
+                DonatarioDTO donatario = (DonatarioDTO) donatarioDAO.selecionar(email).orElseThrow();
+
+                AgendamentoDTO agendamento = new AgendamentoDTO(data, horario, donatario);
 
                 agendamentos.add(agendamento);
             }
@@ -81,6 +84,8 @@ public class AgendamentoDAO implements IAgendamentoDAO {
             stmt.close();
 
             return agendamentos;
+        } catch (NoSuchElementException e) {
+            throw new SQLException("Usuario nao encontrado", e);
         } catch (SQLException e) {
             System.out.println("Erro: " + e.getMessage());
             return Collections.emptyList();
