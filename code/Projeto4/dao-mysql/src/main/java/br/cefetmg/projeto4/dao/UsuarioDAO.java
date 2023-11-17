@@ -53,8 +53,6 @@ public class UsuarioDAO implements IUsuarioDAO {
             System.out.println("Inserção realizada com sucesso");
             return true;
         } catch (SQLException e) {
-            conexao.rollback();
-    
             System.out.println("Erro: " + e.getMessage());
             return false;
         }
@@ -78,8 +76,6 @@ public class UsuarioDAO implements IUsuarioDAO {
             System.out.println("Deleção realizada com sucesso");
             return true;
         } catch (SQLException e) {
-            conexao.rollback();
-    
             System.out.println("Erro: " + e.getMessage());
             return false; 
         }
@@ -114,8 +110,6 @@ public class UsuarioDAO implements IUsuarioDAO {
             System.out.println("Seleção realizada com sucesso");
             return Optional.ofNullable(usuario);
         } catch (SQLException e) {
-            conexao.rollback();
-    
             System.out.println("Erro: " + e.getMessage());
             return Optional.empty();
         }

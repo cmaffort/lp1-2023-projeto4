@@ -31,8 +31,6 @@ public class DoadorDAO extends UsuarioDAO implements IDoadorDAO {
             System.out.println("Inserção realizada com sucesso");
             return true;
         } catch (SQLException e) {
-            conexao.rollback();
-    
             System.out.println("Erro: " + e.getMessage());
             return false;
         } 
@@ -100,8 +98,6 @@ public class DoadorDAO extends UsuarioDAO implements IDoadorDAO {
             System.out.println("Seleção realizada com sucesso");
             return Optional.ofNullable(doador);
         } catch (SQLException e) {
-            conexao.rollback();
-    
             System.out.println("Erro: " + e.getMessage());
             return Optional.empty();
         } 

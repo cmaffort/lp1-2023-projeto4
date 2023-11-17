@@ -34,8 +34,6 @@ public class EstagiarioDAO extends UsuarioDAO implements IEstagiarioDAO {
             System.out.println("Inserção realizada com sucesso");
             return true;
         } catch (SQLException e) {
-            conexao.rollback();
-    
             System.out.println("Erro: " + e.getMessage());
             return false;
         } 
@@ -105,8 +103,6 @@ public class EstagiarioDAO extends UsuarioDAO implements IEstagiarioDAO {
             System.out.println("Seleção realizada com sucesso");
             return Optional.ofNullable(estagiario);
         } catch (SQLException e) {
-            conexao.rollback();
-    
             System.out.println("Erro: " + e.getMessage());
             return Optional.empty();
         } 

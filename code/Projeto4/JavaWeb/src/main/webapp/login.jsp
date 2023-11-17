@@ -12,7 +12,7 @@
         <header></header>
     
         <main>
-            <form action="ServletLogin" method="get">
+            <form action="ServletLogin" method="post">
                 <figure id="logo">
                     <img src="img/logo-cefet.png">
                 </figure>
