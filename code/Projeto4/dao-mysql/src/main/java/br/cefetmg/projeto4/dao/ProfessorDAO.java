@@ -75,8 +75,6 @@ public class ProfessorDAO extends UsuarioDAO implements IProfessorDAO {
             System.out.println("Seleção realizada com sucesso");
             return Optional.ofNullable(professor);
         } catch (SQLException e) {
-            conexao.rollback();
-    
             System.out.println("Erro: " + e.getMessage());
             return Optional.empty();
         } 

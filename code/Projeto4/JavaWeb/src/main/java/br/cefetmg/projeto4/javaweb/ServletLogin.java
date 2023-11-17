@@ -67,7 +67,7 @@ public class ServletLogin extends HttpServlet {
                 DonatarioDTO donatario = (DonatarioDTO) donatarioDAO.selecionar(email).orElseThrow();
                 safeUsuario = donatario.safe();
 
-                response.sendRedirect("feedback.jsp");
+                response.sendRedirect("agendamentoEntrega.jsp");
             } else if (usuario.getTipo().equals("DOADOR")) {
                 if (usuario.getTipoCodigo().equals("CPF")) {
                     DoadorDAO doadorDAO = new DoadorDAO();
