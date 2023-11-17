@@ -17,8 +17,8 @@
                     <img src="img/logo-cefet.png">
                 </figure>
                 <div class="campo">    
-                    <label for="login">Email:</label>
-                    <input type="email" id="login" name="login" required>
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
                 </div><div class="campo">    
                     <label for="senha">Senha:</label>
                     <input type="password" id="senha" name="senha" required>

@@ -1,4 +1,20 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@page import="br.cefetmg.projeto4.dto.UsuarioDTO"%>
+
+<%
+    if (session == null || session.getAttribute("usuario") == null) {
+        response.sendRedirect("login.jsp");
+        return;
+    }
+
+    UsuarioDTO usuario = (UsuarioDTO) session.getAttribute("usuario");
+
+    if (!usuario.getTipo().equals("DONATARIO")) {
+        response.sendRedirect("negado.jsp");
+        return;
+    }
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,7 +51,7 @@
 
             <div class="campo">
             <label for="reparo">Quem reparou o pc? </label>
-            <input type="text" id="reparo" name="reparo">
+            <input type="email" id="reparo" name="reparo">
             </div>
 
             <div id="submit">

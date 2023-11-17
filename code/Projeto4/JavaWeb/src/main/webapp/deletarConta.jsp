@@ -21,11 +21,9 @@
                 <figure id="logo">
                     <img src="img/logo-cefet.png">
                 </figure>
+                <p class="danger"> Tem certeza que quer deletar conta?</p>
                 <div class="campo">    
-                    <label for="login">Email:</label>
-                    <input type="email" id="login" name="login" required>
-                </div><div class="campo">    
-                    <label for="senha">Senha:</label>
+                    <label for="senha">Digite sua senha:</label>
                     <input type="password" id="senha" name="senha" required>
                 </div><div id="submit">
                     <input type="submit" value="Deletar">

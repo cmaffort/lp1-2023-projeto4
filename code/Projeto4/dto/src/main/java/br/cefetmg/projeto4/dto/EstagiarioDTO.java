@@ -17,4 +17,9 @@ public class EstagiarioDTO extends UsuarioDTO {
     public String getDataSaida() {
         return dataSaida;
     }
+
+    @Override
+    public EstagiarioDTO safe() {
+        return new EstagiarioDTO(nome, codigo, email, null, dataEntrada, dataSaida);
+    }
 }

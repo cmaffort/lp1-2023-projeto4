@@ -1,4 +1,20 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="br.cefetmg.projeto4.dto.UsuarioDTO"%>
+
+<%
+    if (session == null || session.getAttribute("usuario") == null) {
+        response.sendRedirect("login.jsp");
+        return;
+    }
+
+    UsuarioDTO usuario = (UsuarioDTO) session.getAttribute("usuario");
+
+    if (!usuario.getTipo().equals("DONATARIO")) {
+        response.sendRedirect("negado.jsp");
+        return;
+    }
+%>
+
 <!DOCTYPE html>
 <html>
     <head>

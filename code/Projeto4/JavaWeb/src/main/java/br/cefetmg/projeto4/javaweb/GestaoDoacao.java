@@ -58,7 +58,7 @@ public class GestaoDoacao extends HttpServlet {
             out.println("<section><table>");
             out.println("<caption>Fila de Espera</caption>");
             out.println("<thead>");
-            out.println("<tr><th>Posição</th><th>Nome</th></tr>");
+            out.println("<tr><th>Posição</th><th>Nome</th><th>Email</th></tr>");
             out.println("</thead><tbody>");
             for (DonatarioDTO donatario : donatarios) {
                 out.println("<tr><td>" + donatario.getPosicao() + "</td><td>" + donatario.getNome() + "</td><td>"+ donatario.getEmail()+ "</td></tr>");

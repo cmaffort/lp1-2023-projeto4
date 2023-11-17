@@ -29,6 +29,11 @@
             <artifactId>protobuf-java</artifactId>
             <version>3.21.9</version>
         </dependency>
+        <dependency>
+            <groupId>org.mindrot</groupId>
+            <artifactId>jbcrypt</artifactId>
+            <version>0.4</version> 
+        </dependency>
     </dependencies>
     <properties>
         <maven.compiler.source>17</maven.compiler.source>

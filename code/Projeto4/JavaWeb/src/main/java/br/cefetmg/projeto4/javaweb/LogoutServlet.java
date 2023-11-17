@@ -1,24 +1,16 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package br.cefetmg.projeto4.javaweb;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
-/**
- *
- * @author lucas
- */
-@WebServlet(name = "TesteCookie", urlPatterns = {"/TesteCookie"})
-public class TesteCookie extends HttpServlet {
+
+@WebServlet(name = "logout", urlPatterns = {"/logout"})
+public class LogoutServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,35 +23,12 @@ public class TesteCookie extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet TesteCookie</title>");
-            boolean cookieExiste = false;
-            Cookie[] cookieTipoLogin = request.getCookies();
-            for (Cookie cookie : cookieTipoLogin) {
-                if (cookie.getName().equals("tipoDeLogin")) {
-                    out.println("<p>cookie existe</p>");
-                    cookieExiste = true;
-                }
-            }
-            if(cookieExiste)
-            {
-                out.println("<form method=\"post\" action=\"/servletDeletarConta\">");
-                out.println("<input type=\"submit\" value=\"Deletar Conta\">");
-                out.println("</form>");
+        HttpSession session = request.getSession(false);
 
-            }
-            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet TesteCookie at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+        if (session != null) 
+            session.invalidate();
+
+        response.sendRedirect("index.html");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

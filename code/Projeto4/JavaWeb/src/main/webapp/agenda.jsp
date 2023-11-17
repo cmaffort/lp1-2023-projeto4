@@ -1,7 +1,23 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.util.List"%>
 <%@page import="br.cefetmg.projeto4.dao.AgendamentoDAO"%>
-<%@page import="br.cefetmg.projeto4.dto.AgendamentoComUsuarioDTO"%>
+<%@page import="br.cefetmg.projeto4.dto.AgendamentoDTO"%>
+<%@page import="br.cefetmg.projeto4.dto.UsuarioDTO"%>
+<%@page import="br.cefetmg.projeto4.dto.DonatarioDTO"%>
+
+<%
+    if (session == null || session.getAttribute("usuario") == null) {
+        response.sendRedirect("login.jsp");
+        return;
+    }
+
+    UsuarioDTO usuario = (UsuarioDTO) session.getAttribute("usuario");
+
+    if (!usuario.getTipo().equals("PROFESSOR") && !usuario.getTipo().equals("ESTAGIARIO")) {
+        response.sendRedirect("negado.jsp");
+        return;
+    }
+%>
 
 <!DOCTYPE html>
 <html>
@@ -21,7 +37,7 @@
 <%
     try {
         AgendamentoDAO agendamentoDAO = new AgendamentoDAO();
-        List<AgendamentoComUsuarioDTO> agendamentos = agendamentoDAO.listar();
+        List<AgendamentoDTO> agendamentos = agendamentoDAO.listar();
 %>
         <table>
             <caption>Doações Agendadas</caption>
@@ -35,13 +51,14 @@
             </thead>
             <tbody>
 <%
-        for (AgendamentoComUsuarioDTO agendamento : agendamentos) {                 
+        for (AgendamentoDTO agendamento : agendamentos) { 
+            DonatarioDTO donatario = agendamento.getDonatario();                
 %>
                 <tr>
                     <td><%=agendamento.getData()%></td>
                     <td><%=agendamento.getHorario()%></td>
-                    <td><%=agendamento.getNome()%></td>
-                    <td><%=agendamento.getEmail()%></td>
+                    <td><%=donatario.getNome()%></td>
+                    <td><%=donatario.getEmail()%></td>
                 </tr>
 <% 
         }

@@ -10,16 +10,18 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import br.cefetmg.projeto4.dao.AgendamentoDAO;
+import br.cefetmg.projeto4.dao.EstagiarioDAO;
 import br.cefetmg.projeto4.dao.MantecaoDAO;
 import br.cefetmg.projeto4.dto.DonatarioDTO;
 import br.cefetmg.projeto4.dto.EstagiarioDTO;
 import br.cefetmg.projeto4.dto.MantecaoDTO;
+import br.cefetmg.projeto4.dto.UsuarioDTO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 /**
  *
@@ -44,21 +46,35 @@ public class CadastroMantecao extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             String data = request.getParameter("retirada");
             String estado = request.getParameter("estado");
-            EstagiarioDTO arrumador = null;
-            DonatarioDTO donatario = null;
+            String email = request.getParameter("email");
+
+            HttpSession session = request.getSession(false);
+
+            if (session == null || session.getAttribute("usuario") == null) {
+                response.sendRedirect("login.jsp");
+                return;
+            }
+        
+            UsuarioDTO usuario = (UsuarioDTO) session.getAttribute("usuario");
+        
+            if (!usuario.getTipo().equals("DONATARIO")) {
+                response.sendRedirect("negado.jsp");
+                return;
+            }
+
+            DonatarioDTO donatario = (DonatarioDTO) usuario;
+            EstagiarioDAO estagiarioDAO = new EstagiarioDAO();
+            EstagiarioDTO arrumador = (EstagiarioDTO) estagiarioDAO.selecionar(email).orElseThrow();
 
             MantecaoDTO mantecao = new MantecaoDTO(data, estado, donatario, arrumador);
+            MantecaoDAO mantecaoDAO = new MantecaoDAO();
 
-            try {
-                MantecaoDAO mantecaoDAO = new MantecaoDAO();
-
-                if(mantecaoDAO.inserir(mantecao))
-                    out.println("<p>inserido</p>");
-                else
-                    out.println("<p>erro</p>");
-            } catch (SQLException e) {
-                out.println("<p>SQLException</p>");
-            }
+            if(mantecaoDAO.inserir(mantecao))
+                out.println("<p>inserido</p>");
+            else
+                out.println("<p>erro</p>");
+        } catch (SQLException e) {
+            System.err.println("Erro: " + e.getMessage());
         }
     }
 

@@ -25,13 +25,9 @@ public class DonatarioCadastro extends HttpServlet {
             String CPF = request.getParameter("cpf");
 
             String escola = request.getParameter("escola");
-            String endereco = request.getParameter("endereco");
-            String bairro = request.getParameter("bairro");
-            String cidade = request.getParameter("cidade");
             String email = request.getParameter("email");
             String senha = request.getParameter("senha");
             String serie = request.getParameter("serie");
-            String enderecoCompleto = "Rua/Av: " + endereco + " Bairro: " + bairro + " Cidade: " + cidade;
             String confirmarSenha = request.getParameter("confirmarSenha");
             try {
             DonatarioDTO donatario = new DonatarioDTO(nome, CPF, email, senha, escola, -1, Integer.parseInt(serie));

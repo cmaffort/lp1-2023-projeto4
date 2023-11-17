@@ -122,3 +122,9 @@ caption {
     font-size: 1.5em;
     margin-bottom: 2vh;
 }
+
+p.danger {
+    padding-bottom: 10px;
+    padding-top: 0;
+    color: #cc0a00;
+}

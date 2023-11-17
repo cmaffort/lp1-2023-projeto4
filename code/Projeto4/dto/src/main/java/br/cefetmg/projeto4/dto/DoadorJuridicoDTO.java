@@ -19,4 +19,9 @@ public class DoadorJuridicoDTO extends DoadorDTO {
     public void setEndereco(String endereco) {
         this.endereco = endereco;
     }
+
+    @Override
+    public DoadorJuridicoDTO safe() {
+        return new DoadorJuridicoDTO(nome, codigo, email, null, computadoresDoados, endereco);
+    }
 }

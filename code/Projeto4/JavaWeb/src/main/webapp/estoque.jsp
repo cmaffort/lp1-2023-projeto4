@@ -2,6 +2,21 @@
 <%@page import="java.util.List"%>
 <%@page import="br.cefetmg.projeto4.dao.EstoqueDAO"%>
 <%@page import="br.cefetmg.projeto4.dto.ItemEstoqueDTO"%>
+<%@page import="br.cefetmg.projeto4.dto.UsuarioDTO"%>
+
+<%
+    if (session == null || session.getAttribute("usuario") == null) {
+        response.sendRedirect("login.jsp");
+        return;
+    }
+
+    UsuarioDTO usuario = (UsuarioDTO) session.getAttribute("usuario");
+
+    if (!usuario.getTipo().equals("PROFESSOR") && !usuario.getTipo().equals("ESTAGIARIO")) {
+        response.sendRedirect("negado.jsp");
+        return;
+    }
+%>
 
 <!DOCTYPE html>
 <html>
