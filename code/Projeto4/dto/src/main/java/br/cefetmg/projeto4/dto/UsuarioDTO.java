@@ -16,7 +16,7 @@ public class UsuarioDTO {
     protected String senha;
     private Tipo tipo;
 
-    public UsuarioDTO(String nome, String CPF, String email, String senha) {
+    public  UsuarioDTO(String nome, String CPF, String email, String senha) {
         this(nome, CPF, email, senha, Tipo.DONATARIO);
     }
 
@@ -24,7 +24,11 @@ public class UsuarioDTO {
         this(nome, CPF, TipoCodigo.CPF, email, senha, tipo);
     }
 
-    public UsuarioDTO(String nome, String codigo, TipoCodigo tipoCodigo, String email, String senha, Tipo tipo) {
+    public UsuarioDTO(String nome, String codigo, String tipoCodigo, String email, String senha, String tipo) {
+        this(nome, codigo, TipoCodigo.valueOf(tipoCodigo), email, senha, Tipo.valueOf(tipo));
+    }
+
+    protected UsuarioDTO(String nome, String codigo, TipoCodigo tipoCodigo, String email, String senha, Tipo tipo) {
         this.nome = nome;
         this.codigo = codigo;
         this.tipoCodigo = tipoCodigo;

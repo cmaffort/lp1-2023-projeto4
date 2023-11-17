@@ -6,7 +6,7 @@
         return;
     }
 
-    UsuarioDTO usuario = session.getAttribute("usuario");
+    UsuarioDTO usuario = (UsuarioDTO) session.getAttribute("usuario");
 
     if (!usuario.getTipo().equals("DONATARIO")) {
         response.sendRedirect("negado.jsp");

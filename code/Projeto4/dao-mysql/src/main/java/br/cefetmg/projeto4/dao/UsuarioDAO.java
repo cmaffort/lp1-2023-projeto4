@@ -99,11 +99,11 @@ public class UsuarioDAO implements IUsuarioDAO {
             if (resultSet.next()) {
                 String nome = resultSet.getString("nome");
                 String codigo = resultSet.getString("codigo");
-                String tipo_codigo = resultSet.getString("tipo_codigo");
+                String tipoCodigo = resultSet.getString("tipo_codigo");
                 String senha = resultSet.getString("senha");
                 String tipo = resultSet.getString("tipo");
 
-                usuario = new UsuarioDTO(nome, codigo, tipo_codigo, email, senha, tipo);
+                usuario = new UsuarioDTO(nome, codigo, tipoCodigo, email, senha, tipo);
             } 
             else 
                 throw new SQLException("Selection failed");

@@ -3,6 +3,7 @@ package br.cefetmg.projeto4.javaweb;
 import br.cefetmg.projeto4.dao.AgendamentoDAO;
 import br.cefetmg.projeto4.dto.AgendamentoDTO;
 import br.cefetmg.projeto4.dto.DonatarioDTO;
+import br.cefetmg.projeto4.dto.UsuarioDTO;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -38,7 +39,7 @@ public class agendarEntregaDoacao extends HttpServlet {
                 return;
             }
         
-            UsuarioDTO usuario = session.getAttribute("usuario");
+            UsuarioDTO usuario = (UsuarioDTO) session.getAttribute("usuario");
         
             if (!usuario.getTipo().equals("DONATARIO")) {
                 response.sendRedirect("negado.jsp");
