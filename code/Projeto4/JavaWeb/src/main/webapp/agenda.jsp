@@ -2,6 +2,8 @@
 <%@page import="java.util.List"%>
 <%@page import="br.cefetmg.projeto4.dao.AgendamentoDAO"%>
 <%@page import="br.cefetmg.projeto4.dto.AgendamentoDTO"%>
+<%@page import="br.cefetmg.projeto4.dto.UsuarioDTO"%>
+<%@page import="br.cefetmg.projeto4.dto.DonatarioDTO"%>
 
 <%
     if (session == null || session.getAttribute("usuario") == null) {

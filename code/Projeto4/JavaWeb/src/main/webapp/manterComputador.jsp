@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@page import="br.cefetmg.projeto4.dto.UsuarioDTO"%>
 
 <%
     if (session == null || session.getAttribute("usuario") == null) {
