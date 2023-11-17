@@ -44,8 +44,25 @@ public class CadastroMantecao extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             String data = request.getParameter("retirada");
             String estado = request.getParameter("estado");
-            EstagiarioDTO arrumador = null;
-            DonatarioDTO donatario = null;
+            String email = request.getParameter("email");
+
+            HttpSession session = request.getSession(false);
+
+            if (session == null || session.getAttribute("usuario") == null) {
+                response.sendRedirect("login.jsp");
+                return;
+            }
+        
+            UsuarioDTO usuario = session.getAttribute("usuario");
+        
+            if (!usuario.getTipo().equals("DONATARIO")) {
+                response.sendRedirect("negado.jsp");
+                return;
+            }
+
+            DonatarioDTO donatario = (DonatarioDTO) usuario;
+            EstagiarioDAO estagiarioDAO = new EstagiarioDAO();
+            EstagiarioDTO arrumador = (EstagiarioDTO) estagiarioDAO.selecionar(email);
 
             MantecaoDTO mantecao = new MantecaoDTO(data, estado, donatario, arrumador);
 
