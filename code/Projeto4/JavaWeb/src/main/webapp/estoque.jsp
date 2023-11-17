@@ -3,6 +3,20 @@
 <%@page import="br.cefetmg.projeto4.dao.EstoqueDAO"%>
 <%@page import="br.cefetmg.projeto4.dto.ItemEstoqueDTO"%>
 
+<%
+    if (session == null || session.getAttribute("usuario") == null) {
+        response.sendRedirect("login.jsp");
+        return;
+    }
+
+    UsuarioDTO usuario = session.getAttribute("usuario");
+
+    if (!usuario.getTipo().equals("PROFESSOR") && !usuario.getTipo().equals("ESTAGIARIO")) {
+        response.sendRedirect("negado.jsp");
+        return;
+    }
+%>
+
 <!DOCTYPE html>
 <html>
 <head>

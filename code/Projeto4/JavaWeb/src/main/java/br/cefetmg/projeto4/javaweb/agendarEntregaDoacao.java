@@ -2,6 +2,7 @@ package br.cefetmg.projeto4.javaweb;
 
 import br.cefetmg.projeto4.dao.AgendamentoDAO;
 import br.cefetmg.projeto4.dto.AgendamentoDTO;
+import br.cefetmg.projeto4.dto.DonatarioDTO;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -14,6 +15,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 /**
  *
@@ -28,9 +30,24 @@ public class agendarEntregaDoacao extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             String data = request.getParameter("dataRetirada");
             String hora = request.getParameter("horaRetirada");
-            int idDonatario = 0;
 
-            AgendamentoDTO agendamento = new AgendamentoDTO(data, hora, idDonatario);
+            HttpSession session = request.getSession(false);
+
+            if (session == null || session.getAttribute("usuario") == null) {
+                response.sendRedirect("login.jsp");
+                return;
+            }
+        
+            UsuarioDTO usuario = session.getAttribute("usuario");
+        
+            if (!usuario.getTipo().equals("DONATARIO")) {
+                response.sendRedirect("negado.jsp");
+                return;
+            }
+
+            DonatarioDTO donatario = (DonatarioDTO) usuario;
+
+            AgendamentoDTO agendamento = new AgendamentoDTO(data, hora, donatario);
 
             try {
                 AgendamentoDAO agendamentoDAO = new AgendamentoDAO();
