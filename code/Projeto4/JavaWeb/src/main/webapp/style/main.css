@@ -123,8 +123,15 @@ caption {
     margin-bottom: 2vh;
 }
 
-p.danger {
+p.fail, p.success {
     padding-bottom: 10px;
     padding-top: 0;
+}
+
+.fail {
     color: #cc0a00;
+}
+
+.success {
+    color: rgb(0, 119, 0);
 }

@@ -50,7 +50,13 @@ public class ProfessorServlet extends HttpServlet {
                 ProfessorDAO professorDAO = new ProfessorDAO();
                 if(professorDAO.inserir(professor)) {
                     out.println("<p>inserido</p>");
-                    response.sendRedirect("login.jsp");
+                    
+                    String p = request.getParameter("p");
+
+                    if (p != null)
+                        response.sendRedirect("login.jsp?=" + p);
+                    else
+                        response.sendRedirect("login.jsp");
                 }
                 else
                     out.println("<p>erro</p>");

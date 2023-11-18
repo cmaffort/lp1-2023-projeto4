@@ -33,8 +33,12 @@ public class EstagiarioServlet extends HttpServlet {
             EstagiarioDAO estagiarioDAO = new EstagiarioDAO();
             if(estagiarioDAO.inserir(estagiario))
             {
-                response.sendRedirect("login.jsp");
+                String p = request.getParameter("p");
 
+                if (p != null)
+                    response.sendRedirect("login.jsp?=" + p);
+                else
+                    response.sendRedirect("login.jsp");
             }
             }catch (SQLException e) {
                 out.println("<p>SQLException</p>");

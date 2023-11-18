@@ -51,7 +51,7 @@ public class CadastroMantecao extends HttpServlet {
             HttpSession session = request.getSession(false);
 
             if (session == null || session.getAttribute("usuario") == null) {
-                response.sendRedirect("login.jsp");
+                response.sendRedirect("negado.jsp");
                 return;
             }
         

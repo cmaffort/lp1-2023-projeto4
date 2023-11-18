@@ -36,7 +36,13 @@ public class DoadorJuridicoServlet extends HttpServlet {
                     if(doadorJuricoDAO.inserir(doadorJuridico))
                     {
                         out.println("<p>inserido</p>");
-                        response.sendRedirect("login.jsp");
+                        
+                        String p = request.getParameter("p");
+
+                        if (p != null)
+                            response.sendRedirect("login.jsp?=" + p);
+                        else
+                            response.sendRedirect("login.jsp");
                     }
                     else
                         out.println("<p>erro</p>");

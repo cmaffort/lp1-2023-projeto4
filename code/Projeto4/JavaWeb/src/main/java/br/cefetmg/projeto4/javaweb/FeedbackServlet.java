@@ -1,15 +1,22 @@
 package br.cefetmg.projeto4.javaweb;
 
-import br.cefetmg.projeto4.dao.AgendamentoDAO;
-import br.cefetmg.projeto4.dto.AgendamentoDTO;
+import br.cefetmg.projeto4.dao.DoadorDAO;
+import br.cefetmg.projeto4.dao.DoadorJuridicoDAO;
+import br.cefetmg.projeto4.dao.DonatarioDAO;
+import br.cefetmg.projeto4.dao.EstagiarioDAO;
+import br.cefetmg.projeto4.dao.FeedbackDAO;
+import br.cefetmg.projeto4.dao.ProfessorDAO;
+import br.cefetmg.projeto4.dao.UsuarioDAO;
+import br.cefetmg.projeto4.dto.DoadorDTO;
+import br.cefetmg.projeto4.dto.DoadorJuridicoDTO;
 import br.cefetmg.projeto4.dto.DonatarioDTO;
+import br.cefetmg.projeto4.dto.EstagiarioDTO;
+import br.cefetmg.projeto4.dto.FeedbackDTO;
+import br.cefetmg.projeto4.dto.ProfessorDTO;
 import br.cefetmg.projeto4.dto.UsuarioDTO;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -18,19 +25,29 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-/**
- *
- * @author Aluno
- */
-@WebServlet(name = "EntregaDoacao", urlPatterns = {"/EntregaDoacao"})
-public class agendarEntregaDoacao extends HttpServlet {
-    
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+
+@WebServlet(name = "feedback", urlPatterns = {"/feedback"})
+public class FeedbackServlet extends HttpServlet {
+
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            String data = request.getParameter("dataRetirada");
-            String hora = request.getParameter("horaRetirada");
+            String estrelas = request.getParameter("rating");
+            String descricao = request.getParameter("comments");
 
             HttpSession session = request.getSession(false);
 
@@ -38,30 +55,28 @@ public class agendarEntregaDoacao extends HttpServlet {
                 response.sendRedirect("negado.jsp");
                 return;
             }
-        
+
             UsuarioDTO usuario = (UsuarioDTO) session.getAttribute("usuario");
-        
+
             if (!usuario.getTipo().equals("DONATARIO")) {
                 response.sendRedirect("negado.jsp");
                 return;
             }
 
             DonatarioDTO donatario = (DonatarioDTO) usuario;
+            FeedbackDTO feedback = new FeedbackDTO(Integer.parseInt(estrelas), descricao, donatario);
+            FeedbackDAO feedbackDAO = new FeedbackDAO();
 
-            AgendamentoDTO agendamento = new AgendamentoDTO(data, hora, donatario);
-
-            try {
-                AgendamentoDAO agendamentoDAO = new AgendamentoDAO();
-
-                if(agendamentoDAO.inserir(agendamento))
-                    out.println("<p>inserido</p>");
-                else
-                    out.println("<p>erro</p>");
-            } catch (SQLException e) {
-                out.println("<p>SQLException</p>");
-            }
+            if (!feedbackDAO.inserir(feedback))
+                response.sendRedirect("feedback.jsp?status=fail");
+            else
+                response.sendRedirect("feedback.jsp?status=success");
+        } catch (SQLException e) {
+            System.err.println("Error: " + e);
+            response.sendRedirect("feedback.jsp?status=fail");
         }
     }
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -76,8 +91,8 @@ public class agendarEntregaDoacao extends HttpServlet {
             throws ServletException, IOException {
         try {
             processRequest(request, response);
-        } catch (ClassNotFoundException e) {
-            Logger.getLogger(agendarEntregaDoacao.class.getName()).log(Level.SEVERE, null, e);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ServletLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -94,8 +109,8 @@ public class agendarEntregaDoacao extends HttpServlet {
             throws ServletException, IOException {
         try {
             processRequest(request, response);
-        } catch (ClassNotFoundException e) {
-            Logger.getLogger(agendarEntregaDoacao.class.getName()).log(Level.SEVERE, null, e);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ServletLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -108,4 +123,5 @@ public class agendarEntregaDoacao extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
 }

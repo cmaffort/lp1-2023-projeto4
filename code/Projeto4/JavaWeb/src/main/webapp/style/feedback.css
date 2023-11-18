@@ -1,3 +1,28 @@
 h2 {
-    top: 25vh;
+    top: 20vh;
+}
+
+input[type="radio"] {
+    display: none;
+}
+
+.star {
+    font-size: 30px;
+    padding-bottom:  2vh;
+    cursor: pointer;
+    transition: all ease-in-out .1s;
+}
+
+.star.selected {
+    color: #ffd93b;
+}
+
+#rating {
+    width: fit-content;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }

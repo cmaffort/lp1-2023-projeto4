@@ -3,7 +3,7 @@
 
 <%
     if (session == null || session.getAttribute("usuario") == null) {
-        response.sendRedirect("login.jsp");
+        response.sendRedirect("login.jsp?p=manterComputador.jsp");
         return;
     }
 
