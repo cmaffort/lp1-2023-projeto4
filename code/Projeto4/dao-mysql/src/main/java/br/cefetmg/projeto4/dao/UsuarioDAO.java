@@ -9,7 +9,6 @@ import java.util.Optional;
 import org.mindrot.jbcrypt.BCrypt;
 
 import br.cefetmg.projeto4.dao.mysql.MySqlConnection;
-import br.cefetmg.projeto4.dto.ProfessorDTO;
 import br.cefetmg.projeto4.dto.UsuarioDTO;
 import br.cefetmg.projeto4.idao.IUsuarioDAO;
 
