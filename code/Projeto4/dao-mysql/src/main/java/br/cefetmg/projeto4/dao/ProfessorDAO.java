@@ -12,7 +12,8 @@ public class ProfessorDAO extends UsuarioDAO implements IProfessorDAO {
     @Override
     public boolean inserir(ProfessorDTO professor) throws SQLException, ClassNotFoundException {
         try {
-            super.inserir(professor);
+            if (!super.inserir(professor))
+                return false;
 
             String sql = "INSERT IGNORE INTO professores (id_cadastro, departamento) VALUES ((SELECT id FROM usuarios WHERE email = ?), ?)";
             PreparedStatement stmt = conexao.prepareStatement(sql);
@@ -30,7 +31,7 @@ public class ProfessorDAO extends UsuarioDAO implements IProfessorDAO {
             System.out.println("Inserção realizada com sucesso");
             return true;
         } catch (SQLException e) {
-            conexao.rollback();
+            remover(professor);
     
             System.out.println("Erro: " + e.getMessage());
             return false;

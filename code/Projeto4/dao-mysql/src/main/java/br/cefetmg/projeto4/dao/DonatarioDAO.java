@@ -21,7 +21,8 @@ public class DonatarioDAO extends UsuarioDAO implements IDonatarioDAO {
     @Override
     public boolean inserir(DonatarioDTO donatario) throws SQLException, ClassNotFoundException {
         try {
-            super.inserir(donatario);
+            if (!super.inserir(donatario))
+                return false;
 
             Statement stmt = conexao.createStatement();
             ResultSet resultSet = stmt.executeQuery("SELECT COALESCE(MAX(posicao) + 1, 1) AS posicao FROM donatarios");
@@ -49,6 +50,8 @@ public class DonatarioDAO extends UsuarioDAO implements IDonatarioDAO {
             System.out.println("Inserção realizada com sucesso");
             return true;
         } catch (SQLException e) {
+            remover(donatario);
+
             System.out.println("Erro: " + e.getMessage());
             return false;
         } 
