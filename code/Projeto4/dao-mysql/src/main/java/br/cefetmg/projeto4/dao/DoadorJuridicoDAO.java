@@ -19,7 +19,8 @@ public class DoadorJuridicoDAO extends DoadorDAO implements IDoadorJuridicoDAO {
     @Override
     public boolean inserir(DoadorJuridicoDTO doador) throws SQLException, ClassNotFoundException {
         try {
-            super.inserir(doador);
+            if (!super.inserir(doador))
+                return false;
 
             String sql = "INSERT IGNORE INTO doadoresJuridicos (id_doador, endereco) VALUES ((SELECT id FROM doadores WHERE id_cadastro = (SELECT id FROM usuarios WHERE email = ?)), ?)";
             PreparedStatement stmt = conexao.prepareStatement(sql);
@@ -37,6 +38,8 @@ public class DoadorJuridicoDAO extends DoadorDAO implements IDoadorJuridicoDAO {
             System.out.println("Inserção realizada com sucesso");
             return true;
         } catch (SQLException e) {
+            remover(doador);
+
             System.out.println("Erro: " + e.getMessage());
             return false;
         } 

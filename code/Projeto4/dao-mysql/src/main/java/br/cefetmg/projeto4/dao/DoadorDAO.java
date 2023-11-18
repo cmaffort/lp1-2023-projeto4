@@ -13,7 +13,8 @@ public class DoadorDAO extends UsuarioDAO implements IDoadorDAO {
     @Override
     public boolean inserir(DoadorDTO doador) throws SQLException, ClassNotFoundException {
         try {
-            super.inserir(doador);
+            if (!super.inserir(doador))
+                return false;
 
             String sql = "INSERT IGNORE INTO doadores (id_cadastro, tipo) VALUES ((SELECT id FROM usuarios WHERE email = ?), ?)";
             PreparedStatement stmt = conexao.prepareStatement(sql);
@@ -31,6 +32,8 @@ public class DoadorDAO extends UsuarioDAO implements IDoadorDAO {
             System.out.println("Inserção realizada com sucesso");
             return true;
         } catch (SQLException e) {
+            remover(doador);
+
             System.out.println("Erro: " + e.getMessage());
             return false;
         } 
