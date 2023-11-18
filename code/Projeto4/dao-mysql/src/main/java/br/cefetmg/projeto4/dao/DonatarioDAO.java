@@ -24,7 +24,7 @@ public class DonatarioDAO extends UsuarioDAO implements IDonatarioDAO {
             super.inserir(donatario);
 
             Statement stmt = conexao.createStatement();
-ResultSet resultSet = stmt.executeQuery("SELECT COALESCE(MAX(posicao) + 1, 1) AS posicao FROM donatarios");
+            ResultSet resultSet = stmt.executeQuery("SELECT COALESCE(MAX(posicao) + 1, 1) AS posicao FROM donatarios");
 
 
             if (!resultSet.next())
