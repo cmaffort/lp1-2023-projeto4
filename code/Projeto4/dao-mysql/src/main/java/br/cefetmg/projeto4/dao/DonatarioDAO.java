@@ -23,19 +23,28 @@ public class DonatarioDAO extends UsuarioDAO implements IDonatarioDAO {
         try {
             super.inserir(donatario);
 
-            String sql = "INSERT IGNORE INTO donatarios (id_cadastro, escola, posicao, serie) VALUES ((SELECT id FROM usuarios WHERE email = ?), ?, (SELECT MAX(posicao) FROM donatarios) + 1, ?)";
-            PreparedStatement stmt = conexao.prepareStatement(sql);
-            
-            stmt.setString(1, donatario.getEmail());
-            stmt.setString(2, donatario.getEscola());
-            stmt.setInt(3, donatario.getSerie());
+            Statement stmt = conexao.createStatement();
+ResultSet resultSet = stmt.executeQuery("SELECT COALESCE(MAX(posicao) + 1, 1) AS posicao FROM donatarios");
 
-            int rowsAffected = stmt.executeUpdate();
+
+            if (!resultSet.next())
+                throw new SQLException("Selection failed");
+
+            int posicao = resultSet.getInt("posicao");
+            String sql = "INSERT IGNORE INTO donatarios (id_cadastro, escola, posicao, serie) VALUES ((SELECT id FROM usuarios WHERE email = ?), ?, ?, ?)";
+            PreparedStatement stmt2 = conexao.prepareStatement(sql);
+            
+            stmt2.setString(1, donatario.getEmail());
+            stmt2.setString(2, donatario.getEscola());
+            stmt2.setInt(3, posicao);
+            stmt2.setInt(4, donatario.getSerie());
+
+            int rowsAffected = stmt2.executeUpdate();
     
             if (rowsAffected <= 0) 
                 throw new SQLException("Insertion into donatarios failed");
 
-            stmt.close();
+            stmt2.close();
     
             System.out.println("Inserção realizada com sucesso");
             return true;
