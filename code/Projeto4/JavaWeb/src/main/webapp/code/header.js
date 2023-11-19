@@ -4,19 +4,22 @@ const icons = {
         'img/logo-cefet.png',
         'img/login.png',
         'img/suporte.png',
-        'img/sobre-nos.png'
+        'img/sobre-nos.png',
+        'img/feedback.png'
     ],
     'alts' : [
         'Logo CEFET',
         'Login',
         'Suporte',
         'Sobre nós',
+        'Feedbacks'
     ],
     'hrefs' : [
         'index.html',
         'login.jsp',
         '',
-        'https://www.dde.cefetmg.br/2023/08/29/oficina-de-recuperacao-de-computadores-beneficia-estudantes-sem-acesso-a-computadores/'
+        'https://www.dde.cefetmg.br/2023/08/29/oficina-de-recuperacao-de-computadores-beneficia-estudantes-sem-acesso-a-computadores/',
+        'mostraFeedback.jsp'
     ]
 };
 const menu = {
@@ -192,7 +195,7 @@ function loadHeader() {
         return;
 
     const navHome = newPopulatedNav('home', 0, 1);
-    const navPages = newPopulatedNav('pages', 1, 4, AltType.TEXT);
+    const navPages = newPopulatedNav('pages', 1, 5, AltType.TEXT);
     const section = newEl('section');
 
     headerEl.appendChild(navHome);

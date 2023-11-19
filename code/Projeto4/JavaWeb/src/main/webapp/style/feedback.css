@@ -7,14 +7,9 @@ input[type="radio"] {
 }
 
 .star {
-    font-size: 30px;
     padding-bottom:  2vh;
     cursor: pointer;
     transition: all ease-in-out .1s;
-}
-
-.star.selected {
-    color: #ffd93b;
 }
 
 #rating {

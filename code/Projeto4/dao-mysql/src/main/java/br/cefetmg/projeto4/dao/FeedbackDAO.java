@@ -62,7 +62,7 @@ public class FeedbackDAO implements IFeedbackDAO {
             List<FeedbackDTO> feedbacks = new ArrayList<>();
             DonatarioDAO donatarioDAO = new DonatarioDAO();
     
-            String sqlFeedbacks = "SELECT feedbacks.*, usuarios.* FROM feedbacks JOIN usuarios ON feedbacks.id_donatario = usuarios.id;";
+            String sqlFeedbacks = "SELECT feedbacks.*, usuarios.* FROM feedbacks JOIN usuarios ON feedbacks.id_donatario = usuarios.id ORDER BY feedbacks.id DESC;";
             try (Statement stmt = conexao.createStatement();
                  ResultSet resultSet = stmt.executeQuery(sqlFeedbacks)) {
     
