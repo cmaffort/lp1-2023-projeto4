@@ -1,5 +1,8 @@
 package br.cefetmg.projeto4.dao;
 import br.cefetmg.projeto4.idao.IEstagiarioDAO;
+
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.*;
 
 import br.cefetmg.projeto4.dto.EstagiarioDTO;
@@ -60,10 +63,11 @@ public class EstagiarioDAO extends UsuarioDAO implements IEstagiarioDAO {
             String CPF = resultSet.getString("codigo");
             String email = resultSet.getString("email");
             String senha = resultSet.getString("senha");
+            byte[] foto = resultSet.getBytes("foto");
             String dataEntrada = resultSet.getString("dataDeEntrada");
             String dataSaida = resultSet.getString("dataDeSaida");
 
-            EstagiarioDTO estagiario = new EstagiarioDTO(nome, CPF, email, senha, dataEntrada, dataSaida);
+            EstagiarioDTO estagiario = new EstagiarioDTO(nome, CPF, email, senha, foto, dataEntrada, dataSaida);
             estagiarios.add(estagiario);
         }
 
@@ -92,10 +96,11 @@ public class EstagiarioDAO extends UsuarioDAO implements IEstagiarioDAO {
                 String nome = resultSet.getString("nome");
                 String CPF = resultSet.getString("codigo");
                 String senha = resultSet.getString("senha");
+                byte[] foto = resultSet.getBytes("foto");
                 String dataEntrada = resultSet.getString("dataDeEntrada");
                 String dataSaida = resultSet.getString("dataDeSaida");
                 
-                estagiario = new EstagiarioDTO(nome, CPF, email, senha, dataEntrada, dataSaida);
+                estagiario = new EstagiarioDTO(nome, CPF, email, senha, foto, dataEntrada, dataSaida);
             } 
             else 
                 throw new SQLException("Selection failed");

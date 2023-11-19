@@ -39,8 +39,13 @@ public class DonatarioCadastro extends HttpServlet {
                     if(donatarioDAO.inserir(donatario))
                     {
                         out.println("<p>inserido</p>");
-                        response.sendRedirect("login.jsp");
+                        
+                        String p = request.getParameter("p");
 
+                        if (p != null)
+                            response.sendRedirect("login.jsp?=" + p);
+                        else
+                            response.sendRedirect("login.jsp");
                     }
                     else
                         out.println("<p>erro</p>");

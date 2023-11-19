@@ -6,7 +6,7 @@
 
 <%
     if (session == null || session.getAttribute("usuario") == null) {
-        response.sendRedirect("login.jsp");
+        response.sendRedirect("login.jsp?p=estoque.jsp");
         return;
     }
 
@@ -62,7 +62,7 @@
             </tbody>
             <tfoot>
                 <tr>
-                    <td colspan="3">
+                    <td colspan="3" id="redirect">
                         <button onclick="redirect('cadastroPecaFaltante.jsp')">Relatar peças faltantes</button>
                     </td>
                 </tr>

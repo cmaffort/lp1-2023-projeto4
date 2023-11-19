@@ -53,6 +53,10 @@ public class ServletLogin extends HttpServlet {
 
             String email = request.getParameter("email");
             String senha = request.getParameter("senha");
+            String p = request.getParameter("p");
+
+            if (p != null)
+                response.sendRedirect(p);
 
             UsuarioDTO usuario = usuarioDAO.selecionar(email).orElseThrow();
 
@@ -67,7 +71,8 @@ public class ServletLogin extends HttpServlet {
                 DonatarioDTO donatario = (DonatarioDTO) donatarioDAO.selecionar(email).orElseThrow();
                 safeUsuario = donatario.safe();
 
-                response.sendRedirect("agendamentoEntrega.jsp");
+                if (p == null)
+                    response.sendRedirect("agendamentoEntrega.jsp");
             } else if (usuario.getTipo().equals("DOADOR")) {
                 if (usuario.getTipoCodigo().equals("CPF")) {
                     DoadorDAO doadorDAO = new DoadorDAO();
@@ -79,7 +84,8 @@ public class ServletLogin extends HttpServlet {
                     safeUsuario = doadorJuridico.safe();
                 }
 
-                response.sendRedirect("cadastroDoacao.jsp");
+                if (p == null)
+                    response.sendRedirect("cadastroDoacao.jsp");
             } else {
                 if (usuario.getTipo().equals("PROFESSOR")) {
                     ProfessorDAO professorDAO = new ProfessorDAO();
@@ -91,12 +97,18 @@ public class ServletLogin extends HttpServlet {
                     safeUsuario = estagiario.safe();
                 }
 
-                response.sendRedirect("MostrarDoacoes");
+                if (p == null)
+                    response.sendRedirect("MostrarDoacoes");
             }
 
             session.setAttribute("usuario", safeUsuario);
         } catch (NoSuchElementException e) {
-            response.sendRedirect("cadastro.jsp");
+            String p = request.getParameter("p");
+
+            if (p != null)
+                response.sendRedirect("cadastro.jsp?p=" + p);
+            else
+                response.sendRedirect("cadastro.jsp");
         } catch (IllegalArgumentException e) {
             response.sendRedirect("login.jsp?status=fail");
         } catch (SQLException e) {

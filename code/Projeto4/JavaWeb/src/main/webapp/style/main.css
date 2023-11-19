@@ -7,7 +7,7 @@ body {
     background-color: #e0e0ff;
 }
 
-input, select, textarea, #estoque button {
+input, select, textarea, #redirect button {
     background-color: #bec1c4e3; 
     border-radius: 30px;
     border: 1px solid black;
@@ -19,18 +19,18 @@ textarea {
     margin-bottom: 1vh;
 }
 
-#submit, #estoque button {
+#submit, #redirect button {
     width: 100%;
 }
 
-#submit input, #estoque button {
+#submit input, #redirect button {
     background-color: #10446c;
     font-family: Andale Mono, monospace;
     color: white;
     cursor: pointer;
 }
 
-#submit input:hover, #estoque button:hover {
+#submit input:hover, #redirect button:hover {
     background-color: #165c92;
 }
 
@@ -123,8 +123,24 @@ caption {
     margin-bottom: 2vh;
 }
 
-p.danger {
+p.fail, p.success, p.danger {
     padding-bottom: 10px;
     padding-top: 0;
+}
+
+.fail, p.danger {
     color: #cc0a00;
+}
+
+.success {
+    color: rgb(0, 119, 0);
+}
+
+.star {
+    color: white;
+    font-size: 30px;
+}
+
+.star.selected {
+    color: #ffd93b;
 }

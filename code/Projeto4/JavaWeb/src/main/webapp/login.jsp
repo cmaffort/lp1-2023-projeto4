@@ -31,5 +31,6 @@
         </main>
 
         <script src="code/header.js"></script>
+        <script src="code/p.js"></script>
     </body>
 </html>

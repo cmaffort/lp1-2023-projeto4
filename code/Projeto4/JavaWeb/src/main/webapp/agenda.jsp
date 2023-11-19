@@ -7,7 +7,7 @@
 
 <%
     if (session == null || session.getAttribute("usuario") == null) {
-        response.sendRedirect("login.jsp");
+        response.sendRedirect("login.jsp?p=agenda.jsp");
         return;
     }
 
