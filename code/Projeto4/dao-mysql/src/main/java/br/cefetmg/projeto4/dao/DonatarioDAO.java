@@ -1,5 +1,8 @@
 package br.cefetmg.projeto4.dao;
 import br.cefetmg.projeto4.idao.IDonatarioDAO;
+
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.*;
 
 import br.cefetmg.projeto4.dto.DonatarioDTO;
@@ -75,11 +78,12 @@ public class DonatarioDAO extends UsuarioDAO implements IDonatarioDAO {
             String CPF = resultSet.getString("codigo");
             String email = resultSet.getString("email");
             String senha = resultSet.getString("senha");
+            byte[] foto = resultSet.getBytes("foto");
             String escola = resultSet.getString("escola");
             int posicao = resultSet.getInt("posicao");
             int serie = resultSet.getInt("serie");
 
-            DonatarioDTO donatario = new DonatarioDTO(nome, CPF, email, senha, escola, posicao, serie);
+            DonatarioDTO donatario = new DonatarioDTO(nome, CPF, email, senha, foto, escola, posicao, serie);
             donatarios.add(donatario);
         }
 
@@ -108,12 +112,13 @@ public class DonatarioDAO extends UsuarioDAO implements IDonatarioDAO {
                 String nome = resultSet.getString("nome");
                 String CPF = resultSet.getString("codigo");
                 String senha = resultSet.getString("senha");
+                byte[] foto = resultSet.getBytes("foto");
                 String escola = resultSet.getString("escola");
                 int posicao = resultSet.getInt("posicao");
                 int serie = resultSet.getInt("serie");
                 
-                donatario = new DonatarioDTO(nome, CPF, email, senha, escola, posicao, serie);
-            } 
+                donatario = new DonatarioDTO(nome, CPF, email, senha, foto, escola, posicao, serie);
+            }
             else 
                 throw new SQLException("Selection failed");
 

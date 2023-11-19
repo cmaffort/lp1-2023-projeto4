@@ -39,7 +39,7 @@
 <%
     if (status != null && status.equals("fail")) {
 %>
-            <p class="fail">Não foi possível enviar seu feedback, tente novamente</p>
+            <p class="fail">Tente novamente</p>
 <%
     } else if (status != null && status.equals("success")) {
 %>

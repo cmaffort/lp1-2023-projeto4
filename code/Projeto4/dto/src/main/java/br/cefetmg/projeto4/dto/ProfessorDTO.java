@@ -5,7 +5,11 @@ public class ProfessorDTO extends UsuarioDTO  {
     private String departamento;
 
     public ProfessorDTO(String nome, String CPF, String email, String senha, String departamento) {
-        super(nome, CPF, email, senha, Tipo.PROFESSOR);
+        this(nome, CPF, email, senha, null, departamento);
+    }
+
+    public ProfessorDTO(String nome, String CPF, String email, String senha, byte[] foto, String departamento) {
+        super(nome, CPF, email, senha, Tipo.PROFESSOR, foto);
         this.departamento = departamento;
     }
 
@@ -19,6 +23,6 @@ public class ProfessorDTO extends UsuarioDTO  {
 
     @Override
     public ProfessorDTO safe() {
-        return new ProfessorDTO(nome, codigo, email, null, departamento);
+        return new ProfessorDTO(nome, codigo, email, null, foto, departamento);
     }
 }

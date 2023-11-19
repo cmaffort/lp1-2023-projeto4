@@ -8,6 +8,8 @@ import br.cefetmg.projeto4.dto.DoadorDTO;
 import br.cefetmg.projeto4.dto.DoadorJuridicoDTO;
 import br.cefetmg.projeto4.dto.UsuarioDTO;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -63,10 +65,11 @@ public class DoadorJuridicoDAO extends DoadorDAO implements IDoadorJuridicoDAO {
             String CNPJ = resultSet.getString("codigo");
             String email = resultSet.getString("email");
             String senha = resultSet.getString("senha");
+            byte[] foto = resultSet.getBytes("foto");
             int computadoresDoados = resultSet.getInt("computadores_doados");
             String endereco = resultSet.getString("endereco");
-            DoadorJuridicoDTO doadorJuridico = new DoadorJuridicoDTO(nome, CNPJ, email, senha, computadoresDoados, endereco);
-            
+
+            DoadorJuridicoDTO doadorJuridico = new DoadorJuridicoDTO(nome, CNPJ, email, senha, foto, computadoresDoados, endereco);
             doadoresJuridicos.add(doadorJuridico);
         }
 
@@ -94,10 +97,11 @@ public class DoadorJuridicoDAO extends DoadorDAO implements IDoadorJuridicoDAO {
                 String nome = resultSet.getString("nome");
                 String CPF = resultSet.getString("codigo");
                 String senha = resultSet.getString("senha");
+                byte[] foto = resultSet.getBytes("foto");
                 int doacoes = resultSet.getInt("computadores_doados");
                 String endereco = resultSet.getString("endereco");
 
-                doador = new DoadorJuridicoDTO(nome, CPF, email, senha, doacoes, endereco);
+                doador = new DoadorJuridicoDTO(nome, CPF, email, senha, foto, doacoes, endereco);
             } 
             else 
                 throw new SQLException("Selection failed");

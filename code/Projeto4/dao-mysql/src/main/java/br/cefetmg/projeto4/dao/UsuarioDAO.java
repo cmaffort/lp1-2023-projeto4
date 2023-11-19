@@ -1,5 +1,9 @@
 package br.cefetmg.projeto4.dao;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -81,6 +85,30 @@ public class UsuarioDAO implements IUsuarioDAO {
     }
 
     @Override
+    public boolean setFoto(String email, byte[] foto) throws SQLException {
+        try {
+            String sql = "UPDATE usuarios SET foto = ? WHERE email = ?";
+            PreparedStatement stmt = conexao.prepareStatement(sql);
+    
+            stmt.setBytes(1, foto);
+            stmt.setString(2, email);
+    
+            int rowsAffected = stmt.executeUpdate();
+    
+            if (rowsAffected <= 0) 
+                throw new SQLException("Update failed");
+
+            stmt.close();
+    
+            System.out.println("Atualizacao realizada com sucesso");
+            return true;
+        } catch (SQLException e) {
+            System.out.println("Erro: " + e.getMessage());
+            return false; 
+        }
+    }
+
+    @Override
     public Optional<UsuarioDTO> selecionar(String email) throws SQLException {
         try {
             String sql = "SELECT * FROM usuarios WHERE email = ?";
@@ -96,9 +124,10 @@ public class UsuarioDAO implements IUsuarioDAO {
                 String codigo = resultSet.getString("codigo");
                 String tipoCodigo = resultSet.getString("tipo_codigo");
                 String senha = resultSet.getString("senha");
+                byte[] foto = resultSet.getBytes("foto");
                 String tipo = resultSet.getString("tipo");
 
-                usuario = new UsuarioDTO(nome, codigo, tipoCodigo, email, senha, tipo);
+                usuario = new UsuarioDTO(nome, codigo, tipoCodigo, email, senha, tipo, foto);
             } 
             else 
                 throw new SQLException("Selection failed");

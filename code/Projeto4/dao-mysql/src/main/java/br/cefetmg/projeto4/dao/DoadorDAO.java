@@ -57,8 +57,11 @@ public class DoadorDAO extends UsuarioDAO implements IDoadorDAO {
             String CPF = resultSet.getString("codigo");
             String email = resultSet.getString("email");
             String senha = resultSet.getString("senha");
+            byte[] foto = resultSet.getBytes("foto");
             int computadoresDoados = resultSet.getInt("computadores_doados");
-            DoadorDTO doador = new DoadorDTO(nome, CPF, email, senha, computadoresDoados);
+            String tipo = resultSet.getString("tipo");
+            
+            DoadorDTO doador = new DoadorDTO(nome, CPF, email, senha, foto, computadoresDoados, tipo);
 
             doadores.add(doador);
         }
@@ -88,9 +91,11 @@ public class DoadorDAO extends UsuarioDAO implements IDoadorDAO {
                 String nome = resultSet.getString("nome");
                 String CPF = resultSet.getString("codigo");
                 String senha = resultSet.getString("senha");
+                byte[] foto = resultSet.getBytes("foto");
                 int doacoes = resultSet.getInt("computadores_doados");
+                String tipo = resultSet.getString("tipo");
 
-                doador = new DoadorDTO(nome, CPF, email, senha, doacoes);
+                doador = new DoadorDTO(nome, CPF, email, senha, foto, doacoes, tipo);
             } 
             else 
                 throw new SQLException("Selection failed");
