@@ -1,18 +1,8 @@
 package br.cefetmg.projeto4.javaweb;
 
-import br.cefetmg.projeto4.dao.DoadorDAO;
-import br.cefetmg.projeto4.dao.DoadorJuridicoDAO;
-import br.cefetmg.projeto4.dao.DonatarioDAO;
-import br.cefetmg.projeto4.dao.EstagiarioDAO;
 import br.cefetmg.projeto4.dao.FeedbackDAO;
-import br.cefetmg.projeto4.dao.ProfessorDAO;
-import br.cefetmg.projeto4.dao.UsuarioDAO;
-import br.cefetmg.projeto4.dto.DoadorDTO;
-import br.cefetmg.projeto4.dto.DoadorJuridicoDTO;
 import br.cefetmg.projeto4.dto.DonatarioDTO;
-import br.cefetmg.projeto4.dto.EstagiarioDTO;
 import br.cefetmg.projeto4.dto.FeedbackDTO;
-import br.cefetmg.projeto4.dto.ProfessorDTO;
 import br.cefetmg.projeto4.dto.UsuarioDTO;
 
 import java.io.IOException;

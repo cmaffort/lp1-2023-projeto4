@@ -78,6 +78,7 @@
 
         <script src="code/header.js"></script>
         <script src="code/feedback.js"></script>
+        <script src="code/refresh.js"></script>
         <script src="https://kit.fontawesome.com/5e2c2b2fc2.js" crossorigin="anonymous"></script>
     </body>
 </html>

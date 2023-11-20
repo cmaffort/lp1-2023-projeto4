@@ -1,4 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+    String p = request.getParameter("p");
+%>
 <!DOCTYPE html>
 <html>
     <body>
@@ -6,6 +9,13 @@
             <figure id="logo">
                 <img src="img/logo-cefet.png">
             </figure>
+<%
+    if (p != null) {
+%>
+            <input type="hidden" name="p" value="<%=p%>">
+<%
+    }
+%>
             <div class="campo"> 
                 <label for="nome">Nome completo:</label>
                 <input type="text" id="nome" name="nome" required>

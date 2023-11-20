@@ -40,7 +40,7 @@ public class DoadorJuridicoServlet extends HttpServlet {
                         String p = request.getParameter("p");
 
                         if (p != null)
-                            response.sendRedirect("login.jsp?=" + p);
+                            response.sendRedirect("login.jsp?p=" + p);
                         else
                             response.sendRedirect("login.jsp");
                     }

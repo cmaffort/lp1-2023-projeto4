@@ -221,5 +221,6 @@
 %>
 
     <script src="code/header.js"></script>
+    <script src="code/refresh.js"></script>
 </body>
 </html>
