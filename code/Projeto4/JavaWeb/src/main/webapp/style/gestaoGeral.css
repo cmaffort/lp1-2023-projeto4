@@ -1,0 +1,33 @@
+#doadores {
+    display: none;
+}
+
+#doacoes {
+    display: none;
+}
+
+#geral {
+    display: none;
+}
+
+#manutencoes {
+    display: none;
+}
+
+#funcionarios {
+    display: none;
+}
+
+h1 {
+    color: black;
+}
+
+#menuGeral {
+    height: 91.6vh;
+    width: 10vh;
+    background-color: lightblue;
+}
+
+
+
+
