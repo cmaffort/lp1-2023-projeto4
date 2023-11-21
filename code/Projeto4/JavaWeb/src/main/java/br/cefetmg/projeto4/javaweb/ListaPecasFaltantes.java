@@ -97,7 +97,7 @@ public class ListaPecasFaltantes extends HttpServlet {
         // Configuração da conexão com o banco de dados (substitua pelos seus próprios dados)
         try {
             PecasDAO pecasDAO = new PecasDAO();
-            List<PecasDTO> pecas = pecasDAO.listar();
+            List<PecasDTO> pecas = pecasDAO.listarFaltosos();
 
             // Configurar a resposta HTTP com um tipo de conteúdo HTML
             response.setContentType("text/html");
@@ -115,14 +115,16 @@ public class ListaPecasFaltantes extends HttpServlet {
             out.println("<table>");
             out.println("<caption>Peças faltantes</caption>");
             out.println("<thead>");
-            out.println("<tr><th>Codigo</th><th>Nome</th><th>Marca</th></tr>");
+            out.println("<tr><th>Codigo</th><th>Nome</th><th>Marca</th><th>Quantidade</th></tr>");
             out.println("</thead><tbody>");
 
             // Iterar sobre os resultados e exibi-los na tabela HTML
             for (PecasDTO peca : pecas) {
-                out.println("<tr><td>" + peca.getCodigo()+ "</td><td>" + peca.getNome()+ "</td><td>" + peca.getMarca() + "</td>");
+                out.println("<tr><td>" + peca.getId() + "</td><td>" + peca.getNome() + "</td><td>" + peca.getMarca() + "</td><td>" + peca.getQuantidade() + "</td>");
             }
-            out.println("</tbody></table>");
+            out.println("</tbody><tfoot>");
+            out.println("<tr><td colspan=\"4\" id=\"redirect\"><button onclick=\"redirect('cadastroCompra.jsp')\">Relatar compra</button></td></tr>");
+            out.println("</tfoot></table>");
             out.println("</section></main>"); 
             out.println("<script src=\"code/header.js\"></script>");
             out.println("<script src=\"code/th.js\"></script>");

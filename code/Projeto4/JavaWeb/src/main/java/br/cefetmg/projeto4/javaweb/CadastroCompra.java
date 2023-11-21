@@ -5,7 +5,6 @@
 package br.cefetmg.projeto4.javaweb;
 
 import br.cefetmg.projeto4.dao.PecasDAO;
-import br.cefetmg.projeto4.dto.PecasDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -14,15 +13,16 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
+import java.util.NoSuchElementException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
  *
- * @author lucas
+ * @author alex
  */
-@WebServlet(name = "PecaFaltanteServlet", urlPatterns = {"/PecaFaltanteServlet"})
-public class PecaFaltanteServlet extends HttpServlet {
+@WebServlet(name = "compra", urlPatterns = {"/compra"})
+public class CadastroCompra extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,28 +32,30 @@ public class PecaFaltanteServlet extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
+     * @throws ClassNotFoundException
+     * @throws NumberFormatException
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, SQLException, ClassNotFoundException {
+            throws ServletException, IOException, NumberFormatException, ClassNotFoundException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet PecaFaltanteServlet</title>");            
-            out.println("</head>");
-            String quantidadeStr = request.getParameter("quantidade"); 
-            int quantidade = Integer.parseInt(quantidadeStr); 
-            String nome = request.getParameter("nome");
-            String marca = request.getParameter("marca");
-            PecasDTO peca = new PecasDTO(nome, marca, quantidade);
-            PecasDAO pecasDAO = new PecasDAO();
-            pecasDAO.inserir(peca);
-            out.println("<body>");
-            out.println("<h1>Servlet PecaFaltanteServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            try {
+                String id = request.getParameter("codigo");
+                String quantidade = request.getParameter("quantidade");
+                
+                PecasDAO pecasDAO = new PecasDAO();
+
+                if (!pecasDAO.registrarCompra(Integer.parseInt(id), Integer.parseInt(quantidade)))
+                    throw new SQLException("Cadastro compra falhou");
+
+                response.sendRedirect("pedidoCompra.jsp");
+            } catch (SQLException e) {
+                System.err.println("Erro: " + e.getMessage());
+                response.sendRedirect("cadastroCompra.jsp?status=fail");
+            } catch (NoSuchElementException e) {
+                System.err.println("Erro: " + e.getMessage());
+                response.sendRedirect("cadastroCompra.jsp?e=id");
+            }
         }
     }
 

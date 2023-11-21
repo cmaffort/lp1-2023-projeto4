@@ -2,18 +2,38 @@ package br.cefetmg.projeto4.dto;
 
 
 public class PecasDTO {
-   
-    private int quantidade;
-    private String codigo;
-    private String nome;
-    private String descricao;
-    private String marca;
+   private enum Status {
+        EM_FALTA, COMPRADO;
+   }
 
-    public PecasDTO(int quantidade, String codigo, String nome, String marca) {
+    private Integer id;
+    private int quantidade;
+    private String nome;
+    private String marca;
+    private Status status;
+
+    public PecasDTO(String nome, String marca, String status, int quantidade) {
+        this(null, nome, marca, status, quantidade);
+    }
+
+    public PecasDTO(Integer id, String nome, String marca, String status, int quantidade) {
+        this(id, nome, marca, Status.valueOf(status), quantidade);
+    }
+
+    public PecasDTO(String nome, String marca, int quantidade) {
+        this((Integer) null, nome, marca, quantidade);
+    }
+
+    public PecasDTO(Integer id, String nome, String marca, int quantidade) {
+        this(id, nome, marca, Status.EM_FALTA, quantidade);
+    }
+
+    private PecasDTO(Integer id, String nome, String marca, Status status, int quantidade) {
+        this.id = id;
         this.quantidade = quantidade;
-        this.codigo = codigo;
         this.nome = nome;
         this.marca = marca;
+        this.status = status;
     }
 
     public int getQuantidade() {
@@ -24,28 +44,12 @@ public class PecasDTO {
         this.quantidade = quantidade;
     }
 
-    public String getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
-    }
-
     public String getNome() {
         return nome;
     }
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
     }
 
     public String getMarca() {
@@ -55,5 +59,20 @@ public class PecasDTO {
     public void setMarca(String marca) {
         this.marca = marca;
     }
-    
+
+    public String getStatus() {
+        return status.name();
+    }
+
+    public void setStatus(String status) {
+        this.status = Status.valueOf(status);
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 }
