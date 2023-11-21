@@ -2,12 +2,17 @@ package br.cefetmg.projeto4.dao;
 import br.cefetmg.projeto4.dao.mysql.MySqlConnection;
 import br.cefetmg.projeto4.idao.IPecasDAO;
 import java.sql.SQLException;
+import java.sql.Statement;
+
 import br.cefetmg.projeto4.dto.PecasDTO;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 public class PecasDAO implements IPecasDAO {
         MySqlConnection bancoDeDados;
@@ -17,124 +22,187 @@ public class PecasDAO implements IPecasDAO {
         bancoDeDados = new MySqlConnection();
         conexao = bancoDeDados.getConexao(); // Abre a conexão com o banco de dados
     }
-    public boolean inserirPecaFaltante(PecasDTO pecas) throws SQLException, ClassNotFoundException {
-        try {
-            PreparedStatement statement = conexao.prepareStatement("INSERT INTO pecas_faltantes (nome, marca, quantidade_em_falta) VALUES (?, ?, ?);");
-            statement.setString(1, pecas.getNome());
-            statement.setString(2, pecas.getMarca());
-            statement.setInt(3, pecas.getQuantidade());
-
-            int rowsAffected = statement.executeUpdate();
-
-            if (rowsAffected > 0) {
-                System.out.println("Inserção realizada com sucesso");
-                return true;
-            } else {
-                System.out.println("Erro na inserção");
-                return false;
-            }
-        } catch (SQLException e) {
-            System.out.println("Erro: " + e.getMessage());
-            return false;
-        }
-    }
     
     @Override
-    public boolean inserir(PecasDTO pecas) throws SQLException, ClassNotFoundException {
+    public boolean inserir(PecasDTO peca) throws SQLException, ClassNotFoundException {
         try {
-            PreparedStatement statement = conexao.prepareStatement("INSERT INTO pecas (nome, marca, quantidade_em_falta) VALUES (?, ?, ?);");
-            statement.setString(1, pecas.getNome());
-            statement.setString(2, pecas.getMarca());
-            statement.setInt(3, pecas.getQuantidade());
+            String sql = "INSERT INTO pecas(nome, marca, status, quantidade) VALUES (?, ?, ?, ?)";
+            PreparedStatement stmt = conexao.prepareStatement(sql);
 
-            int rowsAffected = statement.executeUpdate();
+            stmt.setString(1, peca.getNome());
+            stmt.setString(2, peca.getMarca());
+            stmt.setString(3, peca.getStatus());
+            stmt.setInt(4, peca.getQuantidade());
 
-            if (rowsAffected > 0) {
-                System.out.println("Inserção realizada com sucesso");
-                return true;
-            } else {
-                System.out.println("Erro na inserção");
-                return false;
-            }
-        } catch (SQLException e) {
-            System.out.println("Erro: " + e.getMessage());
-            return false;
-        }
-    }
+            int rowsAffected = stmt.executeUpdate();
     
-    @Override
-    public boolean remover(PecasDTO pecas) throws SQLException, ClassNotFoundException{
-        try {
+            if (rowsAffected <= 0) 
+                throw new SQLException("Insertion into pecas failed");
 
-        PreparedStatement statement = conexao.prepareStatement("DELETE FROM pecas WHERE nome = ?");
-        statement.setString(1, pecas.getNome());
-                   int rowsAffected = statement.executeUpdate();
-
-            if (rowsAffected > 0) {
-                System.out.println("Inserção realizada com sucesso");
-                return true;
-            } else {
-                System.out.println("Erro na inserção");
-                return false;
-            }
+            stmt.close();
+    
+            System.out.println("Inserção realizada com sucesso");
+            return true;
         } catch (SQLException e) {
             System.out.println("Erro: " + e.getMessage());
+            return false; 
+        }
+    }
+
+    @Override
+    public boolean remover(PecasDTO peca) throws SQLException, ClassNotFoundException {
+        try {
+            String sql = "DELETE FROM pecas WHERE id = ?";
+            PreparedStatement stmt = conexao.prepareStatement(sql);
+    
+            stmt.setInt(1, peca.getId());
+    
+            int rowsAffected = stmt.executeUpdate();
+    
+            if (rowsAffected <= 0) 
+                throw new SQLException("Deletion from pecas failed");
+
+            stmt.close();
+    
+            System.out.println("Deleção realizada com sucesso");
+            return true;
+        } catch (SQLException e) {
+            System.out.println("Erro: " + e.getMessage());
+            return false; 
+        }
+    }
+
+    @Override
+    public boolean registrarCompra(int id, int quantidade) throws SQLException, ClassNotFoundException, NoSuchElementException {
+        try {
+            PecasDTO peca = selecionarFaltoso(id);
+
+            int novaQtd = peca.getQuantidade() - quantidade;
+
+            if (novaQtd > 0) {
+                String sql = "UPDATE pecas SET quantidade = ? WHERE id = ?";
+                PreparedStatement stmt = conexao.prepareStatement(sql);
+
+                stmt.setInt(1, novaQtd);
+                stmt.setInt(2, id);
+
+                int rowsAffected = stmt.executeUpdate();
+    
+                if (rowsAffected <= 0) 
+                    throw new SQLException("Update pecas failed");
+
+                PecasDTO pedido = new PecasDTO(peca.getNome(), peca.getMarca(), "COMPRADO", quantidade);
+
+                if (!inserir(pedido))
+                    throw new SQLException("Insertion into pecas failed");
+            } else {
+                String sql = "UPDATE pecas SET status = 'COMPRADO', quantidade = ? WHERE id = ?";
+                PreparedStatement stmt = conexao.prepareStatement(sql);
+
+                stmt.setInt(1, quantidade);
+                stmt.setInt(2, id);
+
+                int rowsAffected = stmt.executeUpdate();
+    
+                if (rowsAffected <= 0) 
+                    throw new SQLException("Update pecas failed");
+            }
+
+            System.out.println("Update realizado com sucesso");
+            return true;
+        } catch (SQLException e) {
+            System.out.println("Erro: " + e.getMessage());
+
             return false;
         }
     }
+
     @Override
-    public boolean alterar(PecasDTO pecas) throws SQLException, ClassNotFoundException {
-        return false;
+    public PecasDTO selecionarFaltoso(int id) throws SQLException, ClassNotFoundException, NoSuchElementException {
+        try {
+            String sql = "SELECT * FROM pecas WHERE id = ? AND status = 'EM_FALTA'";
+            PreparedStatement stmt = conexao.prepareStatement(sql);
+
+            stmt.setInt(1, id);
+
+            ResultSet resultSet = stmt.executeQuery();
+
+            if (!resultSet.next())
+                throw new NoSuchElementException("Não há peça faltosa com esse código");
+
+            String nome = resultSet.getString("nome");
+            String marca = resultSet.getString("marca");
+            String status = resultSet.getString("status");
+            int quantidade = resultSet.getInt("quantidade");
+
+            PecasDTO peca = new PecasDTO(id, nome, marca, status, quantidade);
+
+            System.out.println("Seleção realizada com sucesso");
+            return peca;
+        } catch (SQLException e) {
+            System.out.println("Erro: " + e.getMessage());
+
+            throw new NoSuchElementException("Failed to select");
+        }
     }
 
     @Override
-    public List<PecasDTO> listar() throws SQLException, ClassNotFoundException {
-        List<PecasDTO> pecas = new ArrayList<>();
+    public List<PecasDTO> listarFaltosos() throws SQLException, ClassNotFoundException {
+        try {
+            List<PecasDTO> pecas = new ArrayList<>();
 
-       try {
-            PreparedStatement statement = conexao.prepareStatement("SELECT * FROM pecas_faltantes");
-            ResultSet resultSet = statement.executeQuery();
+            String sql = "SELECT * FROM pecas WHERE status = 'EM_FALTA'";
+            Statement stmt = conexao.createStatement();
+            ResultSet resultSet = stmt.executeQuery(sql);
 
             while (resultSet.next()) {
-                String codigo = resultSet.getString("id");
+                int id = resultSet.getInt("id");
                 String nome = resultSet.getString("nome");
                 String marca = resultSet.getString("marca");
-                int quantidade = resultSet.getInt("quantidade_em_falta");
-                PecasDTO peca = new PecasDTO(quantidade, codigo, nome, marca);
+                int quantidade = resultSet.getInt("quantidade");
+
+                PecasDTO peca = new PecasDTO(id, nome, marca, quantidade);
+
                 pecas.add(peca);
             }
 
             resultSet.close();
-            statement.close();
+            stmt.close();
+
+            return pecas;
         } catch (SQLException e) {
             System.out.println("Erro: " + e.getMessage());
+            return Collections.emptyList();
         }
+    }
 
-        return pecas;    }
+    @Override
+    public List<PecasDTO> listarPedidos() throws SQLException, ClassNotFoundException {
+        try {
+            List<PecasDTO> pedidos = new ArrayList<>();
 
-    public List<PecasDTO> listarEstoque() throws SQLException, ClassNotFoundException {
-        List<PecasDTO> pecas = new ArrayList<>();
-
-       try {
-            PreparedStatement statement = conexao.prepareStatement("SELECT * FROM pecas_estoque");
-            ResultSet resultSet = statement.executeQuery();
+            String sql = "SELECT * FROM pecas WHERE status = 'COMPRADO'";
+            Statement stmt = conexao.createStatement();
+            ResultSet resultSet = stmt.executeQuery(sql);
 
             while (resultSet.next()) {
-                String codigo = resultSet.getString("id");
+                int id = resultSet.getInt("id");
                 String nome = resultSet.getString("nome");
                 String marca = resultSet.getString("marca");
-                int quantidade = resultSet.getInt("quantidade_em_falta");
-                PecasDTO peca = new PecasDTO(quantidade, codigo, nome, marca);
-                pecas.add(peca);
+                int quantidade = resultSet.getInt("quantidade");
+
+                PecasDTO pedido = new PecasDTO(id, nome, marca, "COMPRADO", quantidade);
+
+                pedidos.add(pedido);
             }
 
             resultSet.close();
-            statement.close();
+            stmt.close();
+
+            return pedidos;
         } catch (SQLException e) {
             System.out.println("Erro: " + e.getMessage());
+            return Collections.emptyList();
         }
-
-        return pecas;    }
-
+    }
 }
-
