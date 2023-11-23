@@ -12,31 +12,50 @@ let botaoFuncionariosEl = document.querySelector('#botaoFuncionarios');
 
 botaoDoadoresEl.addEventListener('click', function() {
 
-    doadoresEl.style.display = "block";
+    doadoresEl.style.display = "none";
+    doacoesEl.style.display = "none";
+    geralEl.style.display = "none";
+    manutencoesEl.style.display = "none";
+    funcionariosEl.style.display = "none";
 
 });
 
 botaoDoacoesEl.addEventListener('click', function() {
 
     doacoesEl.style.display = "block";
-
+    doadoresEl.style.display = "none";
+    geralEl.style.display = "none";
+    manutencoesEl.style.display = "none";
+    funcionariosEl.style.display = "none";
 });
 
 botaoGeralEl.addEventListener('click', function() {
 
     geralEl.style.display = "block";
+    doadoresEl.style.display = "none";
+    doacoesEl.style.display = "none";
+    manutencoesEl.style.display = "none";
+    funcionariosEl.style.display = "none";
 
 });
 
 botaoManutencoesEl.addEventListener('click', function() {
 
     manutencoesEl.style.display = "block";
+    geralEl.style.display = "none";
+    doadoresEl.style.display = "none";
+    doacoesEl.style.display = "none";
+    funcionariosEl.style.display = "none";
 
 });
 
-botaoFuncionarioEl.addEventListener('click', function() {
+botaoFuncionariosEl.addEventListener('click', function() {
 
     funcionariosEl.style.display = "block";
+    geralEl.style.display = "none";
+    doadoresEl.style.display = "none";
+    doacoesEl.style.display = "none";
+    manutencoesEl.style.display = "none";
 
 });
 
