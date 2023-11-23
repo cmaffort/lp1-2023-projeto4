@@ -15,6 +15,9 @@
         <main>
             <h2>Cadastrar Doação</h2>
 
+            
+            <a href="gestaoGeral.jsp">Texto a ser exibido</a>
+            
             <form action="CadastrarDoacaoServlet" method="post">
                 <figure id="logo">
                     <img src="img/logo-cefet.png">

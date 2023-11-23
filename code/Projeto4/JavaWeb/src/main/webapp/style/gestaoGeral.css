@@ -23,10 +23,16 @@ h1 {
 }
 
 #menuGeral {
-    height: 91.6vh;
-    width: 10vh;
-    background-color: lightblue;
+    height: 100vh;
+    width: 40vh;
+    background-color: blue;
 }
+
+ul {
+    margin-bottom: 100px;
+}
+
+
 
 
 

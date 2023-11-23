@@ -1,6 +1,4 @@
-
-@@ -0,0 +1,63 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -14,16 +12,13 @@
         <header></header>
 
         <div id="menuGeral">
-
             <ul>
-
-                <li> <span id="botaoDoadores"> Doadores </span> </li>
-                <li> <span id="botaoDoacoes"> Doações </span> </li>
-                <li> <span id="botaoGeral"> Relatório geral </span> </li>
-                <li> <span id="botaoManutencoes"> Manutenções </span> </li>
-                <li> <span id="botaoFuncionarios"> Funcionários </span> </li>
+                <li> <button id="botaoDoadores"> Doadores</button> </li>
+                <li> <button id="botaoDoacoes"> Doações</button> </li>
+                <li> <button id="botaoGeral"> Relatório geral</button> </li>
+                <li> <button id="botaoManutencoes"> Manutenções</button> </li>
+                <li> <button id="botaoFuncionarios"> Funcionários</button></li>
             </ul>
-
 
         </div>
 
@@ -50,7 +45,7 @@
 
 
         </main>
-        <main id="funcionario">
+        <main id="funcionarios">
 
             <h1> Funcionários </h1>
 
