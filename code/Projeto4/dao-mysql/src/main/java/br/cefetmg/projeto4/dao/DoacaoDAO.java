@@ -66,7 +66,8 @@ public class DoacaoDAO implements IDoacaoDAO {
         while (resultSet.next()) {
             String nome = resultSet.getString("computador");
             int quantidade = resultSet.getInt("quantidade");
-            //String doador = resultSet.getString("doador");
+            String id_doador = resultSet.getString("id_doador");
+            
             String data = resultSet.getString("data");
            // int ram = resultSet.getInt("quantidade_ram");
             ComputadorDTO computador = new ComputadorDTO("Doador",data,"", nome,"", 4);
