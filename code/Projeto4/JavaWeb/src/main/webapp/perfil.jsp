@@ -33,8 +33,14 @@
     <link rel="stylesheet" href="style/header.css">
     <link rel="stylesheet" href="style/main.css">
     <link rel="stylesheet" href="style/perfil.css">
+<%
+    if (user == null) {
+%>
     <link rel="stylesheet" href="style/exception.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.css">
+    <link rel="stylesheet" href="style/cropper.css">
+<%
+    }
+%>
     <title>Perfil</title>
 </head>
 <body>
@@ -181,13 +187,13 @@
     </section>
 
     <script src="code/perfil.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.js"></script>
+    <script src="code/cropper.min.js"></script>
+    <script src="code/refresh.js"></script>
 <%
     }
 %>
 
     <script src="code/header.js"></script>
     <script src="code/exception.js"></script>
-    <script src="code/refresh.js"></script>
 </body>
 </html>
