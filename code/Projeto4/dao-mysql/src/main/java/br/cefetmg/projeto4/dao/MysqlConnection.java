@@ -1,6 +1,5 @@
 package br.cefetmg.projeto4.dao;
 
-import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -9,8 +8,8 @@ import java.util.logging.Logger;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
-public class MysqlConnection {
-    private static final String DB_SERVER = "localhost";
+class MysqlConnection {
+    private static final String INSTANCE_CONNECTION_NAME = "projeto4-storage:us-central1:dbprojeto4";
     private static final String DB_NAME = "db_projeto4";
     private static final String DB_USER = "root";
     private static final String DB_PASS = "";
@@ -19,13 +18,15 @@ public class MysqlConnection {
     private static final HikariDataSource DATA_SOURCE;
 
     static {
-        try (InputStream stream = MysqlConnection.class.getClassLoader().getResourceAsStream("cred.json")) {
+        try {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
             HikariConfig config = new HikariConfig();
-            config.setJdbcUrl(String.format("jdbc:mysql://%s/%s", DB_SERVER, DB_NAME));
+            config.setJdbcUrl(String.format("jdbc:mysql:///%s", DB_NAME));
             config.setUsername(DB_USER);
             config.setPassword(DB_PASS);
+            config.addDataSourceProperty("socketFactory", "com.google.cloud.sql.mysql.SocketFactory");
+            config.addDataSourceProperty("cloudSqlInstance", INSTANCE_CONNECTION_NAME);
             config.setMaximumPoolSize(200);
             config.setMinimumIdle(5);
             config.setIdleTimeout(30000);

@@ -84,4 +84,8 @@ public final class CloudHelper {
             return foto;
         }
     }
+
+    public static void main(String[] args) {
+        System.out.println(CloudHelper.class.getName());
+    }
 }
