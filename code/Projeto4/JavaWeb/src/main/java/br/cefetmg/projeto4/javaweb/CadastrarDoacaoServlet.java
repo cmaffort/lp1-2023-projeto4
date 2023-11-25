@@ -29,6 +29,7 @@ public class CadastrarDoacaoServlet extends HttpServlet {
             String data = request.getParameter("data");
             int quantidadeRAM = 0;
             int quantidade = 0;
+            System.out.println(data);
             
             try {
                 quantidade = Integer.parseInt(quantidade1);
