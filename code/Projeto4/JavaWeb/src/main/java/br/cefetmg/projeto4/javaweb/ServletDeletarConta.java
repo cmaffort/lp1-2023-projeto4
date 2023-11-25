@@ -10,20 +10,19 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 @WebServlet(name = "ServletDeletarConta", urlPatterns = {"/ServletDeletarConta"})
 public class ServletDeletarConta extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try (PrintWriter out = response.getWriter()) {
+        try (UsuarioDAO usuarioDAO = new UsuarioDAO()) {
             String senha = request.getParameter("senha");
 
             HttpSession session = request.getSession(false);
             UsuarioDTO safeUsuario = (UsuarioDTO) session.getAttribute("usuario");
 
-            UsuarioDAO usuarioDAO = new UsuarioDAO();
             UsuarioDTO usuario = (UsuarioDTO) usuarioDAO.selecionar(safeUsuario.getEmail()).orElseThrow();
 
             if (!usuarioDAO.autenticar(usuario, senha))

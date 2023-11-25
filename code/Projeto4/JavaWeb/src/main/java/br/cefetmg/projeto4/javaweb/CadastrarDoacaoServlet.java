@@ -46,8 +46,7 @@ public class CadastrarDoacaoServlet extends HttpServlet {
 
             ComputadorDTO computador = new ComputadorDTO(null, data, null, marca, modelo, quantidadeRAM);
             DoacaoDTO doacao = new DoacaoDTO(quantidade, computador);
-                        try {
-                DoacaoDAO doacaoDAO = new DoacaoDAO();
+                        try (DoacaoDAO doacaoDAO = new DoacaoDAO()) {
                 try {
                     if(doacaoDAO.inserir(doacao))
                         out.println("<p>inserido</p>");

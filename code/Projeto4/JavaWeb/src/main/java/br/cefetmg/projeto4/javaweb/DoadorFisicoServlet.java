@@ -27,8 +27,7 @@ public class DoadorFisicoServlet extends HttpServlet {
             String email = request.getParameter("email");
             String senha = request.getParameter("senha");
             DoadorDTO doadorFisica = new DoadorDTO(nome, CPF, email, senha);
-            try {
-                DoadorDAO doadorFisicaDAO = new DoadorDAO();
+            try (DoadorDAO doadorFisicaDAO = new DoadorDAO()) {
                 try {
                     if(doadorFisicaDAO.inserir(doadorFisica))
                     {

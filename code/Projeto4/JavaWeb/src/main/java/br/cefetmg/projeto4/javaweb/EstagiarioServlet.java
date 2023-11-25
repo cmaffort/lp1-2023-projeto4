@@ -29,8 +29,7 @@ public class EstagiarioServlet extends HttpServlet {
             String senha = request.getParameter("senha");
             String confirmarSenha = request.getParameter("confirmarSenha");
             EstagiarioDTO estagiario = new EstagiarioDTO(nome, cpf, email, senha, "21/1/1", "10/1/1");
-            try {
-            EstagiarioDAO estagiarioDAO = new EstagiarioDAO();
+            try (EstagiarioDAO estagiarioDAO = new EstagiarioDAO()) {
             if(estagiarioDAO.inserir(estagiario))
             {
                 String p = request.getParameter("p");

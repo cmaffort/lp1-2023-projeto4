@@ -1,76 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- 
-package br.cefetmg.projeto4.javaweb;
-
-import java.io.IOException;
-import java.io.PrintWriter;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import br.cefetmg.projeto4.dto.PecasDTO;
-import br.cefetmg.projeto4.dao.PecasDAO;
-import java.sql.SQLException;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-@WebServlet(name = "ListaPecasFaltantes", urlPatterns = {"/ListaPecasFaltantes"})
-public class ListaPecasFaltantes extends HttpServlet {
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, ClassNotFoundException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            PecasDAO pecasDAO = new PecasDAO();
-                        out.println("<head>");
-            out.println("<title>Servlet ListaPecasFaltantes</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet ListaPecasFaltantes at " + request.getContextPath() + "</h1>");
-
-            List<PecasDTO> pecas = pecasDAO.listar();
-            for(PecasDTO peca : pecas)
-            {
-                out.println("<p>" + peca.getCodigo() + " " + peca.getMarca() + peca.getNome() + " " + peca.getQuantidade()+ "</p>");
-            }
-            out.println("</body>");
-            out.println("</html>");
-        } catch (SQLException ex) {
-            Logger.getLogger(ListaPecasFaltantes.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ListaPecasFaltantes.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ListaPecasFaltantes.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-   
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
-} */
 package br.cefetmg.projeto4.javaweb;
 
 import br.cefetmg.projeto4.dao.PecasDAO;
@@ -95,13 +22,11 @@ public class ListaPecasFaltantes extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // Configuração da conexão com o banco de dados (substitua pelos seus próprios dados)
-        try {
-            PecasDAO pecasDAO = new PecasDAO();
+        try (PrintWriter out = response.getWriter(); PecasDAO pecasDAO = new PecasDAO()) {
             List<PecasDTO> pecas = pecasDAO.listarFaltosos();
 
             // Configurar a resposta HTTP com um tipo de conteúdo HTML
             response.setContentType("text/html");
-            PrintWriter out = response.getWriter();
 
             // Escrever a página HTML
             out.println("<html><head>");

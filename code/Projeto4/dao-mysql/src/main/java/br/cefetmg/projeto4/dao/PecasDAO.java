@@ -1,5 +1,4 @@
 package br.cefetmg.projeto4.dao;
-import br.cefetmg.projeto4.dao.mysql.MySqlConnection;
 import br.cefetmg.projeto4.idao.IPecasDAO;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -15,12 +14,10 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 public class PecasDAO implements IPecasDAO {
-        MySqlConnection bancoDeDados;
-    Connection conexao;
+    private final Connection conexao;
 
     public PecasDAO() throws SQLException {
-        bancoDeDados = new MySqlConnection();
-        conexao = bancoDeDados.getConexao(); // Abre a conexão com o banco de dados
+        conexao = MysqlConnection.getConexao();
     }
     
     @Override
@@ -204,5 +201,10 @@ public class PecasDAO implements IPecasDAO {
             System.out.println("Erro: " + e.getMessage());
             return Collections.emptyList();
         }
+    }
+
+    @Override
+    public void close() throws SQLException {
+        conexao.close();
     }
 }

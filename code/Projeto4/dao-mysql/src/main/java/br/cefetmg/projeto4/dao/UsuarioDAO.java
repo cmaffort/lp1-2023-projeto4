@@ -1,9 +1,5 @@
 package br.cefetmg.projeto4.dao;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,17 +8,14 @@ import java.util.Optional;
 
 import org.mindrot.jbcrypt.BCrypt;
 
-import br.cefetmg.projeto4.dao.mysql.MySqlConnection;
 import br.cefetmg.projeto4.dto.UsuarioDTO;
 import br.cefetmg.projeto4.idao.IUsuarioDAO;
 
 public class UsuarioDAO implements IUsuarioDAO {
-    MySqlConnection bancoDeDados;
-    Connection conexao;
+    protected final Connection conexao;
 
     public UsuarioDAO() throws SQLException {
-        bancoDeDados = new MySqlConnection();
-        conexao = bancoDeDados.getConexao();
+        conexao = MysqlConnection.getConexao();
     }
 
     @Override
@@ -41,7 +34,7 @@ public class UsuarioDAO implements IUsuarioDAO {
             stmt.setString(3, usuario.getTipoCodigo());
             stmt.setString(4, usuario.getEmail());
 
-            String senhaHash = BCrypt.hashpw(usuario.getSenha(), BCrypt.gensalt());
+            String senhaHash = BCrypt.hashpw(usuario.getSenha(), BCrypt.gensalt(15));
 
             stmt.setString(5, senhaHash);
             stmt.setString(6, usuario.getTipo());
@@ -85,13 +78,36 @@ public class UsuarioDAO implements IUsuarioDAO {
     }
 
     @Override
-    public boolean setFoto(String email, byte[] foto) throws SQLException {
+    public boolean setFoto(String email, String foto) throws SQLException {
         try {
             String sql = "UPDATE usuarios SET foto = ? WHERE email = ?";
             PreparedStatement stmt = conexao.prepareStatement(sql);
     
-            stmt.setBytes(1, foto);
+            stmt.setString(1, foto);
             stmt.setString(2, email);
+    
+            int rowsAffected = stmt.executeUpdate();
+    
+            if (rowsAffected <= 0) 
+                throw new SQLException("Update failed");
+
+            stmt.close();
+    
+            System.out.println("Atualizacao realizada com sucesso");
+            return true;
+        } catch (SQLException e) {
+            System.out.println("Erro: " + e.getMessage());
+            return false; 
+        }
+    }
+
+    @Override
+    public boolean resetFoto(String email) throws SQLException {
+        try {
+            String sql = "UPDATE usuarios SET foto = DEFAULT WHERE email = ?";
+            PreparedStatement stmt = conexao.prepareStatement(sql);
+    
+            stmt.setString(1, email);
     
             int rowsAffected = stmt.executeUpdate();
     
@@ -124,7 +140,7 @@ public class UsuarioDAO implements IUsuarioDAO {
                 String codigo = resultSet.getString("codigo");
                 String tipoCodigo = resultSet.getString("tipo_codigo");
                 String senha = resultSet.getString("senha");
-                byte[] foto = resultSet.getBytes("foto");
+                String foto = resultSet.getString("foto");
                 String tipo = resultSet.getString("tipo");
 
                 usuario = new UsuarioDTO(nome, codigo, tipoCodigo, email, senha, tipo, foto);
@@ -141,5 +157,10 @@ public class UsuarioDAO implements IUsuarioDAO {
             System.out.println("Erro: " + e.getMessage());
             return Optional.empty();
         }
+    }
+
+    @Override
+    public final void close() throws SQLException {
+        conexao.close();
     }
 }

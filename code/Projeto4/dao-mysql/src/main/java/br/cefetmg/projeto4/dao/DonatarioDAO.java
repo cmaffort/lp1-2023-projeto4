@@ -1,8 +1,6 @@
 package br.cefetmg.projeto4.dao;
 import br.cefetmg.projeto4.idao.IDonatarioDAO;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.sql.*;
 
 import br.cefetmg.projeto4.dto.DonatarioDTO;
@@ -17,9 +15,7 @@ import java.util.Optional;
  * @author lucas
  */
 public class DonatarioDAO extends UsuarioDAO implements IDonatarioDAO {
-    public DonatarioDAO() throws SQLException {
-        super();
-    }
+    public DonatarioDAO() throws SQLException {}
 
     @Override
     public boolean inserir(DonatarioDTO donatario) throws SQLException, ClassNotFoundException {
@@ -78,7 +74,7 @@ public class DonatarioDAO extends UsuarioDAO implements IDonatarioDAO {
             String CPF = resultSet.getString("codigo");
             String email = resultSet.getString("email");
             String senha = resultSet.getString("senha");
-            byte[] foto = resultSet.getBytes("foto");
+            String foto = resultSet.getString("foto");
             String escola = resultSet.getString("escola");
             int posicao = resultSet.getInt("posicao");
             int serie = resultSet.getInt("serie");
@@ -112,7 +108,7 @@ public class DonatarioDAO extends UsuarioDAO implements IDonatarioDAO {
                 String nome = resultSet.getString("nome");
                 String CPF = resultSet.getString("codigo");
                 String senha = resultSet.getString("senha");
-                byte[] foto = resultSet.getBytes("foto");
+                String foto = resultSet.getString("foto");
                 String escola = resultSet.getString("escola");
                 int posicao = resultSet.getInt("posicao");
                 int serie = resultSet.getInt("serie");

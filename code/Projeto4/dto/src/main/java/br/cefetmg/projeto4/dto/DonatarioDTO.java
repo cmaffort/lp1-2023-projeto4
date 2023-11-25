@@ -10,7 +10,7 @@ public class DonatarioDTO extends UsuarioDTO {
         this(nome, CPF, email, senha, null, escola, serie);
     }
 
-    public DonatarioDTO(String nome, String CPF, String email, String senha, byte[] foto, String escola, int serie) {
+    public DonatarioDTO(String nome, String CPF, String email, String senha, String foto, String escola, int serie) {
         this(nome, CPF, email, senha, foto, escola, 0, serie);
     }
 
@@ -18,7 +18,7 @@ public class DonatarioDTO extends UsuarioDTO {
         this(nome, CPF, email, senha, null, escola, posicao, serie);
     }
 
-    public DonatarioDTO(String nome, String CPF, String email, String senha, byte[] foto, String escola, int posicao, int serie) {
+    public DonatarioDTO(String nome, String CPF, String email, String senha, String foto, String escola, int posicao, int serie) {
         super(nome, CPF, email, senha, foto);
         this.escola = escola;
         this.posicao = posicao;

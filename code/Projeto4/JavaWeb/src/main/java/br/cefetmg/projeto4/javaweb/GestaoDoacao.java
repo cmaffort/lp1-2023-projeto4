@@ -24,8 +24,10 @@ public class GestaoDoacao extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // Configuração da conexão com o banco de dados (substitua pelos seus próprios dados)
-        try {
+        try (
             DoacaoDAO doacaoDAO = new DoacaoDAO();
+            DonatarioDAO donatarioDAO = new DonatarioDAO();
+        ) {
             List<DoacaoDTO> doacoes = doacaoDAO.listar();
 
             // Configurar a resposta HTTP com um tipo de conteúdo HTML
@@ -53,7 +55,6 @@ public class GestaoDoacao extends HttpServlet {
             }
 
             out.println("</tbody></table></section>");
-            DonatarioDAO donatarioDAO = new DonatarioDAO();
             List<DonatarioDTO> donatarios = donatarioDAO.listar();
             out.println("<section><table>");
             out.println("<caption>Fila de Espera</caption>");

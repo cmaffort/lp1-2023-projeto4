@@ -36,7 +36,10 @@ public class PecaFaltanteServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException, ClassNotFoundException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
+        try (
+            PrintWriter out = response.getWriter(); 
+            PecasDAO pecasDAO = new PecasDAO()
+        ) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
@@ -48,7 +51,6 @@ public class PecaFaltanteServlet extends HttpServlet {
             String nome = request.getParameter("nome");
             String marca = request.getParameter("marca");
             PecasDTO peca = new PecasDTO(nome, marca, quantidade);
-            PecasDAO pecasDAO = new PecasDAO();
             pecasDAO.inserir(peca);
             out.println("<body>");
             out.println("<h1>Servlet PecaFaltanteServlet at " + request.getContextPath() + "</h1>");

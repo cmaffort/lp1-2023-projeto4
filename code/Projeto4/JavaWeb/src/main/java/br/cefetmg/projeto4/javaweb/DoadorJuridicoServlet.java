@@ -30,8 +30,7 @@ public class DoadorJuridicoServlet extends HttpServlet {
             String senha = request.getParameter("senha");
             String confirmarSenha = request.getParameter("confimarSenha");
             DoadorJuridicoDTO doadorJuridico = new DoadorJuridicoDTO(nome, cnpj, email, senha, endereco + " " + bairro + " " + cidade);
-            try {
-                DoadorJuridicoDAO doadorJuricoDAO = new DoadorJuridicoDAO();
+            try (DoadorJuridicoDAO doadorJuricoDAO = new DoadorJuridicoDAO()) {
                 try {
                     if(doadorJuricoDAO.inserir(doadorJuridico))
                     {

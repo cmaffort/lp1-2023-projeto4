@@ -48,8 +48,14 @@ public class ServletLogin extends HttpServlet {
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
-        try {
+        try (
             UsuarioDAO usuarioDAO = new UsuarioDAO();
+            DonatarioDAO donatarioDAO = new DonatarioDAO();
+            DoadorDAO doadorDAO = new DoadorDAO();
+            ProfessorDAO professorDAO = new ProfessorDAO();
+            DoadorJuridicoDAO doadorJuridicoDAO = new DoadorJuridicoDAO();
+            EstagiarioDAO estagiarioDAO = new EstagiarioDAO()
+        ) {
 
             String email = request.getParameter("email");
             String senha = request.getParameter("senha");
@@ -67,7 +73,6 @@ public class ServletLogin extends HttpServlet {
             UsuarioDTO safeUsuario;
 
             if (usuario.getTipo().equals("DONATARIO")) {
-                DonatarioDAO donatarioDAO = new DonatarioDAO();
                 DonatarioDTO donatario = (DonatarioDTO) donatarioDAO.selecionar(email).orElseThrow();
                 safeUsuario = donatario.safe();
 
@@ -75,11 +80,9 @@ public class ServletLogin extends HttpServlet {
                     response.sendRedirect("agendamentoEntrega.jsp");
             } else if (usuario.getTipo().equals("DOADOR")) {
                 if (usuario.getTipoCodigo().equals("CPF")) {
-                    DoadorDAO doadorDAO = new DoadorDAO();
                     DoadorDTO doador = (DoadorDTO) doadorDAO.selecionar(email).orElseThrow();
                     safeUsuario = doador.safe();
                 } else {
-                    DoadorJuridicoDAO doadorJuridicoDAO = new DoadorJuridicoDAO();
                     DoadorJuridicoDTO doadorJuridico = (DoadorJuridicoDTO) doadorJuridicoDAO.selecionar(email).orElseThrow();
                     safeUsuario = doadorJuridico.safe();
                 }
@@ -88,11 +91,9 @@ public class ServletLogin extends HttpServlet {
                     response.sendRedirect("cadastroDoacao.jsp");
             } else {
                 if (usuario.getTipo().equals("PROFESSOR")) {
-                    ProfessorDAO professorDAO = new ProfessorDAO();
                     ProfessorDTO professor = (ProfessorDTO) professorDAO.selecionar(email).orElseThrow();
                     safeUsuario = professor.safe();
                 } else {
-                    EstagiarioDAO estagiarioDAO = new EstagiarioDAO();
                     EstagiarioDTO estagiario = (EstagiarioDTO) estagiarioDAO.selecionar(email).orElseThrow();
                     safeUsuario = estagiario.safe();
                 }

@@ -8,7 +8,7 @@ public class ProfessorDTO extends UsuarioDTO  {
         this(nome, CPF, email, senha, null, departamento);
     }
 
-    public ProfessorDTO(String nome, String CPF, String email, String senha, byte[] foto, String departamento) {
+    public ProfessorDTO(String nome, String CPF, String email, String senha, String foto, String departamento) {
         super(nome, CPF, email, senha, Tipo.PROFESSOR, foto);
         this.departamento = departamento;
     }

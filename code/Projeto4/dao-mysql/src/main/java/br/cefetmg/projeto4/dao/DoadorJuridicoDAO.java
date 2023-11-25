@@ -1,15 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package br.cefetmg.projeto4.dao;
+
 import br.cefetmg.projeto4.idao.IDoadorJuridicoDAO;
 import br.cefetmg.projeto4.dto.DoadorDTO;
 import br.cefetmg.projeto4.dto.DoadorJuridicoDTO;
 import br.cefetmg.projeto4.dto.UsuarioDTO;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -65,7 +60,7 @@ public class DoadorJuridicoDAO extends DoadorDAO implements IDoadorJuridicoDAO {
             String CNPJ = resultSet.getString("codigo");
             String email = resultSet.getString("email");
             String senha = resultSet.getString("senha");
-            byte[] foto = resultSet.getBytes("foto");
+            String foto = resultSet.getString("foto");
             int computadoresDoados = resultSet.getInt("computadores_doados");
             String endereco = resultSet.getString("endereco");
 
@@ -97,7 +92,7 @@ public class DoadorJuridicoDAO extends DoadorDAO implements IDoadorJuridicoDAO {
                 String nome = resultSet.getString("nome");
                 String CPF = resultSet.getString("codigo");
                 String senha = resultSet.getString("senha");
-                byte[] foto = resultSet.getBytes("foto");
+                String foto = resultSet.getString("foto");
                 int doacoes = resultSet.getInt("computadores_doados");
                 String endereco = resultSet.getString("endereco");
 

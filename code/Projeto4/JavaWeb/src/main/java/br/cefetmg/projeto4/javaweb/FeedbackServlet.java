@@ -6,7 +6,6 @@ import br.cefetmg.projeto4.dto.FeedbackDTO;
 import br.cefetmg.projeto4.dto.UsuarioDTO;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -35,7 +34,7 @@ public class FeedbackServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
+        try (FeedbackDAO feedbackDAO = new FeedbackDAO()) {
             String estrelas = request.getParameter("rating");
             String descricao = request.getParameter("comments");
 
@@ -55,7 +54,6 @@ public class FeedbackServlet extends HttpServlet {
 
             DonatarioDTO donatario = (DonatarioDTO) usuario;
             FeedbackDTO feedback = new FeedbackDTO(Integer.parseInt(estrelas), descricao, donatario);
-            FeedbackDAO feedbackDAO = new FeedbackDAO();
 
             if (!feedbackDAO.inserir(feedback))
                 response.sendRedirect("feedback.jsp?status=fail");

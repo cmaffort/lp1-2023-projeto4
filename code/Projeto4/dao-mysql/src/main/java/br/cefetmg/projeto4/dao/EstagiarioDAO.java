@@ -1,8 +1,6 @@
 package br.cefetmg.projeto4.dao;
 import br.cefetmg.projeto4.idao.IEstagiarioDAO;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.sql.*;
 
 import br.cefetmg.projeto4.dto.EstagiarioDTO;
@@ -63,7 +61,7 @@ public class EstagiarioDAO extends UsuarioDAO implements IEstagiarioDAO {
             String CPF = resultSet.getString("codigo");
             String email = resultSet.getString("email");
             String senha = resultSet.getString("senha");
-            byte[] foto = resultSet.getBytes("foto");
+            String foto = resultSet.getString("foto");
             String dataEntrada = resultSet.getString("dataDeEntrada");
             String dataSaida = resultSet.getString("dataDeSaida");
 
@@ -96,7 +94,7 @@ public class EstagiarioDAO extends UsuarioDAO implements IEstagiarioDAO {
                 String nome = resultSet.getString("nome");
                 String CPF = resultSet.getString("codigo");
                 String senha = resultSet.getString("senha");
-                byte[] foto = resultSet.getBytes("foto");
+                String foto = resultSet.getString("foto");
                 String dataEntrada = resultSet.getString("dataDeEntrada");
                 String dataSaida = resultSet.getString("dataDeSaida");
                 
