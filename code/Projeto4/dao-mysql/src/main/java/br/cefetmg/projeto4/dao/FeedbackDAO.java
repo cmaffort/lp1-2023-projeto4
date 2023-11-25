@@ -10,18 +10,15 @@ import java.util.Collections;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-import br.cefetmg.projeto4.dao.mysql.MySqlConnection;
 import br.cefetmg.projeto4.dto.DonatarioDTO;
 import br.cefetmg.projeto4.dto.FeedbackDTO;
 import br.cefetmg.projeto4.idao.IFeedbackDAO;
 
 public class FeedbackDAO implements IFeedbackDAO {
-    MySqlConnection bancoDeDados;
-    Connection conexao;
+    private final Connection conexao;
 
     public FeedbackDAO() throws SQLException {
-        bancoDeDados = new MySqlConnection();
-        conexao = bancoDeDados.getConexao(); // Abre a conexão com o banco de dados
+        conexao = MysqlConnection.getConexao();
     }
 
     @Override
@@ -60,32 +57,34 @@ public class FeedbackDAO implements IFeedbackDAO {
     public List<FeedbackDTO> listar() throws SQLException, ClassNotFoundException {
         try {
             List<FeedbackDTO> feedbacks = new ArrayList<>();
-            DonatarioDAO donatarioDAO = new DonatarioDAO();
-    
-            String sqlFeedbacks = "SELECT feedbacks.*, usuarios.* FROM feedbacks JOIN usuarios ON feedbacks.id_donatario = usuarios.id ORDER BY feedbacks.id DESC;";
-            try (Statement stmt = conexao.createStatement();
-                 ResultSet resultSet = stmt.executeQuery(sqlFeedbacks)) {
-    
-                String sqlDoacoes = "SELECT doacoes.computador FROM usuarios JOIN donatarios ON usuarios.id = donatarios.id_cadastro JOIN doacoes ON donatarios.id_doacao = doacoes.id WHERE usuarios.email = ?";
-                try (PreparedStatement stmt2 = conexao.prepareStatement(sqlDoacoes)) {
-                    while (resultSet.next()) {
-                        int estrelas = resultSet.getInt("estrelas");
-                        String descricao = resultSet.getString("descricao");
-                        String email = resultSet.getString("email");
-                        DonatarioDTO donatario = (DonatarioDTO) donatarioDAO.selecionar(email).orElseThrow();
-    
-                        stmt2.setString(1, email);
-    
-                        String computador;
-                        try (ResultSet resultSet2 = stmt2.executeQuery()) {
-                            if (!resultSet2.next())
-                                throw new SQLException("Failed to select computador");
-    
-                            computador = resultSet2.getString("computador");
+
+            try (DonatarioDAO donatarioDAO = new DonatarioDAO()) {
+                String sqlFeedbacks = "SELECT feedbacks.*, usuarios.* FROM feedbacks JOIN usuarios ON feedbacks.id_donatario = usuarios.id ORDER BY feedbacks.id DESC;";
+                
+                try (Statement stmt = conexao.createStatement();
+                    ResultSet resultSet = stmt.executeQuery(sqlFeedbacks)) {
+        
+                    String sqlDoacoes = "SELECT doacoes.computador FROM usuarios JOIN donatarios ON usuarios.id = donatarios.id_cadastro JOIN doacoes ON donatarios.id_doacao = doacoes.id WHERE usuarios.email = ?";
+                    try (PreparedStatement stmt2 = conexao.prepareStatement(sqlDoacoes)) {
+                        while (resultSet.next()) {
+                            int estrelas = resultSet.getInt("estrelas");
+                            String descricao = resultSet.getString("descricao");
+                            String email = resultSet.getString("email");
+                            DonatarioDTO donatario = (DonatarioDTO) donatarioDAO.selecionar(email).orElseThrow();
+        
+                            stmt2.setString(1, email);
+        
+                            String computador;
+                            try (ResultSet resultSet2 = stmt2.executeQuery()) {
+                                if (!resultSet2.next())
+                                    throw new SQLException("Failed to select computador");
+        
+                                computador = resultSet2.getString("computador");
+                            }
+        
+                            FeedbackDTO feedback = new FeedbackDTO(estrelas, descricao, computador, donatario);
+                            feedbacks.add(feedback);
                         }
-    
-                        FeedbackDTO feedback = new FeedbackDTO(estrelas, descricao, computador, donatario);
-                        feedbacks.add(feedback);
                     }
                 }
             }
@@ -97,5 +96,10 @@ public class FeedbackDAO implements IFeedbackDAO {
             System.out.println("Erro: " + e.getMessage());
             return Collections.emptyList();
         }
+    }
+
+    @Override
+    public void close() throws SQLException {
+        conexao.close();
     }
 }

@@ -1,12 +1,10 @@
 package br.cefetmg.projeto4.javaweb;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.SQLException;
 
-import org.apache.commons.io.IOUtils;
-
+import br.cefetmg.projeto4.core.CloudHelper;
+import br.cefetmg.projeto4.core.FileHelper;
 import br.cefetmg.projeto4.dao.UsuarioDAO;
 import br.cefetmg.projeto4.dto.UsuarioDTO;
 
@@ -20,7 +18,6 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.Part;
 
 import java.io.InputStream;
-import java.nio.file.Paths;
 
 @WebServlet(name = "updatePic", urlPatterns = {"/updatePic"})
 @MultipartConfig
@@ -39,8 +36,9 @@ public class FotoServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html");
 
-        try {
+        try (UsuarioDAO usuarioDAO = new UsuarioDAO()) {
             Part filePart = request.getPart("foto");
+            String fileName = filePart.getSubmittedFileName();
 
             HttpSession session = request.getSession(false);
 
@@ -50,30 +48,22 @@ public class FotoServlet extends HttpServlet {
             }
 
             UsuarioDTO usuario = (UsuarioDTO) session.getAttribute("usuario");
-            UsuarioDAO usuarioDAO = new UsuarioDAO();
 
-            if (filePart != null && filePart.getSize() > 0) {
-                String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
-                File fotoFile = File.createTempFile("uploaded-", "-" + fileName);
+            InputStream fileStream = filePart.getInputStream();
+            byte[] fileBytes = new byte[fileStream.available()];
 
-                try (InputStream fileContent = filePart.getInputStream();
-                    FileOutputStream fileOutputStream = new FileOutputStream(fotoFile)) {
-                    IOUtils.copy(fileContent, fileOutputStream);
-                }
+            fileStream.read(fileBytes);
 
-                byte[] compressedFile = CompressionHelper.compressFile(fotoFile);
+            String newFileName = usuario.getCodigo() + '_' + System.currentTimeMillis() + '.' + FileHelper.getSuffix(fileName);
 
-                if (compressedFile.length > 4294967295l) {
-                    response.sendRedirect("perfil.jsp?e=size");
-                    return;
-                }
+            if (usuario.getFoto().contains("_"))
+                CloudHelper.deletar(usuario.getFoto());
 
-                if (!usuarioDAO.setFoto(usuario.getEmail(), compressedFile))
-                    throw new SQLException("Failed to update picture");
+            String path = CloudHelper.inserir(fileBytes, newFileName);
 
-                usuario.setFoto(compressedFile);
-                session.setAttribute("usuario", usuario);
-            }
+            usuarioDAO.setFoto(usuario.getEmail(), path);
+            usuario.setFoto(path);
+            session.setAttribute("usuario", usuario);
 
             response.sendRedirect("perfil.jsp?status=success");
         } catch (SQLException e) {

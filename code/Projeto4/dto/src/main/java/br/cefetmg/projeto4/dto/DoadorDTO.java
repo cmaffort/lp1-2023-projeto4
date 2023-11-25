@@ -13,7 +13,7 @@ public class DoadorDTO extends UsuarioDTO {
         this(nome, CPF, email, senha, null);
     }
 
-    public DoadorDTO(String nome, String CPF,  String email, String senha, byte[] foto) {
+    public DoadorDTO(String nome, String CPF,  String email, String senha, String foto) {
         this(nome, CPF, email, senha, foto, 0);
     }
 
@@ -21,15 +21,15 @@ public class DoadorDTO extends UsuarioDTO {
         this(nome, CPF, email, senha, null, computadoresDoados);
     }
 
-    public DoadorDTO(String nome, String CPF,  String email, String senha, byte[] foto, int computadoresDoados) {
+    public DoadorDTO(String nome, String CPF,  String email, String senha, String foto, int computadoresDoados) {
         this(nome, CPF, email, senha, foto, computadoresDoados, TipoDoador.FISICO);
     }
 
-    public DoadorDTO(String nome, String codigo,  String email, String senha, byte[] foto, int computadoresDoados, String tipo) {
+    public DoadorDTO(String nome, String codigo,  String email, String senha, String foto, int computadoresDoados, String tipo) {
         this(nome, codigo, email, senha, foto, computadoresDoados, TipoDoador.valueOf(tipo));
     }
 
-    protected DoadorDTO(String nome, String codigo,  String email, String senha, byte[] foto, int computadoresDoados, TipoDoador tipo) {
+    protected DoadorDTO(String nome, String codigo,  String email, String senha, String foto, int computadoresDoados, TipoDoador tipo) {
         super(nome, codigo, tipo == TipoDoador.FISICO ? TipoCodigo.CPF : TipoCodigo.CNPJ, email, senha, Tipo.DOADOR, foto);
         this.computadoresDoados = computadoresDoados;
         this.tipo = tipo;

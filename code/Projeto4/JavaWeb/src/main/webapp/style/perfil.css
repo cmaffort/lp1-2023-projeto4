@@ -34,6 +34,10 @@ p.info {
     text-align: left;
 }
 
+p.info:last-of-type {
+    padding-bottom: 10px;
+}
+
 #email {
     color: #777;
     font-size: 16px;
@@ -47,9 +51,16 @@ p.info {
     font-weight: bold;
 }
 
+#remove, #update {
+    display: block;
+}
+
 #update {
     cursor: pointer;
-    display: block;
+    margin-bottom: 5px;
+}
+
+#remove {
     margin-bottom: 10px;
 }
 

@@ -5,17 +5,14 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
-import br.cefetmg.projeto4.dao.mysql.MySqlConnection;
 import br.cefetmg.projeto4.dto.MantecaoDTO;
 import br.cefetmg.projeto4.idao.IMantecaoDAO;
 
 public class MantecaoDAO implements IMantecaoDAO {
-    MySqlConnection bancoDeDados;
-    Connection conexao;
+    private final Connection conexao;
 
     public MantecaoDAO() throws SQLException {
-        bancoDeDados = new MySqlConnection();
-        conexao = bancoDeDados.getConexao(); // Abre a conexão com o banco de dados
+        conexao = MysqlConnection.getConexao();
     }
 
     @Override
@@ -59,5 +56,10 @@ public class MantecaoDAO implements IMantecaoDAO {
     public List<MantecaoDTO> listar() throws SQLException, ClassNotFoundException {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'listar'");
+    }
+
+    @Override
+    public void close() throws SQLException {
+        conexao.close();
     }
 }

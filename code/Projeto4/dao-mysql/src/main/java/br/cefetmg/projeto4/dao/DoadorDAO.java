@@ -57,7 +57,7 @@ public class DoadorDAO extends UsuarioDAO implements IDoadorDAO {
             String CPF = resultSet.getString("codigo");
             String email = resultSet.getString("email");
             String senha = resultSet.getString("senha");
-            byte[] foto = resultSet.getBytes("foto");
+            String foto = resultSet.getString("foto");
             int computadoresDoados = resultSet.getInt("computadores_doados");
             String tipo = resultSet.getString("tipo");
             
@@ -91,7 +91,7 @@ public class DoadorDAO extends UsuarioDAO implements IDoadorDAO {
                 String nome = resultSet.getString("nome");
                 String CPF = resultSet.getString("codigo");
                 String senha = resultSet.getString("senha");
-                byte[] foto = resultSet.getBytes("foto");
+                String foto = resultSet.getString("foto");
                 int doacoes = resultSet.getInt("computadores_doados");
                 String tipo = resultSet.getString("tipo");
 

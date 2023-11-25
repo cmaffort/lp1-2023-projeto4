@@ -34,11 +34,10 @@
 
     <main>
 <%
-    try {
-        EstoqueDAO estoqueDAO = new EstoqueDAO();
+    try (EstoqueDAO estoqueDAO = new EstoqueDAO()) {
         List<ItemEstoqueDTO> itens = estoqueDAO.listar();
 %>
-        <table id="estoque">
+        <table id="estoque" class="hidden hideable">
             <caption>Estoque</caption>
             <thead>
                 <tr>

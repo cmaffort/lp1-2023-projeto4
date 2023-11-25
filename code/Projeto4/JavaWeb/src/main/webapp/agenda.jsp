@@ -39,7 +39,7 @@
         AgendamentoDAO agendamentoDAO = new AgendamentoDAO();
         List<AgendamentoDTO> agendamentos = agendamentoDAO.listar();
 %>
-        <table>
+        <table class="hidden hideable">
             <caption>Doações Agendadas</caption>
             <thead>
                 <tr>

@@ -9,17 +9,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import br.cefetmg.projeto4.dao.mysql.MySqlConnection;
 import br.cefetmg.projeto4.dto.ItemEstoqueDTO;
 import br.cefetmg.projeto4.idao.IEstoqueDAO;
 
 public class EstoqueDAO implements IEstoqueDAO {
-    MySqlConnection bancoDeDados;
-    Connection conexao;
+    private final Connection conexao;
 
     public EstoqueDAO() throws SQLException {
-        bancoDeDados = new MySqlConnection();
-        conexao = bancoDeDados.getConexao(); // Abre a conexão com o banco de dados
+        conexao = MysqlConnection.getConexao(); // Abre a conexão com o banco de dados
     }
 
     @Override
@@ -82,5 +79,10 @@ public class EstoqueDAO implements IEstoqueDAO {
             System.out.println("Erro: " + e.getMessage());
             return Collections.emptyList();
         }
+    }
+
+    @Override
+    public void close() throws SQLException {
+        conexao.close();
     }
 }

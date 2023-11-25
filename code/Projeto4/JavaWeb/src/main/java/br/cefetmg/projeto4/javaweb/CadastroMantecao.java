@@ -43,7 +43,11 @@ public class CadastroMantecao extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
+        try (
+            PrintWriter out = response.getWriter();
+            EstagiarioDAO estagiarioDAO = new EstagiarioDAO();
+            MantecaoDAO mantecaoDAO = new MantecaoDAO()
+        ) {
             String data = request.getParameter("retirada");
             String estado = request.getParameter("estado");
             String email = request.getParameter("email");
@@ -63,11 +67,9 @@ public class CadastroMantecao extends HttpServlet {
             }
 
             DonatarioDTO donatario = (DonatarioDTO) usuario;
-            EstagiarioDAO estagiarioDAO = new EstagiarioDAO();
             EstagiarioDTO arrumador = (EstagiarioDTO) estagiarioDAO.selecionar(email).orElseThrow();
 
             MantecaoDTO mantecao = new MantecaoDTO(data, estado, donatario, arrumador);
-            MantecaoDAO mantecaoDAO = new MantecaoDAO();
 
             if(mantecaoDAO.inserir(mantecao))
                 out.println("<p>inserido</p>");

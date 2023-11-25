@@ -29,6 +29,7 @@ public class CadastrarDoacaoServlet extends HttpServlet {
             String data = request.getParameter("data");
             int quantidadeRAM = 0;
             int quantidade = 0;
+            System.out.println(data);
             
             try {
                 quantidade = Integer.parseInt(quantidade1);
@@ -46,8 +47,7 @@ public class CadastrarDoacaoServlet extends HttpServlet {
 
             ComputadorDTO computador = new ComputadorDTO(null, data, null, marca, modelo, quantidadeRAM);
             DoacaoDTO doacao = new DoacaoDTO(quantidade, computador);
-                        try {
-                DoacaoDAO doacaoDAO = new DoacaoDAO();
+                        try (DoacaoDAO doacaoDAO = new DoacaoDAO()) {
                 try {
                     if(doacaoDAO.inserir(doacao))
                         out.println("<p>inserido</p>");

@@ -39,11 +39,9 @@ public class CadastroCompra extends HttpServlet {
             throws ServletException, IOException, NumberFormatException, ClassNotFoundException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            try {
+            try (PecasDAO pecasDAO = new PecasDAO()) {
                 String id = request.getParameter("codigo");
                 String quantidade = request.getParameter("quantidade");
-                
-                PecasDAO pecasDAO = new PecasDAO();
 
                 if (!pecasDAO.registrarCompra(Integer.parseInt(id), Integer.parseInt(quantidade)))
                     throw new SQLException("Cadastro compra falhou");

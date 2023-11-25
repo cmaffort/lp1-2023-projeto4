@@ -5,7 +5,9 @@
   <artifactId>Projeto4</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>pom</packaging>
+  
   <modules>
+    <module>core</module>
     <module>dto</module>
     <module>idao</module>
     <module>dao-mysql</module>

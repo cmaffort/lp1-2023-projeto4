@@ -5,9 +5,10 @@ import java.util.List;
 
 import br.cefetmg.projeto4.dto.MantecaoDTO;
 
-public interface IMantecaoDAO {
+public interface IMantecaoDAO extends AutoCloseable {
     boolean inserir(MantecaoDTO computador) throws SQLException, ClassNotFoundException;
     boolean alterar(MantecaoDTO computador) throws SQLException, ClassNotFoundException;
     boolean remover(MantecaoDTO computador) throws SQLException, ClassNotFoundException;
-    List<MantecaoDTO> listar() throws SQLException, ClassNotFoundException;    
+    List<MantecaoDTO> listar() throws SQLException, ClassNotFoundException;
+    void close() throws SQLException;    
 }

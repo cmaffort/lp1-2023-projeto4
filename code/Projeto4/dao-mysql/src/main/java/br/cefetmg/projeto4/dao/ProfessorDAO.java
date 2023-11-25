@@ -3,8 +3,6 @@ import br.cefetmg.projeto4.dto.ProfessorDTO;
 import br.cefetmg.projeto4.dto.UsuarioDTO;
 import br.cefetmg.projeto4.idao.IProfessorDAO;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.sql.*;
 import java.util.List;
 import java.util.Optional;
@@ -66,7 +64,7 @@ public class ProfessorDAO extends UsuarioDAO implements IProfessorDAO {
                 String nome = resultSet.getString("nome");
                 String CPF = resultSet.getString("codigo");
                 String senha = resultSet.getString("senha");
-                byte[] foto = resultSet.getBytes("foto");
+                String foto = resultSet.getString("foto");
                 String departamento = resultSet.getString("departamento");
 
                 professor = new ProfessorDTO(nome, CPF, email, senha, foto, departamento);

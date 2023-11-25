@@ -34,8 +34,7 @@ public class DonatarioCadastro extends HttpServlet {
             out.println("<p>" + donatario.getCodigo() + "</p>");
             out.println("<p>" + donatario.getNome()+ "</p>");
 
-            DonatarioDAO donatarioDAO = new DonatarioDAO();
-                try {
+                try (DonatarioDAO donatarioDAO = new DonatarioDAO()) {
                     if(donatarioDAO.inserir(donatario))
                     {
                         out.println("<p>inserido</p>");

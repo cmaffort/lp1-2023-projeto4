@@ -50,8 +50,7 @@ public class SolicitacaoReparoServlet extends HttpServlet {
 
             SolicitacaoReparoDTO reparo = new SolicitacaoReparoDTO(computador, dataDeDoacao, especificacoes);
 
-            try {
-                SolicitacaoReparoDAO reparoDAO = new SolicitacaoReparoDAO();
+            try (SolicitacaoReparoDAO reparoDAO = new SolicitacaoReparoDAO()) {
                 out.print(reparo.getDataDeDoacao());
                 if (reparoDAO.inserir(reparo)) {
                     out.println("<p>inserido</p>");
