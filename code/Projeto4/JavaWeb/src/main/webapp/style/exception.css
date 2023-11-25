@@ -7,7 +7,10 @@ main {
     position: static;
 }
 
-table {
-    opacity: 0;
+.hideable {
     transition: opacity .3s ease-in-out;
+}
+
+.hidden {
+    opacity: 0;
 }

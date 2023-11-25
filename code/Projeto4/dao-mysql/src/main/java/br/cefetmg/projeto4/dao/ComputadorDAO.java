@@ -1,5 +1,4 @@
 package br.cefetmg.projeto4.dao;
-import br.cefetmg.projeto4.dao.mysql.MySqlConnection;
 import br.cefetmg.projeto4.idao.IComputadorDAO;
 import java.sql.SQLException;
 import br.cefetmg.projeto4.dto.ComputadorDTO;
@@ -10,12 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ComputadorDAO implements IComputadorDAO {
-    MySqlConnection bancoDeDados;
-    Connection conexao;
+    private final Connection conexao;
 
     public ComputadorDAO() throws SQLException {
-        bancoDeDados = new MySqlConnection();
-        conexao = bancoDeDados.getConexao(); // Abre a conexão com o banco de dados
+        conexao = MysqlConnection.getConexao();
     }
 
     @Override
@@ -105,5 +102,10 @@ public class ComputadorDAO implements IComputadorDAO {
 
     return computadores;
 
+    }
+
+    @Override
+    public void close() throws SQLException {
+        conexao.close();
     }
 }

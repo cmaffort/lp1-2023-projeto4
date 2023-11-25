@@ -10,18 +10,15 @@ import java.util.Collections;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-import br.cefetmg.projeto4.dao.mysql.MySqlConnection;
 import br.cefetmg.projeto4.dto.AgendamentoDTO;
 import br.cefetmg.projeto4.dto.DonatarioDTO;
 import br.cefetmg.projeto4.idao.IAgendamentoDAO;
 
 public class AgendamentoDAO implements IAgendamentoDAO {
-    MySqlConnection bancoDeDados;
-    Connection conexao;
+    private final Connection conexao;
 
     public AgendamentoDAO() throws SQLException {
-        bancoDeDados = new MySqlConnection();
-        conexao = bancoDeDados.getConexao(); // Abre a conexão com o banco de dados
+        conexao = MysqlConnection.getConexao();
     }
 
     @Override
@@ -62,26 +59,27 @@ public class AgendamentoDAO implements IAgendamentoDAO {
     public List<AgendamentoDTO> listar() throws SQLException, ClassNotFoundException {
         try {
             List<AgendamentoDTO> agendamentos = new ArrayList<>();
-            DonatarioDAO donatarioDAO = new DonatarioDAO();
 
-            String sql = "SELECT agendamentos.*, usuarios.email FROM agendamentos JOIN usuarios ON agendamentos.id_donatario = usuarios.id;";
-            Statement stmt = conexao.createStatement();
-            ResultSet resultSet = stmt.executeQuery(sql);
+            try (DonatarioDAO donatarioDAO = new DonatarioDAO()) {
+                String sql = "SELECT agendamentos.*, usuarios.email FROM agendamentos JOIN usuarios ON agendamentos.id_donatario = usuarios.id;";
+                Statement stmt = conexao.createStatement();
+                ResultSet resultSet = stmt.executeQuery(sql);
 
-            while (resultSet.next()) {
-                String data = resultSet.getString("data");
-                String horario = resultSet.getString("horario");
-                String email = resultSet.getString("email");
+                while (resultSet.next()) {
+                    String data = resultSet.getString("data");
+                    String horario = resultSet.getString("horario");
+                    String email = resultSet.getString("email");
 
-                DonatarioDTO donatario = (DonatarioDTO) donatarioDAO.selecionar(email).orElseThrow();
+                    DonatarioDTO donatario = (DonatarioDTO) donatarioDAO.selecionar(email).orElseThrow();
 
-                AgendamentoDTO agendamento = new AgendamentoDTO(data, horario, donatario);
+                    AgendamentoDTO agendamento = new AgendamentoDTO(data, horario, donatario);
 
-                agendamentos.add(agendamento);
+                    agendamentos.add(agendamento);
+                }
+
+                resultSet.close();
+                stmt.close();
             }
-
-            resultSet.close();
-            stmt.close();
 
             return agendamentos;
         } catch (NoSuchElementException e) {
@@ -90,5 +88,10 @@ public class AgendamentoDAO implements IAgendamentoDAO {
             System.out.println("Erro: " + e.getMessage());
             return Collections.emptyList();
         }
+    }
+
+    @Override
+    public void close() throws SQLException {
+        conexao.close();
     }
 }

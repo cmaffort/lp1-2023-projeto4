@@ -16,13 +16,13 @@ public class UsuarioDTO {
     protected String email;
     protected String senha;
     private Tipo tipo;
-    protected byte[] foto;
+    protected String foto;
 
     public UsuarioDTO(String nome, String codigo, String tipoCodigo, String email, String senha, String tipo) {
         this(nome, codigo, tipoCodigo, email, senha, tipo, null);
     }
 
-    public UsuarioDTO(String nome, String codigo, String tipoCodigo, String email, String senha, String tipo, byte[] foto) {
+    public UsuarioDTO(String nome, String codigo, String tipoCodigo, String email, String senha, String tipo, String foto) {
         this(nome, codigo, TipoCodigo.valueOf(tipoCodigo), email, senha, Tipo.valueOf(tipo), foto);
     }
 
@@ -30,7 +30,7 @@ public class UsuarioDTO {
         this(nome, CPF, email, senha, Tipo.DONATARIO, null);
     }
 
-    protected UsuarioDTO(String nome, String CPF, String email, String senha, byte[] foto) {
+    protected UsuarioDTO(String nome, String CPF, String email, String senha, String foto) {
         this(nome, CPF, email, senha, Tipo.DONATARIO, foto);
     }
 
@@ -38,7 +38,7 @@ public class UsuarioDTO {
         this(nome, CPF, email, senha, tipo, null);
     }
 
-    protected UsuarioDTO(String nome, String CPF, String email, String senha, Tipo tipo, byte[] foto) {
+    protected UsuarioDTO(String nome, String CPF, String email, String senha, Tipo tipo, String foto) {
         this(nome, CPF, TipoCodigo.CPF, email, senha, tipo, foto);
     }
 
@@ -46,7 +46,7 @@ public class UsuarioDTO {
         this(nome, codigo, tipoCodigo, email, senha, tipo, null);
     }
 
-    protected UsuarioDTO(String nome, String codigo, TipoCodigo tipoCodigo, String email, String senha, Tipo tipo, byte[] foto) {
+    protected UsuarioDTO(String nome, String codigo, TipoCodigo tipoCodigo, String email, String senha, Tipo tipo, String foto) {
         this.nome = nome;
         this.codigo = codigo;
         this.tipoCodigo = tipoCodigo;
@@ -110,11 +110,11 @@ public class UsuarioDTO {
         this.tipo = tipo;
     }
 
-    public byte[] getFoto() {
+    public String getFoto() {
         return foto;
     }
 
-    public void setFoto(byte[] foto) {
+    public void setFoto(String foto) {
         this.foto = foto;
     }
 

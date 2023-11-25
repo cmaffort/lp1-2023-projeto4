@@ -22,6 +22,7 @@
                     <img src="img/logo-cefet.png">
                 </figure>
                 <p class="danger"> Tem certeza que quer deletar conta?</p>
+                <p class="danger">Essa ação não pode ser desfeita</p>
                 <div class="campo">    
                     <label for="senha">Digite sua senha:</label>
                     <input type="password" id="senha" name="senha" required>

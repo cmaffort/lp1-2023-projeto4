@@ -8,7 +8,7 @@ public class DoadorJuridicoDTO extends DoadorDTO {
         this(nome, CNPJ, email, senha, null, endereco);
     }
     
-    public DoadorJuridicoDTO(String nome, String CNPJ,  String email, String senha, byte[] foto, String endereco) {
+    public DoadorJuridicoDTO(String nome, String CNPJ,  String email, String senha, String foto, String endereco) {
         this(nome, CNPJ, email, senha, foto, 0, endereco);
     } 
 
@@ -16,7 +16,7 @@ public class DoadorJuridicoDTO extends DoadorDTO {
         this(nome, CNPJ, email, senha, null, 0, endereco);
     }
 
-    public DoadorJuridicoDTO(String nome, String CNPJ,  String email, String senha, byte[] foto, int computadoresDoados, String endereco) {
+    public DoadorJuridicoDTO(String nome, String CNPJ,  String email, String senha, String foto, int computadoresDoados, String endereco) {
         super(nome, CNPJ, email, senha, foto, computadoresDoados, TipoDoador.JURIDICO);
         this.endereco = endereco;
     } 

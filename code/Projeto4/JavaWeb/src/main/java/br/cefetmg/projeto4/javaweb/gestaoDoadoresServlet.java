@@ -24,10 +24,11 @@ public class gestaoDoadoresServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
  
-        try {
-            DoadorDAO doadorFisicaDAO = new DoadorDAO();
+        try (
+            DoadorDAO doadorFisicaDAO = new DoadorDAO(); 
+            DoadorJuridicoDAO doadorJuridicoDAO = new DoadorJuridicoDAO()
+        ) {
             List<DoadorDTO> doadoresFisicos = doadorFisicaDAO.listar();
-            DoadorJuridicoDAO doadorJuridicoDAO = new DoadorJuridicoDAO();
             List<DoadorDTO> doadoresJuridicos = doadorJuridicoDAO.listar();
             
             response.setContentType("text/html");
@@ -52,6 +53,7 @@ public class gestaoDoadoresServlet extends HttpServlet {
             for (DoadorDTO doador : doadoresFisicos) {
                 out.println("<tr><td>" + doador.getNome()+ "</td><td>" + doador.getEmail() + "</td><td>" + doador.getComputadoresDoados()+ "</td><td>" + doador.getCodigo() + "</td></tr>");
             }
+
             out.println("</tbody></table>");
             out.println("<table>");
             out.println("<caption>Lista de Doadores Juridicos</caption>");

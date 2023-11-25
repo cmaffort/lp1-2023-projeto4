@@ -1,6 +1,5 @@
 package br.cefetmg.projeto4.dao;
 
-import br.cefetmg.projeto4.dao.mysql.MySqlConnection;
 import br.cefetmg.projeto4.dto.ComputadorDTO;
 import br.cefetmg.projeto4.dto.DoacaoDTO;
 import java.sql.Connection;
@@ -12,12 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 public class DoacaoDAO implements IDoacaoDAO {
-    MySqlConnection bancoDeDados;
-    Connection conexao;
+    private final Connection conexao;
 
     public DoacaoDAO() throws SQLException {
-        bancoDeDados = new MySqlConnection();
-        conexao = bancoDeDados.getConexao(); // Abre a conexão com o banco de dados
+        conexao = MysqlConnection.getConexao();
     }
 
     @Override
@@ -86,5 +83,8 @@ public class DoacaoDAO implements IDoacaoDAO {
     return doacoes;
     }
     
-
+    @Override
+    public void close() throws SQLException {
+        conexao.close();
+    }
 }

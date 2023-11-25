@@ -1,14 +1,4 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="java.io.InputStream"%>
-<%@page import="java.util.Base64"%>
-<%@page import="java.nio.file.Path"%>
-<%@page import="java.nio.file.Files"%>
-<%@page import="java.nio.file.FileSystems"%>
-<%@page import="java.io.IOException"%>
-<%@page import="java.util.Arrays"%>
-<%@page import="org.apache.commons.io.FilenameUtils"%>
-<%@page import="org.apache.commons.io.IOUtils"%>
-
 <%@page import="br.cefetmg.projeto4.dao.UsuarioDAO"%>
 <%@page import="br.cefetmg.projeto4.dao.DonatarioDAO"%>
 <%@page import="br.cefetmg.projeto4.dao.ProfessorDAO"%>
@@ -21,7 +11,6 @@
 <%@page import="br.cefetmg.projeto4.dto.DoadorDTO"%>
 <%@page import="br.cefetmg.projeto4.dto.DoadorJuridicoDTO"%>
 <%@page import="br.cefetmg.projeto4.dto.EstagiarioDTO"%>
-<%@page import="br.cefetmg.projeto4.javaweb.CompressionHelper"%>
 
 <%
     String user = request.getParameter("u");
@@ -34,7 +23,6 @@
     }
 
     UsuarioDTO usuario;
-    String base64Image = "";
 %>
 
 <!DOCTYPE html>
@@ -54,34 +42,23 @@
 
     <main>
 <%
-    try {
+    try (
+        UsuarioDAO usuarioDAO = new UsuarioDAO();
+        DonatarioDAO donatarioDAO = new DonatarioDAO();
+        DoadorDAO doadorDAO = new DoadorDAO();
+        ProfessorDAO professorDAO = new ProfessorDAO();
+        DoadorJuridicoDAO doadorJuridicoDAO = new DoadorJuridicoDAO();
+        EstagiarioDAO estagiarioDAO = new EstagiarioDAO()
+    ) {
         if (user == null)
             usuario = (UsuarioDTO) session.getAttribute("usuario");
-        else {
-            UsuarioDAO usuarioDAO = new UsuarioDAO();
-
-            usuario = usuarioDAO.selecionar(user).orElseThrow();
-        }
-
-        if (usuario.getFoto() != null) {
-            byte[] compressedPhotoBytes = usuario.getFoto();
-        
-            byte[] decompressedPhotoBytes = CompressionHelper.decompressFile(compressedPhotoBytes);
-        
-            base64Image = Base64.getEncoder().encodeToString(decompressedPhotoBytes);
-        } else {
-            try (InputStream defaultImageStream = Files.newInputStream(FileSystems.getDefault().getPath(request.getServletContext().getRealPath("/img/avatar.png")))) {
-                byte[] defaultImageBytes = IOUtils.toByteArray(defaultImageStream);
-                base64Image = Base64.getEncoder().encodeToString(defaultImageBytes);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }        
+        else 
+            usuario = usuarioDAO.selecionar(user).orElseThrow();     
 %>
-        <section class="profile">
+        <section class="profile hidden hideable">
             <section class="profile-header">
 
-                <img id="profile-picture" src="data:image/png;base64,<%= base64Image %>" alt="Foto de perfil">
+                <img id="profile-picture" src="<%=usuario.getFoto()%>" alt="Foto de perfil">
                 
 <%
         if (user == null) {
@@ -93,10 +70,6 @@
 %>
                 <p class="success">Perfil atualizado!</p>  
 <%
-            } else if (error != null && error.equals("size")) {
-%>
-                <p class="fail">Arquivo muito grande</p>
-<%
             }
 %>                              
                 <form action="updatePic" method="post" id="update" enctype="multipart/form-data">
@@ -105,6 +78,8 @@
                         <a id="update">Mudar foto de perfil</a>
                     </label>
                 </form>
+
+                <a href="deletarFoto" class="danger" id="remove">Remover foto de perfil</a>
 <%
         }
 %>                
@@ -122,11 +97,8 @@
 
             if (user == null)
                 donatario = (DonatarioDTO) usuario;
-            else {
-                DonatarioDAO donatarioDAO = new DonatarioDAO();
-
+            else 
                 donatario = (DonatarioDTO) donatarioDAO.selecionar(user).orElseThrow();
-            }
 %>
             <p class="info"><span class="title">Escola:</span> <%=donatario.getEscola()%></p>
             <p class="info"><span class="title">Série:</span> <%=donatario.getSerie()%></p>
@@ -136,11 +108,8 @@
 
             if (user == null)
                 professor = (ProfessorDTO) usuario;
-            else {
-                ProfessorDAO professorDAO = new ProfessorDAO();
-
+            else 
                 professor = (ProfessorDTO) professorDAO.selecionar(user).orElseThrow();
-            }
 %>
             <p class="info"><span class="title">Departamento:</span> <%=professor.getDepartamento()%></p>
 <%
@@ -149,11 +118,8 @@
 
             if (user == null)
                 estagiario = (EstagiarioDTO) usuario;
-            else {
-                EstagiarioDAO estagiarioDAO = new EstagiarioDAO();
-
+            else 
                 estagiario = (EstagiarioDTO) estagiarioDAO.selecionar(user).orElseThrow();
-            }
 %>
             <p class="info"><span class="title">Data de entrada:</span> <%=estagiario.getDataEntrada()%></p>
             <p class="info"><span class="title">Data de saida:</span> <%=estagiario.getDataSaida()%></p>
@@ -163,11 +129,8 @@
 
             if (user == null)
                 doador = (DoadorDTO) usuario;
-            else {
-                DoadorDAO doadorDAO = new DoadorDAO();
-
+            else 
                 doador = (DoadorDTO) doadorDAO.selecionar(user).orElseThrow();
-            }
 %>
             <p class="info"><span class="title">Computadores doados:</span> <%=doador.getComputadoresDoados()%></p>
 <%
@@ -176,16 +139,19 @@
 
                 if (user == null)
                     doadorJuridico = (DoadorJuridicoDTO) doador;
-                else {
-                    DoadorJuridicoDAO doadorJuridicoDAO = new DoadorJuridicoDAO();
-
+                else 
                     doadorJuridico = (DoadorJuridicoDTO) doadorJuridicoDAO.selecionar(user).orElseThrow();
-                }
 %>
             <p class="info"><span class="title">Endereço:</span> <%=doadorJuridico.getEndereco()%></p>
 <%
             }
         } 
+
+        if (user == null) {
+%>
+            <a href="deletarConta.jsp" class="danger">Deletar conta</a>
+<%
+        }
 %>
             </section>
         </section>
@@ -221,6 +187,7 @@
 %>
 
     <script src="code/header.js"></script>
+    <script src="code/exception.js"></script>
     <script src="code/refresh.js"></script>
 </body>
 </html>

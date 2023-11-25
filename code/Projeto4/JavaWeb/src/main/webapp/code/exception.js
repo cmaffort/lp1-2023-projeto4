@@ -1,21 +1,18 @@
 const main = document.querySelector('main');
+const hideable = document.querySelector('.hideable');
 const exception = document.getElementById('exception');
 
 function fixContent() {
-    const children = main.children;
-
-    for (const child of children)
-        if (child !== exception)
-            main.removeChild(child);
+    main.removeChild(hideable);
 }
 
-function showTable() {
-    tables[0].style.opacity = 1;
+function showContent() {
+    hideable.classList.remove('hidden');
 }
 
 document.addEventListener('DOMContentLoaded', () => {
     if (exception)
         fixContent();
-    if (tables[0])
-        showTable();
-})
+    if (hideable)
+        showContent();
+});

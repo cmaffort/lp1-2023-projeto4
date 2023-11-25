@@ -47,12 +47,9 @@ public class agendarEntregaDoacao extends HttpServlet {
             }
 
             DonatarioDTO donatario = (DonatarioDTO) usuario;
-
             AgendamentoDTO agendamento = new AgendamentoDTO(data, hora, donatario);
 
-            try {
-                AgendamentoDAO agendamentoDAO = new AgendamentoDAO();
-
+            try (AgendamentoDAO agendamentoDAO = new AgendamentoDAO()) {
                 if(agendamentoDAO.inserir(agendamento))
                     out.println("<p>inserido</p>");
                 else

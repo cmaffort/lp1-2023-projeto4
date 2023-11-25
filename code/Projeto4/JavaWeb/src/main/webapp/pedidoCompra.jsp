@@ -37,11 +37,10 @@
 
     <main>
 <%
-    try {
-        PecasDAO pecasDAO = new PecasDAO();
+    try (PecasDAO pecasDAO = new PecasDAO()) {
         List<PecasDTO> pedidos = pecasDAO.listarPedidos();
 %>
-        <table id="compra">
+        <table id="compra" class="hideable hidden">
             <caption>Pedidos</caption>
             <thead>
                 <tr>

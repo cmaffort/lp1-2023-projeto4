@@ -46,8 +46,8 @@ public class ProfessorServlet extends HttpServlet {
             out.println("</html>");
             ProfessorDTO professor = new ProfessorDTO(nome, CPF, email, departamento, senha);
             System.out.println(professor.getNome() + ": " + professor.getEmail());
-            try {
-                ProfessorDAO professorDAO = new ProfessorDAO();
+            
+            try (ProfessorDAO professorDAO = new ProfessorDAO()) {
                 if(professorDAO.inserir(professor)) {
                     out.println("<p>inserido</p>");
                     
