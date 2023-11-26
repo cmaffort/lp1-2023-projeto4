@@ -34,7 +34,7 @@ public class UsuarioDAO implements IUsuarioDAO {
             stmt.setString(3, usuario.getTipoCodigo());
             stmt.setString(4, usuario.getEmail());
 
-            String senhaHash = BCrypt.hashpw(usuario.getSenha(), BCrypt.gensalt(15));
+            String senhaHash = BCrypt.hashpw(usuario.getSenha(), BCrypt.gensalt());
 
             stmt.setString(5, senhaHash);
             stmt.setString(6, usuario.getTipo());
