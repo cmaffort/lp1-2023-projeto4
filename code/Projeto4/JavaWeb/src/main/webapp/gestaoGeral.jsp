@@ -17,8 +17,26 @@
 
                 <h1>Doadores</h1>
 
-
-
+                <div id="esquerda">
+                    
+                    <img  src="img/pessoa-anonima.png" id="pessoaAnonima">
+                    
+                </div>
+                <div id="meioEsquerda">
+                    
+                    <img  src="img/pessoa-anonima.png" id="pessoaAnonima">
+                    
+                </div>
+                <div id="meioDireita">
+                    
+                    <img  src="img/pessoa-anonima.png" id="pessoaAnonima">
+                    
+                </div>
+                <div id="direita">
+                    
+                    <img  src="img/pessoa-anonima.png" id="pessoaAnonima">
+                    
+                </div>
 
             </main>
 
@@ -26,25 +44,79 @@
 
                 <h1>Doacões</h1>
 
-
+                <div id="esquerda">
+                    
+                    <img  src="img/pessoa-anonima.png" id="pessoaAnonima">
+                    
+                </div>
+                <div id="meioEsquerda">
+                    
+                    <img  src="img/pessoa-anonima.png" id="pessoaAnonima">
+                    
+                </div>
+                <div id="meioDireita">
+                    
+                    <img  src="img/pessoa-anonima.png" id="pessoaAnonima">
+                    
+                </div>
+                <div id="direita">
+                    
+                    <img  src="img/pessoa-anonima.png" id="pessoaAnonima">
+                    
+                </div>
 
         
-
-
-
     </main>
     <main id="geral">
 
         <h1>Relatório Geral</h1>
 
-
+        <div id="esquerda">
+                    
+                    <img  src="img/pessoa-anonima.png" id="pessoaAnonima">
+                    
+                </div>
+                <div id="meioEsquerda">
+                    
+                    <img  src="img/pessoa-anonima.png" id="pessoaAnonima">
+                    
+                </div>
+                <div id="meioDireita">
+                    
+                    <img  src="img/pessoa-anonima.png" id="pessoaAnonima">
+                    
+                </div>
+                <div id="direita">
+                    
+                    <img  src="img/pessoa-anonima.png" id="pessoaAnonima">
+                    
+                </div>
 
     </main>
     <main id="manutencoes">
 
         <h1> Manutencões </h1>
 
-
+        <div id="esquerda">
+                    
+                    <img  src="img/pessoa-anonima.png" id="pessoaAnonima">
+                    
+                </div>
+                <div id="meioEsquerda">
+                    
+                    <img  src="img/pessoa-anonima.png" id="pessoaAnonima">
+                    
+                </div>
+                <div id="meioDireita">
+                    
+                    <img  src="img/pessoa-anonima.png" id="pessoaAnonima">
+                    
+                </div>
+                <div id="direita">
+                    
+                    <img  src="img/pessoa-anonima.png" id="pessoaAnonima">
+                    
+                </div>
 
     </main>
     <main id="funcionarios">
@@ -52,7 +124,26 @@
         <h1> Funcionários </h1>
 
 
-
+        <div id="esquerda">
+                    
+                    <img  src="img/pessoa-anonima.png" id="pessoaAnonima">
+                    
+                </div>
+                <div id="meioEsquerda">
+                    
+                    <img  src="img/pessoa-anonima.png" id="pessoaAnonima">
+                    
+                </div>
+                <div id="meioDireita">
+                    
+                    <img  src="img/pessoa-anonima.png" id="pessoaAnonima">
+                    
+                </div>
+                <div id="direita">
+                    
+                    <img  src="img/pessoa-anonima.png" id="pessoaAnonima">
+                    
+                </div>
 
     </main>
         
