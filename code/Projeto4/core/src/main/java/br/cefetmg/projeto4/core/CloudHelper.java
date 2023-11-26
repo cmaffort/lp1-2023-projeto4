@@ -15,6 +15,8 @@ import com.google.cloud.storage.StorageOptions;
 import com.google.common.collect.Lists;
 
 public final class CloudHelper {
+    private CloudHelper() {}
+    
     private static final String BUCKET_NAME = "projeto4";
     private static final String JSON_PATH = "cred.json"; 
     public static final String DEFAULT_FOTO = "fotos/avatar.png";
@@ -45,8 +47,6 @@ public final class CloudHelper {
             throw new ExceptionInInitializerError(e);
         }
     }
-
-    private CloudHelper() {}
 
     public static String inserir(byte[] fileBytes, String fileName) {
         if (!fileName.startsWith(SUBFOLDER))
@@ -83,9 +83,5 @@ public final class CloudHelper {
 
             return foto;
         }
-    }
-
-    public static void main(String[] args) {
-        System.out.println(CloudHelper.class.getName());
     }
 }
