@@ -1,5 +1,5 @@
 #doadores {
-    display: none;
+    display: block;
 }
 
 #doacoes {
@@ -20,18 +20,16 @@
 
 h1 {
     color: black;
+    margin-top: 10px;
 }
 
 #menuGeral {
-    height: 100vh;
+    height: 91.6vh;
     width: 40vh;
-    background-color: blue;
+    background-color: #10446c;
+    margin-top: -556px;
+    position: absolute;
 }
-
-ul {
-    margin-bottom: 100px;
-}
-
 
 
 
