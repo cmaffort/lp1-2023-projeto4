@@ -29,7 +29,7 @@ public class gestaoDoadoresServlet extends HttpServlet {
             DoadorJuridicoDAO doadorJuridicoDAO = new DoadorJuridicoDAO()
         ) {
             List<DoadorDTO> doadoresFisicos = doadorFisicaDAO.listar();
-            List<DoadorDTO> doadoresJuridicos = doadorJuridicoDAO.listar();
+            List<DoadorJuridicoDTO> doadoresJuridicos = doadorJuridicoDAO.listar();
             
             response.setContentType("text/html");
             PrintWriter out = response.getWriter();

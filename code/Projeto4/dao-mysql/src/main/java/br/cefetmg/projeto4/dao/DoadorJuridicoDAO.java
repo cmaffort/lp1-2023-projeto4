@@ -1,7 +1,6 @@
 package br.cefetmg.projeto4.dao;
 
 import br.cefetmg.projeto4.idao.IDoadorJuridicoDAO;
-import br.cefetmg.projeto4.dto.DoadorDTO;
 import br.cefetmg.projeto4.dto.DoadorJuridicoDTO;
 import br.cefetmg.projeto4.dto.UsuarioDTO;
 
@@ -10,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class DoadorJuridicoDAO extends DoadorDAO implements IDoadorJuridicoDAO {
+public class DoadorJuridicoDAO extends UsuarioDAO implements IDoadorJuridicoDAO {
     public DoadorJuridicoDAO() throws SQLException {}
 
     @Override
@@ -48,8 +47,8 @@ public class DoadorJuridicoDAO extends DoadorDAO implements IDoadorJuridicoDAO {
     }
 
     @Override
-    public List<DoadorDTO> listar() throws SQLException, ClassNotFoundException {
-   List<DoadorDTO> doadoresJuridicos = new ArrayList<>();
+    public List<DoadorJuridicoDTO> listar() throws SQLException, ClassNotFoundException {
+   List<DoadorJuridicoDTO> doadoresJuridicos = new ArrayList<>();
 
     try {
         PreparedStatement statement = conexao.prepareStatement("SELECT doadoresJuridicos.*, doadores.*, usuarios.* FROM doadoresJuridicos JOIN doadores ON doadoresJuridicos.id_doador = doadores.id JOIN usuarios ON doadores.id_cadastro = usuarios.id;");

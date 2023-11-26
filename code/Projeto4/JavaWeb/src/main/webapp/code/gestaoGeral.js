@@ -10,14 +10,14 @@ let funcionariosEl = document.querySelector('#funcionarios');
 let botaoFuncionariosEl = document.querySelector('#botaoFuncionarios');
 
 
+
 botaoDoadoresEl.addEventListener('click', function() {
 
-    doadoresEl.style.display = "none";
+    doadoresEl.style.display = "block";
     doacoesEl.style.display = "none";
     geralEl.style.display = "none";
     manutencoesEl.style.display = "none";
     funcionariosEl.style.display = "none";
-
 });
 
 botaoDoacoesEl.addEventListener('click', function() {
@@ -56,6 +56,5 @@ botaoFuncionariosEl.addEventListener('click', function() {
     doadoresEl.style.display = "none";
     doacoesEl.style.display = "none";
     manutencoesEl.style.display = "none";
-
 });
 

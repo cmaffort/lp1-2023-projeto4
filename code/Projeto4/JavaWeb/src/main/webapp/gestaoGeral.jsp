@@ -11,6 +11,51 @@
     <body>
         <header></header>
 
+          
+
+            <main id="doadores">
+
+                <h1>Doadores</h1>
+
+
+
+
+            </main>
+
+            <main id="doacoes">
+
+                <h1>Doacões</h1>
+
+
+
+        
+
+
+
+    </main>
+    <main id="geral">
+
+        <h1>Relatório Geral</h1>
+
+
+
+    </main>
+    <main id="manutencoes">
+
+        <h1> Manutencões </h1>
+
+
+
+    </main>
+    <main id="funcionarios">
+
+        <h1> Funcionários </h1>
+
+
+
+
+    </main>
+        
         <div id="menuGeral">
             <ul>
                 <li> <button id="botaoDoadores"> Doadores</button> </li>
@@ -19,42 +64,11 @@
                 <li> <button id="botaoManutencoes"> Manutenções</button> </li>
                 <li> <button id="botaoFuncionarios"> Funcionários</button></li>
             </ul>
-
-        </div>
-
-        <main id="doadores">
-
-            <h1>Doadores</h1>
-
-        </main>
-        <main id="doacoes">
-
-            <h1>Doacões</h1>
+            
+        </div>  
 
 
-        </main>
-        <main id="geral">
-
-            <h1>Relatório Geral</h1>
-
-
-        </main>
-        <main id="manutencoes">
-
-            <h1> Manutencões </h1>
-
-
-        </main>
-        <main id="funcionarios">
-
-            <h1> Funcionários </h1>
-
-
-
-        </main>
-
-
-        <script src="code/gestaoGeral.js"></script>
-        <script src="code/header.js"></script>
-    </body>
+    <script src="code/gestaoGeral.js"></script>
+    <script src="code/header.js"></script>
+</body>
 </html>
