@@ -6,13 +6,12 @@ import br.cefetmg.projeto4.dao.MantecaoDAO;
 import br.cefetmg.projeto4.dao.EstagiarioDAO;
 import br.cefetmg.projeto4.dao.ProfessorDAO;
 import br.cefetmg.projeto4.dao.DoacaoDAO;
-import br.cefetmg.projeto4.dto.DoadorDTO; 
+import br.cefetmg.projeto4.dto.DoadorDTO;
 import br.cefetmg.projeto4.dto.DoadorJuridicoDTO;
 import br.cefetmg.projeto4.dto.MantecaoDTO;
 import br.cefetmg.projeto4.dto.EstagiarioDTO;
 import br.cefetmg.projeto4.dto.ProfessorDTO;
 import br.cefetmg.projeto4.dto.DoacaoDTO;
-
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -30,172 +29,230 @@ import java.util.logging.Logger;
 @WebServlet(name = "GestaoGeralServlet", urlPatterns = {"/GestaoGeralServlet"})
 public class GestaoGeralServlet extends HttpServlet {
 
-   
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            
-            
-        } 
+
+        }
     }
 
-    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         try (PrintWriter out = response.getWriter()) {
-                DoadorDAO doadorDAO = new DoadorDAO();
-                DoadorJuridicoDAO doadorJuridicoDAO = new DoadorJuridicoDAO();
-                MantecaoDAO manutencaoDAO = new MantecaoDAO();
-                EstagiarioDAO estagiarioDAO = new EstagiarioDAO();
-                ProfessorDAO professorDAO = new ProfessorDAO();
-                DoacaoDAO doacaoDAO = new DoacaoDAO();
+            DoadorDAO doadorDAO = new DoadorDAO();
+            DoadorJuridicoDAO doadorJuridicoDAO = new DoadorJuridicoDAO();
+            MantecaoDAO manutencaoDAO = new MantecaoDAO();
+            EstagiarioDAO estagiarioDAO = new EstagiarioDAO();
+            ProfessorDAO professorDAO = new ProfessorDAO();
+            DoacaoDAO doacaoDAO = new DoacaoDAO();
+
+            int contador = 0;
+
+            List<DoadorDTO> doadoresFisicos = doadorDAO.listar();
+            List<DoadorJuridicoDTO> doadoresJuridicos = doadorJuridicoDAO.listar();
+            List<MantecaoDTO> manutencoes = manutencaoDAO.listar();
+            List<EstagiarioDTO> estagiarios = estagiarioDAO.listar();
+            List<ProfessorDTO> professores = professorDAO.listar();
+            List<DoacaoDTO> doacoes = doacaoDAO.listar();
+
+            // classe doadores
+            out.println("<div id=\"doadores\">");
+
+            for (DoadorDTO doadores : doadoresFisicos) {
+
+                if (contador == 0) {
+                        out.println("<div id=\"esquerda\">");
+                        out.println("</div>");
+                    } else if (contador == 1) {
+                        out.println("<div id=\"meioEsquerda\">");
+                        out.println("</div>");
+                    } else if (contador == 2) {
+                        out.println("<div id=\"meioDireita\">");
+                        out.println("</div>");
+                    } else if (contador == 3) {
+                        out.println("<div id=\"direita\">");
+                        out.println("</div>");
+                    }
                 
-                List<DoadorDTO> doadoresFisicos = doadorDAO.listar();
-                List<DoadorJuridicoDTO> doadoresJuridicos = doadorJuridicoDAO.listar();
-                List<MantecaoDTO> manutencoes = manutencaoDAO.listar();
-                List<EstagiarioDTO> estagiarios = estagiarioDAO.listar();
-                List<ProfessorDTO> professores = professorDAO.listar();
-                List<DoacaoDTO> doacoes = doacaoDAO.listar();
-                
-                // classe doadores
-                
-                out.println("<div id=\"doadores\">");
-                
-                         
-                for (DoadorDTO doadores : doadoresFisicos) {
-                    out.println("<div id=\"esquerda\">");
-                    out.println("</div>");
-                    out.println("<div id=\"meioEsquerda\">");
-                    out.println("</div>");
-                    out.println("<div id=\"meioDireita\">");
-                    out.println("</div>");
-                    out.println("<div id=\"direita\">");
-                    out.println("</div>");
+                    contador++;
                     
-                }
+                    if (contador == 4)
+                        contador = 0;
+
+            }
+
+            for (DoadorJuridicoDTO doadores2 : doadoresJuridicos) {
+                if (contador == 0) {
+                        out.println("<div id=\"esquerda\">");
+                        out.println("</div>");
+                    } else if (contador == 1) {
+                        out.println("<div id=\"meioEsquerda\">");
+                        out.println("</div>");
+                    } else if (contador == 2) {
+                        out.println("<div id=\"meioDireita\">");
+                        out.println("</div>");
+                    } else if (contador == 3) {
+                        out.println("<div id=\"direita\">");
+                        out.println("</div>");
+                    }
                 
-                for (DoadorJuridicoDTO doadores2 : doadoresJuridicos) {
-                    out.println("<div id=\"esquerda\">");
-                    out.println("</div>");
-                    out.println("<div id=\"meioEsquerda\">");
-                    out.println("</div>");
-                    out.println("<div id=\"meioDireita\">");
-                    out.println("</div>");
-                    out.println("<div id=\"direita\">");
-                    out.println("</div>");
-                }
-                
-                out.println("</div>");
-                
-                
-                // classe doações
-                 
-                out.println("<div id=\"doacoes\">");
-                
-                for (DoacaoDTO doacoes2 : doacoes) {
+                    contador++;
                     
-                    out.println("<div id=\"esquerda\">");
-                    out.println("</div>");
-                    out.println("<div id=\"meioEsquerda\">");
-                    out.println("</div>");
-                    out.println("<div id=\"meioDireita\">");
-                    out.println("</div>");
-                    out.println("<div id=\"direita\">");
-                    out.println("</div>");
-                }
+                    if (contador == 4)
+                        contador = 0;
+
+            }
+
+            out.println("</div>");
+
+            // classe doações
+            out.println("<div id=\"doacoes\">");
+
+            for (DoacaoDTO doacoes2 : doacoes) {
+
+                if (contador == 0) {
+                        out.println("<div id=\"esquerda\">");
+                        out.println("</div>");
+                    } else if (contador == 1) {
+                        out.println("<div id=\"meioEsquerda\">");
+                        out.println("</div>");
+                    } else if (contador == 2) {
+                        out.println("<div id=\"meioDireita\">");
+                        out.println("</div>");
+                    } else if (contador == 3) {
+                        out.println("<div id=\"direita\">");
+                        out.println("</div>");
+                    }
                 
-                out.println("</div>");
-                
-                
-                // classe Relatório Geral
+                    contador++;
                     
-                out.println("<div id=\"geral\">");
+                    if (contador == 4)
+                        contador = 0;
+
+            }
+
+            out.println("</div>");
+
+            // classe Relatório Geral
+            out.println("<div id=\"geral\">");
+
+            for ( ) {
+
+                if (contador == 0) {
+                        out.println("<div id=\"esquerda\">");
+                        out.println("</div>");
+                    } else if (contador == 1) {
+                        out.println("<div id=\"meioEsquerda\">");
+                        out.println("</div>");
+                    } else if (contador == 2) {
+                        out.println("<div id=\"meioDireita\">");
+                        out.println("</div>");
+                    } else if (contador == 3) {
+                        out.println("<div id=\"direita\">");
+                        out.println("</div>");
+                    }
                 
-                for () {
+                    contador++;
                     
-                    out.println("<div id=\"esquerda\">");
-                    out.println("</div>");
-                    out.println("<div id=\"meioEsquerda\">");
-                    out.println("</div>");
-                    out.println("<div id=\"meioDireita\">");
-                    out.println("</div>");
-                    out.println("<div id=\"direita\">");
-                    out.println("</div>");     
-               }
+                    if (contador == 4)
+                        contador = 0;
+
+            }
+
+            out.println("</div>");
+
+            // classe Manutenções 
+            out.println("<div id=\"manutencoes\">");
+
+            for (MantecaoDTO manutencoes2 : manutencoes) {
+
+                if (contador == 0) {
+                        out.println("<div id=\"esquerda\">");
+                        out.println("</div>");
+                    } else if (contador == 1) {
+                        out.println("<div id=\"meioEsquerda\">");
+                        out.println("</div>");
+                    } else if (contador == 2) {
+                        out.println("<div id=\"meioDireita\">");
+                        out.println("</div>");
+                    } else if (contador == 3) {
+                        out.println("<div id=\"direita\">");
+                        out.println("</div>");
+                    }
                 
-                out.println("</div>");
-                
-                // classe Manutenções 
-                
-                out.println("<div id=\"manutencoes\">");
-                
-                for (MantecaoDTO manutencoes2 : manutencoes) {
-                
-                    out.println("<div id=\"esquerda\">");
-                    out.println("</div>");
-                    out.println("<div id=\"meioEsquerda\">");
-                    out.println("</div>");
-                    out.println("<div id=\"meioDireita\">");
-                    out.println("</div>");
-                    out.println("<div id=\"direita\">");
-                    out.println("</div>");
+                    contador++;
                     
-                }
+                    if (contador == 4)
+                        contador = 0;
+
+            }
+
+            out.println("</div>");
+
+            // classe Funcionários 
+            out.println("<div id=\"funcionarios\">");
+
+            for (ProfessorDTO professores2 : professores) {
+
+                if (contador == 0) {
+                        out.println("<div id=\"esquerda\">");
+                        out.println("</div>");
+                    } else if (contador == 1) {
+                        out.println("<div id=\"meioEsquerda\">");
+                        out.println("</div>");
+                    } else if (contador == 2) {
+                        out.println("<div id=\"meioDireita\">");
+                        out.println("</div>");
+                    } else if (contador == 3) {
+                        out.println("<div id=\"direita\">");
+                        out.println("</div>");
+                    }
                 
-                out.println("</div>");
-                
-                
-                // classe Funcionários 
-                
-                out.println("<div id=\"funcionarios\">");
-                                
-                for (ProfessorDTO professores2 : professores) {                    
+                    contador++;
                     
-                    out.println("<div id=\"esquerda\">");
-                    out.println("</div>");
-                    out.println("<div id=\"meioEsquerda\">");
-                    out.println("</div>");
-                    out.println("<div id=\"meioDireita\">");
-                    out.println("</div>");
-                    out.println("<div id=\"direita\">");
-                    out.println("</div>");
-                }
+                    if (contador == 4)
+                        contador = 0;
+
+            }
+
+            for (EstagiarioDTO estagiarios2 : estagiarios) {
+
                 
-                for (EstagiarioDTO estagiarios2 : estagiarios) {                    
+
+                    if (contador == 0) {
+                        out.println("<div id=\"esquerda\">");
+                        out.println("</div>");
+                    } else if (contador == 1) {
+                        out.println("<div id=\"meioEsquerda\">");
+                        out.println("</div>");
+                    } else if (contador == 2) {
+                        out.println("<div id=\"meioDireita\">");
+                        out.println("</div>");
+                    } else if (contador == 3) {
+                        out.println("<div id=\"direita\">");
+                        out.println("</div>");
+                    }
+                
+                    contador++;
                     
-                    out.println("<div id=\"esquerda\">");
-                    out.println("</div>");
-                    out.println("<div id=\"meioEsquerda\">");
-                    out.println("</div>");
-                    out.println("<div id=\"meioDireita\">");
-                    out.println("</div>");
-                    out.println("<div id=\"direita\">");
-                    out.println("</div>");
-                }
+                    if (contador == 4)
+                        contador = 0;
                 
-                out.println("</div>");
-                
-                
-                
+
+            }
+
+            out.println("</div>");
+
         } catch (SQLException ex) {
             Logger.getLogger(GestaoDoacao.class.getName()).log(Level.SEVERE, null, ex);
             // Trate a exceção de alguma forma apropriada aqui (por exemplo, exibir uma mensagem de erro).
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(GestaoDoacao.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
-        
-        
-        
-        
-        
-    }
 
-    
-    
+    }
 
 }
