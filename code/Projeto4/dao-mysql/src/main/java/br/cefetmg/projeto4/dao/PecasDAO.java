@@ -113,7 +113,28 @@ public class PecasDAO implements IPecasDAO {
             return false;
         }
     }
+    public boolean alterarStatus(int id, String status) throws SQLException, ClassNotFoundException, NoSuchElementException {
+            try {
+                String sql = "UPDATE pecas SET status = ? WHERE id = ?";
+                PreparedStatement stmt = conexao.prepareStatement(sql);
 
+            stmt.setString(1, status);
+
+            stmt.setInt(2, id);
+            int linhasAfetadas = stmt.executeUpdate();
+
+            if (linhasAfetadas == 0)
+                throw new NoSuchElementException("Não há peça faltosa com esse código");
+            else 
+                return true;
+
+        } catch (SQLException e) {
+            System.out.println("Erro: " + e.getMessage());
+
+            throw new NoSuchElementException("Failed to select");
+        }
+
+    }
     @Override
     public PecasDTO selecionarFaltoso(int id) throws SQLException, ClassNotFoundException, NoSuchElementException {
         try {
@@ -172,11 +193,40 @@ public class PecasDAO implements IPecasDAO {
             return Collections.emptyList();
         }
     }
+        public List<PecasDTO> listarCompradas() throws SQLException, ClassNotFoundException {
+        try {
+            List<PecasDTO> pecas = new ArrayList<>();
+
+            String sql = "SELECT * FROM pecas WHERE status = 'COMPRADO'";
+            Statement stmt = conexao.createStatement();
+            ResultSet resultSet = stmt.executeQuery(sql);
+
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String nome = resultSet.getString("nome");
+                String marca = resultSet.getString("marca");
+                int quantidade = resultSet.getInt("quantidade");
+
+                PecasDTO peca = new PecasDTO(id, nome, marca, quantidade);
+
+                pecas.add(peca);
+            }
+
+            resultSet.close();
+            stmt.close();
+
+            return pecas;
+        } catch (SQLException e) {
+            System.out.println("Erro: " + e.getMessage());
+            return Collections.emptyList();
+        }
+    }
+
     public List<PecasDTO> listarDoados() throws SQLException, ClassNotFoundException {
         try {
             List<PecasDTO> pecas = new ArrayList<>();
 
-            String sql = "SELECT * FROM pecas WHERE status = 'DOADO'";
+            String sql = "SELECT * FROM pecas WHERE status = 'COMPRADO'";
             Statement stmt = conexao.createStatement();
             ResultSet resultSet = stmt.executeQuery(sql);
 

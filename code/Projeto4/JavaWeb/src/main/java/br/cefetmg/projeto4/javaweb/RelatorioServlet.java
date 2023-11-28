@@ -55,7 +55,7 @@ public class RelatorioServlet extends HttpServlet {
             int total = comprasDAO.valorTotal();
             out.println("<p> Total gasto: " + total + "</p>");
             out.println("<table>");
-            out.println("<caption>Lista de Peças em Falta</caption>");
+           /* out.println("<caption>Lista de Peças em Falta</caption>");
             out.println("<thead>");
             out.println("<tr><th>Nome</th><th>Marca</th><th>Quantidade</th></tr>");
             out.println("</thead><tbody>");
@@ -67,12 +67,13 @@ public class RelatorioServlet extends HttpServlet {
                 out.println("<tr><td>" + pecas.getNome() + "</td><td>" + pecas.getMarca() + "</td><td>" + pecas.getQuantidade() + "</td></tr>");
 
             }
-            out.println("</table>");
+            out.println("</table>");*/
             out.println("<table>");
             out.println("<caption>Lista de Peças Doadas</caption>");
             out.println("<thead>");
             out.println("<tr><th>Nome</th><th>Marca</th><th>Quantidade</th></tr>");
             out.println("</thead><tbody>");
+            PecasDAO pecasDAO = new PecasDAO(); 
             List<PecasDTO> pecasDoadas = pecasDAO.listarDoados();
             out.println(pecasDoadas.size());
             for(PecasDTO pecas : pecasDoadas)
@@ -83,7 +84,7 @@ public class RelatorioServlet extends HttpServlet {
             
             out.println("</table>");
             out.println("<table>");
-            out.println("<caption>Lista de Peças Doadas</caption>");
+            out.println("<caption>Lista de Computadores Doados</caption>");
             out.println("<thead>");
             out.println("<tr><th>Marca</th><th>Doador</th><th>Donatario</th><th>Data de Chegada</th></tr>");
             out.println("</thead><tbody>");
