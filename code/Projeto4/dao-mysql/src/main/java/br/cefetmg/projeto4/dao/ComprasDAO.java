@@ -18,7 +18,7 @@ import java.util.List;
  *
  * @author lucas
  */
-public class ComprasDAO implements IComprasDAO{
+public class ComprasDAO implements IComprasDAO {
     private final Connection conexao;
 
     public ComprasDAO() throws SQLException {
@@ -94,9 +94,9 @@ public class ComprasDAO implements IComprasDAO{
         }
         return total; 
     }
+
     @Override
     public void close() throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        conexao.close();
     }
-    
 }
