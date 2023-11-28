@@ -31,6 +31,62 @@ h1 {
     position: absolute;
 }
 
+#pessoaAnonima {
+    height: 100px;
+    width: 100px;
+    margin-left: -180px;
+    margin-top: 50px;
+}
+
+.listaDiv {
+    margin-top: -100px;
+    list-style: none;
+    margin-left: 60px;
+    font-size: 14px;
+    text-align: left;
+    justify-content: space-around;
+}
+
+h2 {
+    margin-left: 25px;
+}
+
+#divMaior {
+    margin-top: 15px;
+    display: flex;
+    margin-left: 270px;
+    height: 180px;
+    width: 1050px;
+}
+
+.esquerda {
+    height: 180px;
+    width: 290px;
+    background-color: #eee;
+    margin-right: 60px;
+    border-radius: 15px;
+}
+
+.meio {
+    height: 180px;
+    width: 290px;
+    background-color: #eee;
+    margin-right: 60px;
+    border-radius: 15px;
+}
+
+.direita {
+    height: 180px;
+    width: 290px;
+    background-color: #eee;
+    border-radius: 15px;
+}
+
+
+
+
+
+
 
 
 

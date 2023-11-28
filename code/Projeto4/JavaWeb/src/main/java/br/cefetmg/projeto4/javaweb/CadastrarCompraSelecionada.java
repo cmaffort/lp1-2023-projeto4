@@ -4,8 +4,6 @@
  */
 package br.cefetmg.projeto4.javaweb;
 
-import br.cefetmg.projeto4.dao.PecasDAO;
-import br.cefetmg.projeto4.dto.PecasDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -13,47 +11,47 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import br.cefetmg.projeto4.dto.PecasDTO;
+import br.cefetmg.projeto4.dao.PecasDAO;
+import br.cefetmg.projeto4.dto.ComprasDTO;
+import br.cefetmg.projeto4.dao.ComprasDAO;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 /**
  *
  * @author lucas
  */
-@WebServlet(name = "PecaFaltanteServlet", urlPatterns = {"/PecaFaltanteServlet"})
-public class PecaFaltanteServlet extends HttpServlet {
+@WebServlet(name = "cadastrarCompra", urlPatterns = {"/cadastrarCompra"})
+public class CadastrarCompraSelecionada extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException, ClassNotFoundException {
         response.setContentType("text/html;charset=UTF-8");
-        try (
-            PrintWriter out = response.getWriter(); 
-            PecasDAO pecasDAO = new PecasDAO()
-        ) {
+        try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet PecaFaltanteServlet</title>");            
+            out.println("<title>Servlet CadastrarCompraSelecionada</title>");            
             out.println("</head>");
-            String quantidadeStr = request.getParameter("quantidade"); 
-            int quantidade = Integer.parseInt(quantidadeStr); 
-            String nome = request.getParameter("nome");
-            String marca = request.getParameter("marca");
-            PecasDTO peca = new PecasDTO(nome, marca, quantidade);
-            pecasDAO.inserir(peca);
             out.println("<body>");
-            out.println("<h1>Servlet PecaFaltanteServlet at " + request.getContextPath() + "</h1>");
+            PecasDAO pecasDAO = new PecasDAO();
+            int id = Integer.parseInt(request.getParameter("id"));
+            int preco = Integer.parseInt(request.getParameter("preco"));
+
+            if(pecasDAO.alterarStatus(id, "COMPRADO"))
+            {
+                out.println("<p>Alterado</p>");
+                ComprasDAO comprasDAO = new ComprasDAO();
+                ComprasDTO compra = new ComprasDTO(id, preco);
+                comprasDAO.inserir(compra);
+            }
+            else
+                out.println("<p>Não alterado</p>");
+
+            out.println("<h1>Servlet CadastrarCompraSelecionada at " + request.getContextPath() + "</h1>");
+            out.println("<p>" + id + "</p");
             out.println("</body>");
             out.println("</html>");
         }
@@ -74,9 +72,9 @@ public class PecaFaltanteServlet extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(PecaFaltanteServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CadastrarCompraSelecionada.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(PecaFaltanteServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CadastrarCompraSelecionada.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -94,9 +92,9 @@ public class PecaFaltanteServlet extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(PecaFaltanteServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CadastrarCompraSelecionada.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(PecaFaltanteServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CadastrarCompraSelecionada.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

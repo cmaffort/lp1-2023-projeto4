@@ -9,53 +9,246 @@
         <title>Gestão Geral</title>
     </head>
     <body>
+
+        <%@page import="br.cefetmg.projeto4.dto.*"%>
+        <%@page        %>
+
         <header></header>
 
-          
-
-            <main id="doadores">
-
-                <h1>Doadores</h1>
 
 
+        <main id="doadores">
 
-
-            </main>
-
-            <main id="doacoes">
-
-                <h1>Doacões</h1>
-
-
-
-        
-
-
-
-    </main>
-    <main id="geral">
-
-        <h1>Relatório Geral</h1>
-
-
-
-    </main>
-    <main id="manutencoes">
-
-        <h1> Manutencões </h1>
-
-
-
-    </main>
-    <main id="funcionarios">
-
-        <h1> Funcionários </h1>
+            <h1>Doadores</h1>
 
 
 
 
-    </main>
-        
+            <div id="divMaior"> 
+
+
+                <div class="esquerda">
+
+                    <h2> Guilherme Arana</h2>
+
+                    <img  src="img/pessoa-anonima.png" id="pessoaAnonima">
+
+                    <ul class="listaDiv"> 
+                        <li><strong>CPF:</strong> 165.789.987-36</li>
+                        <li><strong>Computadores Doados:<strong> 59</li>
+                        <li><strong>Email:</strong> Roger@gmail.com</li>
+                    </ul>
+
+                </div>
+                <div class="meio">
+
+                    <h2> Leonardo Silva</h2>
+
+                    <img  src="img/pessoa-anonima.png" id="pessoaAnonima">
+
+                    <ul class="listaDiv"> 
+                        <li><strong>CPF:</strong> 165.789.987-36</li>
+                        <li><strong>Computadores Doados:<strong> 59</li>
+                        <li><strong>Email:</strong> Roger@gmail.com</li>
+                    </ul>
+
+                </div>
+                <div class="direita">
+
+                    <h2> Igor Gomes</h2>
+
+                    <img  src="img/pessoa-anonima.png" id="pessoaAnonima">
+
+                    <ul class="listaDiv"> 
+                        <li><strong>CPF:</strong> 165.789.987-36</li>
+                        <li><strong>Computadores Doados:<strong> 59</li>
+                        <li><strong>Email:</strong> Roger@gmail.com</li>
+                      
+                    </ul>
+
+                </div>
+
+
+            </div>
+        </main>
+
+        <main id="doacoes">
+
+            <h1>Doacões</h1>
+
+           <div id="divMaior"> 
+
+
+                <div class="esquerda">
+
+                    <h2> Marcos Rocha</h2>
+
+                    <img  src="img/pessoa-anonima.png" id="pessoaAnonima">
+
+                    <ul class="listaDiv"> 
+                        <li><strong>CPF:</strong> 138.967.653-67</li>
+                        <li><strong>Data de doação:</strong> 23/05/2022</li>
+                        <li><strong>Email:</strong> Roger@gmail.com</li>
+                    </ul>
+
+                </div>
+                <div class="meio">
+
+                    <h2> Junior Alonso</h2>
+
+                    <img  src="img/pessoa-anonima.png" id="pessoaAnonima">
+
+                    <ul class="listaDiv"> 
+                        <li><strong>CPF:</strong> 138.967.653-67</li>
+                        <li><strong>Data de doação:</strong> 23/05/2022</li>
+                        <li><strong>Email:</strong> Roger@gmail.com</li>
+                    </ul>
+
+                </div>
+                <div class="direita">
+
+                    <h2> Douglas Santos</h2>
+
+                    <img  src="img/pessoa-anonima.png" id="pessoaAnonima">
+
+                    <ul class="listaDiv"> 
+                        <li><strong>CPF:</strong> 138.967.653-67</li>
+                        <li><strong>Data de doação:</strong> 23/05/2022</li>
+                        <li><strong>Email:</strong> Roger@gmail.com</li>
+                    </ul>
+
+                </div>
+
+
+            </div>
+
+
+        </main>
+        <main id="geral">
+
+            <h1>Relatório Geral</h1>
+
+            <div class="esquerda">
+
+                <img  src="img/pessoa-anonima.png" id="pessoaAnonima">
+
+            </div>
+            <div class="meio">
+
+                <img  src="img/pessoa-anonima.png" id="pessoaAnonima">
+
+            </div>
+            <div class="direita">
+
+                <img  src="img/pessoa-anonima.png" id="pessoaAnonima">
+
+            </div>
+
+        </main>
+        <main id="manutencoes">
+
+            <h1> Manutencões </h1>
+
+            <div id="divMaior"> 
+
+
+                <div class="esquerda">
+
+                    <h2> Dadá Maravilha</h2>
+
+                    <img  src="img/pessoa-anonima.png" id="pessoaAnonima">
+
+                    <ul class="listaDiv"> 
+                        <li><strong>Marca:</strong> Dell</li>
+                        <li><strong>Data de doação:</strong> 23/05/2022</li>
+                        <li><strong>Email:</strong> Roger@gmail.com</li>
+                    </ul>
+
+                </div>
+                <div class="meio">
+
+                    <h2> Rafael Carioca</h2>
+
+                    <img  src="img/pessoa-anonima.png" id="pessoaAnonima">
+
+                    <ul class="listaDiv"> 
+                        <li><strong>Marca:</strong> Dell</li>
+                        <li><strong>Data de doação:</strong> 23/05/2022</li>
+                        <li><strong>Email:</strong> Roger@gmail.com</li>
+                    </ul>
+
+                </div>
+                <div class="direita">
+
+                    <h2> Diego Tardelli</h2>
+
+                    <img  src="img/pessoa-anonima.png" id="pessoaAnonima">
+
+                    <ul class="listaDiv"> 
+                        <li><strong>Marca:</strong> Dell</li>
+                        <li><strong>Data de doação:</strong> 23/05/2022</li>
+                        <li><strong>Email:</strong> Roger@gmail.com</li>
+                    </ul>
+
+                </div>
+
+
+            </div>
+
+        </main>
+        <main id="funcionarios">
+
+            <h1> Funcionários </h1>
+
+
+            <div id="divMaior"> 
+
+
+                <div class="esquerda">
+
+                    <h2> Ronaldinho Gaúcho</h2>
+
+                    <img  src="img/pessoa-anonima.png" id="pessoaAnonima">
+
+                    <ul class="listaDiv"> 
+                        <li><strong>Cargo:</strong> Professor</li>
+                        <li><strong>Data de início:</strong> 23/05/2022</li>
+                        <li><strong>Email:</strong> Roger@gmail.com</li>
+                    </ul>
+
+                </div>
+                <div class="meio">
+
+                    <h2> Leandro Donizete</h2>
+
+                    <img  src="img/pessoa-anonima.png" id="pessoaAnonima">
+
+                    <ul class="listaDiv"> 
+                        <li><strong>Cargo:</strong> Professor</li>
+                        <li><strong>Data de início:</strong> 23/05/2022</li>
+                        <li><strong>Email:</strong> Roger@gmail.com</li>
+                    </ul>
+
+                </div>
+                <div class="direita">
+
+                    <h2> Neto Berola</h2>
+
+                    <img  src="img/pessoa-anonima.png" id="pessoaAnonima">
+
+                    <ul class="listaDiv"> 
+                        <li><strong>Cargo:</strong> Professor</li>
+                        <li><strong>Data de início:</strong> 23/05/2022</li>
+                        <li><strong>Email:</strong> Roger@gmail.com</li>
+                    </ul>
+
+                </div>
+
+
+            </div>
+
+        </main>
+
         <div id="menuGeral">
             <ul>
                 <li> <button id="botaoDoadores"> Doadores</button> </li>
@@ -64,11 +257,11 @@
                 <li> <button id="botaoManutencoes"> Manutenções</button> </li>
                 <li> <button id="botaoFuncionarios"> Funcionários</button></li>
             </ul>
-            
+
         </div>  
 
 
-    <script src="code/gestaoGeral.js"></script>
-    <script src="code/header.js"></script>
-</body>
+        <script src="code/gestaoGeral.js"></script>
+        <script src="code/header.js"></script>
+    </body>
 </html>
