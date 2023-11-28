@@ -139,28 +139,11 @@ public class GestaoGeralServlet extends HttpServlet {
             // classe Relatório Geral
             out.println("<div id=\"geral\">");
 
-            for ( ) {
+            
 
-                if (contador == 0) {
-                        out.println("<div id=\"esquerda\">");
-                        out.println("</div>");
-                    } else if (contador == 1) {
-                        out.println("<div id=\"meioEsquerda\">");
-                        out.println("</div>");
-                    } else if (contador == 2) {
-                        out.println("<div id=\"meioDireita\">");
-                        out.println("</div>");
-                    } else if (contador == 3) {
-                        out.println("<div id=\"direita\">");
-                        out.println("</div>");
-                    }
-                
-                    contador++;
-                    
-                    if (contador == 4)
-                        contador = 0;
+           
 
-            }
+            
 
             out.println("</div>");
 
