@@ -12,11 +12,10 @@ import java.util.List;
  *
  * @author lucas
  */
-public interface IComprasDAO {
+public interface IComprasDAO extends AutoCloseable {
     boolean inserir(ComprasDTO compra) throws SQLException, ClassNotFoundException;
     boolean alterar(ComprasDTO compra) throws SQLException, ClassNotFoundException;
     boolean remover(ComprasDTO compra) throws SQLException, ClassNotFoundException;
     List<ComprasDTO> listar() throws SQLException, ClassNotFoundException;
-    void close() throws SQLException;;    
-
+    void close() throws SQLException;
 }

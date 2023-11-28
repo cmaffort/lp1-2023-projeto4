@@ -59,6 +59,10 @@
                         <div class="model"><%=feedback.getModeloPC()%></div>
                         <div class="feedback"><%=feedback.getDescricao()%></div>
                     </div>
+
+                    <nav class="link">
+                        <a href='perfil.jsp?u=<%=donatario.getEmail().replace("@", "%40")%>'>Ver perfil</a>
+                    </nav>
                 </div>
 <%
         }

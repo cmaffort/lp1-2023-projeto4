@@ -18,7 +18,7 @@ import java.util.List;
  *
  * @author lucas
  */
-public class ComprasDAO implements IComprasDAO{
+public class ComprasDAO implements IComprasDAO {
     private final Connection conexao;
 
     public ComprasDAO() throws SQLException {
@@ -81,11 +81,12 @@ public class ComprasDAO implements IComprasDAO{
     {
         int total = 0;
         try {
-            PreparedStatement statement = conexao.prepareStatement("SELECT * FROM compras");
+            PreparedStatement statement = conexao.prepareStatement("SELECT compras.*, pecas.quantidade FROM compras JOIN pecas ON compras.id_peca = pecas.id");
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 int valorUnitario = resultSet.getInt("valor_unitario");
-                total += valorUnitario;
+                int quantidade = resultSet.getInt("quantidade");
+                total += valorUnitario * quantidade;
             }
 
         } catch (SQLException e) {
@@ -93,9 +94,9 @@ public class ComprasDAO implements IComprasDAO{
         }
         return total; 
     }
+
     @Override
     public void close() throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        conexao.close();
     }
-    
 }
