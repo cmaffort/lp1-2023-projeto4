@@ -172,6 +172,34 @@ public class PecasDAO implements IPecasDAO {
             return Collections.emptyList();
         }
     }
+    public List<PecasDTO> listarDoados() throws SQLException, ClassNotFoundException {
+        try {
+            List<PecasDTO> pecas = new ArrayList<>();
+
+            String sql = "SELECT * FROM pecas WHERE status = 'DOADO'";
+            Statement stmt = conexao.createStatement();
+            ResultSet resultSet = stmt.executeQuery(sql);
+
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String nome = resultSet.getString("nome");
+                String marca = resultSet.getString("marca");
+                int quantidade = resultSet.getInt("quantidade");
+
+                PecasDTO peca = new PecasDTO(id, nome, marca, quantidade);
+
+                pecas.add(peca);
+            }
+
+            resultSet.close();
+            stmt.close();
+
+            return pecas;
+        } catch (SQLException e) {
+            System.out.println("Erro: " + e.getMessage());
+            return Collections.emptyList();
+        }
+    }
 
     @Override
     public List<PecasDTO> listarPedidos() throws SQLException, ClassNotFoundException {
