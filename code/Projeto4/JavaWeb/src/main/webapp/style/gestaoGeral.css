@@ -31,48 +31,59 @@ h1 {
     position: absolute;
 }
 
-.esquerda {
-    height: 230px;
-    width: 230px;
-    background-color: gray;
-    margin-left: 270px;
+#pessoaAnonima {
+    height: 100px;
+    width: 100px;
+    margin-left: -180px;
+    margin-top: 50px;
+}
+
+.listaDiv {
+    margin-top: -100px;
+    list-style: none;
+    margin-left: 60px;
+    font-size: 14px;
+    text-align: left;
+    justify-content: space-around;
+}
+
+h2 {
+    margin-left: 25px;
+}
+
+#divMaior {
     margin-top: 15px;
+    display: flex;
+    margin-left: 270px;
+    height: 180px;
+    width: 1050px;
+}
+
+.esquerda {
+    height: 180px;
+    width: 290px;
+    background-color: #eee;
+    margin-right: 60px;
     border-radius: 15px;
 }
 
-.meioEsquerda {
-    height: 230px;
-    width: 230px;
-    background-color: gray;
-    margin-left: 550px;
-    margin-top: -230px;
-    border-radius: 15px;
-}
-
-.meioDireita {
-    height: 230px;
-    width: 230px;
-    background-color: gray;
-    margin-left: 830px;
-    margin-top: -230px;
+.meio {
+    height: 180px;
+    width: 290px;
+    background-color: #eee;
+    margin-right: 60px;
     border-radius: 15px;
 }
 
 .direita {
-    height: 230px;
-    width: 230px;
-    background-color: gray;
-    margin-left: 1110px;
-    margin-top: -230px;
+    height: 180px;
+    width: 290px;
+    background-color: #eee;
     border-radius: 15px;
 }
 
-#pessoaAnonima {
-    height: 100px;
-    width: 100px;
-    margin-left: -150px;
-    margin-top: 50px;
-}
+
+
 
 
 
