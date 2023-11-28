@@ -4,6 +4,8 @@
  */
 package br.cefetmg.projeto4.dao;
 import br.cefetmg.projeto4.dto.ComprasDTO;
+import br.cefetmg.projeto4.dto.PecasDTO;
+
 import br.cefetmg.projeto4.idao.IComprasDAO;
 import java.sql.Connection;
 import java.sql.SQLException;
