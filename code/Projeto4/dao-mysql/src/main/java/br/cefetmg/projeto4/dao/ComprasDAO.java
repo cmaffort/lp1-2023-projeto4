@@ -81,11 +81,12 @@ public class ComprasDAO implements IComprasDAO{
     {
         int total = 0;
         try {
-            PreparedStatement statement = conexao.prepareStatement("SELECT * FROM compras");
+            PreparedStatement statement = conexao.prepareStatement("SELECT compras.*, pecas.quantidade FROM compras JOIN pecas ON compras.id_compra = pecas.id");
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 int valorUnitario = resultSet.getInt("valor_unitario");
-                total += valorUnitario;
+                int quantidade = resultSet.getInt("quantidade");
+                total += valorUnitario * quantidade;
             }
 
         } catch (SQLException e) {
