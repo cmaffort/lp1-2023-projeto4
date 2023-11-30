@@ -10,8 +10,15 @@
     </head>
     <body>
 
-        <%@page import="br.cefetmg.projeto4.dto.*"%>
-        <%@page        %>
+        <%@page import="br.cefetmg.projeto4.dto.DoadorDTO"%>
+        <%@page import="br.cefetmg.projeto4.dto.DoacaoDTO"%>
+        <%@page import="br.cefetmg.projeto4.dto.DoadorJuridicoDTO"%>
+        <%@page import="br.cefetmg.projeto4.dto.DonatarioDTO" %>
+        <%@page import="br.cefetmg.projeto4.dto.EstagiarioDTO" %>
+        <%@page import="br.cefetmg.projeto4.dto.ProfessorDTO" %>
+        <%@page import="br.cefetmg.projeto4.dto.MantecaoDTO" %>
+        <%@page import="br.cefetmg.projeto4.javaweb.GestaoGeralServlet" %>
+        <%@page import="java.util.*" %>
 
         <header></header>
 

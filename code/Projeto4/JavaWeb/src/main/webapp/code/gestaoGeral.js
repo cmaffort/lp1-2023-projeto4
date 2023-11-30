@@ -1,3 +1,5 @@
+// Definir qual classe será exibida
+
 let doadoresEl = document.querySelector('#doadores');
 let botaoDoadoresEl = document.querySelector('#botaoDoadores');
 let doacoesEl = document.querySelector('#doacoes');
@@ -57,4 +59,27 @@ botaoFuncionariosEl.addEventListener('click', function() {
     doacoesEl.style.display = "none";
     manutencoesEl.style.display = "none";
 });
+
+// Função que exibe o Banco de dados
+
+let contador = 0;
+let posicaoClasse = "direita";
+
+function mostrarclasses () {
+
+let novaClasse = document.createElement("div");
+
+
+
+if (posicaoClasse == "direita") {
+    novaClasse.classList.add("esquerda");
+    posicaoClasse = "esquerda";
+} else if (posicaoClasse == "esquerda") {
+        novaClasse.classList.add("meio");
+        posicaoClasse = "meio";
+} else if (posicaoClasse == "meio") {
+        novaClasse.classList.add("direita");
+        posicaoClasse = "direita";
+}
+}
 
