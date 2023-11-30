@@ -6,7 +6,7 @@
 }
 
 .profile {
-    max-width: 800px;
+    max-width: 25vw;
 }
 
 .profile-header {
@@ -56,7 +56,6 @@ p.info:last-of-type {
 }
 
 #update {
-    cursor: pointer;
     margin-bottom: 5px;
 }
 
@@ -66,6 +65,7 @@ p.info:last-of-type {
 
 a {
     color: #3379ad;
+    cursor: pointer;
 }
 
 form {

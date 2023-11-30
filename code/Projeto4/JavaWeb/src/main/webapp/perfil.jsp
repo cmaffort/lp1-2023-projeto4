@@ -17,9 +17,18 @@
     String status = request.getParameter("status");
     String error = request.getParameter("e");
 
+    if (user != null)
+        user.replace("%40", "@");
     if ((session == null || session.getAttribute("usuario") == null) && user == null) {
         response.sendRedirect("login.jsp?p=perfil.jsp");
         return;
+    } else if (session != null && session.getAttribute("usuario") != null && user != null) {
+        UsuarioDTO aux = (UsuarioDTO) session.getAttribute("usuario");
+
+        if (aux.getEmail().equals(user)) {
+            response.sendRedirect("perfil.jsp");
+            return;
+        }
     }
 
     UsuarioDTO usuario;
@@ -33,10 +42,10 @@
     <link rel="stylesheet" href="style/header.css">
     <link rel="stylesheet" href="style/main.css">
     <link rel="stylesheet" href="style/perfil.css">
+    <link rel="stylesheet" href="style/exception.css">
 <%
     if (user == null) {
 %>
-    <link rel="stylesheet" href="style/exception.css">
     <link rel="stylesheet" href="style/cropper.css">
 <%
     }
@@ -58,10 +67,10 @@
     ) {
         if (user == null)
             usuario = (UsuarioDTO) session.getAttribute("usuario");
-        else 
+        else
             usuario = usuarioDAO.selecionar(user).orElseThrow();     
 %>
-        <section class="profile hidden hideable">
+        <section class="profile hideable hidden">
             <section class="profile-header">
 
                 <img id="profile-picture" src="<%=usuario.getFoto()%>" alt="Foto de perfil">
