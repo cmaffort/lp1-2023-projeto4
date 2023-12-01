@@ -1,26 +1,24 @@
 package br.cefetmg.projeto4.core;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.google.auth.oauth2.GoogleCredentials;
+import com.google.cloud.storage.Acl;
+import com.google.cloud.storage.Blob;
+import com.google.cloud.storage.Acl.Role;
 import com.google.cloud.storage.BlobId;
 import com.google.cloud.storage.BlobInfo;
 import com.google.cloud.storage.Storage;
 import com.google.cloud.storage.StorageException;
 import com.google.cloud.storage.StorageOptions;
-import com.google.common.collect.Lists;
+import com.google.cloud.storage.Acl.User;
 
 public final class CloudHelper {
     private CloudHelper() {}
     
-    private static final String BUCKET_NAME = "projeto4";
-    private static final String JSON_PATH = "cred.json"; 
+    private static final String BUCKET_NAME = "projeto_4";
     public static final String DEFAULT_FOTO = "fotos/avatar.png";
-    private static final String PATH_PREFIX = "https://storage.cloud.google.com/projeto4/";
+    private static final String PATH_PREFIX = "https://storage.googleapis.com/projeto_4/";
     public static final String SUBFOLDER = "fotos/";
     private static final Storage STORAGE;
     private static final Map<String, String> CONTENT_TYPES;
@@ -34,18 +32,7 @@ public final class CloudHelper {
         contentTypes.put("gif", "image/gif");
 
         CONTENT_TYPES = Map.copyOf(contentTypes);
-
-        try (InputStream jsonInputStream = CloudHelper.class.getClassLoader().getResourceAsStream(JSON_PATH)) {
-            if (jsonInputStream == null) 
-                throw new FileNotFoundException("File not found: " + JSON_PATH);
-
-            GoogleCredentials credentials = GoogleCredentials.fromStream(jsonInputStream)
-                    .createScoped(Lists.newArrayList("https://www.googleapis.com/auth/cloud-platform"));
-
-            STORAGE = StorageOptions.newBuilder().setCredentials(credentials).build().getService();
-        } catch (IOException e) {
-            throw new ExceptionInInitializerError(e);
-        }
+        STORAGE = StorageOptions.newBuilder().build().getService();
     }
 
     public static String inserir(byte[] fileBytes, String fileName) {
@@ -57,7 +44,9 @@ public final class CloudHelper {
     
         BlobId blobId = BlobId.of(BUCKET_NAME, fileName);
         BlobInfo blobInfo = BlobInfo.newBuilder(blobId).setContentType(contentType).build();
-        STORAGE.create(blobInfo, fileBytes);
+        
+        Blob blob = STORAGE.create(blobInfo, fileBytes);
+        blob.createAcl(Acl.of(User.ofAllUsers(), Role.READER));
 
         return PATH_PREFIX + fileName;        
     }

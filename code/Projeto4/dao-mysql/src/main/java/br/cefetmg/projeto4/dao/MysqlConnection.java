@@ -9,7 +9,7 @@ import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
 class MysqlConnection {
-    private static final String INSTANCE_CONNECTION_NAME = "projeto4-storage:us-central1:dbprojeto4";
+    private static final String INSTANCE_CONNECTION_NAME = "projeto-4-406800:us-central1:projeto4server";
     private static final String DB_NAME = "db_projeto4";
     private static final String DB_USER = "root";
     private static final String DB_PASS = "";
