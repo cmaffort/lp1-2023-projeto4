@@ -20,12 +20,13 @@ public class DonatarioDAO extends UsuarioDAO implements IDonatarioDAO {
     @Override
     public boolean inserir(DonatarioDTO donatario) throws SQLException, ClassNotFoundException {
         try {
+            conexao.setAutoCommit(false);
+
             if (!super.inserir(donatario))
-                return false;
+                throw new SQLException("Failed to insert");
 
             Statement stmt = conexao.createStatement();
             ResultSet resultSet = stmt.executeQuery("SELECT COALESCE(MAX(posicao) + 1, 1) AS posicao FROM donatarios");
-
 
             if (!resultSet.next())
                 throw new SQLException("Selection failed");
@@ -47,10 +48,10 @@ public class DonatarioDAO extends UsuarioDAO implements IDonatarioDAO {
             stmt2.close();
     
             System.out.println("Inserção realizada com sucesso");
+            conexao.commit();
             return true;
         } catch (SQLException e) {
-            remover(donatario);
-
+            conexao.rollback();
             System.out.println("Erro: " + e.getMessage());
             return false;
         } 

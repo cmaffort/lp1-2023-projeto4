@@ -52,7 +52,7 @@ public class GestaoGeralServlet extends HttpServlet {
             int contador = 0;
 
             List<DoadorDTO> doadoresFisicos = doadorDAO.listar();
-            List<DoadorJuridicoDTO> doadoresJuridicos = doadorJuridicoDAO.listar();
+            List<DoadorDTO> doadoresJuridicos = doadorJuridicoDAO.listar();
             List<MantecaoDTO> manutencoes = manutencaoDAO.listar();
             List<EstagiarioDTO> estagiarios = estagiarioDAO.listar();
             List<ProfessorDTO> professores = professorDAO.listar();
@@ -84,7 +84,9 @@ public class GestaoGeralServlet extends HttpServlet {
 
             }
 
-            for (DoadorJuridicoDTO doadores2 : doadoresJuridicos) {
+            for (DoadorDTO doadores1 : doadoresJuridicos) {
+                DoadorJuridicoDTO doadores2 = (DoadorJuridicoDTO) doadores1;
+
                 if (contador == 0) {
                         out.println("<div id=\"esquerda\">");
                         out.println("</div>");

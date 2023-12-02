@@ -13,8 +13,10 @@ public class ProfessorDAO extends UsuarioDAO implements IProfessorDAO {
     @Override
     public boolean inserir(ProfessorDTO professor) throws SQLException, ClassNotFoundException {
         try {
+            conexao.setAutoCommit(false);
+
             if (!super.inserir(professor))
-                return false;
+                throw new SQLException("Failed to insert");
 
             String sql = "INSERT IGNORE INTO professores (id_cadastro, departamento) VALUES ((SELECT id FROM usuarios WHERE email = ?), ?)";
             PreparedStatement stmt = conexao.prepareStatement(sql);
@@ -30,9 +32,10 @@ public class ProfessorDAO extends UsuarioDAO implements IProfessorDAO {
             stmt.close();
     
             System.out.println("Inserção realizada com sucesso");
+            conexao.commit();
             return true;
         } catch (SQLException e) {
-            remover(professor);
+            conexao.rollback();
     
             System.out.println("Erro: " + e.getMessage());
             return false;
