@@ -10,8 +10,15 @@
     </head>
     <body>
 
-        <%@page import="br.cefetmg.projeto4.dto.*"%>
-        <%@page        %>
+        <%@page import="br.cefetmg.projeto4.dto.DoadorDTO"%>
+        <%@page import="br.cefetmg.projeto4.dto.DoacaoDTO"%>
+        <%@page import="br.cefetmg.projeto4.dto.DoadorJuridicoDTO"%>
+        <%@page import="br.cefetmg.projeto4.dto.DonatarioDTO" %>
+        <%@page import="br.cefetmg.projeto4.dto.EstagiarioDTO" %>
+        <%@page import="br.cefetmg.projeto4.dto.ProfessorDTO" %>
+        <%@page import="br.cefetmg.projeto4.dto.MantecaoDTO" %>
+        <%@page import="br.cefetmg.projeto4.javaweb.GestaoGeralServlet" %>
+        <%@page import="java.util.*" %>
 
         <header></header>
 
@@ -21,62 +28,17 @@
 
             <h1>Doadores</h1>
 
+            
 
 
-
-            <div id="divMaior"> 
-
-
-                <div class="esquerda">
-
-                    <h2> Guilherme Arana</h2>
-
-                    <img  src="img/pessoa-anonima.png" id="pessoaAnonima">
-
-                    <ul class="listaDiv"> 
-                        <li><strong>CPF:</strong> 165.789.987-36</li>
-                        <li><strong>Computadores Doados:<strong> 59</li>
-                        <li><strong>Email:</strong> Roger@gmail.com</li>
-                    </ul>
-
-                </div>
-                <div class="meio">
-
-                    <h2> Leonardo Silva</h2>
-
-                    <img  src="img/pessoa-anonima.png" id="pessoaAnonima">
-
-                    <ul class="listaDiv"> 
-                        <li><strong>CPF:</strong> 165.789.987-36</li>
-                        <li><strong>Computadores Doados:<strong> 59</li>
-                        <li><strong>Email:</strong> Roger@gmail.com</li>
-                    </ul>
-
-                </div>
-                <div class="direita">
-
-                    <h2> Igor Gomes</h2>
-
-                    <img  src="img/pessoa-anonima.png" id="pessoaAnonima">
-
-                    <ul class="listaDiv"> 
-                        <li><strong>CPF:</strong> 165.789.987-36</li>
-                        <li><strong>Computadores Doados:<strong> 59</li>
-                        <li><strong>Email:</strong> Roger@gmail.com</li>
-                      
-                    </ul>
-
-                </div>
-
-
-            </div>
+            
         </main>
 
         <main id="doacoes">
 
             <h1>Doacões</h1>
 
-           <div id="divMaior"> 
+           <div class="divMaior"> 
 
 
                 <div class="esquerda">
