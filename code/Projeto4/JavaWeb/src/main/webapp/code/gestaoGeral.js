@@ -13,7 +13,7 @@ let botaoFuncionariosEl = document.querySelector('#botaoFuncionarios');
 
 
 
-botaoDoadoresEl.addEventListener('click', function() {
+botaoDoadoresEl.addEventListener('click', function () {
 
     doadoresEl.style.display = "block";
     doacoesEl.style.display = "none";
@@ -22,7 +22,7 @@ botaoDoadoresEl.addEventListener('click', function() {
     funcionariosEl.style.display = "none";
 });
 
-botaoDoacoesEl.addEventListener('click', function() {
+botaoDoacoesEl.addEventListener('click', function () {
 
     doacoesEl.style.display = "block";
     doadoresEl.style.display = "none";
@@ -31,7 +31,7 @@ botaoDoacoesEl.addEventListener('click', function() {
     funcionariosEl.style.display = "none";
 });
 
-botaoGeralEl.addEventListener('click', function() {
+botaoGeralEl.addEventListener('click', function () {
 
     geralEl.style.display = "block";
     doadoresEl.style.display = "none";
@@ -41,7 +41,7 @@ botaoGeralEl.addEventListener('click', function() {
 
 });
 
-botaoManutencoesEl.addEventListener('click', function() {
+botaoManutencoesEl.addEventListener('click', function () {
 
     manutencoesEl.style.display = "block";
     geralEl.style.display = "none";
@@ -51,7 +51,7 @@ botaoManutencoesEl.addEventListener('click', function() {
 
 });
 
-botaoFuncionariosEl.addEventListener('click', function() {
+botaoFuncionariosEl.addEventListener('click', function () {
 
     funcionariosEl.style.display = "block";
     geralEl.style.display = "none";
@@ -63,29 +63,86 @@ botaoFuncionariosEl.addEventListener('click', function() {
 // Função que exibe o Banco de dados
 
 let contador = 0;
-let posicaoClasse = "direita";
+let posicaoClasseDoador = "direita";
+let posicaoClasseDoacao = "direita";
+let posicaoClasseManutencao = "direita";
+let posicaoClasseFuncionario = "direita";
 
-function mostrarclasses () {
+function mostrarclasses() {
 
-if (contador % 3 == 0) { 
-    let novaDiv = document.createElement("div");
-    novaDiv.classLis.add("divMaior");
-    novaDiv.style.top += 15 + "px";
+    if (contador % 3 == 0) {
+        let novaDiv = document.createElement("div");
+        novaDiv.classLis.add("divMaior");
+        novaDiv.style.top += 15 + "px";
+    }
+
+    let novaClasseDoador = document.createElement("div");
+    let novaClasseDoacao = document.createElement("div");
+    let novaClasseManutencao = document.createElement("div");
+    let novaClasseFuncionario = document.createElement("div");
+
+    if (doadoresEl.style.display == "block") {
+
+
+        if (posicaoClasseDoador == "direita") {
+            novaClasseDoador.classList.add("esquerda");
+            posicaoClasseDoador = "esquerda";
+        } else if (posicaoClasseDoador == "esquerda") {
+            novaClasseDoador.classList.add("meio");
+            posicaoClasseDoador = "meio";
+        } else if (posicaoClasseDoador == "meio") {
+            novaClasseDoador.classList.add("direita");
+            posicaoClasseDoador = "direita";
+        }
+
     }
     
-let novaClasse = document.createElement("div");
+    if (doacoesEl.style.display == "block") {
 
 
+        if (posicaoClasseDoacao == "direita") {
+            novaClasseDoacao.classList.add("esquerda");
+            posicaoClasseDoacao = "esquerda";
+        } else if (posicaoClasseDoacao == "esquerda") {
+            novaClasseDoacao.classList.add("meio");
+            posicaoClasseDoacao = "meio";
+        } else if (posicaoClasseDoacao == "meio") {
+            novaClasseDoacao.classList.add("direita");
+            posicaoClasseDoacao = "direita";
+        }
 
-if (posicaoClasse == "direita") {
-    novaClasse.classList.add("esquerda");
-    posicaoClasse = "esquerda";
-} else if (posicaoClasse == "esquerda") {
-        novaClasse.classList.add("meio");
-        posicaoClasse = "meio";
-} else if (posicaoClasse == "meio") {
-        novaClasse.classList.add("direita");
-        posicaoClasse = "direita";
-}
+    }
+    
+    if (manutencoesEl.style.display == "block") {
+
+
+        if (posicaoClasseManutencao == "direita") {
+            novaClasseManutencao.classList.add("esquerda");
+            posicaoClasseManutencao = "esquerda";
+        } else if (posicaoClasseManutencao == "esquerda") {
+            novaClasseManutencao.classList.add("meio");
+            posicaoClasseManutencao = "meio";
+        } else if (posicaoClasseManutencao == "meio") {
+            novaClasseManutencao.classList.add("direita");
+            posicaoClasseManutencao = "direita";
+        }
+
+    }
+    
+    if (funcionariosEl.style.display == "block") {
+
+
+        if (posicaoClasseFuncionario == "direita") {
+            novaClasseFuncionario.classList.add("esquerda");
+            posicaoClasseFuncionario = "esquerda";
+        } else if (posicaoClasseFuncionario == "esquerda") {
+            novaClasseFuncionario.classList.add("meio");
+            posicaoClasseFuncionario = "meio";
+        } else if (posicaoClasseFuncionario == "meio") {
+            novaClasseFuncionario.classList.add("direita");
+            posicaoClasseFuncionario = "direita";
+        }
+
+    }
 }
 
