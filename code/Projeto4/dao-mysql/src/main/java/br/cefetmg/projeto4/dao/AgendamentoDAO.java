@@ -24,7 +24,7 @@ public class AgendamentoDAO implements IAgendamentoDAO {
     @Override
     public boolean inserir(AgendamentoDTO agendamento) throws SQLException, ClassNotFoundException {
         try {
-            PreparedStatement stmt = conexao.prepareStatement("INSERT INTO agendamentos (data, horario, id_donatario) VALUES (?, ?, (SELECT id FROM usuarios WHERE email = ?))");
+            PreparedStatement stmt = conexao.prepareStatement("INSERT IGNORE INTO agendamentos (data, horario, id_donatario) VALUES (?, ?, (SELECT id FROM usuarios WHERE email = ?))");
 
             stmt.setString(1, agendamento.getData());
             stmt.setString(2, agendamento.getHorario());
@@ -57,29 +57,27 @@ public class AgendamentoDAO implements IAgendamentoDAO {
 
     @Override
     public List<AgendamentoDTO> listar() throws SQLException, ClassNotFoundException {
-        try {
+        try (DonatarioDAO donatarioDAO = new DonatarioDAO()) {
             List<AgendamentoDTO> agendamentos = new ArrayList<>();
 
-            try (DonatarioDAO donatarioDAO = new DonatarioDAO()) {
-                String sql = "SELECT agendamentos.*, usuarios.email FROM agendamentos JOIN usuarios ON agendamentos.id_donatario = usuarios.id;";
-                Statement stmt = conexao.createStatement();
-                ResultSet resultSet = stmt.executeQuery(sql);
+            String sql = "SELECT agendamentos.*, usuarios.email FROM agendamentos JOIN usuarios ON agendamentos.id_donatario = usuarios.id;";
+            Statement stmt = conexao.createStatement();
+            ResultSet resultSet = stmt.executeQuery(sql);
 
-                while (resultSet.next()) {
-                    String data = resultSet.getString("data");
-                    String horario = resultSet.getString("horario");
-                    String email = resultSet.getString("email");
+            while (resultSet.next()) {
+                String data = resultSet.getString("data");
+                String horario = resultSet.getString("horario");
+                String email = resultSet.getString("email");
 
-                    DonatarioDTO donatario = (DonatarioDTO) donatarioDAO.selecionar(email).orElseThrow();
+                DonatarioDTO donatario = (DonatarioDTO) donatarioDAO.selecionar(email).orElseThrow();
 
-                    AgendamentoDTO agendamento = new AgendamentoDTO(data, horario, donatario);
+                AgendamentoDTO agendamento = new AgendamentoDTO(data, horario, donatario);
 
-                    agendamentos.add(agendamento);
-                }
-
-                resultSet.close();
-                stmt.close();
+                agendamentos.add(agendamento);
             }
+
+            resultSet.close();
+            stmt.close();
 
             return agendamentos;
         } catch (NoSuchElementException e) {

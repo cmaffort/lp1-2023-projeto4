@@ -46,7 +46,7 @@ public class CompraDAO extends PecasDAO  implements ICompraDAO {
             else
                 id = compra.getId();
 
-            String sql = "INSERT INTO compras(id_peca, valor_unitario) VALUES (?, ?)";
+            String sql = "INSERT IGNORE INTO compras(id_peca, valor_unitario) VALUES (?, ?)";
             PreparedStatement stmt = conexao.prepareStatement(sql);
 
             stmt.setInt(1, id);

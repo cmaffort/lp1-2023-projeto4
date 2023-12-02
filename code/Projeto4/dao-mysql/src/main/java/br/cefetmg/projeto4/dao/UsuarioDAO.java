@@ -26,7 +26,7 @@ public class UsuarioDAO implements IUsuarioDAO {
     @Override
     public boolean inserir(UsuarioDTO usuario) throws SQLException {
         try {
-            String sql = "INSERT INTO usuarios (nome, codigo, tipo_codigo, email, senha, tipo) VALUES (?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT IGNORE INTO usuarios (nome, codigo, tipo_codigo, email, senha, tipo) VALUES (?, ?, ?, ?, ?, ?)";
             PreparedStatement stmt = conexao.prepareStatement(sql);
     
             stmt.setString(1, usuario.getNome());

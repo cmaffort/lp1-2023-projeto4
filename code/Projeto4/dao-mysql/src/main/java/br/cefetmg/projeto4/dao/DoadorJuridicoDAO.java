@@ -1,6 +1,7 @@
 package br.cefetmg.projeto4.dao;
 
 import br.cefetmg.projeto4.idao.IDoadorJuridicoDAO;
+import br.cefetmg.projeto4.dto.DoadorDTO;
 import br.cefetmg.projeto4.dto.DoadorJuridicoDTO;
 import br.cefetmg.projeto4.dto.UsuarioDTO;
 
@@ -9,14 +10,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class DoadorJuridicoDAO extends UsuarioDAO implements IDoadorJuridicoDAO {
+public class DoadorJuridicoDAO extends DoadorDAO implements IDoadorJuridicoDAO {
     public DoadorJuridicoDAO() throws SQLException {}
 
     @Override
     public boolean inserir(DoadorJuridicoDTO doador) throws SQLException, ClassNotFoundException {
         try {
+            conexao.setAutoCommit(false);
+
             if (!super.inserir(doador))
-                return false;
+                throw new SQLException("Failed to insert");
 
             String sql = "INSERT IGNORE INTO doadoresJuridicos (id_doador, endereco) VALUES ((SELECT id FROM doadores WHERE id_cadastro = (SELECT id FROM usuarios WHERE email = ?)), ?)";
             PreparedStatement stmt = conexao.prepareStatement(sql);
@@ -32,9 +35,10 @@ public class DoadorJuridicoDAO extends UsuarioDAO implements IDoadorJuridicoDAO 
             stmt.close();
     
             System.out.println("Inserção realizada com sucesso");
+            conexao.commit();
             return true;
         } catch (SQLException e) {
-            remover(doador);
+            conexao.rollback();
 
             System.out.println("Erro: " + e.getMessage());
             return false;
@@ -47,8 +51,8 @@ public class DoadorJuridicoDAO extends UsuarioDAO implements IDoadorJuridicoDAO 
     }
 
     @Override
-    public List<DoadorJuridicoDTO> listar() throws SQLException, ClassNotFoundException {
-   List<DoadorJuridicoDTO> doadoresJuridicos = new ArrayList<>();
+    public List<DoadorDTO> listar() throws SQLException, ClassNotFoundException {
+   List<DoadorDTO> doadores = new ArrayList<>();
 
     try {
         PreparedStatement statement = conexao.prepareStatement("SELECT doadoresJuridicos.*, doadores.*, usuarios.* FROM doadoresJuridicos JOIN doadores ON doadoresJuridicos.id_doador = doadores.id JOIN usuarios ON doadores.id_cadastro = usuarios.id;");
@@ -63,8 +67,8 @@ public class DoadorJuridicoDAO extends UsuarioDAO implements IDoadorJuridicoDAO 
             int computadoresDoados = resultSet.getInt("computadores_doados");
             String endereco = resultSet.getString("endereco");
 
-            DoadorJuridicoDTO doadorJuridico = new DoadorJuridicoDTO(nome, CNPJ, email, senha, foto, computadoresDoados, endereco);
-            doadoresJuridicos.add(doadorJuridico);
+            DoadorJuridicoDTO doador = new DoadorJuridicoDTO(nome, CNPJ, email, senha, foto, computadoresDoados, endereco);
+            doadores.add(doador);
         }
 
         resultSet.close();
@@ -73,7 +77,7 @@ public class DoadorJuridicoDAO extends UsuarioDAO implements IDoadorJuridicoDAO 
         System.out.println("Erro: " + e.getMessage());
     }
 
-    return doadoresJuridicos;
+    return doadores;
     }
 
     @Override

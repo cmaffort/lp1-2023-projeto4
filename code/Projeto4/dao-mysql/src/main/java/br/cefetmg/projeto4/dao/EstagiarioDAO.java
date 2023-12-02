@@ -16,8 +16,10 @@ public class EstagiarioDAO extends UsuarioDAO implements IEstagiarioDAO {
     @Override
     public boolean inserir(EstagiarioDTO estagiario) throws SQLException, ClassNotFoundException {
         try {
+            conexao.setAutoCommit(false);
+
             if (!super.inserir(estagiario))
-                return false;
+                throw new SQLException("Failed to insert");
 
             String sql = "INSERT IGNORE INTO estagiarios (id_cadastro, dataDeEntrada, dataDeSaida) VALUES ((SELECT id FROM usuarios WHERE email = ?), ?, ?)";
             PreparedStatement stmt = conexao.prepareStatement(sql);
@@ -34,9 +36,10 @@ public class EstagiarioDAO extends UsuarioDAO implements IEstagiarioDAO {
             stmt.close();
     
             System.out.println("Inserção realizada com sucesso");
+            conexao.commit();
             return true;
         } catch (SQLException e) {
-            remover(estagiario);
+            conexao.rollback();
 
             System.out.println("Erro: " + e.getMessage());
             return false;
