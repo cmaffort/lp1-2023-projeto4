@@ -16,15 +16,18 @@ import java.util.logging.Logger;
 public class GetDoadores {
     
     private List<DoadorDTO> doadoresFisicos;
-    private List<DoadorJuridicoDTO> doadoresJuridicos;
+    private List<DoadorDTO> doadoresJuridicos;
+    DoadorDAO doadorDAO;
+    DoadorJuridicoDAO doadorJuridicoDAO;
     
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         try (PrintWriter out = response.getWriter()) {
             
-            DoadorDAO doadorDAO = new DoadorDAO();
-            DoadorJuridicoDAO doadorJuridicoDAO = new DoadorJuridicoDAO();
+            doadorDAO = new DoadorDAO();
+            doadorJuridicoDAO = new DoadorJuridicoDAO();
+            
             
             
             doadoresFisicos = doadorDAO.listar();
@@ -35,8 +38,15 @@ public class GetDoadores {
             // Trate a exceção de alguma forma apropriada aqui (por exemplo, exibir uma mensagem de erro).
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(GestaoDoacao.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }        
     }
     
+    public List<DoadorDTO> getDoadorFisico() {
+            return doadoresFisicos;
+    }
     
+    public List<DoadorDTO> getDoadoresJuridicos() {
+        return doadoresJuridicos;
+    }
+ 
 }

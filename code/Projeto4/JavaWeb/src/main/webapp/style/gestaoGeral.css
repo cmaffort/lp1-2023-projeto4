@@ -31,7 +31,7 @@ h1 {
     position: absolute;
 }
 
-#pessoaAnonima {
+.pessoaAnonima {
     height: 100px;
     width: 100px;
     margin-left: -180px;
