@@ -67,6 +67,12 @@ let posicaoClasse = "direita";
 
 function mostrarclasses () {
 
+if (contador % 3 == 0) { 
+    let novaDiv = document.createElement("div");
+    novaDiv.classLis.add("divMaior");
+    novaDiv.style.top += 15 + "px";
+    }
+    
 let novaClasse = document.createElement("div");
 
 
