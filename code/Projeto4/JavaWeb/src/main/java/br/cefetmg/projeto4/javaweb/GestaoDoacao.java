@@ -46,12 +46,12 @@ public class GestaoDoacao extends HttpServlet {
             out.println("<table>");
             out.println("<caption>Lista de Doações</caption>");
             out.println("<thead>");
-            out.println("<tr><th>Quantidade</th><th>Computador</th><th>Ram</th><th>Doador</th><th>Data</th></tr>");
+            out.println("<tr><th>Quantidade</th><th>Computador</th><th>Ram</th><th>Doador</th></tr>");
             out.println("</thead><tbody>");
 
             // Iterar sobre os resultados e exibi-los na tabela HTML
             for (DoacaoDTO doacao : doacoes) {
-                out.println("<tr><td>" + doacao.getQuantidade()+ "</td><td>" + doacao.getMarcaComputador() + "</td><td>" + doacao.getQuantidadeDeRAM() + "</td><td>" + doacao.getDoador() + "</td><td>" + doacao.getDataDeChegada());
+                out.println("<tr><td>" + doacao.getQuantidade()+ "</td><td>" + doacao.getMarcaComputador() + "</td><td>" + doacao.getQuantidadeDeRAM() + "</td><td>" + doacao.getDoador() + "</td></tr>");
             }
 
             out.println("</tbody></table></section>");
