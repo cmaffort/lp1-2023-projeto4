@@ -2,9 +2,9 @@ package br.cefetmg.projeto4.dto;
 
 
 public class PecasDTO {
-   private enum Status {
+    protected enum Status {
         EM_FALTA, COMPRADO;
-   }
+    }
 
     private Integer id;
     private int quantidade;
@@ -12,11 +12,11 @@ public class PecasDTO {
     private String marca;
     private Status status;
 
-    public PecasDTO(String nome, String marca, String status, int quantidade) {
+    protected PecasDTO(String nome, String marca, String status, int quantidade) {
         this(null, nome, marca, status, quantidade);
     }
 
-    public PecasDTO(Integer id, String nome, String marca, String status, int quantidade) {
+    protected PecasDTO(Integer id, String nome, String marca, String status, int quantidade) {
         this(id, nome, marca, Status.valueOf(status), quantidade);
     }
 
@@ -28,7 +28,7 @@ public class PecasDTO {
         this(id, nome, marca, Status.EM_FALTA, quantidade);
     }
 
-    private PecasDTO(Integer id, String nome, String marca, Status status, int quantidade) {
+    protected PecasDTO(Integer id, String nome, String marca, Status status, int quantidade) {
         this.id = id;
         this.quantidade = quantidade;
         this.nome = nome;

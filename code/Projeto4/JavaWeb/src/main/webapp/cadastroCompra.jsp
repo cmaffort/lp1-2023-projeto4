@@ -58,7 +58,9 @@
                     <label for="nome">Quantidade: </label>
                     <input type="number" id="quantidade" name="quantidade" required>
                 </div><div class="campo">
-                 </div><div id="submit">
+                    <label for="valor">Valor unitário: </label>
+                    <input type="text" name="valor" pattern="^\d+(\.\d{1,2})?$" required>
+                </div><div id="submit">
                     <input type="submit" value="Cadastrar">
                 </div>
             </form>
