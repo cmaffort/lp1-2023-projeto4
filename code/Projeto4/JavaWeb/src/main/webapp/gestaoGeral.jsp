@@ -32,12 +32,32 @@
             <div class="divMaior">
                 
                 <% 
-                    GetDoadores doadoresFisicos = new GetDoadores();
-                    GetDoadores doadoresJuridicos = new GetDoadores();
-                    List<DoadorDTO> listaFisico = doadoresFisicos.
-                    List<DoadorJuridicoDTO> listaJuridico = doadoresjuridicos.
-                    
+                    GetDoadores doadoresFisicosGet = new GetDoadores();
+                    GetDoadores doadoresJuridicosGet = new GetDoadores();
+                    List<DoadorDTO> doadoresFisicos = doadoresFisicosGet.getDoadorFisico();
+                    List<DoadorDTO> doadoresJuridicos = doadoresJuridicosGet.getDoadoresJuridicos();
                 %>
+                
+                <div>
+                    <% 
+                    for (DoadorDTO contador: doadoresFisicos) { %>
+                    
+                    <p class="classe"><% out.println(contador.getNome() + "*" + contador.getCodigo() + "*" + contador.getComputadoresDoados() + "*" + contador.getEmail() + "*" + contador.getFoto()); 
+                    %></p>
+                    
+                <%}%>
+                
+                <% 
+                    for (DoadorDTO contador: doadoresJuridicos) { %>
+                    
+                    <p class="classe"><% out.println(contador.getNome() + "*" + contador.getCodigo() + "*" + contador.getComputadoresDoados() + "*" + contador.getEmail() + "*" + contador.getFoto()); 
+                    %></p>
+                    
+                <%}%>
+                    
+                </div>  
+                
+                
             </div>
 
 
