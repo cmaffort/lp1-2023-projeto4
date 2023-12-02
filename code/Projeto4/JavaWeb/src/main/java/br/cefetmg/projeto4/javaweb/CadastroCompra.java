@@ -4,7 +4,7 @@
  */
 package br.cefetmg.projeto4.javaweb;
 
-import br.cefetmg.projeto4.dao.PecasDAO;
+import br.cefetmg.projeto4.dao.CompraDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -39,11 +39,12 @@ public class CadastroCompra extends HttpServlet {
             throws ServletException, IOException, NumberFormatException, ClassNotFoundException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            try (PecasDAO pecasDAO = new PecasDAO()) {
+            try (CompraDAO compraDAO = new CompraDAO()) {
                 String id = request.getParameter("codigo");
                 String quantidade = request.getParameter("quantidade");
+                String valorUnitario = request.getParameter("valor");
 
-                if (!pecasDAO.registrarCompra(Integer.parseInt(id), Integer.parseInt(quantidade)))
+                if (!compraDAO.registrarCompra(Integer.parseInt(id), Integer.parseInt(quantidade), Double.parseDouble(valorUnitario)))
                     throw new SQLException("Cadastro compra falhou");
 
                 response.sendRedirect("pedidoCompra.jsp");

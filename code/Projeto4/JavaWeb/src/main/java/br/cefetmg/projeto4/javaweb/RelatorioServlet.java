@@ -3,8 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 package br.cefetmg.projeto4.javaweb;
-import br.cefetmg.projeto4.dto.ComprasDTO;
-import br.cefetmg.projeto4.dao.ComprasDAO;
+import br.cefetmg.projeto4.dto.CompraDTO;
+import br.cefetmg.projeto4.dao.CompraDAO;
 import br.cefetmg.projeto4.dao.PecasDAO;
 import br.cefetmg.projeto4.dto.PecasDTO;
 import br.cefetmg.projeto4.dto.PecasDTO;
@@ -51,8 +51,8 @@ public class RelatorioServlet extends HttpServlet {
             out.println("</head><body>");
             out.println("<header></header>");
             out.println("<main><section>");
-            ComprasDAO comprasDAO = new ComprasDAO();
-            int total = comprasDAO.valorTotal();
+            CompraDAO comprasDAO = new CompraDAO();
+            double total = comprasDAO.getTotalCompras();
             out.println("<p> Total gasto: " + total + "</p>");
             out.println("<table>");
            /* out.println("<caption>Lista de Peças em Falta</caption>");
