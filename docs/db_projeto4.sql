@@ -51,6 +51,28 @@ INSERT INTO `agendamentos` (`id`, `data`, `horario`, `id_donatario`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `compras`
+--
+
+DROP TABLE IF EXISTS `compras`;
+CREATE TABLE `compras` (
+  `id` int(11) NOT NULL,
+  `id_peca` int(11) NOT NULL,
+  `preco_unitario` DECIMAL(10, 2) NOT NULL DEFAULT 0.00
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `compras`
+--
+
+INSERT INTO `compras` (`id`, `id_peca`, `preco_unitario`) VALUES
+(1, 4, 598.99),
+(2, 5, 499.99),
+(3, 6, 123.00);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `doacoes`
 --
 
@@ -297,7 +319,7 @@ CREATE TABLE `usuarios` (
   `tipo_codigo` enum('CPF', 'CNPJ') DEFAULT 'CPF',
   `email` varchar(32) NOT NULL,
   `senha` varchar(255) NOT NULL,
-  `foto` varchar(255) NOT NULL DEFAULT 'https://storage.cloud.google.com/projeto4/fotos/avatar.png',
+  `foto` varchar(255) NOT NULL DEFAULT 'https://storage.googleapis.com/projeto_4/fotos/avatar.png',
   `tipo` enum('DONATARIO','PROFESSOR','ESTAGIARIO','DOADOR') DEFAULT 'DONATARIO'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -306,31 +328,31 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `nome`, `codigo`, `tipo_codigo`, `email`, `senha`, `foto`, `tipo`) VALUES
-(1, 'Fulaninho', '1', 'CPF', 'fulaninho@gmail.com', '$2a$15$DU9jyb6Rkdie9.qtsChzSubRxQ7/Al1WXswx9G17D2ghVD8notG7.', 'https://storage.cloud.google.com/projeto4/fotos/1_1700684150839.png', 'DONATARIO'),
-(2, 'Ciclaninho', '2', 'CPF', 'ciclaninho@gmail.com', '$2a$15$cDId8Cyx0LiRRpLIQK0wauaQALX9fXH8hplKJM8jl5U1sHL1636Ye', 'https://storage.cloud.google.com/projeto4/fotos/2_1700684240282.png', 'DONATARIO'),
-(3, 'Beltraninho', '3', 'CPF', 'beltraninho@gmail.com', '$2a$15$IwWkfXDlTheX9MTcoRkioOAawdJjIOg4o12rldcczwSymgXPbuYmO', 'https://storage.cloud.google.com/projeto4/fotos/3_1700684283068.png', 'DONATARIO'),
-(4, 'Cristiano Maffort', '123', 'CPF', 'maffort@gmail.com', '$2a$15$D/1xK/3M1g5s9DeHL4Vu0u5LM3Tv6d2YXleiLZm8HHYujST/qfbXu', 'https://storage.cloud.google.com/projeto4/fotos/123_1700684064448.png', 'PROFESSOR'),
-(5, 'miguel', '12345678900', 'CPF', 'miguel@gmail.com', '$2a$15$BbKV0hC/5S5i9r3VImrKz.3rEEPgml/F9gH6sQiblKY0xu76rUMsC', 'https://storage.cloud.google.com/projeto4/fotos/avatar.png', 'ESTAGIARIO'),
-(6, 'rafael', '21345678900', 'CPF', 'rafael@gmail.com', '$2a$15$hzn5fEFQvyBF0RIVovZfRO9545613IRvZGzqqs8yMwV1X/BzGwonS', 'https://storage.cloud.google.com/projeto4/fotos/avatar.png', 'ESTAGIARIO'),
-(7, 'Ruan', '4', 'CPF', 'l@l.l', '$2a$15$NGY0hkJxSXh92z2jKapYp.EIkz9ME.C5JwbvYTiY9DSX8w1xva//e', 'https://storage.cloud.google.com/projeto4/fotos/avatar.png', 'DOADOR'),
-(8, 'lucas', '5', 'CPF', 'exotic@gmail.com', '$2a$15$hRYBB849pmWOMUojFE62POepw4QFEfWWlH5bb5nt.IXIcZocJaGLq', 'https://storage.cloud.google.com/projeto4/fotos/avatar.png', 'DOADOR'),
-(9, 'caio', '6', 'CPF', 'caio@gmail.com', '$2a$15$CvyeFCpyWZN64N73KMhYwuinGqPke4leme47oq/lm7o/LG//eXBsS', 'https://storage.cloud.google.com/projeto4/fotos/avatar.png', 'DOADOR'),
-(10, 'vitor', '123653', 'CPF', 'vitor@gmail.com', '$2a$15$vLA5W48V8PhFCmoFvnrGF.rCOTc3w83ztSuOlRevL5MUb4ZnsxATu', 'https://storage.cloud.google.com/projeto4/fotos/avatar.png', 'DOADOR'),
-(11, 'Fulanão', '19', 'CPF', 'fulanao@gmail.com', '$2a$15$W2oMWsdgXY4RUOveVTAVPOMbgm7zW5OhY60qn2DjrcKJw1FijoYlC', 'https://storage.cloud.google.com/projeto4/fotos/19_1700684397697.png', 'DONATARIO'),
-(12, 'Beltranão', '20', 'CPF', 'beltranao@gmail.com', '$2a$15$UxD.oUrRFJsk9mbkSgLhC.offDE6LoDtz4xdLMC0gcsDSaM70zapW', 'https://storage.cloud.google.com/projeto4/fotos/20_1700684584375.png', 'DONATARIO'),
-(13, 'Ciclanão', '21', 'CPF', 'ciclanao@gmail.com', '$2a$15$CE7c02f1M6Inw8qkbFWN4.P8KSqRzcpBGOuAtRzzOJEoiGUJU3Pwq', 'https://storage.cloud.google.com/projeto4/fotos/21_1700684448373.png', 'DONATARIO'),
-(14, 'Mick Jagger', '7', 'CPF', 'mick@jagger.com', '$2a$15$40.4/DMCNOjetEYkWE11XuQZjCwblnK0/knq.Eiknx3iRnu3rnSB2', 'https://storage.cloud.google.com/projeto4/fotos/avatar.png', 'DONATARIO'),
-(15, 'Jimmy Page', '8', 'CPF', 'jimmy@page.com', '$2a$15$K05zxb0YkvD3.S1j8QadIej8v159iIPYkOLNIvF61YKlWIIcxv1om', 'https://storage.cloud.google.com/projeto4/fotos/avatar.png', 'DONATARIO'),
-(16, 'Freddy Mercury', '9', 'CPF', 'freddy@mercury.com', '$2a$15$bPMzlUIcAj740/ppA8smAeKUq5Yc1SNGAuZQBeQZuv.g5pITYSSDG', 'https://storage.cloud.google.com/projeto4/fotos/avatar.png', 'DONATARIO'),
-(17, 'John Lennon', '10', 'CPF', 'john@lennon.com', '$2a$15$Y6uZtc.T/qy/gT3RO1xgRulCbtg09v6OriybLxb204cYnoGWrFH/S', 'https://storage.cloud.google.com/projeto4/fotos/avatar.png', 'DONATARIO'),
-(18, 'Janis Joplin', '11', 'CPF', 'janis@joplin.com', '$2a$15$YXm/Vi6CT76347FuwdxoXeoMphQgb4BV0f7gW0Z.DPjQBOWybFdPa', 'https://storage.cloud.google.com/projeto4/fotos/avatar.png', 'DONATARIO'),
-(19, 'David Bowie', '12', 'CPF', 'david@bowie.com', '$2a$15$BCKJMWPPUredncITM2ByNuUCaVgn2LF.EMgTH/MNR2t1bNee4rhBe', 'https://storage.cloud.google.com/projeto4/fotos/avatar.png', 'DONATARIO'),
-(20, 'Mick Jagger', '13', 'CPF', 'm1ck@jagger.com', '$2a$15$qjbbScbxDLBIQzD42xMWQeto2k5CVXwhO419mAeTenxm5/NT/McXi', 'https://storage.cloud.google.com/projeto4/fotos/avatar.png', 'DONATARIO'),
-(21, 'Jimmy Page', '14', 'CPF', 'j1mmy@page.com', '$2a$15$fMdqEZfRKxeuWOHLROX2L.gbzy/g4bFfadrWcpblcohMUcKMfr32G', 'https://storage.cloud.google.com/projeto4/fotos/avatar.png', 'DONATARIO'),
-(22, 'Freddy Mercury', '15', 'CPF', 'fr3ddy@mercury.com', '$2a$15$MOL6P6SSG8GdxVrjIuV8PehqAwW6Kl1gf0bMBgPbUfGSf5RVMX5qy', 'https://storage.cloud.google.com/projeto4/fotos/avatar.png', 'DONATARIO'),
-(23, 'John Lennon', '16', 'CPF', 'j0hn@lennon.com', '$2a$15$JCzTpK3Gr/RCIu2//rlDgOyKWbjTK4JF94H.pI2EGQpLntd.f/mDC', 'https://storage.cloud.google.com/projeto4/fotos/avatar.png', 'DONATARIO'),
-(24, 'Janis Joplin', '17', 'CPF', 'j4nis@joplin.com', '$2a$15$kdaZVzeHqhh3MhB.7DA5nOevnMRrZNMzqDOAU7iChyUeECwNS04/.', 'https://storage.cloud.google.com/projeto4/fotos/avatar.png', 'DONATARIO'),
-(25, 'David Bowie', '18', 'CPF', 'd4vid@bowie.com', '$2a$15$5r6N4nVlbID46xIbkQka5.whsAgcw2Hdnq1WNGnBsmmlqN8chzp/u', 'https://storage.cloud.google.com/projeto4/fotos/avatar.png', 'DONATARIO');
+(1, 'Fulaninho', '1', 'CPF', 'fulaninho@gmail.com', '$2a$10$Xn5Q2Ei5ip0g2GYIhRtwS.hu3O4uDaQ1qwdXZhuncNhfAF22pVB06', 'https://storage.googleapis.com/projeto_4/fotos/1_1700684150839.png', 'DONATARIO'),
+(2, 'Ciclaninho', '2', 'CPF', 'ciclaninho@gmail.com', '$2a$10$5UC4coHFr1tO8duWZz1/ZumgQqYJCvtETIgYI2VLleTFCoUoGFqPe', 'https://storage.googleapis.com/projeto_4/fotos/2_1700684240282.png', 'DONATARIO'),
+(3, 'Beltraninho', '3', 'CPF', 'beltraninho@gmail.com', '$2a$10$5jqwVuKCdcg5wtEXuMk4FOp.32wCKVtsUDacKl8IpTtF6dVuhhmP.', 'https://storage.googleapis.com/projeto_4/fotos/3_1700684283068.png', 'DONATARIO'),
+(4, 'Cristiano Maffort', '123', 'CPF', 'maffort@gmail.com', '$2a$10$ZQJLs.TK0.ZBVpkeA5KG4OLdIfJGoLMnENcHGGiSPXGgZBFH8fArC', 'https://storage.googleapis.com/projeto_4/fotos/123_1700684064448.png', 'PROFESSOR'),
+(5, 'miguel', '12345678900', 'CPF', 'miguel@gmail.com', '$2a$10$Y5IiYzPvLSTctqq6uOyx4eb8qH/Ivt9OhUOkBolaHjaI9bNPt2Ude', 'https://storage.googleapis.com/projeto_4/fotos/avatar.png', 'ESTAGIARIO'),
+(6, 'rafael', '21345678900', 'CPF', 'rafael@gmail.com', '$2a$10$MDG1OyvVL/eo3HkXzkhBmOvS2oGb9yfnHTn6e0cswZQVef3FZJgQ.', 'https://storage.googleapis.com/projeto_4/fotos/avatar.png', 'ESTAGIARIO'),
+(7, 'Ruan', '4', 'CPF', 'l@l.l', '$2a$10$.y9dY0.M4ZUr/Xe5NUn8DeKH2xN78EUiZC1/Rq/QXuOiOC4GW0Mzu', 'https://storage.googleapis.com/projeto_4/fotos/avatar.png', 'DOADOR'),
+(8, 'lucas', '5', 'CPF', 'exotic@gmail.com', '$2a$10$UuGsV0U86dHlSZ0vPb76.O5eySVmtc/HwzsiVg8K/r.kCi9Bwdkqe', 'https://storage.googleapis.com/projeto_4/fotos/avatar.png', 'DOADOR'),
+(9, 'caio', '6', 'CPF', 'caio@gmail.com', '$2a$10$GChdGJChltw1EkqrnsEaEOwGBLBAdJlXh1J4u8Fj8ZPDnjJKnjF0a', 'https://storage.googleapis.com/projeto_4/fotos/avatar.png', 'DOADOR'),
+(10, 'vitor', '123653', 'CPF', 'vitor@gmail.com', '$2a$10$BIMTdmR293bq9lGzDEuKHOGk5KlgeRb2TvHeZkDtxD.K8NmNcw6U2', 'https://storage.googleapis.com/projeto_4/fotos/avatar.png', 'DOADOR'),
+(11, 'Fulanão', '19', 'CPF', 'fulanao@gmail.com', '$2a$10$FT5z9Lpva.jrJ.NbcmG22eRJklp6VWEu1xwaeuiFrF7XFoFmE0/Q2', 'https://storage.googleapis.com/projeto_4/fotos/19_1700684397697.png', 'DONATARIO'),
+(12, 'Ciclanão', '20', 'CPF', 'ciclanao@gmail.com', '$2a$10$5m2P5lm/xRVtMMaVI9Ssx.SH0PkKbW3KBGQH4bBsdqBAtHN/Za5b6', 'https://storage.googleapis.com/projeto_4/fotos/20_1700684584375.png', 'DONATARIO'),
+(13, 'Beltranão', '21', 'CPF', 'beltranao@gmail.com', '$2a$10$ToXi3MfCKgJXhb4OGnofMOo3O2sSoBqMXs2D.ATNpasn7A8HwsToy', 'https://storage.googleapis.com/projeto_4/fotos/21_1700684448373.png', 'DONATARIO'),
+(14, 'Mick Jagger', '7', 'CPF', 'mick@jagger.com', '$2a$10$E33ktwz.Un4FFl9HoPcy7uxjmTz46Q8hUv9FX/618ckKMPgOWSZYu', 'https://storage.googleapis.com/projeto_4/fotos/avatar.png', 'DONATARIO'),
+(15, 'Jimmy Page', '8', 'CPF', 'jimmy@page.com', '$2a$10$xOmV3PLdIXKQT/QJ/8Xb6./5RVTUWy.G.IYyUbQYyckQBz0R6xI9i', 'https://storage.googleapis.com/projeto_4/fotos/avatar.png', 'DONATARIO'),
+(16, 'Freddy Mercury', '9', 'CPF', 'freddy@mercury.com', '$2a$10$IrzG7vIHe9I6PePepu2speuVc2QDyURz8mwpIl3gjqdeEn29eopsW', 'https://storage.googleapis.com/projeto_4/fotos/avatar.png', 'DONATARIO'),
+(17, 'John Lennon', '10', 'CPF', 'john@lennon.com', '$2a$10$HTVt93YauuezrOzXCiiJDeeOT6u1f6J.ff5eBxwSDYbDF/8.CN1Ba', 'https://storage.googleapis.com/projeto_4/fotos/avatar.png', 'DONATARIO'),
+(18, 'Janis Joplin', '11', 'CPF', 'janis@joplin.com', '$2a$10$mZK1UIdEh6idlqMRI/XOS.xUIZLvDnUoojixp4ysICQlDeUZitRrG', 'https://storage.googleapis.com/projeto_4/fotos/avatar.png', 'DONATARIO'),
+(19, 'David Bowie', '12', 'CPF', 'david@bowie.com', '$2a$10$z1iRrLcKzJWPrkRCRC9HDOd.XxSa3ZEQ7M4GremcGycyb5g6VjEh2', 'https://storage.googleapis.com/projeto_4/fotos/avatar.png', 'DONATARIO'),
+(20, 'Mick Jagger', '13', 'CPF', 'm1ck@jagger.com', '$2a$10$C3LOWWlIOqTYQUuAT42WMOL7EH4hD6.3s60oEP7RMmZJKhumht.RS', 'https://storage.googleapis.com/projeto_4/fotos/avatar.png', 'DONATARIO'),
+(21, 'Jimmy Page', '14', 'CPF', 'j1mmy@page.com', '$2a$10$bHpRugrGgxdA8Jd8Fm0bdOOhfftkPiP4qQLln1Kr1pbhp701H0bgu', 'https://storage.googleapis.com/projeto_4/fotos/avatar.png', 'DONATARIO'),
+(22, 'Freddy Mercury', '15', 'CPF', 'fr3ddy@mercury.com', '$2a$10$VhjEAr0tPzfTpFouK3oUw./CFDLo6ZRXdAb5v6d0U6HVqQLeFoEaC', 'https://storage.googleapis.com/projeto_4/fotos/avatar.png', 'DONATARIO'),
+(23, 'John Lennon', '16', 'CPF', 'j0hn@lennon.com', '$2a$10$KIAbFMwxosnKupFz9dgRNeASqI3gO7RjwN5yU9WLWDP/qcApJeqsS', 'https://storage.googleapis.com/projeto_4/fotos/avatar.png', 'DONATARIO'),
+(24, 'Janis Joplin', '17', 'CPF', 'j4nis@joplin.com', '$2a$10$RQFe.y9mh3L2s3bQNqa5iOaqN.baLNSy5o/BmIJVi68ExTTX.5L9W', 'https://storage.googleapis.com/projeto_4/fotos/avatar.png', 'DONATARIO'),
+(25, 'David Bowie', '18', 'CPF', 'd4vid@bowie.com', '$2a$10$A4Ry6HQLwSz2XkK.7jCqxuC9wdacDinwQLnNptWAFUdHUdqYV0MEC', 'https://storage.googleapis.com/projeto_4/fotos/avatar.png', 'DONATARIO');
 
 --
 -- Indexes for dumped tables
@@ -342,6 +364,13 @@ INSERT INTO `usuarios` (`id`, `nome`, `codigo`, `tipo_codigo`, `email`, `senha`,
 ALTER TABLE `agendamentos`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `fk_agendamentos_usuarios` (`id_donatario`);
+
+--
+-- Indexes for table `compras`
+--
+ALTER TABLE `compras`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `fk_compras_pecas` (`id_peca`);
 
 --
 -- Indexes for table `doacoes`
@@ -427,6 +456,11 @@ ALTER TABLE `usuarios`
 ALTER TABLE `agendamentos`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
+-- AUTO_INCREMENT for table `compras`
+--
+ALTER TABLE `compras`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT for table `doacoes`
 --
 ALTER TABLE `doacoes`
@@ -493,6 +527,13 @@ ALTER TABLE `agendamentos`
   ADD CONSTRAINT `fk_agendamentos_usuarios`
   FOREIGN KEY (`id_donatario`)
   REFERENCES `usuarios`(`id`) ON DELETE CASCADE;
+--
+-- FOREIGN KEY for table `compras`
+--
+ALTER TABLE `compras`
+  ADD CONSTRAINT `fk_compras_pecas`
+  FOREIGN KEY (`id_peca`)
+  REFERENCES `pecas`(`id`) ON DELETE CASCADE;
 --
 -- FOREIGN KEY for table `doacoes`
 --
