@@ -258,6 +258,14 @@ CREATE TABLE `mantecao` (
   `id_arrumador` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `mantecao`
+--
+INSERT INTO `mantecao`(`id`, `data`, `estado`, `id_donatario`, `id_arrumador`) VALUES 
+(1, '2023-09-30', 'QUEBRADO', 1, 5),
+(2, '2023-10-30', 'FALTANDO_PECA', 2, 6),
+(3, '2023-11-30', 'DEFEITUOSO', 3, 5);
+
 -- --------------------------------------------------------
 
 --

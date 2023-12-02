@@ -1,13 +1,12 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@page import="java.util.List"%>
-<%@page import="br.cefetmg.projeto4.dao.AgendamentoDAO"%>
-<%@page import="br.cefetmg.projeto4.dto.AgendamentoDTO"%>
+<%@page import="br.cefetmg.projeto4.dao.MantecaoDAO"%>
+<%@page import="br.cefetmg.projeto4.dto.MantecaoDTO"%>
 <%@page import="br.cefetmg.projeto4.dto.UsuarioDTO"%>
-<%@page import="br.cefetmg.projeto4.dto.DonatarioDTO"%>
 
 <%
     if (session == null || session.getAttribute("usuario") == null) {
-        response.sendRedirect("login.jsp?p=agenda.jsp");
+        response.sendRedirect("login.jsp?p=mostraManutencoes.jsp");
         return;
     }
 
@@ -28,36 +27,35 @@
     <link rel="stylesheet" href="style/main.css">
     <link rel="stylesheet" href="style/exception.css">
     <link rel="stylesheet" href="style/table.css">
-    <title>Agenda de doações</title>
+    <title>Manutenções</title>
 </head>
 <body>
     <header></header>
 
     <main>
 <%
-    try (AgendamentoDAO agendamentoDAO = new AgendamentoDAO()) {
-        List<AgendamentoDTO> agendamentos = agendamentoDAO.listar();
+    try (MantecaoDAO mantecaoDAO = new MantecaoDAO()) {
+        List<MantecaoDTO> mantecoes = mantecaoDAO.listar();
 %>
         <table class="hidden hideable">
-            <caption>Doações Agendadas</caption>
+            <caption>Manutenções</caption>
             <thead>
                 <tr>
-                    <th>Data</th>
-                    <th>Horario</th>
-                    <th>Nome donatario</th>
+                    <th>Data entrega</th>
+                    <th>Estado</th>
                     <th>Email donatario</th>
+                    <th>Email arrumador</th>
                 </tr>
             </thead>
             <tbody>
 <%
-        for (AgendamentoDTO agendamento : agendamentos) { 
-            DonatarioDTO donatario = agendamento.getDonatario();                
+        for (MantecaoDTO mantecao : mantecoes) {             
 %>
                 <tr>
-                    <td><%=agendamento.getData()%></td>
-                    <td><%=agendamento.getHorario()%></td>
-                    <td><%=donatario.getNome()%></td>
-                    <td><%=donatario.getEmail()%></td>
+                    <td><%=mantecao.getData()%></td>
+                    <td><%=mantecao.getEstado()%></td>
+                    <td><%=mantecao.getEmailDonatario()%></td>
+                    <td><%=mantecao.getEmailArrumador()%></td>
                 </tr>
 <% 
         }
@@ -68,7 +66,7 @@
     } catch (Exception e) {
 %>
         <div id="exception">
-            <h2>Erro ao carregar agenda</h2>
+            <h2>Erro ao carregar manutenções</h2>
             <p>Descrição: <%=e.getMessage()%></p>
         </div>
 <%        

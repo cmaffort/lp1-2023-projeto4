@@ -42,7 +42,7 @@ public class CadastroCompra extends HttpServlet {
             try (CompraDAO compraDAO = new CompraDAO()) {
                 String id = request.getParameter("codigo");
                 String quantidade = request.getParameter("quantidade");
-                String valorUnitario = request.getParameter("valor");
+                String valorUnitario = request.getParameter("valor").replace(",", ".");
 
                 if (!compraDAO.registrarCompra(Integer.parseInt(id), Integer.parseInt(quantidade), Double.parseDouble(valorUnitario)))
                     throw new SQLException("Cadastro compra falhou");
