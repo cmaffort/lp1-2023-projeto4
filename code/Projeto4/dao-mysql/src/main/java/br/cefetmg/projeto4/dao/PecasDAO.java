@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 public class PecasDAO implements IPecasDAO {
-    private final Connection conexao;
+    protected final Connection conexao;
 
     public PecasDAO() throws SQLException {
         conexao = MysqlConnection.getConexao();
@@ -68,52 +68,8 @@ public class PecasDAO implements IPecasDAO {
             return false; 
         }
     }
-
-    @Override
-    public boolean registrarCompra(int id, int quantidade) throws SQLException, ClassNotFoundException, NoSuchElementException {
-        try {
-            PecasDTO peca = selecionarFaltoso(id);
-
-            int novaQtd = peca.getQuantidade() - quantidade;
-
-            if (novaQtd > 0) {
-                String sql = "UPDATE pecas SET quantidade = ? WHERE id = ?";
-                PreparedStatement stmt = conexao.prepareStatement(sql);
-
-                stmt.setInt(1, novaQtd);
-                stmt.setInt(2, id);
-
-                int rowsAffected = stmt.executeUpdate();
     
-                if (rowsAffected <= 0) 
-                    throw new SQLException("Update pecas failed");
-
-                PecasDTO pedido = new PecasDTO(peca.getNome(), peca.getMarca(), "COMPRADO", quantidade);
-
-                if (!inserir(pedido))
-                    throw new SQLException("Insertion into pecas failed");
-            } else {
-                String sql = "UPDATE pecas SET status = 'COMPRADO', quantidade = ? WHERE id = ?";
-                PreparedStatement stmt = conexao.prepareStatement(sql);
-
-                stmt.setInt(1, quantidade);
-                stmt.setInt(2, id);
-
-                int rowsAffected = stmt.executeUpdate();
-    
-                if (rowsAffected <= 0) 
-                    throw new SQLException("Update pecas failed");
-            }
-
-            System.out.println("Update realizado com sucesso");
-            return true;
-        } catch (SQLException e) {
-            System.out.println("Erro: " + e.getMessage());
-
-            return false;
-        }
-    }
-    public boolean alterarStatus(int id, String status) throws SQLException, ClassNotFoundException, NoSuchElementException {
+    protected boolean alterarStatus(int id, String status) throws SQLException, ClassNotFoundException, NoSuchElementException {
             try {
                 String sql = "UPDATE pecas SET status = ? WHERE id = ?";
                 PreparedStatement stmt = conexao.prepareStatement(sql);
@@ -135,6 +91,7 @@ public class PecasDAO implements IPecasDAO {
         }
 
     }
+
     @Override
     public PecasDTO selecionarFaltoso(int id) throws SQLException, ClassNotFoundException, NoSuchElementException {
         try {
@@ -150,10 +107,9 @@ public class PecasDAO implements IPecasDAO {
 
             String nome = resultSet.getString("nome");
             String marca = resultSet.getString("marca");
-            String status = resultSet.getString("status");
             int quantidade = resultSet.getInt("quantidade");
 
-            PecasDTO peca = new PecasDTO(id, nome, marca, status, quantidade);
+            PecasDTO peca = new PecasDTO(id, nome, marca, quantidade);
 
             System.out.println("Seleção realizada com sucesso");
             return peca;
@@ -252,37 +208,7 @@ public class PecasDAO implements IPecasDAO {
     }
 
     @Override
-    public List<PecasDTO> listarPedidos() throws SQLException, ClassNotFoundException {
-        try {
-            List<PecasDTO> pedidos = new ArrayList<>();
-
-            String sql = "SELECT * FROM pecas WHERE status = 'COMPRADO'";
-            Statement stmt = conexao.createStatement();
-            ResultSet resultSet = stmt.executeQuery(sql);
-
-            while (resultSet.next()) {
-                int id = resultSet.getInt("id");
-                String nome = resultSet.getString("nome");
-                String marca = resultSet.getString("marca");
-                int quantidade = resultSet.getInt("quantidade");
-
-                PecasDTO pedido = new PecasDTO(id, nome, marca, "COMPRADO", quantidade);
-
-                pedidos.add(pedido);
-            }
-
-            resultSet.close();
-            stmt.close();
-
-            return pedidos;
-        } catch (SQLException e) {
-            System.out.println("Erro: " + e.getMessage());
-            return Collections.emptyList();
-        }
-    }
-
-    @Override
-    public void close() throws SQLException {
+    public final void close() throws SQLException {
         conexao.close();
     }
 }

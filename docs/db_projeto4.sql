@@ -58,14 +58,14 @@ DROP TABLE IF EXISTS `compras`;
 CREATE TABLE `compras` (
   `id` int(11) NOT NULL,
   `id_peca` int(11) NOT NULL,
-  `preco_unitario` DECIMAL(10, 2) NOT NULL DEFAULT 0.00
+  `valor_unitario` DECIMAL(10, 2) NOT NULL DEFAULT 0.00
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `compras`
 --
 
-INSERT INTO `compras` (`id`, `id_peca`, `preco_unitario`) VALUES
+INSERT INTO `compras` (`id`, `id_peca`, `valor_unitario`) VALUES
 (1, 4, 598.99),
 (2, 5, 499.99),
 (3, 6, 123.00);
@@ -257,6 +257,14 @@ CREATE TABLE `mantecao` (
   `id_donatario` int(11) NOT NULL,
   `id_arrumador` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `mantecao`
+--
+INSERT INTO `mantecao`(`id`, `data`, `estado`, `id_donatario`, `id_arrumador`) VALUES 
+(1, '2023-09-30', 'QUEBRADO', 1, 5),
+(2, '2023-10-30', 'FALTANDO_PECA', 2, 6),
+(3, '2023-11-30', 'DEFEITUOSO', 3, 5);
 
 -- --------------------------------------------------------
 

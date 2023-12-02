@@ -50,12 +50,12 @@
             </div>
 
             <div class="campo">
-            <label for="reparo">Quem reparou o pc? </label>
-            <input type="email" id="reparo" name="reparo">
+            <label for="email">Quem reparou o pc? (email):</label>
+            <input type="email" name="email">
             </div>
 
             <div id="submit">
-                <input type="submit" value="submit">
+                <input type="submit" value="Enviar">
             </div>
         </form>
     </main>

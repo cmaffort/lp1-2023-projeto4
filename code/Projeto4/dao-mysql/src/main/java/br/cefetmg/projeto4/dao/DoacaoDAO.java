@@ -23,11 +23,11 @@ public class DoacaoDAO implements IDoacaoDAO {
         Random rand = new Random();
         int numero = rand.nextInt(1000) + 1;
 
-        PreparedStatement statement = conexao.prepareStatement("INSERT INTO doacoes (id_doador, quantidade, computador, data) VALUES (?, ?, ?, ?)");
+        PreparedStatement statement = conexao.prepareStatement("INSERT INTO doacoes (id_doador, quantidade, computador) VALUES (?, ?, ?)");
         statement.setInt(1, numero);
         statement.setInt(2, doacao.getQuantidade());
         statement.setString(3, doacao.getMarcaComputador());
-        statement.setString(4, doacao.getDataDeChegada());
+        
         int rowsAffected = statement.executeUpdate();
         if (rowsAffected > 0) {
             System.out.println("Inserção realizada com sucesso");
@@ -84,10 +84,9 @@ public List<DoacaoDTO> listarComputadoresDoados() throws SQLException, ClassNotF
                 resultSet = statement.executeQuery();
 
                 if (resultSet.next()) {
-                    String dataDoacao = resultSet.getString("data_doacao");
                     String nome = resultSet.getString("computador");
                     int quantidade = resultSet.getInt("quantidade");
-                    ComputadorDTO computadorDTO = new ComputadorDTO(doador, dataDoacao, "", nome, "", 8);
+                    ComputadorDTO computadorDTO = new ComputadorDTO(doador, "", "", nome, "", 8);
                     DoacaoDTO doacao = new DoacaoDTO(quantidade, computadorDTO);
                     computadoresDoados.add(doacao);
                 }
@@ -114,9 +113,8 @@ public List<DoacaoDTO> listarComputadoresDoados() throws SQLException, ClassNotF
             int quantidade = resultSet.getInt("quantidade");
             String id_doador = resultSet.getString("id_doador");
             
-            String data = resultSet.getString("data");
            // int ram = resultSet.getInt("quantidade_ram");
-            ComputadorDTO computador = new ComputadorDTO("Doador",data,"", nome,"", 4);
+            ComputadorDTO computador = new ComputadorDTO("Doador","","", nome,"", 4);
             DoacaoDTO doacao = new DoacaoDTO(quantidade, computador);
             doacoes.add(doacao);
         }

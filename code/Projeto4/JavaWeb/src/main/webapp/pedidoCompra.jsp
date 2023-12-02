@@ -1,10 +1,9 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="java.util.List"%>
-<%@page import="br.cefetmg.projeto4.dao.EstoqueDAO"%>
-<%@page import="br.cefetmg.projeto4.dto.ItemEstoqueDTO"%>
 <%@page import="br.cefetmg.projeto4.dto.UsuarioDTO"%>
-<%@page import="br.cefetmg.projeto4.dao.PecasDAO"%>
-<%@page import="br.cefetmg.projeto4.dto.PecasDTO"%>
+<%@page import="br.cefetmg.projeto4.dao.CompraDAO"%>
+<%@page import="br.cefetmg.projeto4.dto.CompraDTO"%>
 
 <%
     if (session == null || session.getAttribute("usuario") == null) {
@@ -37,8 +36,8 @@
 
     <main>
 <%
-    try (PecasDAO pecasDAO = new PecasDAO()) {
-        List<PecasDTO> pedidos = pecasDAO.listarPedidos();
+    try (CompraDAO compraDAO = new CompraDAO()) {
+        List<CompraDTO> pedidos = compraDAO.listar();
 %>
         <table id="compra" class="hideable hidden">
             <caption>Pedidos</caption>
@@ -47,16 +46,21 @@
                     <th>Peça</th>
                     <th>Marca</th>
                     <th>Quantidade</th>
+                    <th>Valor (un.)</th>
                 </tr>
             </thead>
             <tbody>
 <%
-        for (PecasDTO pedido : pedidos) {
+        for (CompraDTO pedido : pedidos) {
+            double valorUnitario = pedido.getValorUnitario();
+            DecimalFormat df = new DecimalFormat("0.00");
+            String formattedValorUnitario = "R$" + df.format(valorUnitario);
 %>
                 <tr>
                     <td><%=pedido.getNome()%></td>
                     <td><%=pedido.getMarca()%></td>
                     <td><%=pedido.getQuantidade()%></td>
+                    <td><%=formattedValorUnitario%></td>
                 </tr>
 <%
         }
