@@ -18,6 +18,7 @@
         <%@page import="br.cefetmg.projeto4.dto.ProfessorDTO" %>
         <%@page import="br.cefetmg.projeto4.dto.MantecaoDTO" %>
         <%@page import="br.cefetmg.projeto4.javaweb.GestaoGeralServlet" %>
+        <%@page import="br.cefetmg.projeto4.javaweb.GetDoadores" %>
         <%@page import="java.util.*" %>
 
         <header></header>
@@ -28,7 +29,16 @@
 
             <h1>Doadores</h1>
 
-            
+            <div class="divMaior">
+                
+                <% 
+                    GetDoadores doadoresFisicos = new GetDoadores();
+                    GetDoadores doadoresJuridicos = new GetDoadores();
+                    List<DoadorDTO> listaFisico = doadoresFisicos.
+                    List<DoadorJuridicoDTO> listaJuridico = doadoresjuridicos.
+                    
+                %>
+            </div>
 
 
             
