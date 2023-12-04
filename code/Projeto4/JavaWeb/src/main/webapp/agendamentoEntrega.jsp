@@ -2,8 +2,6 @@
 <%@page import="br.cefetmg.projeto4.dto.UsuarioDTO"%>
 
 <%
-    String status = request.getParameter("status");
-
     if (session == null || session.getAttribute("usuario") == null) {
         response.sendRedirect("login.jsp?p=agendamentoEntrega.jsp");
         return;
@@ -36,19 +34,6 @@
                 <figure id="logo">
                     <img src="img/logo-cefet.png">
                 </figure>
-<%
-        if (status != null) {
-            if (status.equals("fail")) {
-%>
-                <p class="fail">Tente novamente</p>
-<%
-            } else if (status.equals("success")) {
-%>
-                <p class="success">Entrega agendada!</p>  
-<%
-            }
-        }
-%>                      
                 <div class="campo">
                     <label for="dataRetirada"> selecione a data: </label>
                     <input type="date" name="dataRetirada">
@@ -64,6 +49,5 @@
         </main>
         
         <script src="code/header.js"></script>
-        <script src="code/refresh.js"></script>
     </body>
 </html>
