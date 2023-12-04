@@ -2,6 +2,8 @@
 <%@page import="br.cefetmg.projeto4.dto.UsuarioDTO"%>
 
 <%
+    String status = request.getParameter("status");
+
     if (session == null || session.getAttribute("usuario") == null) {
         response.sendRedirect("login.jsp?p=agendamentoEntrega.jsp");
         return;
@@ -30,6 +32,19 @@
         <main>
             <h2>Agende aqui a melhor data para retirar seu pc</h2>
 
+<%
+    if (status != null) {
+        if (status.equals("fail")) {
+%>
+            <p class="fail">Tente novamente</p>
+<%
+        } else if (status.equals("success")) {
+%>
+            <p class="success">Entrega agendada!</p>
+<%
+        }
+    }
+%>
             <form action="EntregaDoacao" method="post">
                 <figure id="logo">
                     <img src="img/logo-cefet.png">
@@ -49,5 +64,6 @@
         </main>
         
         <script src="code/header.js"></script>
+        <script src="code/refresh.js"></script>
     </body>
 </html>
