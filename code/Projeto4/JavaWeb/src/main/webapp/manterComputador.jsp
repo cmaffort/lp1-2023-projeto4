@@ -2,6 +2,9 @@
 <%@page import="br.cefetmg.projeto4.dto.UsuarioDTO"%>
 
 <%
+    String status = request.getParameter("status");
+    String error = request.getParameter("e");
+
     if (session == null || session.getAttribute("usuario") == null) {
         response.sendRedirect("login.jsp?p=manterComputador.jsp");
         return;
@@ -33,6 +36,23 @@
                 <img src="img/logo-cefet.png">
             </figure>
 
+<%
+        if (status != null) {
+            if (status.equals("fail")) {
+%>
+                <p class="fail">Tente novamente</p>
+<%
+            } else if (status.equals("success")) {
+%>
+                <p class="success">Entrega agendada!</p>  
+<%
+            }
+        } else if (error != null && error.equals("email")) {
+%>
+                <p class="fail">Email invalido</p>  
+<%
+        }
+%>
             <div class="campo"> 
             <label for="data">Data da retirada: </label>
             <input type="date" id="retirada" name="retirada">
@@ -61,6 +81,7 @@
     </main>
 
     <script src="code/header.js"></script>
+    <script src="code/refresh.js"></script>
 </body>
 
 </html>

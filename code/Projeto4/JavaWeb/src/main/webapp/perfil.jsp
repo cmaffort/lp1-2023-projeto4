@@ -15,7 +15,6 @@
 <%
     String user = request.getParameter("u");
     String status = request.getParameter("status");
-    String error = request.getParameter("e");
 
     if (user != null)
         user.replace("%40", "@");

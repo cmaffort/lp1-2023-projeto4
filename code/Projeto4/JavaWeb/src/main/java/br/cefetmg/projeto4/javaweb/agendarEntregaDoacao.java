@@ -51,11 +51,12 @@ public class agendarEntregaDoacao extends HttpServlet {
 
             try (AgendamentoDAO agendamentoDAO = new AgendamentoDAO()) {
                 if(agendamentoDAO.inserir(agendamento))
-                    out.println("<p>inserido</p>");
+                    response.sendRedirect("agendamentoEntrega.jsp?status=success");
                 else
-                    out.println("<p>erro</p>");
+                    response.sendRedirect("agendamentoEntrega.jsp?status=fail");
             } catch (SQLException e) {
-                out.println("<p>SQLException</p>");
+                System.out.println("Erro: " + e.getMessage());
+                response.sendRedirect("agendamentoEntrega.jsp?status=fail");
             }
         }
     }
