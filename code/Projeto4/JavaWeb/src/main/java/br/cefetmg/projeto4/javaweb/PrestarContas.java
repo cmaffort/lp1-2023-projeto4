@@ -40,18 +40,14 @@ public class PrestarContas extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-        // Configuração da conexão com o banco de dados (substitua pelos seus próprios dados)
         try (
             DoacaoDAO doacaoDAO = new DoacaoDAO();
             DonatarioDAO donatarioDAO = new DonatarioDAO();
         ) {
             List<DoacaoDTO> doacoes = doacaoDAO.listar();
 
-            // Configurar a resposta HTTP com um tipo de conteúdo HTML
             response.setContentType("text/html");
 
-            // Escrever a página HTML
             out.println("<html><head>");
             out.println("<link rel=\"stylesheet\" href=\"style/header.css\">");
             out.println("<link rel=\"stylesheet\" href=\"style/main.css\">");
@@ -66,7 +62,6 @@ public class PrestarContas extends HttpServlet {
             out.println("<tr><th>Quantidade</th><th>Computador</th><th>Ram</th><th>Doador</th><th>Data</th></tr>");
             out.println("</thead><tbody>");
 
-            // Iterar sobre os resultados e exibi-los na tabela HTML
             for (DoacaoDTO doacao : doacoes) {
                 out.println("<tr><td>" + doacao.getQuantidade()+ "</td><td>" + doacao.getMarcaComputador() + "</td><td>" + doacao.getQuantidadeDeRAM() + "</td><td>" + doacao.getDoador() + "</td><td>" + doacao.getDataDeChegada());
             }
