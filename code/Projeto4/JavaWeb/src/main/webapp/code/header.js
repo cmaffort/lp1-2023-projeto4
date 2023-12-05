@@ -3,21 +3,18 @@ const icons = {
     'srcs' : [
         'img/logo-cefet.png',
         'img/login.png',
-        'img/suporte.png',
         'img/sobre-nos.png',
         'img/feedback.png'
     ],
     'alts' : [
         'Logo CEFET',
         'Login',
-        'Suporte',
         'Sobre nós',
         'Feedbacks'
     ],
     'hrefs' : [
         'index.html',
         'login.jsp',
-        '',
         'https://www.dde.cefetmg.br/2023/08/29/oficina-de-recuperacao-de-computadores-beneficia-estudantes-sem-acesso-a-computadores/',
         'mostraFeedback.jsp'
     ]
@@ -179,11 +176,10 @@ function loadMenu() {
         newLi('Solicitar reparo', 'solicitacaoReparo.jsp'),
         newLi('Verificar posição na fila', 'verificarPosicao.jsp'),
         newLi('Manter computador', 'manterComputador.jsp'),
-        newLi('Perfil', 'perfil.jsp'),
         newLi('Prestação de Contas', 'PrestarContas'),
         newLi('Gestão Pecas', 'PecasFaltantes'),
         newLi('Prestar Contas instituições', 'Relatorio'),
-        newLi('Gestão Peças', 'PecasFaltantes'),
+        newLi('Perfil', 'perfil.jsp'),
         newLi('Deslogar', 'logout', 'danger'),
         newLi('Deletar conta', 'deletarConta.jsp', 'danger')
     ];
@@ -199,7 +195,7 @@ function loadHeader() {
         return;
 
     const navHome = newPopulatedNav('home', 0, 1);
-    const navPages = newPopulatedNav('pages', 1, 5, AltType.TEXT);
+    const navPages = newPopulatedNav('pages', 1, 4, AltType.TEXT);
     const section = newEl('section');
 
     headerEl.appendChild(navHome);

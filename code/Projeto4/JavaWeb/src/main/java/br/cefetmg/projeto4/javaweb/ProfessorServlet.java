@@ -44,7 +44,7 @@ public class ProfessorServlet extends HttpServlet {
             out.println("<h1>Servlet ProfessorServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
-            ProfessorDTO professor = new ProfessorDTO(nome, CPF, email, departamento, senha);
+            ProfessorDTO professor = new ProfessorDTO(nome, CPF, email, senha, departamento);
             System.out.println(professor.getNome() + ": " + professor.getEmail());
             
             try (ProfessorDAO professorDAO = new ProfessorDAO()) {

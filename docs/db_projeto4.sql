@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.1
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Host: sql10.freesqldatabase.com
--- Generation Time: Nov 12, 2023 at 04:47 AM
--- Server version: 5.5.62-0ubuntu0.14.04.1
--- PHP Version: 7.0.33-0ubuntu0.16.04.16
+-- Host: 34.133.90.58:3306
+-- Generation Time: Dec 05, 2023 at 12:52 PM
+-- Server version: 8.0.31-google
+-- PHP Version: 7.4.26
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -32,12 +31,14 @@ USE `db_projeto4`;
 --
 
 DROP TABLE IF EXISTS `agendamentos`;
-CREATE TABLE `agendamentos` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `agendamentos` (
+  `id` int NOT NULL AUTO_INCREMENT,
   `data` varchar(10) NOT NULL,
   `horario` varchar(5) NOT NULL,
-  `id_donatario` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `id_donatario` int NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `fk_agendamentos_usuarios` (`id_donatario`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `agendamentos`
@@ -55,20 +56,23 @@ INSERT INTO `agendamentos` (`id`, `data`, `horario`, `id_donatario`) VALUES
 --
 
 DROP TABLE IF EXISTS `compras`;
-CREATE TABLE `compras` (
-  `id` int(11) NOT NULL,
-  `id_peca` int(11) NOT NULL,
-  `valor_unitario` DECIMAL(10, 2) NOT NULL DEFAULT 0.00
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+CREATE TABLE IF NOT EXISTS `compras` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `id_peca` int NOT NULL,
+  `valor_unitario` decimal(10,2) NOT NULL DEFAULT '0.00',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `fk_compras_pecas` (`id_peca`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `compras`
 --
 
 INSERT INTO `compras` (`id`, `id_peca`, `valor_unitario`) VALUES
-(1, 4, 598.99),
-(2, 5, 499.99),
-(3, 6, 123.00);
+(1, 4, '598.99'),
+(2, 5, '499.99'),
+(3, 6, '123.00'),
+(6, 1, '3000.00');
 
 -- --------------------------------------------------------
 
@@ -77,12 +81,14 @@ INSERT INTO `compras` (`id`, `id_peca`, `valor_unitario`) VALUES
 --
 
 DROP TABLE IF EXISTS `doacoes`;
-CREATE TABLE `doacoes` (
-  `id` int(11) NOT NULL,
-  `id_doador` int(11) NOT NULL,
-  `quantidade` int(11) NOT NULL DEFAULT 1,
-  `computador` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+CREATE TABLE IF NOT EXISTS `doacoes` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `id_doador` int NOT NULL,
+  `quantidade` int NOT NULL DEFAULT '1',
+  `computador` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_doacoes_usuarios` (`id_doador`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `doacoes`
@@ -103,12 +109,14 @@ INSERT INTO `doacoes` (`id`, `id_doador`, `quantidade`, `computador`) VALUES
 --
 
 DROP TABLE IF EXISTS `doadores`;
-CREATE TABLE `doadores` (
-  `id` int(11) NOT NULL,
-  `id_cadastro` int(11) NOT NULL,
-  `computadores_doados` int(11) NOT NULL DEFAULT 0,
-  `tipo` enum('FISICO','JURIDICO') NOT NULL DEFAULT 'FISICO'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+CREATE TABLE IF NOT EXISTS `doadores` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `id_cadastro` int NOT NULL,
+  `computadores_doados` int NOT NULL DEFAULT '0',
+  `tipo` enum('FISICO','JURIDICO') NOT NULL DEFAULT 'FISICO',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `fk_doadores_usuarios` (`id_cadastro`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `doadores`
@@ -118,7 +126,9 @@ INSERT INTO `doadores` (`id`, `id_cadastro`, `computadores_doados`, `tipo`) VALU
 (1, 7, 0, 'FISICO'),
 (2, 8, 0, 'FISICO'),
 (3, 9, 0, 'FISICO'),
-(4, 10, 0, 'FISICO');
+(4, 10, 0, 'FISICO'),
+(5, 26, 0, 'FISICO'),
+(6, 28, 0, 'JURIDICO');
 
 -- --------------------------------------------------------
 
@@ -127,11 +137,20 @@ INSERT INTO `doadores` (`id`, `id_cadastro`, `computadores_doados`, `tipo`) VALU
 --
 
 DROP TABLE IF EXISTS `doadoresJuridicos`;
-CREATE TABLE `doadoresJuridicos` (
-  `id` int(11) NOT NULL,
-  `id_doador` int(11) NOT NULL,
-  `endereco` varchar(255) NOT NULL 
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+CREATE TABLE IF NOT EXISTS `doadoresJuridicos` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `id_doador` int NOT NULL,
+  `endereco` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `fk_juridicos_doadores` (`id_doador`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `doadoresJuridicos`
+--
+
+INSERT INTO `doadoresJuridicos` (`id`, `id_doador`, `endereco`) VALUES
+(1, 6, 'sdsds ssdss sdsds');
 
 -- --------------------------------------------------------
 
@@ -140,14 +159,17 @@ CREATE TABLE `doadoresJuridicos` (
 --
 
 DROP TABLE IF EXISTS `donatarios`;
-CREATE TABLE `donatarios` (
-  `id` int(11) NOT NULL,
-  `id_cadastro` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `donatarios` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `id_cadastro` int NOT NULL,
   `escola` varchar(255) NOT NULL,
-  `posicao` int(11),
-  `serie` int(11) NOT NULL,
-  `id_doacao` int(11)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `posicao` int DEFAULT NULL,
+  `serie` int NOT NULL,
+  `id_doacao` int DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `fk_donatarios_usuarios` (`id_cadastro`),
+  UNIQUE KEY `fk_donatarios_doacoes` (`id_doacao`)
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `donatarios`
@@ -171,7 +193,8 @@ INSERT INTO `donatarios` (`id`, `id_cadastro`, `escola`, `posicao`, `serie`, `id
 (15, 22, 'do rock', 9, 3, NULL),
 (16, 23, 'do rock', 10, 3, NULL),
 (17, 24, 'do rock', 11, 3, NULL),
-(18, 25, 'do rock', 12, 3, NULL);
+(18, 25, 'do rock', 12, 3, NULL),
+(19, 31, 'Escola Municipal Prefeito Aminthas de Barros', 13, 3, NULL);
 
 -- --------------------------------------------------------
 
@@ -180,12 +203,14 @@ INSERT INTO `donatarios` (`id`, `id_cadastro`, `escola`, `posicao`, `serie`, `id
 --
 
 DROP TABLE IF EXISTS `estagiarios`;
-CREATE TABLE `estagiarios` (
-  `id` int(11) NOT NULL,
-  `id_cadastro` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `estagiarios` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `id_cadastro` int NOT NULL,
   `dataDeEntrada` varchar(10) NOT NULL,
-  `dataDeSaida` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `dataDeSaida` varchar(10) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `fk_estagiarios_usuarios` (`id_cadastro`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `estagiarios`
@@ -193,7 +218,8 @@ CREATE TABLE `estagiarios` (
 
 INSERT INTO `estagiarios` (`id`, `id_cadastro`, `dataDeEntrada`, `dataDeSaida`) VALUES
 (1, 5, '21/1/1', '10/1/1'),
-(2, 6, '21/1/1', '10/1/1');
+(2, 6, '21/1/1', '10/1/1'),
+(3, 33, '21/1/1', '10/1/1');
 
 -- --------------------------------------------------------
 
@@ -202,18 +228,20 @@ INSERT INTO `estagiarios` (`id`, `id_cadastro`, `dataDeEntrada`, `dataDeSaida`) 
 --
 
 DROP TABLE IF EXISTS `estoque`;
-CREATE TABLE `estoque` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `estoque` (
+  `id` int NOT NULL AUTO_INCREMENT,
   `tipo` varchar(255) NOT NULL DEFAULT 'Computador',
-  `quantidade` int(11) NOT NULL DEFAULT 1,
-  `status` enum('DISPONIVEL', 'DOADO') DEFAULT 'DISPONIVEL'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `quantidade` int NOT NULL DEFAULT '1',
+  `status` enum('DISPONIVEL','DOADO') DEFAULT 'DISPONIVEL',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `estoque`
 --
 
-INSERT INTO `estoque`(`id`, `tipo`, `quantidade`, `status`) VALUES (1, 'Ram', 3, 'DOADO'),
+INSERT INTO `estoque` (`id`, `tipo`, `quantidade`, `status`) VALUES
+(1, 'Ram', 3, 'DOADO'),
 (2, 'HD', 4, 'DOADO'),
 (3, 'Processador', 1, 'DISPONIVEL');
 
@@ -224,18 +252,20 @@ INSERT INTO `estoque`(`id`, `tipo`, `quantidade`, `status`) VALUES (1, 'Ram', 3,
 --
 
 DROP TABLE IF EXISTS `feedbacks`;
-CREATE TABLE `feedbacks` (
-  `id` int(11) NOT NULL,
-  `id_donatario` int(11) NOT NULL,
-  `estrelas` int(1) NOT NULL,
-  `descricao` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+CREATE TABLE IF NOT EXISTS `feedbacks` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `id_donatario` int NOT NULL,
+  `estrelas` int NOT NULL,
+  `descricao` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_feedbacks_usuarios` (`id_donatario`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `feedbacks`
 --
 
-INSERT INTO `feedbacks`(`id`, `id_donatario`, `estrelas`, `descricao`) VALUES 
+INSERT INTO `feedbacks` (`id`, `id_donatario`, `estrelas`, `descricao`) VALUES
 (1, 1, 5, 'Amei é tudo, acho o auge!!!!!'),
 (2, 2, 2, 'Guys vou ter hablar, vocês tão pedindo...'),
 (3, 3, 1, 'veyr, que nojoooo. 🤢🤮 Lixo transfóbico'),
@@ -250,18 +280,22 @@ INSERT INTO `feedbacks`(`id`, `id_donatario`, `estrelas`, `descricao`) VALUES
 --
 
 DROP TABLE IF EXISTS `mantecao`;
-CREATE TABLE `mantecao` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `mantecao` (
+  `id` int NOT NULL AUTO_INCREMENT,
   `data` varchar(255) NOT NULL,
-  `estado` enum('FUNCIONANDO', 'QUEBRADO', 'FALTANDO_PECA', 'DEFEITUOSO') NOT NULL,
-  `id_donatario` int(11) NOT NULL,
-  `id_arrumador` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `estado` enum('FUNCIONANDO','QUEBRADO','FALTANDO_PECA','DEFEITUOSO') NOT NULL,
+  `id_donatario` int NOT NULL,
+  `id_arrumador` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_mantecao_usuarios_1` (`id_donatario`),
+  KEY `fk_mantecao_usuarios_2` (`id_arrumador`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `mantecao`
 --
-INSERT INTO `mantecao`(`id`, `data`, `estado`, `id_donatario`, `id_arrumador`) VALUES 
+
+INSERT INTO `mantecao` (`id`, `data`, `estado`, `id_donatario`, `id_arrumador`) VALUES
 (1, '2023-09-30', 'QUEBRADO', 1, 5),
 (2, '2023-10-30', 'FALTANDO_PECA', 2, 6),
 (3, '2023-11-30', 'DEFEITUOSO', 3, 5);
@@ -273,24 +307,25 @@ INSERT INTO `mantecao`(`id`, `data`, `estado`, `id_donatario`, `id_arrumador`) V
 --
 
 DROP TABLE IF EXISTS `pecas`;
-CREATE TABLE `pecas` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `pecas` (
+  `id` int NOT NULL AUTO_INCREMENT,
   `nome` varchar(255) NOT NULL,
   `marca` varchar(255) NOT NULL,
-  `status` enum('EM_FALTA', 'COMPRADO') NOT NULL DEFAULT 'EM_FALTA',
-  `quantidade` int(11) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `status` enum('EM_FALTA','COMPRADO') NOT NULL DEFAULT 'EM_FALTA',
+  `quantidade` int NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `pecas`
 --
 
 INSERT INTO `pecas` (`id`, `nome`, `marca`, `status`, `quantidade`) VALUES
-(1, 'Placa de Vídeo', 'Nvidia', 'EM_FALTA', 5),
-(2, 'Memória RAM', 'Corsair', 'EM_FALTA',10),
-(3, 'HD', 'Seagate', 'EM_FALTA',3),
+(1, 'Placa de Vídeo', 'Nvidia', 'COMPRADO', 5),
+(2, 'Memória RAM', 'Corsair', 'EM_FALTA', 10),
+(3, 'HD', 'Seagate', 'EM_FALTA', 3),
 (4, 'Processador', 'Intel', 'COMPRADO', 7),
-(5, 'Placa-mãe', 'ASUS', 'COMPRADO',2),
+(5, 'Placa-mãe', 'ASUS', 'COMPRADO', 2),
 (6, 'Ram', '123', 'COMPRADO', 123);
 
 -- --------------------------------------------------------
@@ -300,11 +335,13 @@ INSERT INTO `pecas` (`id`, `nome`, `marca`, `status`, `quantidade`) VALUES
 --
 
 DROP TABLE IF EXISTS `professores`;
-CREATE TABLE `professores` (
-  `id` int(11) NOT NULL,
-  `id_cadastro` int(11) DEFAULT NULL,
-  `departamento` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+CREATE TABLE IF NOT EXISTS `professores` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `id_cadastro` int DEFAULT NULL,
+  `departamento` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `fk_professores_usuarios` (`id_cadastro`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `professores`
@@ -320,16 +357,19 @@ INSERT INTO `professores` (`id`, `id_cadastro`, `departamento`) VALUES
 --
 
 DROP TABLE IF EXISTS `usuarios`;
-CREATE TABLE `usuarios` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `usuarios` (
+  `id` int NOT NULL AUTO_INCREMENT,
   `nome` varchar(32) NOT NULL,
   `codigo` varchar(18) NOT NULL,
-  `tipo_codigo` enum('CPF', 'CNPJ') DEFAULT 'CPF',
+  `tipo_codigo` enum('CPF','CNPJ') DEFAULT 'CPF',
   `email` varchar(32) NOT NULL,
   `senha` varchar(255) NOT NULL,
-  `foto` varchar(255) NOT NULL DEFAULT 'https://storage.googleapis.com/projeto_4/fotos/avatar.png',
-  `tipo` enum('DONATARIO','PROFESSOR','ESTAGIARIO','DOADOR') DEFAULT 'DONATARIO'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `foto` varchar(255) NOT NULL DEFAULT 'https://storage.cloud.google.com/projeto_4/fotos/avatar.png',
+  `tipo` enum('DONATARIO','PROFESSOR','ESTAGIARIO','DOADOR') DEFAULT 'DONATARIO',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `codigo` (`codigo`),
+  UNIQUE KEY `email` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `usuarios`
@@ -343,7 +383,7 @@ INSERT INTO `usuarios` (`id`, `nome`, `codigo`, `tipo_codigo`, `email`, `senha`,
 (5, 'miguel', '12345678900', 'CPF', 'miguel@gmail.com', '$2a$10$Y5IiYzPvLSTctqq6uOyx4eb8qH/Ivt9OhUOkBolaHjaI9bNPt2Ude', 'https://storage.googleapis.com/projeto_4/fotos/avatar.png', 'ESTAGIARIO'),
 (6, 'rafael', '21345678900', 'CPF', 'rafael@gmail.com', '$2a$10$MDG1OyvVL/eo3HkXzkhBmOvS2oGb9yfnHTn6e0cswZQVef3FZJgQ.', 'https://storage.googleapis.com/projeto_4/fotos/avatar.png', 'ESTAGIARIO'),
 (7, 'Ruan', '4', 'CPF', 'l@l.l', '$2a$10$.y9dY0.M4ZUr/Xe5NUn8DeKH2xN78EUiZC1/Rq/QXuOiOC4GW0Mzu', 'https://storage.googleapis.com/projeto_4/fotos/avatar.png', 'DOADOR'),
-(8, 'lucas', '5', 'CPF', 'exotic@gmail.com', '$2a$10$UuGsV0U86dHlSZ0vPb76.O5eySVmtc/HwzsiVg8K/r.kCi9Bwdkqe', 'https://storage.googleapis.com/projeto_4/fotos/avatar.png', 'DOADOR'),
+(8, 'lucas', '5', 'CPF', 'exotic@gmail.com', '$2a$10$UuGsV0U86dHlSZ0vPb76.O5eySVmtc/HwzsiVg8K/r.kCi9Bwdkqe', 'https://storage.cloud.google.com/projeto_4/fotos/avatar.png', 'DOADOR'),
 (9, 'caio', '6', 'CPF', 'caio@gmail.com', '$2a$10$GChdGJChltw1EkqrnsEaEOwGBLBAdJlXh1J4u8Fj8ZPDnjJKnjF0a', 'https://storage.googleapis.com/projeto_4/fotos/avatar.png', 'DOADOR'),
 (10, 'vitor', '123653', 'CPF', 'vitor@gmail.com', '$2a$10$BIMTdmR293bq9lGzDEuKHOGk5KlgeRb2TvHeZkDtxD.K8NmNcw6U2', 'https://storage.googleapis.com/projeto_4/fotos/avatar.png', 'DOADOR'),
 (11, 'Fulanão', '19', 'CPF', 'fulanao@gmail.com', '$2a$10$FT5z9Lpva.jrJ.NbcmG22eRJklp6VWEu1xwaeuiFrF7XFoFmE0/Q2', 'https://storage.googleapis.com/projeto_4/fotos/19_1700684397697.png', 'DONATARIO'),
@@ -360,251 +400,77 @@ INSERT INTO `usuarios` (`id`, `nome`, `codigo`, `tipo_codigo`, `email`, `senha`,
 (22, 'Freddy Mercury', '15', 'CPF', 'fr3ddy@mercury.com', '$2a$10$VhjEAr0tPzfTpFouK3oUw./CFDLo6ZRXdAb5v6d0U6HVqQLeFoEaC', 'https://storage.googleapis.com/projeto_4/fotos/avatar.png', 'DONATARIO'),
 (23, 'John Lennon', '16', 'CPF', 'j0hn@lennon.com', '$2a$10$KIAbFMwxosnKupFz9dgRNeASqI3gO7RjwN5yU9WLWDP/qcApJeqsS', 'https://storage.googleapis.com/projeto_4/fotos/avatar.png', 'DONATARIO'),
 (24, 'Janis Joplin', '17', 'CPF', 'j4nis@joplin.com', '$2a$10$RQFe.y9mh3L2s3bQNqa5iOaqN.baLNSy5o/BmIJVi68ExTTX.5L9W', 'https://storage.googleapis.com/projeto_4/fotos/avatar.png', 'DONATARIO'),
-(25, 'David Bowie', '18', 'CPF', 'd4vid@bowie.com', '$2a$10$A4Ry6HQLwSz2XkK.7jCqxuC9wdacDinwQLnNptWAFUdHUdqYV0MEC', 'https://storage.googleapis.com/projeto_4/fotos/avatar.png', 'DONATARIO');
+(25, 'David Bowie', '18', 'CPF', 'd4vid@bowie.com', '$2a$10$A4Ry6HQLwSz2XkK.7jCqxuC9wdacDinwQLnNptWAFUdHUdqYV0MEC', 'https://storage.googleapis.com/projeto_4/fotos/avatar.png', 'DONATARIO'),
+(26, 'SERGIO', '123.4456.789-01', 'CPF', 'silva@gmail.com', '$2a$10$kozAgs7dKpkleQogdXLqq..blNAB9SovbTWS66IcXw19f2vozDNoG', 'https://storage.cloud.google.com/projeto_4/fotos/avatar.png', 'DOADOR'),
+(28, 'feijoes', '12376834834', 'CNPJ', 'mateus@gmail.com', '$2a$10$dRVDl6lsvG2dYW0BlSn1ZetnLuMbLsd5I0dwi08EwRO/5cI2Dciua', 'https://storage.cloud.google.com/projeto_4/fotos/avatar.png', 'DOADOR'),
+(31, 'Fabricio Vivas', '54921398921', 'CPF', 'erro@erro.com', '$2a$10$H7APerPFM8Bruyfc3R96E.erbhrkK/HgpSfiEVp3kKgK3RZh5U5Me', 'https://storage.cloud.google.com/projeto_4/fotos/avatar.png', 'DONATARIO'),
+(33, 'Lucas Grama', '700139', 'CPF', 'lucasggrama@protonmail.com', '$2a$10$Fnsl3btR2QRaCPRauyYJbunc1hjkI1eK76X.ohNCaW9wKBwm6lA6q', 'https://storage.cloud.google.com/projeto_4/fotos/avatar.png', 'ESTAGIARIO');
 
 --
--- Indexes for dumped tables
+-- Constraints for dumped tables
 --
 
 --
--- Indexes for table `agendamentos`
+-- Constraints for table `agendamentos`
 --
 ALTER TABLE `agendamentos`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `fk_agendamentos_usuarios` (`id_donatario`);
+  ADD CONSTRAINT `fk_agendamentos_usuarios` FOREIGN KEY (`id_donatario`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE;
 
 --
--- Indexes for table `compras`
+-- Constraints for table `compras`
 --
 ALTER TABLE `compras`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `fk_compras_pecas` (`id_peca`);
+  ADD CONSTRAINT `fk_compras_pecas` FOREIGN KEY (`id_peca`) REFERENCES `pecas` (`id`) ON DELETE CASCADE;
 
 --
--- Indexes for table `doacoes`
+-- Constraints for table `doacoes`
 --
 ALTER TABLE `doacoes`
-  ADD PRIMARY KEY (`id`);
+  ADD CONSTRAINT `fk_doacoes_usuarios` FOREIGN KEY (`id_doador`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE;
 
 --
--- Indexes for table `doadores`
+-- Constraints for table `doadores`
 --
 ALTER TABLE `doadores`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `fk_doadores_usuarios` (`id_cadastro`);
+  ADD CONSTRAINT `fk_doadores_usuarios` FOREIGN KEY (`id_cadastro`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE;
 
 --
--- Indexes for table `doadoresJuridicos`
+-- Constraints for table `doadoresJuridicos`
 --
 ALTER TABLE `doadoresJuridicos`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `fk_juridicos_doadores` (`id_doador`);
+  ADD CONSTRAINT `fk_juridicos_doadores` FOREIGN KEY (`id_doador`) REFERENCES `doadores` (`id`) ON DELETE CASCADE;
 
 --
--- Indexes for table `donatarios`
+-- Constraints for table `donatarios`
 --
 ALTER TABLE `donatarios`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `fk_donatarios_usuarios` (`id_cadastro`),
-  ADD UNIQUE KEY `fk_donatarios_doacoes` (`id_doacao`);
+  ADD CONSTRAINT `fk_donatarios_doacoes` FOREIGN KEY (`id_doacao`) REFERENCES `doacoes` (`id`),
+  ADD CONSTRAINT `fk_donatarios_usuarios` FOREIGN KEY (`id_cadastro`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE;
 
 --
--- Indexes for table `estagiarios`
+-- Constraints for table `estagiarios`
 --
 ALTER TABLE `estagiarios`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `fk_estagiarios_usuarios` (`id_cadastro`);
+  ADD CONSTRAINT `fk_estagiarios_usuarios` FOREIGN KEY (`id_cadastro`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE;
 
 --
--- Indexes for table `estoque`
---
-ALTER TABLE `estoque`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `feedbacks`
+-- Constraints for table `feedbacks`
 --
 ALTER TABLE `feedbacks`
-  ADD PRIMARY KEY (`id`);
+  ADD CONSTRAINT `fk_feedbacks_usuarios` FOREIGN KEY (`id_donatario`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE;
 
 --
--- Indexes for table `mantecao`
+-- Constraints for table `mantecao`
 --
 ALTER TABLE `mantecao`
-  ADD PRIMARY KEY (`id`);
+  ADD CONSTRAINT `fk_mantecao_usuarios_1` FOREIGN KEY (`id_donatario`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_mantecao_usuarios_2` FOREIGN KEY (`id_arrumador`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE;
 
 --
--- Indexes for table `pecas`
---
-ALTER TABLE `pecas`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `professores`
+-- Constraints for table `professores`
 --
 ALTER TABLE `professores`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `fk_professores_usuarios` (`id_cadastro`);
-
---
--- Indexes for table `usuarios`
---
-ALTER TABLE `usuarios`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `codigo` (`codigo`),
-  ADD UNIQUE KEY `email` (`email`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `agendamentos`
---
-ALTER TABLE `agendamentos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `compras`
---
-ALTER TABLE `compras`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `doacoes`
---
-ALTER TABLE `doacoes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `doadores`
---
-ALTER TABLE `doadores`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `doadoresJuridicos`
---
-ALTER TABLE `doadoresJuridicos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `donatarios`
---
-ALTER TABLE `donatarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `estagiarios`
---
-ALTER TABLE `estagiarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `estoque`
---
-ALTER TABLE `estoque`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `feedbacks`
---
-ALTER TABLE `feedbacks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `doadoresJuridicos`
---
-ALTER TABLE `mantecao`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `pecas`
---
-ALTER TABLE `pecas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `professores`
---
-ALTER TABLE `professores`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `usuarios`
---
-ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- FOREIGN KEY for dumped tables
---
-
---
--- FOREIGN KEY for table `agendamentos`
---
-ALTER TABLE `agendamentos`
-  ADD CONSTRAINT `fk_agendamentos_usuarios`
-  FOREIGN KEY (`id_donatario`)
-  REFERENCES `usuarios`(`id`) ON DELETE CASCADE;
---
--- FOREIGN KEY for table `compras`
---
-ALTER TABLE `compras`
-  ADD CONSTRAINT `fk_compras_pecas`
-  FOREIGN KEY (`id_peca`)
-  REFERENCES `pecas`(`id`) ON DELETE CASCADE;
---
--- FOREIGN KEY for table `doacoes`
---
-ALTER TABLE `doacoes`
-  ADD CONSTRAINT `fk_doacoes_usuarios`
-  FOREIGN KEY (`id_doador`)
-  REFERENCES `usuarios`(`id`)  ON DELETE CASCADE;
---
--- FOREIGN KEY for `doadores`
---
-ALTER TABLE `doadores`
-  ADD CONSTRAINT `fk_doadores_usuarios`
-  FOREIGN KEY (`id_cadastro`)
-  REFERENCES `usuarios`(`id`)  ON DELETE CASCADE; 
---
--- FOREIGN KEY for `doadoresJuridicos`
---
-ALTER TABLE `doadoresJuridicos`
-  ADD CONSTRAINT `fk_juridicos_doadores`
-  FOREIGN KEY (`id_doador`)
-  REFERENCES `doadores`(`id`)  ON DELETE CASCADE; 
---
--- FOREIGN KEY for `donatarios`
---
-ALTER TABLE `donatarios`
-  ADD CONSTRAINT `fk_donatarios_usuarios`
-  FOREIGN KEY (`id_cadastro`)
-  REFERENCES `usuarios`(`id`)  ON DELETE CASCADE,
-  ADD CONSTRAINT `fk_donatarios_doacoes`
-  FOREIGN KEY (`id_doacao`)
-  REFERENCES `doacoes`(`id`);
---
--- FOREIGN KEY for `estagiarios`
---
-ALTER TABLE `estagiarios`
-  ADD CONSTRAINT `fk_estagiarios_usuarios`
-  FOREIGN KEY (`id_cadastro`)
-  REFERENCES `usuarios`(`id`)  ON DELETE CASCADE;
---
--- FOREIGN KEY for `feedbacks`
---
-ALTER TABLE `feedbacks`
-  ADD CONSTRAINT `fk_feedbacks_usuarios`
-  FOREIGN KEY (`id_donatario`)
-  REFERENCES `usuarios`(`id`)  ON DELETE CASCADE;
---
--- FOREIGN KEY for table `doacoes`
---
-ALTER TABLE `mantecao`
-  ADD CONSTRAINT `fk_mantecao_usuarios_1`
-  FOREIGN KEY (`id_donatario`)
-  REFERENCES `usuarios`(`id`)  ON DELETE CASCADE,
-  ADD CONSTRAINT `fk_mantecao_usuarios_2`
-  FOREIGN KEY (`id_arrumador`)
-  REFERENCES `usuarios`(`id`)  ON DELETE CASCADE;
---
--- FOREIGN KEY for `donatarios`
---
-ALTER TABLE `professores`
-  ADD CONSTRAINT `fk_professores_usuarios`
-  FOREIGN KEY (`id_cadastro`)
-  REFERENCES `usuarios`(`id`) ON DELETE CASCADE;          
-
+  ADD CONSTRAINT `fk_professores_usuarios` FOREIGN KEY (`id_cadastro`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

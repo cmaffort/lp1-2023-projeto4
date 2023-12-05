@@ -95,7 +95,8 @@ public class RelatorioServlet extends HttpServlet {
 
             }
             out.println("</table>");
-
+            out.println("<script src=\"code/header.js\"></script>");
+            out.println("<script src=\"code/th.js\"></script>");
             out.println("</body>");
             out.println("</html>");
 
