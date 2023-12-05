@@ -7,6 +7,7 @@ package br.cefetmg.projeto4.javaweb;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.NoSuchElementException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -72,11 +73,14 @@ public class CadastroMantecao extends HttpServlet {
             MantecaoDTO mantecao = new MantecaoDTO(data, estado, donatario, arrumador);
 
             if(mantecaoDAO.inserir(mantecao))
-                out.println("<p>inserido</p>");
+                response.sendRedirect("manterComputador.jsp?status=success");
             else
-                out.println("<p>erro</p>");
+                response.sendRedirect("manterComputador.jsp?status=fail");
         } catch (SQLException e) {
             System.err.println("Erro: " + e.getMessage());
+            response.sendRedirect("manterComputador.jsp?status=fail");
+        } catch (NoSuchElementException e) {
+            response.sendRedirect("manterComputador.jsp?e=email");
         }
     }
 
