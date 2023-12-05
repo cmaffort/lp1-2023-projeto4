@@ -8,7 +8,9 @@ import br.cefetmg.projeto4.idao.IDoacaoDAO;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Random;
 public class DoacaoDAO implements IDoacaoDAO {
     private final Connection conexao;
@@ -53,52 +55,32 @@ public class DoacaoDAO implements IDoacaoDAO {
     public boolean remover(DoacaoDTO doacao) throws SQLException, ClassNotFoundException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-public List<DoacaoDTO> listarComputadoresDoados() throws SQLException, ClassNotFoundException {
-    List<DoacaoDTO> computadoresDoados = new ArrayList<>();
 
-    try {
-        // Step 1: Fetch data from the first table
-        PreparedStatement statement = conexao.prepareStatement("SELECT * FROM donatarios");
-        ResultSet resultSet = statement.executeQuery();
+    public List<DoacaoDTO> listarComputadoresDoados() throws SQLException, ClassNotFoundException {
+        try (
+            DonatarioDAO donatarioDAO = new DonatarioDAO();
+            DoadorDAO doadorDAO = new DoadorDAO();
+        ) {
+            List<DoacaoDTO> computadoresDoados = new ArrayList<>();
+            PreparedStatement statement = conexao.prepareStatement("SELECT donatario.email AS email_donatario, doacoes.*, doador.email AS email_doador FROM donatarios JOIN usuarios AS donatario ON donatarios.id_cadastro = donatario.id JOIN doacoes ON donatarios.id_doacao = doacoes.id JOIN usuarios AS doador ON doacoes.id_doador = doador.id WHERE donatario.id_doacao IS NOT NULL;");
+            ResultSet resultSet = statement.executeQuery();
 
-        List<Integer> idDoacoes = new ArrayList<>();
-        List<Integer> idDoadores = new ArrayList<>();
+            while (resultSet.next()) {
+                String emailDonatario = resultSet.getString("email_donatario");
+                String marca = resultSet.getString("computador");
+                int quantidade = resultSet.getInt("quantidade");
+                String emailDoador = resultSet.getString("email_doador");
 
-        while (resultSet.next()) {
-            Integer idDoacao = resultSet.getInt("id_doacao");
-            idDoacoes.add(idDoacao);
-        }
-
-        // Step 2: Fetch additional information from the second table (usuarios)
-        for (Integer idDoador : idDoadores) {
-            statement = conexao.prepareStatement("SELECT * FROM usuarios WHERE id = ?");
-            statement.setInt(1, idDoador);
-            resultSet = statement.executeQuery();
-
-            if (resultSet.next()) {
-                String doador = resultSet.getString("nome");
-
-                // Step 3: Fetch additional information from the third table (doacoes)
-                statement = conexao.prepareStatement("SELECT * FROM doacoes WHERE id = ?");
-                statement.setInt(1, idDoacoes.remove(0));
-                resultSet = statement.executeQuery();
-
-                if (resultSet.next()) {
-                    String nome = resultSet.getString("computador");
-                    int quantidade = resultSet.getInt("quantidade");
-                    ComputadorDTO computadorDTO = new ComputadorDTO(doador, "", "", nome, "", 8);
-                    DoacaoDTO doacao = new DoacaoDTO(quantidade, computadorDTO);
-                    computadoresDoados.add(doacao);
-                }
+                DoacaoDTO doacao = new DoacaoDTO(emailDoador, "", emailDonatario, marca, "", quantidade);
+                computadoresDoados.add(doacao);
             }
+
+            return computadoresDoados;
+        } catch (SQLException e) {
+            System.out.println("Erro: " + e.getMessage());
+            return Collections.emptyList();
         }
-
-    } catch (SQLException e) {
-        System.out.println("Erro: " + e.getMessage());
     }
-
-    return computadoresDoados;
-}
 
     @Override
     public List<DoacaoDTO> listar() throws SQLException, ClassNotFoundException {
