@@ -183,6 +183,10 @@ function loadMenu() {
         newLi('Manter computador', 'manterComputador.jsp'),
         newLi('Manutenções', 'mostraManutencoes.jsp'),
         newLi('Perfil', 'perfil.jsp'),
+        newLi('Prestação de Contas', 'PrestarContas'),
+        newLi('Gestão Pecas', 'PecasFaltantes'),
+        newLi('Prestar Contas instituições', 'Relatorio'),
+        newLi('Gestão Peças', 'PecasFaltantes'),
         newLi('Deslogar', 'logout', 'danger'),
         newLi('Deletar conta', 'deletarConta.jsp', 'danger')
     ];

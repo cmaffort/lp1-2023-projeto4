@@ -75,7 +75,6 @@ public class RelatorioServlet extends HttpServlet {
             out.println("</thead><tbody>");
             PecasDAO pecasDAO = new PecasDAO(); 
             List<PecasDTO> pecasDoadas = pecasDAO.listarDoados();
-            out.println(pecasDoadas.size());
             for(PecasDTO pecas : pecasDoadas)
             {
                 out.println("<tr><td>" + pecas.getNome() + "</td><td>" + pecas.getMarca() + "</td><td>" + pecas.getQuantidade() + "</td></tr>");
